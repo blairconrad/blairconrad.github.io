@@ -17,6 +17,10 @@ body {
     padding: 1em;
 }
 
+.flushright {
+    text-align: right;
+}
+
 .header {
     margin: 0 0;
 }
