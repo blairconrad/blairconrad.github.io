@@ -1,0 +1,113 @@
+---
+---
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>FakeItEasy - It's faking amazing</title>
+
+    <link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.2.1/pure-min.css">
+    <link rel="stylesheet" href="css/fakeiteasy.css">
+    <link rel="stylesheet" href="css/syntax.css">
+    <script src="http://use.typekit.net/ajf8ggy.js"></script>
+    <script>
+      try { Typekit.load(); } catch (e) {}
+    </script>
+    
+    <script>
+      (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+      (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+      m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+      })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+      ga('create', 'UA-41480445-1', 'purecss.io');
+      ga('send', 'pageview');
+    </script>
+  </head>
+  <body>
+    <div class="splash">
+      <div class="pure-g-r">
+        <div class="pure-u-2-3">
+          <div class="box splash-text">
+            <h1 class="splash-head">FakeItEasy</h1>
+
+            <h2 class="splash-subhead">The easy mocking library for .NET</h2>
+          </div>
+        </div>
+
+        <div class="pure-u-1-3">
+          <img src="img/talkingladies.png" alt="Two ladies talking about FakeItEasy">
+        </div>
+      </div>
+    </div>
+
+    <div class="content">
+      <div class="pure-g-r content-ribbon">
+        <div class="pure-u-2-3">
+{% highlight csharp %}
+// Creating a fake object is just dead easy!
+// No mocks, no stubs, everything's a fake!
+var lollipop = A.Fake<ICandy>();
+var shop = A.Fake<ICandyShop>();
+// Easily set up a call to return a value
+A.CallTo(() => shop.GetTopSellingCandy()).Returns(lollipop);
+// Use your fake as you would an instance of the faked type.
+var developer = new SweetTooth();
+developer.BuyTastiestCandy(shop);
+// Asserting uses the same syntax as configuring calls.
+// There's no need to learn another syntax.
+A.CallTo(() => shop.BuyCandy(lollipop)).MustHaveHappened();
+{% endhighlight csharp %}
+        </div>
+        <div class="pure-u-1-3">
+          <div class="l-box">
+            <h3>A .Net dynamic fake framework for creating all types of fake objects, mocks, stubs etc.</h3>
+            <ul>
+              <li>Easier semantics: all fake objects are just that &mdash; fakes. Usage determines whether they're mocks or stubs.</li>
+              <li>Context-aware fluent interface guides the developer</li>
+              <li>Easy to use and compatible with both C# and VB.Net.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+      <div class="pure-g-r content-ribbon">
+        <div class="pure-u-1">
+          <h3>Additional Features</h3>
+          <div class="pure-g-r">
+            <div class="pure-u-1-2">
+              <ul>
+                <li>every faked instance looks and feels like an instance of the faked type</li>
+                <li>helpful exception messages identify where a test went wrong</li>
+                <li>raising events from faked objects</li>
+                <li>explicit assertions, stated at the end of the test</li>
+              </ul>
+            </div>
+            
+            <div class="pure-u-1-2">
+              <ul>
+                <li>type-safe faking of classes that require constructor arguments</li>
+                <li>automatic generation of dummy constructor arguments, if desired</li>
+                <li>extensible facilities for fake and dummy creation and argument formatting</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="ribbon">
+        <a class="pure-button " href="https://github.com/FakeItEasy/FakeItEasy/wiki">Read the Documentation</a>
+        <a class="pure-button " href="https://jabbr.net/#/rooms/fakeiteasy">Get Help on Jabbr</a>
+        <a class="pure-button " href="https://github.com/FakeItEasy/FakeItEasy">View the GitHub Project</a>
+        <a class="pure-button" href="https://www.nuget.org/packages/FakeItEasy" class="pure-button primary-button">Get it on NuGet</a>
+      </div>
+    </div>
+    
+    <div class="footer">
+      FakeItEasy builds are run using <a href="http://www.jetbrains.com/teamcity/">TeamCity</a>, generously <a href="http://codebetter.com/codebetter-ci/">hosted by Codebetter</a>.
+    </div>
+</div>
+</body>
+</html>
