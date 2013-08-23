@@ -7,6 +7,7 @@
 body {
     margin: 0 auto;
     line-height: 1.7em;
+    background: #111;
 }
 
 .l-box {
@@ -83,6 +84,9 @@ body .pure-button {
     font-size: 150%;
 }
 
+.content {
+    background: white;
+}
 
 .content .content-subhead {
     color: #999;
@@ -94,7 +98,7 @@ body .pure-button {
 }
 
 .content .content-ribbon {
-    margin: 3em;
+    padding: 0em 2em;
     border-bottom: 1px solid #eee;
 }
 
