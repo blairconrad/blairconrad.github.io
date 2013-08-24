@@ -93,6 +93,10 @@ body .pure-button {
     font-size: 150%;
 }
 
+.highlight {
+    padding-left: 0.75em;
+}
+
 .content {
     background: white;
 }
