@@ -23,8 +23,8 @@ h1, h2, h3, h4, h5, h6, .pure-button {
     padding: 1em;
 }
 
-.flushright {
-    text-align: right;
+.floatright {
+    float: right;
 }
 
 .header {
@@ -72,6 +72,10 @@ body .pure-button {
     margin: auto auto 0;
     padding: 1em 0.5em;
     background: #5C595A;
+}
+
+.splash-text {
+    overflow: hidden;
 }
 
 .splash .splash-head {
