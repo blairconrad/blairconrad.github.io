@@ -1,1 +1,28 @@
+name: Blair Conrad's Blog
+description: Blair Conrad's Blog
+url: "http://localhost:4000"
+
+# Author info
+author_name: Blair Conrad
+author_image_path: /images/author-image.png
+author_bio: |
+    Software developer at Agfa HealthCare
+    More <a href=/about/>about me</a>.
+
+# External services
+github_url: "https://github.com/blairconrad"
+twitter_url: "https://twitter.com/Hippopottoman"
+linkedin_url: "https://linkedin.com/in/blairconrad"
+feed_url: "http://feeds.feedburner.com/BlairConrad"
+email: "blairconrad@gmail.com"
+
+# Markdown rendering
+markdown: kramdown
+kramdown:
+  smart_quotes: apos,apos,quot,quot
+  parse_block_html: true
+
+# Site settings
+permalink: /blog/:year/:month/:day/:title/
+relative_permalinks: false
 pygments: true
