@@ -1,19 +1,17 @@
 ---
 layout: default
-title: Blair Conrad's Blog
 ---
+<p class="intro">My name is Blair Conrad. Sometimes I write here about
+things like <a href="http://www.libraryhippo.com/">LibraryHippo</a>
+and unit testing
+and <a href="http://fakeiteasy.github.io">FakeItEasy</a>.</p>
 
+<h2>Recent Posts</h2>
+<ul style="list-style: none; padding-left: 0;">
 {% for post in site.posts %}
-<div class=post>
-    {% if post.feature %}
-    <p class=feature-image>
-        <img src="{{ post.feature }}"/>
-    </p> 
-    {% endif %}
-    <h1 class=title><a href="{{ post.url }}">{{ post.title }}</a></h1>
-    <div class=content>
-        {{ post.excerpt | markdownify }}
-    </div>
-    {% include post-meta.html %}
-</div>
+<li class="post">
+    <a class="title" href="{{ post.url }}">{{ post.title }}</a> {% include post-meta.html %}
+    <div class="post-excerpt">{{ post.excerpt | markdownify }}</div>
+</li>
 {% endfor %}
+</ul>

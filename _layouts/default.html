@@ -7,23 +7,22 @@
         
         <title>{{ page.title }} | {{ site.name }}</title>
 
-        <link rel="stylesheet type=text/css" href="/css/pure-min.css">
+        <!-- <link rel="stylesheet type=text/css" href="/css/pure-min.css"> -->
         <link rel="stylesheet" type="text/css" href="/css/github.css">
         <link rel="stylesheet" type="text/css" href="/css/styles.css">
-        <link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css">
+        <link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans' rel='stylesheet' type='text/css'>
+        <!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css"> -->
         
-        <link rel="alternate" type="application/rss+xml" title="RSS feed for eyeshalfclosed.com" href="/feed.xml">
+        <link rel="alternate" type="application/rss+xml" title="RSS feed for {{ site.name }}" href="{{ site.feed_url }}">
     </head>
     <body>
-        <div class="container pure-g-r">
-            <div class="pure-u-4-5">
-                <div class="content">
-                    {{ content }}
-                </div>
-            </div>
-            <div class="pure-u-1-5 right-sidebar">
-              {% include header.html %}
-            </div>
-        </div>
+      <div class="masthead">
+          <h1>{{ site.name }}</h1>
+          <a href="/about" style="float:right">about</a>
+          <h2>{{site.description}}</h2>
+      </div>
+      <div class="content">
+        {{ content }}
+      </div>
     </body>
 </html>
