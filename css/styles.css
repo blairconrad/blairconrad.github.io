@@ -2,10 +2,9 @@ a {
     color: #475F77;
     text-decoration: none;
     font-weight: bold;
-
 }
 
-.masthead > a {
+.masthead a {
     color: white;
 }
 
@@ -14,6 +13,7 @@ body {
     color: #333;
 padding: 0;
 margin: 0;
+font-size: 14px;
 /*    padding-left: 1em;
     padding-right: 1em;
 */    font-family: 'Verdana', 'Sans-Serif';
@@ -34,23 +34,24 @@ a.title {
     margin-left: 1em;
 }
 
-h1 {
-    line-height: 0em;
-}
-
-
 div.masthead {
     margin-left: 0em;
     margin-right: 0em
     margin-top: 0em;
-    margin-bottom: 1em;
+    margin-bottom: 0em;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1em;
-padding-bottom: 0.25em;
+    padding-bottom: 0.25em;
     background-color: #354B5E;
     color: white;
 }
+
+.masthead h1 {
+    margin-top: 0em;
+    margin-bottom: 0em;
+}
+
 
 /* .post { */
     /* border-bottom: 1px solid #eee; */
@@ -183,6 +184,10 @@ padding-bottom: 0.25em;
 .post-meta {
     color: #666;
     font-size: .9em;
+}
+
+.post-meta a {
+    font-weight: normal;
 }
 
 /* .post-meta { */
