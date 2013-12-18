@@ -8,6 +8,10 @@ a {
     color: white;
 }
 
+a:hover {
+    color: #839CB4;
+}
+
 body {
 /*     font-family: 'Open Sans', Helvetica, Arial, sans-serif; */
     color: #333;
