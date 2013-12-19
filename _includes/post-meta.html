@@ -1,4 +1,4 @@
-<span class='post-meta'>
+<div class='post-meta'>
 {% if post %}{% assign item = post %}{% else %}{% assign item = page %}{% endif %}
-{{ item.date | date: "%Y-%m-%d" }}{% for tag in item.tags %}&nbsp;<a href="/tags/#{{ tag }}-ref">#{{ tag }}</a>{% endfor %}
-</span>
+Posted on {{ item.date | date: "%Y-%m-%d" }} in {% for tag in item.tags %} <a href="/tags/#{{ tag }}-ref">#{{ tag }}</a>{% endfor %}
+</div>
