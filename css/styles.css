@@ -13,20 +13,17 @@ a:hover {
 }
 
 body {
-/*     font-family: 'Open Sans', Helvetica, Arial, sans-serif; */
+     font-family: 'Open Sans', Helvetica, Arial, sans-serif; 
     color: #333;
 padding: 0;
 margin: 0;
 font-size: 14px;
 /*    padding-left: 1em;
     padding-right: 1em;
-*/    font-family: 'Verdana', 'Sans-Serif';
-background: #354B5E;
+*/   
+/*background: #354B5E;*/
 }
 
-a.title {
-    font-size: 1.2em;
-}
 
 .content h1, .content h2, .content h3, .content h4 { 
     color: #354B5E;
@@ -48,15 +45,16 @@ a.title {
     color: #AAAAAA;
 }
 
-h1, h2 {
+h1, h2, h3  {
     margin-top: 0em;
     margin-bottom: 0em;
+    font-family: 'Roboto Slab';
 }
 
 .post-excerpt {
     padding-bottom: 1em;
     margin-left: 1em;
-    border-bottom: solid 1px #354B5E;
+    /* border-bottom: solid 1px #354B5E;  */
 }
 
 .recent-post {

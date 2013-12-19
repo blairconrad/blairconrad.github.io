@@ -6,11 +6,11 @@ things like <a href="http://www.libraryhippo.com/">LibraryHippo</a>
 and unit testing
 and <a href="http://fakeiteasy.github.io">FakeItEasy</a>.</p>
 
-<h1>Recent Posts</h1>
+<h2>Recent Posts</h2>
 <ul style="list-style: none; padding-left: 0;">
 {% for post in site.posts %}
 <li class="recent-post">
-    <a class="title" href="{{ post.url }}">{{ post.title }}</a>
+    <h3><a class="title" href="{{ post.url }}">{{ post.title }}</a></h3>
     {% include post-meta.html %}
     <div class="post-excerpt">
       {{ post.excerpt | markdownify }}
