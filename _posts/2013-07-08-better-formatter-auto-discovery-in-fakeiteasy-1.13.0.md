@@ -1,11 +1,11 @@
 ---
 layout: post
 title: Better formatter auto-discovery in FakeItEasy 1.13.0
-tags: .NET FakeItEasy Nancy
+tags: .NET Fake ItEasy Nancy
 ---
 
 A few weeks ago, I wrote about
-<a href="/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">the
+<a href="../fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">the
 problems that FakeItEasy's assembly scanning was causing</a> while it
 was looking for user-defined extensions. To recap, FakeItEasy was
 scanning all assemblies in the AppDomain and the working directory,

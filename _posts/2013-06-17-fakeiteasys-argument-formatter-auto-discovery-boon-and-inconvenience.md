@@ -31,12 +31,6 @@ It's very easy to use, and quite helpful. However, lately I've had a few difficu
 
 The reasons all these things are happening during the first FakeItEasy call is due to the way that FakeItEasy finds the custom `ArgumentValueFormatter` implementations. It <b>scans all available assemblies</b>, looking for any implementations. In this case, "all available assemblies" means every assembly in the `AppDomain` as well as all `*.dll` files in the current directory. This actually makes the feature a little more powerful than Mr. Hägne indicated&mdash;you can define your extensions in other assemblies than the test project's. In fact, this is how FakeItEasy finds its own built-in `ArgumentValueFormatter`s (one for `null`, one for `System.String`, and one for any `System.Object` that doesn't have its own extensions). FakeItEasy is in the AppDomain, so its extensions are located by the scan. One benefit of doing such a wide scan is that <b>it's possible to define the formatter extension classes in a shared library</b> that can be used across test projects.
 
-{% highlight csharp %}
-public class T
-{
-}
-{% endhighlight csharp %}
-
 It's the scanning that's causing my pain. First, some of the solutions at the Day Job are quite large, with dozens of assemblies in the test project's AppDomain and build directory. Even if everything went well, it would take seconds to load and scan all those assemblies.  Second, some of the DLLs in the directory aren't under our control. Some aren't managed. Some don't play well with others. It's these ones that are causing the other problems I mentioned above. <b>Loading these assemblies causes them to be accessed in ways that they were never planned to be</b>, which causes the LoaderLocks and Runtime Error.
 
 What now? We're investigating the assemblies we're using to see if we can't access them in a better way, but that's probably going to be a slow operation, and one that may not bear fruit. In the meantime, I've forked FakeItEasy and am using the custom build in the one project that it was causing the most pain. <b>The custom version only loads extensions from the FakeItEasy assembly</b>. It's kind of a terrible hack, and means that we can't define custom extensions, but we hadn't for that project anyhow, so it's not yet causing pain. On the brighter side, there are no more errors or popups, and the tests start much more quickly.
