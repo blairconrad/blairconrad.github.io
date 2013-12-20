@@ -10,11 +10,11 @@ and <a href="http://fakeiteasy.github.io">FakeItEasy</a>.</p>
 <ul style="list-style: none; padding-left: 0;">
 {% for post in site.posts %}
 <li class="recent-post">
-    <h3><a class="title" href="{{ post.url }}">{{ post.title }}</a></h3>
+  <h3><a class="title" href="{{ post.url }}">{{ post.title }}</a></h3>
     {% include post-meta.html %}
     <div class="post-excerpt">
       {{ post.excerpt | markdownify }}
-    </div>
+    <a href="{{ post.url }}">read more&hellip;</a></div>
 </li>
 {% endfor %}
 </ul>
