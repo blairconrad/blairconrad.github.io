@@ -3,10 +3,11 @@ layout: post
 title: FakeItEasy's argument formatter auto-discovery - boon and inconvenience
 tags: .NET FakeItEasy
 ---
-
 Hi again. At the Day Job, we've recently dropped [Typemock Isolator](http://www.typemock.com/isolator-product-page) and [NMock2](http://sourceforge.net/apps/mediawiki/nmock2) as the mocking frameworks of choice in the products that I work on. We've jumped on the [FakeItEasy](http://fakeiteasy.github.io) bandwagon. So far, we're enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit the mind pretty well. Today I'm going to focus on one feature that I've really enjoyed but that has been an occasional thorn in the side.
 
 This is a feature that [Patrik Hägne has blogged about before](http://ondevelopment.blogspot.ca/2010/09/extending-exception-messages-in.html), but that I think is still not well known. I found it accidentally, and have benefited from it. You can provide custom argument renderers to **improve the messages** you get when FakeItEasy detects an error due to missing or mismatched calls. Check out Mr. Hägne's post for the full details, but if I may be so bold as to rip off some of his examples, here's the gist (original meaning, not fancy github one).
+
+<!--more-->
 
 Define a class that extends `ArgumentValueFormatter<Person>` (where Person is a class in your project), override `GetStringValue` with something that renders a Person, and FakeItEasy errors that need to talk about a Person change from this
 <pre>Assertion failed for the following call:

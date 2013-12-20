@@ -4,25 +4,23 @@ title: Better formatter auto-discovery in FakeItEasy 1.13.0
 tags: .NET Fake ItEasy Nancy
 ---
 
-A few weeks ago, I wrote about
-<a href="../fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">the
-problems that FakeItEasy's assembly scanning was causing</a> while it
-was looking for user-defined extensions. To recap, FakeItEasy was
-scanning all assemblies in the AppDomain and the working directory,
-looking for types that implemented `IArgumentValueFormatter`,
-`IDummyDefinition`, or `IFakeConfigurator`. This process was quite
-slow. Worse, it raised LoaderLock exceptions when debugging, and
-Runtime errors anytime I ran my tests using the ReSharper test runner.
+A few weeks ago, I wrote about [the problems that FakeItEasy's
+assembly scanning was causing]({% post_url 2013-06-17-fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience %}) while it was looking for user-defined extensions. To recap,
+FakeItEasy was scanning all assemblies in the AppDomain and the
+working directory, looking for types that implemented
+`IArgumentValueFormatter`, `IDummyDefinition`, or
+`IFakeConfigurator`. This process was quite slow. Worse, it raised
+LoaderLock exceptions when debugging, and Runtime errors anytime I ran
+my tests using the ReSharper test runner.
 
-At that time, I'd opened <a
-href="https://github.com/FakeItEasy/FakeItEasy/issues/130">issue
-130</a>, intended to allow configuration of the scanning
-procedure. I'm happy to say that the issue has been closed "no
-fix". Instead, I've contributed the fix for <a
-href="https://github.com/FakeItEasy/FakeItEasy/issues/133">Issue 133
-&mdash; Improved performance of assembly scanning</a>. It doesn't
+
+At that time, I'd opened <a href="https://github.com/FakeItEasy/FakeItEasy/issues/130">issue130</a>, intended to allow configuration of the scanning
+procedure. I'm happy to say that the issue has been closed "on
+fix". Instead, I've contributed the fix for <a href="https://github.com/FakeItEasy/FakeItEasy/issues/133">Issue 133 &mdash; Improved performance of assembly scanning</a>. It doesn't
 introduce any configuration options, but streamlines the scanning
 process.
+
+<!--more-->
 
 The **original behaviour** was:
 

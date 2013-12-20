@@ -26,6 +26,5 @@ kramdown:
 permalink: /blog/:title/
 relative_permalinks: false
 pygments: true
-
-# Other variables
+excerpt_separator: <!--more--> 
 image_dir: /images

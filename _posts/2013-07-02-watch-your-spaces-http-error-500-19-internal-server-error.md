@@ -2,9 +2,7 @@
 layout: post
 title: Watch your spaces - HTTP Error 500.19 - Internal Server Error
 tags: 500-19 iis iis7
-excerpt: The errors suggested that we have problems with the configuration file, but the web.config was present (and well-formed), and there were no obvious permission problems, so it seems the file was being read. There was nothing in the event logs. Web searches yielded nothing that matched the `0x80072af9` error code or the description of the error. Even ERR.exe, recommended by <a href="http://blogs.iis.net/webtopics/archive/2010/03/08/troubleshooting-http-500-19-errors-in-iis-7.aspx">Troubleshooting HTTP 500.19 Errors in IIS 7</a>, failed me.
 ---
-
 Late last week at the Day Job, a colleague came to me with a problem. The web service he was trying to hit was throwing an error he'd never seen before:
 
 <blockquote style="color:#CC0000;">
@@ -15,6 +13,8 @@ The requested page cannot be accessed because the related configuration data for
 I'd never seen it before either, at least not in this exact incarnation. Take a look
 
 <a href="{{ site.image_dir }}/500-191-internal-server-error.png"><img style="display: block; margin-left: auto; margin-right: auto;" src="{{ site.image_dir }}/500-191-internal-server-error-small.png" alt="screenshot of 500.19 error" width="500" height="334" /></a>
+
+<!--more-->
 
 In case the text isn't so clear, here are the details:
 
