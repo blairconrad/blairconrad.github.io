@@ -125,12 +125,15 @@ h1, h2, h3  {
 /*     white-space: nowrap; */
 /* } */
 
-/* pre { */
-/*     overflow-x: auto; */
-/*     overflow-y: hidden; */
-/*     white-space: pre; */
-/*     word-wrap: normal; */
-/* } */
+pre {
+    background: #eeeeee;
+    border: 1px solid #dddddd; 
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+    word-wrap: normal;
+    padding: 1px 1px 1px 1px;
+}
 
 /* p code, ul code { */
 /*     background: #eeeeee; */
