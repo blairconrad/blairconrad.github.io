@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Better formatter auto-discovery in FakeItEasy 1.13.0
-tags: .NET Fake ItEasy Nancy
+tags: 
+    - .NET
+    - FakeItEasy
+    - Nancy
 ---
 
 A few weeks ago, I wrote about [the problems that FakeItEasy's

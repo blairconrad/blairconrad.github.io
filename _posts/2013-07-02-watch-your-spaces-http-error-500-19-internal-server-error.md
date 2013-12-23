@@ -1,7 +1,10 @@
 ---
 layout: post
 title: Watch your spaces - HTTP Error 500.19 - Internal Server Error
-tags: 500-19 iis iis7
+tags:
+    - 500-19 
+    - iis 
+    - iis7
 ---
 Late last week at the Day Job, a colleague came to me with a problem. The web service he was trying to hit was throwing an error he'd never seen before:
 
