@@ -80,6 +80,10 @@ h1, h2, h3  {
     background: white;
 }
 
+dt {
+    font-weight: bold;
+}
+
 /* i { */
 /*     vertical-align: middle; */
 /* } */
@@ -130,6 +134,10 @@ pre {
     white-space: pre;
     word-wrap: normal;
     padding: 1px 1px 1px 1px;
+}
+
+blockquote {
+    background: #f8f8f8;
 }
 
 /* p code, ul code { */
