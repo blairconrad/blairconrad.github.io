@@ -8,12 +8,14 @@ tags:
     - python
     - python27
     - stackexchange
+excerpt: One of the requirements for moving to Python 2.7 is that the [app must use the High Replication Datastore](http://code.google.com/appengine/docs/python/python27/using27.html#Prerequisites), and LibraryHippo did not. Moreover, the only way to convert to the HRD is to [copy your data to a whole new application](http://code.google.com/appengine/docs/adminconsole/datastoreadmin.html#Copying_Entities_to_Another_Application). So I bit the bullet, and made a new application from the LibraryHippo source.
 ---
 
 <p>Now that Google has announced that <a title="Announcing the General Availability of the Python 2.7 Runtime for App Engine" href="http://googleappengine.blogspot.com/2012/02/announcing-general-availability-of.html">Python 2.7 is fully supported on Google App Engine</a>, I figured I should get my act in gear and make convert <a href="http://www.libraryhippo.com">LibraryHippo</a> over. I'd had a few aborted attempts earlier, but this time things are going much better.</p>
 
 <h2>How We Got Here - Cloning LibraryHippo</h2>
-<p>One of the requirements for moving to Python 2.7 is that the <a href="http://code.google.com/appengine/docs/python/python27/using27.html#Prerequisites">app must use the High Replication Datastore</a>, and LibraryHippo did not. Moreover, the only way to convert to the HRD is to <a href="http://code.google.com/appengine/docs/adminconsole/datastoreadmin.html#Copying_Entities_to_Another_Application">copy your data to a whole new application</a>. So I bit the bullet, and made a new application from the LibraryHippo source.</p>
+One of the requirements for moving to Python 2.7 is that the [app must use the High Replication Datastore](http://code.google.com/appengine/docs/python/python27/using27.html#Prerequisites), and LibraryHippo did not. Moreover, the only way to convert to the HRD is to [copy your data to a whole new application](http://code.google.com/appengine/docs/adminconsole/datastoreadmin.html#Copying_Entities_to_Another_Application). So I bit the bullet, and made a new application from the LibraryHippo source.
+
 <p>When you set up a new application, you have the option of allowing federated authentication via <a href="http://openid.net/">OpenID</a>. I'd wanted to do this for some time, so I thought, "While I'm changing the datastore, template engine, and version of Python under the hood, why not add a little complexity?", and I picked it.</p>
 
 <h2>The Simplest Thing That Should Work - Google as Provider</h2>

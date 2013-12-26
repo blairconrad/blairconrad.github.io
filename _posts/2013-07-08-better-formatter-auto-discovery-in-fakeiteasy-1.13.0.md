@@ -18,7 +18,7 @@ my tests using the ReSharper test runner.
 
 
 At that time, I'd opened <a href="https://github.com/FakeItEasy/FakeItEasy/issues/130">issue130</a>, intended to allow configuration of the scanning
-procedure. I'm happy to say that the issue has been closed "on
+procedure. I'm happy to say that the issue has been closed "no
 fix". Instead, I've contributed the fix for <a href="https://github.com/FakeItEasy/FakeItEasy/issues/133">Issue 133 &mdash; Improved performance of assembly scanning</a>. It doesn't
 introduce any configuration options, but streamlines the scanning
 process.
