@@ -7,9 +7,7 @@ tags:
     - OpenCover
 ---
 
-<div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#f8f8f8;">
-This post is the conclusion of a series chronicling my <a href="/2011/07/18/can-you-cover-me-looking-for-a-net-coverage-tool/">search for a .NET coverage tool</a>.
-</div>
+{% include series-net-coverage-tool.html %}
 
 This is the gala awards show, where my chosen coverage tool is announced. 
 
