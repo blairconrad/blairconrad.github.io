@@ -41,7 +41,9 @@ To prevent this behavior, use the `//literal` argument.
 I really like that it defaults to passing the recommended <code>/noshadow</code> to NUnit. The <code>//</code> switches are also a good touch - it makes providing arguments to the executable being covered a lot easier. These features make the command line invocation <b>the best I've seen</b> among coverage tools.
 
 <h2>GUI Runner</h2>
+<div class="images">
 <a href="{{ site.image_dir }}/runncover.png"><img src="{{ site.image_dir }}/runncover.png" width="300" height="397"  alt="NCover options" title="RunNCover"/></a><a href="{{ site.image_dir }}/nocoverexplorer.png"><img src="{{ site.image_dir }}/ncoverexplorer.png" height="397" width="515" alt="" title="NCoverExplorer"  /></a>
+</div>
 
 The GUI runner looks just like a GUI wrapper on top of the command line options - they appear to support the same level of configuration. After the tests have been run, the NCoverExplorer allows one to browse the results and to save a report as XML or HTML.
 
