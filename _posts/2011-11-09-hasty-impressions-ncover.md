@@ -11,6 +11,7 @@ tags:
     - Testing
     - TypeMock
 ---
+{% include series-net-coverage-tool.html %} 
 
 I tried NCover 3.4.18.6937. 
 <h2>The Cost</h2>

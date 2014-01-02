@@ -84,8 +84,13 @@ dt {
     font-weight: bold;
 }
 
+.images {
+    text-align: center;
+}
+
 .images img {
-    margin-left: 1em;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 }
 
 /* i { */
