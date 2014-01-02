@@ -1,0 +1,84 @@
+---
+layout: post
+title: Auto-deploying TypeMock Isolator Without Trashing the Installation
+tags:
+    - Isolator
+    - MSBuild
+    - Testing
+    - TypeMock
+---
+<p>At the Day Job, we use <a href="http://site.typemock.com/typemock-isolator-product">TypeMock Isolator</a> as the isolation framework for the client portion of our flagship product. Historically we'd used version 3, but recently I had the opportunity to upgrade the code and build system to use the 2010 (or "version 6") edition.</p>
+
+<h4>Backward Compatibility</h4>
+<p>I was very pleased to see that no code changes were <i>required</i> with the upgrade. Sure, we'd like to start using the new <a href="http://www.typemock.com/Docs/UserGuide/">Arrange-Act-Assert API</a>, and to trade in the method name strings for the type-safe lambda expressions, but I didn't want to have to run back and convert everything today. And I didn't. Typemock Isolator appears to be backward compatible (at least as far as the feature set we use goes).</p>
+
+<h4>Auto-Deployment</h4>
+In fact, the whole exercise of moving up to  2010 would've been over in almost no time were it not for one thing&mdash;we need to auto-deploy Isolator. The reasons are several:
+<ul>
+<li>we have many dozen people working on the product, spread across four teams and three offices all over the world, so coordinating the installation is tricky</li>
+<li>some people have a need to occasionally build the product, but don't actively develop it - imposing an install on them seems rude</li>
+<li>some of our developers actively oppose unit testing, and I didn't want to give them any more ammunition than I had to</li>
+</ul>
+<p>We'd had a home-grown auto-deploy solution working with Isolator 3, but it was a little clunky and some of the details of the Isolator install had changed, so it wasn't really up to auto-deploying 6. Fortunately, I found a <a href="http://blog.typemock.com/2010/01/auto-deploy-typemock-isolator_25.html">Typemock Insider blog post about auto-deploying</a>.</p>
+<p>We use <a href="http://ant.apache.org/">Apache Ant</a> for our builds, but it was no trouble to shell out to an <a href="http://msdn.microsoft.com/en-us/library/0k6kkbsd.aspx">MSBuild</a> task to auto-deploy Isolator:</p>
+{% highlight xml %}
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TypeMockLocation>path\to\TypeMock\Isolator\files</TypeMockLocation>
+    <NUNIT>path\to\nunit-console.exe</NUNIT>
+  </PropertyGroup>  
+
+  <Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/>
+
+  <Target Name="RegisterTypeMock">
+    <TypeMockRegister Company="MyCompany" License="XXX-XXX" AutoDeploy="true"/> 
+    <TypeMockStart/>
+    <Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)"/>
+    <TypeMockStop Undeploy="true"/>
+  </Target>
+ </Project>
+{% endhighlight %}
+
+<h4>Build Server Licenses</h4>
+<p>This worked really well - I was testing the tests on my local machine, watching Isolator auto-deploy and auto-undeploy. Everything was great, until I realized: we have two licenses&mdash;one for developers, and one for build servers. It only seemed right to use the appropriate one depending on whether we were building on a developer's machine or a build server. Fortunately, all our build servers set a specific environment variable, so it was a simple matter to have MSBuild pick the correct one.</p>
+
+<h4>Undeploying Isolator Mangles the Installed Instance</h4>
+<p>Even though we're providing a mechanism for auto-deploying Isolator, some developers will prefer to install it in order to use the Visual Studio AddIn to aid debugging. I'd heard that undoing the auto-deployment could wreak havoc with the installed version of Typemock Isolator, and that it's sometime necessary to repair the installed instance. A little testing, with the help of a coworker, showed this to be the case. Worse, it appeared that the auto-deploy/undeploy broke his ability to run the product in the IDE - as soon as the process started, it would end, with a "CLR error 80004005". Disabling the Isolator AddIn made the error go away.</p>
+<p>So it looked like we'd need to figure out how not to break installed Isolator instances while still supplying auto-deployment when it's needed. Searching found nothing promising, so I resorted to Registry spelunking. Unfortunately, the installed Isolator and auto-deployed Isolator make very similar Registry entries - there was nothing that I felt confident basing "Is Isolator installed?" on. After poking around and coming up short, I fell back to using the filesystem. By default, Isolator is installed in <code>%ProgramFiles%\TypeMock\Isolator\6.0</code>, so I decided to use that as the determinant. I'd feel dirty doing this for code destined for a customer's site, but I can live with telling our own developers that if they choose to install Isolator, they should install it in the default location or face the consequences.</p>
+<p>Still, if anyone comes up with a more reliable way to determine if Isolator is installed, please post it in the comments.</p>
+
+<h4>Putting it all Together</h4>
+<p>Here's the MSBuild file I ended up with. It uses the correct license based on machine type, and only auto-deploys/undeploys when Isolator isn't installed - existing installations are left alone.</p>
+{% highlight xml %}
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <TypeMockLocation>path\to\TypeMock\Isolator\files</TypeMockLocation>
+    <NUNIT>path\to\nunit-console.exe</NUNIT>
+
+    <!-- Used to detect TypeMock installs. -->
+    <UsualTypeMockInstallDir>$(ProgramFiles)\TypeMock\Isolator\6.0</UsualTypeMockInstallDir>
+
+    <!-- 
+         Only deploy Typemock if it's not already in the usual install dir.
+
+         If developers install Typemock, they should install it in the
+         default location in order to help the build system decide
+         whether or not we need to auto-deploy (since auto-deploy and
+         undeploy can corrupt the TypeMock VisusalStudio Add-In, and
+         interfere with the ability to run programs in the IDE.
+      -->
+    <DeployTypeMock>false</DeployTypeMock>
+    <DeployTypeMock Condition="!Exists('$(UsualTypeMockInstallDir)')">true</DeployTypeMock>
+
+    <License>XXX-XXX</License>
+    <License Condition="'$(BuildServer)' != ''">YYY-YYY</License>
+  </PropertyGroup>
+  <Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/>
+  <Target Name="RegisterTypeMock">
+    <TypeMockRegister Company="MyCompany" License="$(License)" AutoDeploy="$(DeployTypeMock)"/> 
+    <TypeMockStart/>
+    <Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)" />
+    <TypeMockStop Undeploy="$(DeployTypeMock)"/>
+  </Target>
+</Project>
+{% endhighlight %}
