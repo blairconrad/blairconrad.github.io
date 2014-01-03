@@ -183,6 +183,19 @@ blockquote {
     background: #f8f8f8;
 }
 
+.series {
+    padding-left:.5em;
+    padding-right:.5em;
+    margin-left:2em;
+    margin-right:2em;
+    border:1px solid #EEE;
+    background-color:#f8f8f8;
+}
+
+.post-excerpt .series {
+    display:none;
+}
+
 /* p code, ul code { */
 /*     background: #eeeeee; */
 /*     border: 1px solid #eee;  */

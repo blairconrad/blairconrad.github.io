@@ -11,7 +11,7 @@ tags:
 
 This is the gala awards show, where my chosen coverage tool is announced. 
 
-If you've come this far, you've probably already read the title, and it won't surprise you to learn that I've chosen <a href="https://github.com/sawilde/opencover">OpenCover</a>. It offered the best fit for my requirements - the only areas where I found it lacking were in the "nice to haves". <!--more-->Witness:
+If you've come this far, you've probably already read the title, and it won't surprise you to learn that I've chosen <a href="https://github.com/sawilde/opencover">OpenCover</a>. It offered the best fit for my requirements - the only areas where I found it lacking were in the "nice to haves". Witness:
 <ul>
    <li>OpenCover is pretty easy to <strong>run from the command line</strong> - second only to NCover.</li>
    <li>It can (with the help of ReportGenerator) generate <strong>coverage reports in XML and HTML</strong>.</li>
