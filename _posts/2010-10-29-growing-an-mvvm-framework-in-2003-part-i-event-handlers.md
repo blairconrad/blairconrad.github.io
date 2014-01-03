@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing an MVVM Framework in 2003, part I - Event Handlers
+title: Growing an MVVM Framework in 2003, part I&mdash;Event Handlers
 tags:
     - Development
     - Frameworks
@@ -11,11 +11,11 @@ tags:
 
 This is one post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.
 
-* Part I - Event Handlers
-* <a href="{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Part II &#8211; Properties</a>
-* <a href="{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III  &#8211; Properties Redux
-* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV - Unit Tests</a>
-* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V - Reflections and Regrets</a>
+* Part I&mdash;Event Handlers
+* <a href="{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Part II&mdash;Properties</a>
+* <a href="{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III &mdash;Properties Redux
+* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV&mdash;Unit Tests</a>
+* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V&mdash;Reflections and Regrets</a>
 
 Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code repository</a>.
 
@@ -29,7 +29,7 @@ Previously, I <a href="{% post_url 2010-04-02-watch-even-if-youre-not-building-a
 * had no "codebehind" in the view, and
 * shunted the tedious wiring up of events and handlers into helpers (or a "framework")
 
-Unfortunately, the application was intended to work at our established customers' sites, so I couldn't depend on WPF, or even .NET 2.0 - it's 1.1 all the way.
+Unfortunately, the application was intended to work at our established customers' sites, so I couldn't depend on WPF, or even .NET 2.0&mdash;it's 1.1 all the way.
 
 <h2>The Goal</h2>
 I'll demonstrate with a simpler app than the one from work, but will cover the the relevant concepts. For the purpose of this post, I'll be writing a book-finding app. The user will be able to enter a substring to use to search a database; the matching entries will be displayed in a ListBox and when one of them is selected, some notes will be displayed in a TextBox.
@@ -128,7 +128,7 @@ private bool ListenToEvent(Control control, MethodInfo method)
 }
 {% endhighlight %}
 
-This is pretty straightforward, with two exceptions. Creating the delegate to wrap the ViewModel method was a little tricky - I had to reference the specific <code>EventHandlerType</code> that matched the event. Similarly to the EventArgs problem above, I'd originally tried to create an  <code>EventHandler</code>, which failed for certain events.
+This is pretty straightforward, with two exceptions. Creating the delegate to wrap the ViewModel method was a little tricky&mdash;I had to reference the specific <code>EventHandlerType</code> that matched the event. Similarly to the EventArgs problem above, I'd originally tried to create an  <code>EventHandler</code>, which failed for certain events.
 
 The last piece is the <code>ControlAttributeName</code> method, which builds the desired attribute (in this case an event) name from a control and the ViewModel member that we want to bind to. The method assumes that the name of the ViewModel member (the handler) will start with the name of the control. If there's a match, it returns the rest of the member name. Otherwise, null. 
 The name comparison ignores case, which wasn't necessary to hook up method handlers, but proved to be useful when wiring up properties.

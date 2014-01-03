@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing an MVVM Framework in 2003, part III - Properties Redux
+title: Growing an MVVM Framework in 2003, part III&mdash;Properties Redux
 tags:
     - Development
     - Frameworks
@@ -9,11 +9,11 @@ tags:
 <div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
 <p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
 
-* <a href="{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I - Event Handlers</a>
+* <a href="{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I&mdash;Event Handlers</a>
 * <a href="{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Part II &#8211; Properties</a>
 * Part III  &#8211; Properties Redux
-* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV - Unit Tests</a>
-* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V - Reflections and Regrets</a>
+* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV&mdash;Unit Tests</a>
+* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V&mdash;Reflections and Regrets</a>
 
 <p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository</a>.</p>
 </div>
@@ -44,9 +44,9 @@ When I first wrote the code, I was bothered a little by the weaknesses in the pr
 
 >At this point, I was really missing generics.
 
-What did I mean by that? Why did I miss generics? I hadn't explained that well, even to myself. So I thought about it. What would I do with the generics if I had them? And I thought for a bit longer. Then I had it. I'd make a <code>Property</code> class to proxy the view's properties - that would tighten up the code and relieve programmers of the burden of knowing when to use `.AsList`.
+What did I mean by that? Why did I miss generics? I hadn't explained that well, even to myself. So I thought about it. What would I do with the generics if I had them? And I thought for a bit longer. Then I had it. I'd make a <code>Property</code> class to proxy the view's properties&mdash;that would tighten up the code and relieve programmers of the burden of knowing when to use `.AsList`.
 
-Well, I don't have generics, but I do have Manual Type Creation. That's somewhat less convenient, but it's not like I'm going to need dozens of different property types - 3 will do for a start.  So I decided to see what I could do with a little Property type hierarchy.
+Well, I don't have generics, but I do have Manual Type Creation. That's somewhat less convenient, but it's not like I'm going to need dozens of different property types&mdash;3 will do for a start.  So I decided to see what I could do with a little Property type hierarchy.
 
 {% highlight csharp %}
 public abstract class Property
@@ -82,7 +82,7 @@ public class BoolProperty: Property
 }
 {% endhighlight %}
 
-There's not a terrible amount here, just a family of properties. Each concrete class is responsible for providing a <code>Value</code> property that will return (or accept) a typed value. The real work is done by the <code>storage</code> member - it keeps track of the untyped value that the concrete class will take or dole out. As the name <code>PropertyStorageStrategy</code> suggests, a Property can vary the source and sink for its value via the  <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy design pattern</a>. 
+There's not a terrible amount here, just a family of properties. Each concrete class is responsible for providing a <code>Value</code> property that will return (or accept) a typed value. The real work is done by the <code>storage</code> member&mdash;it keeps track of the untyped value that the concrete class will take or dole out. As the name <code>PropertyStorageStrategy</code> suggests, a Property can vary the source and sink for its value via the  <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy design pattern</a>. 
 
 <h2>I was holding it for a friend</h2>
 Let's look at the storage strategy that defers to a property on another object.

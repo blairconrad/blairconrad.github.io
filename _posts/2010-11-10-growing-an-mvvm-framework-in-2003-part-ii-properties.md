@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Growing an MVVM Framework in 2003, part II – Properties
+title: Growing an MVVM Framework in 2003, part II&mdash;Properties
 tags:
     - Development
     - Frameworks
@@ -10,11 +10,11 @@ tags:
 
 <p>This is second post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
 
-* <a href="{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I - Event Handlers</a>
-* Part II &#8211; Properties
-* <a href="{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III  &#8211; Properties Redux
-* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV - Unit Tests</a>
-* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V - Reflections and Regrets</a>
+* <a href="{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I&mdash;Event Handlers</a>
+* Part II&mdash;Properties
+* <a href="{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III &mdash;Properties Redux
+* <a href="{% post_url 2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests %}">Part IV&mdash;Unit Tests</a>
+* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V&mdash;Reflections and Regrets</a>
 
 Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code repository</a>.
 
@@ -91,7 +91,7 @@ public abstract class Property
 {% endhighlight %}
 
 
-I really like the implicit operator functionality, which I'd never used before. I wish it could be used with interfaces, though. There's probably a good reason why it can't, but nothing comes to mind. Anyhow, I had to go another route for IList - the somewhat uninspiring <code>AsList</code> method. At this point, I was really missing generics.
+I really like the implicit operator functionality, which I'd never used before. I wish it could be used with interfaces, though. There's probably a good reason why it can't, but nothing comes to mind. Anyhow, I had to go another route for IList&mdash;the somewhat uninspiring <code>AsList</code> method. At this point, I was really missing generics.
 
 Still, it's nicer to be able to write
 {% highlight csharp %}
@@ -150,7 +150,7 @@ public string TitleText
 {% endhighlight %}
 
 <h2>Remarks</h2>
-Once the infrastructure was in place, I really started enjoying developing the application. It was very liberating to add a new event handler just by writing a method with the right name and signature. And even adding access to a new property wasn't so bad - writing the three lines of code to segregate the conversions and <code>.Value</code>s was worth it to keep the event handler bodies nice and clean.
+Once the infrastructure was in place, I really started enjoying developing the application. It was very liberating to add a new event handler just by writing a method with the right name and signature. And even adding access to a new property wasn't so bad&mdash;writing the three lines of code to segregate the conversions and <code>.Value</code>s was worth it to keep the event handler bodies nice and clean.
 
 Next time, we'll see how the design affected the form of the application's unit tests.
 
