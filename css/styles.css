@@ -93,6 +93,28 @@ dt {
     margin-right: 0.5em;
 }
 
+.console pre {
+background-color:#222;
+color:#CCC;
+font-family:monospace;
+padding-left: 2px;
+padding-right: 2px;
+text-wrap: none;
+}
+
+.highlight pre {
+padding-left: 2px;
+padding-right: 2px;
+}
+
+.console .error {
+    color: red;
+}
+
+.console .prompt {
+    color: yellow;
+}
+
 /* i { */
 /*     vertical-align: middle; */
 /* } */
