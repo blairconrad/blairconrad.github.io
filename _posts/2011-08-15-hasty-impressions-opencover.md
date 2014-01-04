@@ -23,12 +23,11 @@ None that I can find.
 <h2>Command Line Execution</h2>
 Covering an application from the command line is <strong>easy</strong>, and reminiscent of using PartCover the same way. I used this command to see what code my BookFinder unit tests exercised:
 
-
 {% highlight bat %}
 OpenCover.Console.exe -arch:64 -register target:nunit-console.exe -targetargs:bin\debug\BookFinder.Tests.dll \
                       -output:..\..\opencover.xml -filter:+[BookFinder.Core]*
 {% endhighlight bat %}
-
+<!--more-->
 Let's look at that.
 
 * `-arch:64` - I'm running on a 64-bit system. I didn't get any results without this.

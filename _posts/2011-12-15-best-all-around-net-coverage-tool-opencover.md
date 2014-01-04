@@ -21,7 +21,7 @@ If you've come this far, you've probably already read the title, and it won't su
    <li>There's <b>no GUI integration</b>, but this was a nice to have. If some developer is absolutely dying to have this, my boss's boss has indicated that money could be available for individual licenses of something like dotCover.</li>
    <li>There's <b>no support for integrating with IIS</b>. We don't need this right now, so that's okay. Again, if we one or two developers find a need, we have the option of buying a license of some other tool. Even better, support <a href="https://github.com/sawilde/opencover/issues/36">may be coming soon</a>.</li>
 </ul>
-
+<!--more-->
 After considering OpenCover's strengths in the areas I absolutely
 needed, and its weaknesses, which all appear to be in areas that I
 care a little less about, I recommended it the boss's boss, who agreed

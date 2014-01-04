@@ -19,6 +19,8 @@ NCover Complete is $479 plus $179 for a 1-year subscription (which gives free ve
 <h2>Support</h2>
 I haven't had enough problems to really stress the support network, but I will say this - the NCover chaps are really keen on keeping in touch with people who have trial copies of the program. I've received 3 separate e-mails from my assigned NCover rep in the 2 weeks since I first installed my trial copy. I replied to one of these, asking for a clarification on the VS integration (see below), and got a speedy response. 
 It's nice to see such a <b>high level of customer support</b>, but I do feel just a little bit smothered&hellip;
+<!--more-->
+
 <h2>VS integration</h2>
 The best advice from the NCover folks is to <a href="http://docs.ncover.com/how-to/running-ncover-from-visual-studio/">create an external tool to launch NCover</a>. That's an okay solution if you want to run all the unit tests in a project and profile them, but it <b>lacks flexibility</b>. Then to actually look at the report, you have to launch the NCover Explorer and load the report.
 

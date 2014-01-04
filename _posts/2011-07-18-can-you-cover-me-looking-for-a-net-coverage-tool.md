@@ -30,11 +30,11 @@ Here are some factors that will influence me. Some of these may be negotiable, i
  <h2>The Candidates</h2>
 Googling has lead me to these candidates, which I'll be examining in the next little while:
 <ul>
-<li><a href="http://www.jetbrains.com/dotcover/">dotCover</a> (<a href="{% post_url 2011-07-29-hasty-impressions-dotcover-1-1 %}">my impression</a>)</li>
-<li><a href="http://www.ncover.com/">NCover</a> (<a href="{% post_url 2011-11-09-hasty-impressions-ncover %}">my impression</a>)</li>
-<li><a href="http://sourceforge.net/projects/partcover/">PartCover</a> (<a href="{% post_url 2011-08-05-hasty-impressions-partcover %}">my impression</a>)</li>
-<li><a href="https://github.com/sawilde/opencover">OpenCover</a> (<a href="{% post_url 2011-08-15-hasty-impressions-opencover %}">my impression</a>)</li>
+<li><a href="http://www.jetbrains.com/dotcover/">dotCover</a> (<a href="{{ site.url }}{% post_url 2011-07-29-hasty-impressions-dotcover-1-1 %}">my impression</a>)</li>
+<li><a href="http://www.ncover.com/">NCover</a> (<a href="{{ site.url }}{% post_url 2011-11-09-hasty-impressions-ncover %}">my impression</a>)</li>
+<li><a href="http://sourceforge.net/projects/partcover/">PartCover</a> (<a href="{{ site.url }}{% post_url 2011-08-05-hasty-impressions-partcover %}">my impression</a>)</li>
+<li><a href="https://github.com/sawilde/opencover">OpenCover</a> (<a href="{{ site.url }}{% post_url 2011-08-15-hasty-impressions-opencover %}">my impression</a>)</li>
 </ul>
 
-<b>Update</b>: <a href="{% post_url 2011-12-15-best-all-around-net-coverage-tool-opencover %}">I picked one</a>.
+<b>Update</b>: <a href="{{ site.url }}{% post_url 2011-12-15-best-all-around-net-coverage-tool-opencover %}">I picked one</a>.
  

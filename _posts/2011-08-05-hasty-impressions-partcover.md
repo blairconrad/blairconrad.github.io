@@ -22,6 +22,8 @@ PartCover claims to be auto-deployable, but I did not try this.
 <h2>Project Concerns</h2>
 The hardest thing about working with PartCover is learning about PartCover - finding definitive information about the project's state is quite difficult. Searching with Google finds <a href="http://sourceforge.net/projects/partcover/">the SourceForge project</a> which contains a note to see latest news on the <a href="http://partcover.blogspot.com">PartCover blog</a>, which <b>hasn't been updated</b> since 17 June 2009. Back at SourceForge, you can download a readme written by Shaun Wilde, which says that he's the last active developer and has <b>moved development</b> to <a href="http://github.com/sawilde/partcover.net4">a GitHub project</a>.
 
+<!--more-->
+
 At last! A project with recent (26 June 2011) updates. Unfortunately, my trials did not end here. I tried a number of versions, each with their own quirks. Unfortunately, I did not keep as careful track of which version had which problem as I should, and can't say which version (from either GitHub or SourceForge) had which problems, but I can describe the problems.
 
 At first I thought things were working really well, but then noticed that I had abnormally high coverage levels on my projects - one legacy project that I knew had about 5% coverage was registering as over 20%! 

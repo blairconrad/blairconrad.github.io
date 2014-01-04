@@ -10,11 +10,11 @@ tags:
 <div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
 <p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
 
-* <a href="{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I&mdash;Event Handlers</a>
-* <a href="{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Part II&mdash;Properties</a>
-* <a href="{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III &mdash;Properties Redux</a>
+* <a href="{{ site.url }}{% post_url 2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers %}">Part I&mdash;Event Handlers</a>
+* <a href="{{ site.url }}{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Part II&mdash;Properties</a>
+* <a href="{{ site.url }}{% post_url 2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux %}">Part III &mdash;Properties Redux</a>
 * Part IV&mdash;Unit Tests
-* <a href="{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V&mdash;Reflections and Regrets</a>
+* <a href="{{ site.url }}{% post_url 2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets %}">Part V&mdash;Reflections and Regrets</a>
 
 <p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository</a>.</p>
 </div>

@@ -6,7 +6,7 @@ tags:
     - AutoTest.Net
     - Testing
 ---
-I received a useful comment on <a href="{% post_url 2011-07-29-hasty-impressions-dotcover-1-1 %}">Friday's post about AutoTest.Net</a>. In the wee hours of Saturday, <a href="http://codebetter.com/blogs/gregyoung/">Greg Young</a>, wrote to say
+I received a useful comment on <a href="{{ site.url }}{% post_url 2011-07-29-hasty-impressions-dotcover-1-1 %}">Friday's post about AutoTest.Net</a>. In the wee hours of Saturday, <a href="http://codebetter.com/blogs/gregyoung/">Greg Young</a>, wrote to say
 
 > It should detect broken builds without any problem. We have been running it daily for about 1.5 months.  
 > Perhaps you could grab me via email and reproduce it?
