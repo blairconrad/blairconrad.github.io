@@ -43,7 +43,9 @@ body {
 }
 
 .masthead ul {
+    margin: 0px;
     float:right;
+    line-height: 1.5em;
 }
 
 .masthead ul li{
@@ -52,11 +54,14 @@ body {
     padding-left: 0.5em;
 }
 
-
 h1, h2, h3  {
     margin-top: 0em;
     margin-bottom: 0em;
     font-family: 'Roboto Slab';
+}
+
+h2 {
+    line-height: 1em;
 }
 
 .post-excerpt {
