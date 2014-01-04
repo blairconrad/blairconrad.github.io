@@ -27,4 +27,4 @@ permalink: /blog/:title/
 relative_permalinks: false
 pygments: true
 excerpt_separator: <!--more--> 
-image_dir: /images
+image_dir: http://blairconrad.com/images
