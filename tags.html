@@ -1,5 +1,5 @@
 ---
-layout: default 
+layout: page
 title: Tags
 permalink: /tags/
 ---
@@ -10,18 +10,13 @@ permalink: /tags/
   {{ site_tags | split:',' | size }}
 {% endcapture %}
 {% assign tag_words = site_tags | split:',' | sort %}
-   <h1>Tags</h1>
    {% for item in (0..num_words) %}{% unless forloop.last %}
      {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-   <dl>
-     <dt id="{{ this_word | cgi_escape }}-ref">#{{ this_word }}</dt>
-     <dd>
-   <ul class="posts">
+<h2 id="{{ this_word | cgi_escape }}-ref">#{{ this_word }}</h2>
+   <ul>
      {% for post in site.tags[this_word] %}{% if post.title != null %}
      <li>{{ post.date | date: "%Y-%m-%d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>
      {% endif %}{% endfor %}
    </ul>
-   </dd>
-   </dl>
    {% endunless %}{% endfor %}
 

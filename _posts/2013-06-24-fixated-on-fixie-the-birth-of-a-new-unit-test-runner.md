@@ -9,7 +9,7 @@ I enjoy reading about how software is made, and I like unit testing frameworks. 
 
 <p>In this case, "check it out" doesn't mean "clone the repo and dig around the source code". Nor does it mean "install the NuGet package and build something". Although I may do those things in the future.</p>
 
-<p>Nope. It means I read Mr. Plioi's articles about Fixie and its development. And I am having a great time. Moreso than hearing about Fixie's features (or more often lack of features), I'm enjoying seeing Mr. Plioi's approach to setting up a new project, including:</p>
+<p>Nope. It means I read Mr. Plioi's articles about Fixie and its development. And I am having a great time. Moreso than hearing about Fixie's features (or more often lack of features), I'm enjoying seeing Mr. Plioi's approach to setting up a new project<!--more-->, including:</p>
 <ul>
 <li>prototyping the scariest integration points first</li>
 <li>the importance of starting out with a one-click build, for himself and for potential future contributors</li>
