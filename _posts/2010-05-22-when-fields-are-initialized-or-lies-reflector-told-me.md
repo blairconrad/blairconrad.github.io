@@ -69,14 +69,14 @@ class Program
 >Variable initializers are transformed into assignment statements, and these assignment statements are executed before the invocation of the base class instance constructor. This ordering ensures that all instance fields are initialized by their variable initializers before any statements that have access to that instance are executed.
 
 <p>"What's the problem here?" you may be wondering - the Base code doesn't know anything about the Derived fields, so why go out of our way to make sure the field initializers are called before the Derived constructor?</p>
-<h4>Vitual methods</h4>
+<h2>Vitual methods</h2>
 <p>Virtual methods are the problem. If a virtual method is defined in Base and overridden in Derived, the overridden method may reference the new fields added to Derived. If the virtual method is called from the Base constructor, then we need those fields to be initialized <i>before</i> the constructor is called. Initializing fields even before calling base class constructors ensures that this is so.</p>
 
 <p>Or does it? What if the field I'm accessing in a overridden method in the derived class doesn't have a field initializer, that method is called from the base constructor, and the field value is set in the derived constructor? In this case, the field won't be initialized before the method is called - it will still have the default value for its type.</p>
 
 <p>So how to do we safely call virtual methods in constructors? We don't. You can't guarantee what code is going to go into a derived class's virtual method, so you never know what's going to happen.</p>
 
-<h4>Back to Reflector</h4>
+<h2>Back to Reflector</h2>
 <p>Remember a few paragraphs ago when I said that Reflector told me that field initialization acted like it was an assignment statement at the beginning of a constructor? Well, I did, and I wanted to see whether I was misremembering, so I compiled my sample code and threw the assembly into Reflector. Here's what I saw:</p>
 
 <a href="http://blairconrad.files.wordpress.com/2010/05/derived_class_constructor.png"><img src="http://blairconrad.files.wordpress.com/2010/05/derived_class_constructor.png" alt="Derived Class Constructor" title="Derived Class Constructor" width="248" height="75" class="size-full wp-image-440" /></a>
