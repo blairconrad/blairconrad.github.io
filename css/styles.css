@@ -29,17 +29,21 @@ body {
     color: #354B5E;
 } 
 
+.header {
+    background-color: #333333;
+}
+
 .masthead {
-    margin-left: 0em;
-    margin-right: 0em
+    margin-left: auto;
+    margin-right: auto;
     margin-top: 0em;
     margin-bottom: 0em;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1em;
     padding-bottom: 0.25em;
-    background-color: #333333;
     color: #AAAAAA;
+    max-width: 800px
 }
 
 .masthead ul {
@@ -66,8 +70,8 @@ h2 {
 
 .post-excerpt {
 /*    padding-bottom: 1em; */
-    margin-left: 3em;
-    margin-right: 3em;
+    margin-left: 1.5em;
+/*    margin-right: 3em; */
     /* border-bottom: solid 1px #333333;  */
 }
 
@@ -95,6 +99,9 @@ h2 {
     margin: 1em;
     padding: 0.5em;
     background: white;
+max-width: 800px;
+margin-left: auto;
+margin-right: auto;
 }
 
 dt {

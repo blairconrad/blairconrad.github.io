@@ -16,6 +16,9 @@ linkedin_url: "https://linkedin.com/in/blairconrad"
 feed_url: "http://feeds.feedburner.com/BlairConrad"
 email: "blair@blairconrad.com"
 
+# For Google Authorship https://plus.google.com/authorship
+googleplus_profile: "BlairConrad"
+
 # Markdown rendering
 markdown: kramdown
 kramdown:

@@ -10,18 +10,21 @@
     <link rel="stylesheet" type="text/css" href="/css/github.css">
     <link rel="stylesheet" type="text/css" href="/css/styles.css">
     <link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400,600' rel='stylesheet' type='text/css'>
-    <!-- <link rel="stylesheet" type="text/css" href="/css/font-awesome/css/font-awesome.min.css"> -->
+    <link rel="canonical" href="{{ site.url }}">
+    <link rel="author" href="https://plus.google.com/+{{ site.googleplus_profile }}?rel=author">
     
     <link rel="alternate" type="application/rss+xml" title="RSS feed for {{ site.name }}" href="{{ site.feed_url }}">
   </head>
   <body>
-    <div class="masthead">
-      <h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
-      <ul>
-        <li><a href="{{ site.url }}/about">about</a></li>
-        <li><a href="{{ site.url }}/archive">archive</a></li>
-      </ul>
-      <h2>{{site.description}}</h2>
+    <div class="header">
+      <div class="masthead">
+        <h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
+        <ul>
+          <li><a href="{{ site.url }}/about">about</a></li>
+          <li><a href="{{ site.url }}/archive">archive</a></li>
+        </ul>
+        <h2>{{site.description}}</h2>
+      </div>
     </div>
 </div>
 <div class="content">
