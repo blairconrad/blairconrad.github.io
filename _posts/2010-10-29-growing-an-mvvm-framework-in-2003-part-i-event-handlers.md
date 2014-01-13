@@ -34,7 +34,7 @@ Unfortunately, the application was intended to work at our established customers
 <h2>The Goal</h2>
 I'll demonstrate with a simpler app than the one from work, but will cover the the relevant concepts. For the purpose of this post, I'll be writing a book-finding app. The user will be able to enter a substring to use to search a database; the matching entries will be displayed in a ListBox and when one of them is selected, some notes will be displayed in a TextBox.
 
-<a href="http://blairconrad.files.wordpress.com/2010/10/bookfindermockup.png"><img class="aligncenter size-full wp-image-595" title="bookfindermockup" src="http://blairconrad.files.wordpress.com/2010/10/bookfindermockup.png" alt="BookFinder Mockup" width="480" height="337" /></a>
+<a href="{{ site.image_dir }}/bookfindermockup.png"><img class="aligncenter size-full wp-image-595" title="bookfindermockup" src="{{ site.image_dir }}/bookfindermockup.png" alt="BookFinder Mockup" width="480" height="337" /></a>
 
 I didn't want to have to riddle my ViewModel with <code>+=</code>s just to be able to react to button presses and item selections from the view. I wanted to write something like:
 

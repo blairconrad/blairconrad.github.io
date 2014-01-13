@@ -47,7 +47,7 @@ There are 10 coins in each of the five bags below. One of these bags is filled w
 </blockquote>
 
 <div class="images">
-<a href="http://blairconrad.files.wordpress.com/2010/06/fake_coins.png"><img src="http://blairconrad.files.wordpress.com/2010/06/fake_coins.png" alt="fake coins puzzle" title="fake coins puzzle" width="256" height="192" class="aligncenter size-full wp-image-494" /></a>
+<a href="{{ site.image_dir }}/fake_coins.png"><img src="{{ site.image_dir }}/fake_coins.png" alt="fake coins puzzle" title="fake coins puzzle" width="256" height="192" class="aligncenter size-full wp-image-494" /></a>
 </div>
 
 I'm going to spoil the puzzle, so if you want to figure it out yourself, stop reading now.

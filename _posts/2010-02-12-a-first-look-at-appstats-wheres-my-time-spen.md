@@ -16,7 +16,7 @@ I didn't use (or need) any particularly advanced configuration, so I just <a hre
 
 Here's what I saw:
 
-<img src="http://blairconrad.files.wordpress.com/2010/02/no_rwl.png" alt="Appstats result for checking one family with just Waterloo and Kitchener accounts" title="checking one family, Waterloo and Kitchener libraries" width="746" height="425" class="size-full wp-image-322" />
+<img src="{{ site.image_dir }}/no_rwl.png" alt="Appstats result for checking one family with just Waterloo and Kitchener accounts" title="checking one family, Waterloo and Kitchener libraries" width="746" height="425" class="size-full wp-image-322" />
 
 I don't have an in-depth analysis, but here are some impressions: 
 <ul>
@@ -33,7 +33,7 @@ Two things did stand out, though. First, in the first group of urlfetch.Fetches,
 
 Second, there's a datastore_v3.Get call before each card is checked. This is <strong>not an explicit call</strong> that LibraryHippo makes, so I clicked on the line in the graph and got a detailed view of what was going on:
 
-<img src="http://blairconrad.files.wordpress.com/2010/02/implicit_get.png" alt="Detail of implicit datastore_v3.get call" title="Detail of implicit get" width="751" height="407" class="size-full wp-image-328" />
+<img src="{{ site.image_dir }}/implicit_get.png" alt="Detail of implicit datastore_v3.get call" title="Detail of implicit get" width="751" height="407" class="size-full wp-image-328" />
 
 It looks like the call is coming from the <code>create</code> method on line 8 of the all_libraries.py file. Curious, I click on that line and lo and behold, <strong>I get a view of the source</strong>. This is very cool.
 
@@ -60,7 +60,7 @@ Correlating the detail view and the source code, we see that <code>create</code>
 
 Ordinarily, I might start investigating the gaps and the implicit gets, but I know there's a much greater threat to LibraryHippo usability, which I confirm by checking out the record for another family's notification:
 
-<img src="http://blairconrad.files.wordpress.com/2010/02/with_rwl.png" alt="Appstats results of checking one family, with a Region of Waterloo Account" title="checking one family, with a Region of Waterloo Account" width="757" height="665" class="size-full wp-image-321" />
+<img src="{{ site.image_dir }}/with_rwl.png" alt="Appstats results of checking one family, with a Region of Waterloo Account" title="checking one family, with a Region of Waterloo Account" width="757" height="665" class="size-full wp-image-321" />
 
 Here's where the presentation really packs a wallop - there's clearly a qualitative difference here. And what a difference - instead of 2.5 seconds on the horizontal axis, it's 25 seconds, and most of the fetches are compressed to nigh-invisibility.
 

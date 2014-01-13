@@ -11,7 +11,7 @@ After a while, I wanted more - I wanted the script to work on more pages, and I 
 Recently, though, I've been using <a href="http://www.google.com/chrome/">Google Chrome</a> as my browser, and the user script (for whatever reason) doesn't work with Chrome's greasemonkey-to-extension translator. So, I've been "libary lookupless", and keenly felt the lack. 
 
 <div class="images">
-<a href="https://chrome.google.com/extensions/detail/lopekoojcojbmfpkbncnpihmjbbkdgdk"><img src="http://blairconrad.files.wordpress.com/2010/07/icon_128.png" border="0" alt="LibraryLookup icon" title="LibraryLookup" width="128" height="128" class="alignright size-full wp-image-571" /></a>
+<a href="https://chrome.google.com/extensions/detail/lopekoojcojbmfpkbncnpihmjbbkdgdk"><img src="{{ site.image_dir }}/icon_128.png" border="0" alt="LibraryLookup icon" title="LibraryLookup" width="128" height="128" class="alignright size-full wp-image-571" /></a>
 </div>
 
 I figured this was an excellent opportunity to learn how to write Chrome extensions, and it was not too difficult.  The first incarnation of the new
@@ -40,6 +40,6 @@ And it will start looking up libraries when you browse to a book's page at:
 Try it now! Install the extension, visit <a href="http://www.amazon.ca/Time-Travelers-Wife-Audrey-Niffenegger/dp/0676976336">a book page</a>, and (if it's in the libraries) click on the handy "book found" page icon in the URL bar to see where your book is:
 
 <div class="images">
-<a href="http://blairconrad.files.wordpress.com/2010/07/found_tttw.png"><img src="http://blairconrad.files.wordpress.com/2010/07/found_tttw.png?w=300" alt="Library Lookup finds The Time Traveler&#039;s Wife" title="found_tttw" width="300" height="127" class="aligncenter size-medium wp-image-528" /></a>
+<a href="{{ site.image_dir }}/found_tttw.png"><img src="{{ site.image_dir }}/found_tttw.png?w=300" alt="Library Lookup finds The Time Traveler&#039;s Wife" title="found_tttw" width="300" height="127" class="aligncenter size-medium wp-image-528" /></a>
 </div>
 

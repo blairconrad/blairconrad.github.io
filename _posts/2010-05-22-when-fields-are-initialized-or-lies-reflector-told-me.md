@@ -79,7 +79,7 @@ class Program
 <h2>Back to Reflector</h2>
 <p>Remember a few paragraphs ago when I said that Reflector told me that field initialization acted like it was an assignment statement at the beginning of a constructor? Well, I did, and I wanted to see whether I was misremembering, so I compiled my sample code and threw the assembly into Reflector. Here's what I saw:</p>
 
-<a href="http://blairconrad.files.wordpress.com/2010/05/derived_class_constructor.png"><img src="http://blairconrad.files.wordpress.com/2010/05/derived_class_constructor.png" alt="Derived Class Constructor" title="Derived Class Constructor" width="248" height="75" class="size-full wp-image-440" /></a>
+<a href="{{ site.image_dir }}/derived_class_constructor.png"><img src="{{ site.image_dir }}/derived_class_constructor.png" alt="Derived Class Constructor" title="Derived Class Constructor" width="248" height="75" class="size-full wp-image-440" /></a>
 
 <p>I felt somewhat vindicated - this matched my memory. For a lark, I took this code (and the matching code Reflector showed me for the Base class), compiled it, ran it, and got:</p>
 <ul>
@@ -91,7 +91,7 @@ class Program
 
 <p>The more I thought about this, though, the worse I felt. How could Reflector let me down like this? Isn't it just looking at the IL and translating into C#? I poked around a little more, and instead of just double-clicking on the Derived constructor, I right-clicked on the Derived class node in the navigation tree and picked <b>Disassemble</b>. Lo and behold:</p>
 
-<a href="http://blairconrad.files.wordpress.com/2010/05/derived_class_whole.png"><img src="http://blairconrad.files.wordpress.com/2010/05/derived_class_whole.png" alt="Disassembled Derived Class" title="Disassembled Derived Class" width="294" height="154" class="size-full wp-image-441" /></a>
+<a href="{{ site.image_dir }}/derived_class_whole.png"><img src="{{ site.image_dir }}/derived_class_whole.png" alt="Disassembled Derived Class" title="Disassembled Derived Class" width="294" height="154" class="size-full wp-image-441" /></a>
 
 So, Reflector does know what's going on&mdash;you just have to ask nice. To recap,
 
