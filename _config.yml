@@ -26,7 +26,6 @@ kramdown:
   parse_block_html: true
 
 # Site settings
-permalink: /blog/:title/
 relative_permalinks: false
 pygments: true
 excerpt_separator: <!--more--> 
