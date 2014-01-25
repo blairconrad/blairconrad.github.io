@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Better formatter auto-discovery in FakeItEasy 1.13.0
+comments: true
 tags: 
     - .NET
     - FakeItEasy

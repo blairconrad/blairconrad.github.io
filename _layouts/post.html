@@ -11,7 +11,4 @@ layout: default
 <div class="entry">
 {{ content }}
 </div>
-<p class="discuss">
-  Discuss this post via <a href="mailto:{{ site.email }}">e-mail</a>
-  or <a href="{{ site.twitter_url }}">Twitter</a>.
-</p>
+{% include disqus.html %}
