@@ -1,6 +1,7 @@
 ---
 layout: post
 title: An unanticipated benefit of using the Chrome Extension Gallery
+comments: true
 tags:
     - ChromeExtensions
     - Development

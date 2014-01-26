@@ -1,6 +1,7 @@
 ---
 layout: post
 title: AutoTest.Net updated - now (and then) notices broken builds
+comments: true
 tags:
     - .NET
     - AutoTest.Net

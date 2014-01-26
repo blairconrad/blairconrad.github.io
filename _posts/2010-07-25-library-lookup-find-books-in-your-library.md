@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Library Lookup - find books in your library
+comments: true
 tags:
     - LibraryLookup
 ---

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Animating Google Chrome Extension Page Action Icons
+comments: true
 tags:
     - AnimatedGIFs
     - ChromeExtensions

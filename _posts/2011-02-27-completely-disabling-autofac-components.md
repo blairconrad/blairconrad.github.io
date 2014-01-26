@@ -1,6 +1,7 @@
 ---
 layout: post
 title: How to completely disable Autofac components
+comments: true
 tags:
     - .NET
     - Autofac

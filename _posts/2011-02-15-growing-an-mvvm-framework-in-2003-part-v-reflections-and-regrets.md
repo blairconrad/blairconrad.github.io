@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Growing an MVVM Framework in 2003, part V&mdash;Reflections and Regrets
+comments: true
 tags:
     - .NET
     - Development

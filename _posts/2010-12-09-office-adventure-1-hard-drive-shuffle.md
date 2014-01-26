@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Office Adventure&#58; Hard Drive Shuffle
+comments: true
 tags:
     - OfficeAdventures
     - Uncategorized

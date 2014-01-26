@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hasty Impressions&#58; dotCover 1.1
+comments: true
 tags:
     - .NET
     - coverage

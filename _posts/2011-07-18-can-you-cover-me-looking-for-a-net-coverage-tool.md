@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Can you cover me&#63; Looking for a .NET coverage tool
+comments: true
 tags:
     - .NET
     - coverage

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Growing an MVVM Framework in 2003, part IV&mdash;Unit Tests
+comments: true
 tags:
     - .NET
     - Frameworks

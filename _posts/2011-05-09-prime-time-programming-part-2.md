@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Prime Time Programming, Part 2
+comments: true
 tags:
     - Development
     - Primes

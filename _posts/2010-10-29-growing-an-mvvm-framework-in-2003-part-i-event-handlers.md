@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Growing an MVVM Framework in 2003, part I&mdash;Event Handlers
+comments: true
 tags:
     - Development
     - Frameworks

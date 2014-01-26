@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hasty impressions&#58; Continuous testing using AutoTest.NET
+comments: true
 tags:
     - .NET
     - AutoTest.Net
