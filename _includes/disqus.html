@@ -1,5 +1,5 @@
 {% comment %} Load script if disqus comments are enabled and `page.comments` is either empty (index) or set to true {% endcomment %}
-{% if page.comments %}
+{% if page.comments and site.disqus_shortname %}
 <div id="page-comments">
 <h1>Comments</h1>
 <div id="disqus_thread"></div>

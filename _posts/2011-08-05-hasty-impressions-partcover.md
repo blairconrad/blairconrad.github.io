@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Hasty Impressions&#58; PartCover
+comments: true
 tags:
     - .NET
     - coverage
