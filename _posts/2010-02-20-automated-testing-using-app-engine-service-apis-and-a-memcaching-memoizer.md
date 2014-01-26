@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Automated Testing using App Engine Service APIs (and a Memcaching Memoizer)
+comments: true
 tags:
     - AppEngine
     - Decorators

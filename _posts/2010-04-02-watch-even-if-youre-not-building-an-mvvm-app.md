@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Watch, even if you're not building an MVVM App
+comments: true
 tags:
     - Coroutines
     - Development

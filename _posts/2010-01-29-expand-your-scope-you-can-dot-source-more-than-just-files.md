@@ -1,6 +1,7 @@
 ---
 layout: post
 title: expand your scope - you can dot-source more than just files 
+comments: true
 tags:
     - Development
     - PowerShell

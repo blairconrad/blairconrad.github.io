@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Best all-around .NET coverage tool - OpenCover
+comments: true
 tags: 
     - .NET
     - coverage

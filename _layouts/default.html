@@ -7,11 +7,11 @@
     
     <title>{{ page.title }} | {{ site.name }}</title>
     
-    <link rel="stylesheet" type="text/css" href="/css/github.css">
-    <link rel="stylesheet" type="text/css" href="/css/styles.css">
-    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400,600' rel='stylesheet' type='text/css'>
-    <link rel="canonical" href="{{ site.url }}">
-    <link rel="author" href="https://plus.google.com/+{{ site.googleplus_profile }}?rel=author">
+    <link rel="stylesheet" type="text/css" href="/css/github.css"/>
+    <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
+    <link href='http://fonts.googleapis.com/css?family=Roboto+Slab|Open+Sans:400,600' rel='stylesheet' type='text/css'/>
+    <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}"/>
+    <link rel="author" href="https://plus.google.com/+{{ site.googleplus_profile }}?rel=author"/>
     
     <link rel="alternate" type="application/rss+xml" title="RSS feed for {{ site.name }}" href="{{ site.feed_url }}">
   </head>

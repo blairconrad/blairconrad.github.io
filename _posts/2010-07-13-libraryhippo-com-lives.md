@@ -1,6 +1,7 @@
 ---
 layout: post
 title: libraryhippo.com lives
+comments: true
 tags:
     - LibraryHippo
     - Profligateness

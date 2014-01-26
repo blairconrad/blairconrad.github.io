@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Using XSL to arbitrarily order strings - lessons from Professor Layton
+comments: true
 tags:
     - Development
     - Sorting

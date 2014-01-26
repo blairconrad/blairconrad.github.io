@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Brandon Sanderson - Good author and class act
+comments: true
 tags:
     - Books
 ---

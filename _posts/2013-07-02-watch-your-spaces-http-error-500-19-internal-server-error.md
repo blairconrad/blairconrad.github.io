@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Watch your spaces - HTTP Error 500.19 - Internal Server Error
-comments: true>
+comments: true
 tags:
     - 500-19 
     - iis 

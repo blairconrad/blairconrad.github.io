@@ -1,6 +1,7 @@
 ---
 layout: post
 title: FakeItEasy's argument formatter auto-discovery - boon and inconvenience
+comments: true
 tags: 
   - .NET
   - FakeItEasy

@@ -15,7 +15,7 @@ twitter_url: "https://twitter.com/Hippopottoman"
 linkedin_url: "https://linkedin.com/in/blairconrad"
 feed_url: "http://feeds.feedburner.com/BlairConrad"
 email: "blair@blairconrad.com"
-disqus_short_name: blairconrad
+disqus_shortname: blairconrad
 
 # For Google Authorship https://plus.google.com/authorship
 googleplus_profile: "BlairConrad"
@@ -28,6 +28,7 @@ kramdown:
 
 # Site settings
 relative_permalinks: false
+permalink: /:year/:month/:day/:title/
 pygments: true
 excerpt_separator: <!--more--> 
 image_dir: http://blairconrad.com/images

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Using Subversion to Evangelize PowerShell
+comments: true
 tags:
     - Development
     - PowerShell

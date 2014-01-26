@@ -1,6 +1,7 @@
 ---
 layout: post
 title: A first look at Appstats - where's my time spent?
+comments: true
 tags:
     - AppEngine
     - Appstats

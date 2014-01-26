@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Waiting pays off again - Google App Engine gets Datastore retries
+comments: true
 tags:
     - AppEngine
     - Development

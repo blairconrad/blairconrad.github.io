@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Auto-deploying TypeMock Isolator Without Trashing the Installation
+comments: true
 tags:
     - Isolator
     - MSBuild

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: When Fields are Initialized, or "Lies Reflector Told Me"
+comments: true
 tags:
     - .NET
     - C#

@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Cookies, Redirects, and Transcripts - Supercharging urlfetch
+comments: true
 tags:
     - AppEngine
     - Development

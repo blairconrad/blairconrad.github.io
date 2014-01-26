@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Quickly make editable diagrams with yUML
+comments: true
 tags:
     - Development
     - PNG

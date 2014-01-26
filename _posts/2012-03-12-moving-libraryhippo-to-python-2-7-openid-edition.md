@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Moving LibraryHippo to Python 2.7 - OpenID edition
+comments: true
 tags: 
     - appengine
     - myopenid

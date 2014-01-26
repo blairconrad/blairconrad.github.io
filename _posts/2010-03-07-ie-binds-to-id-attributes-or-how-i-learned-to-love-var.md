@@ -1,6 +1,7 @@
 ---
 layout: post
 title: IE binds to id attributes, or “How I learned to love var”
+comments: true
 tags:
     - Ajax
     - Development

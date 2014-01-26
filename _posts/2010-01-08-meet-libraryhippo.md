@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Meet LibraryHippo
+comments: true
 tags:
     - LibraryHippo
 ---

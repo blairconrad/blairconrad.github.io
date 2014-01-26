@@ -1,6 +1,7 @@
 ---
 layout: post
 title: Acronyms of the Day&#58; VOMIT and BARF
+comments: true
 tags:
     - Uncategorized
     - Words
