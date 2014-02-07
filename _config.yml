@@ -16,6 +16,8 @@ linkedin_url: "https://linkedin.com/in/blairconrad"
 feed_url: "http://feeds.feedburner.com/BlairConrad"
 email: "blair@blairconrad.com"
 disqus_shortname: blairconrad
+google_analytics_key: UA-47778858-1
+google_analytics_property: blairconrad.com
 
 # For Google Authorship https://plus.google.com/authorship
 googleplus_profile: "BlairConrad"
