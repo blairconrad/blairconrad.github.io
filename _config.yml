@@ -9,15 +9,17 @@ author_bio: |
     Software developer at Agfa HealthCare
     More <a href=/about/>about me</a>.
 
-# External services
-github_url: "https://github.com/blairconrad"
-twitter_url: "https://twitter.com/Hippopottoman"
-linkedin_url: "https://linkedin.com/in/blairconrad"
 feed_url: "http://feeds.feedburner.com/BlairConrad"
 email: "blair@blairconrad.com"
 disqus_shortname: blairconrad
 google_analytics_key: UA-47778858-1
 google_analytics_property: blairconrad.com
+
+# Social
+github_url: "https://github.com/blairconrad"
+twitter_url: "https://twitter.com/Hippopottoman"
+goodreads_url: "https://www.goodreads.com/Hippopottoman"
+linkedin_url: "https://linkedin.com/in/blairconrad"
 
 # For Google Authorship https://plus.google.com/authorship
 googleplus_profile: "BlairConrad"
