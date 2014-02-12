@@ -2,6 +2,7 @@ a {
     color: #005BA8;
     text-decoration: none;
     font-weight: 600;
+    transition: 0.3s;
 }
 
 a.title { 
@@ -14,6 +15,7 @@ a.title {
 
 a:hover {
     color: #5984A8;
+    transition: 0.3s;
 }
 
 body {
@@ -122,34 +124,42 @@ dt {
 
 .twitter {
     background-color: hsla(196,100%,46%,.6);
+    transition: 0.3s;
 }
 
 .twitter:hover {
     background-color: hsl(196,100%,46%);
+    transition: 0.3s;
 }
 
 .github {
     background-color: hsla(210,53%,51%,.6);
+    transition: 0.3s;
 }
 
 .github:hover {
     background-color: hsl(210,53%,51%);
+    transition: 0.3s;
 }
 
 .goodreads {
     background-color: hsla(42,54%,23%,.6);
+    transition: 0.3s;
 }
 
 .goodreads:hover {
     background-color: hsl(42,54%,23%);
+    transition: 0.3s;
 }
 
 .rss {
     background-color: hsla(31,100%,50%,.6);
+    transition: 0.3s;
 }
 
 .rss:hover {
     background-color: hsl(31,100%,50%);
+    transition: 0.3s;
 }
 
 .console pre {
