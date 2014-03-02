@@ -27,19 +27,32 @@
     {% endif %}
   </head>
   <body>
-    <div class="header">
-      <div class="masthead">
-        <h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
-        <ul>
-          <li><a href="{{ site.url }}/about/">about</a></li>
-          <li><a href="{{ site.url }}/archive/">archive</a></li>
-        </ul>
-        <h2>{{site.description}}</h2>
+    <div class="container">
+      <div class="header">
+        <div class="masthead">
+          <div class="titles">
+            <h1><a href="{{ site.url }}">{{ site.name }}</a></h1>
+            <h2>{{site.description}}</h2>
+          </div>
+          <div class="nav">
+            <ul>
+              <li><a href="{{ site.url }}/about/">about</a></li>
+              <li><a href="{{ site.url }}/archive/">archive</a></li>
+            </ul>
+
+            <div class="social">
+              {% if site.twitter_url %}<a href="{{ site.twitter_url }}"><img src="{{ site.image_dir }}/twitter-48.png" alt="Twitter" title="Me on Twitter" class="twitter" ></a>{% endif %}
+              {% if site.github_url %}<a href="{{ site.github_url }}"><img src="{{ site.image_dir }}/github-48.png" alt="GitHub" title="Me on GitHub" class="github"></a>{% endif %}
+              {% if site.goodreads_url %}<a href="{{ site.goodreads_url }}"><img src="{{ site.image_dir }}/goodreads-48.png" title="Me on GoodReads" class="goodreads"></a>{% endif %}
+              {% if site.feed_url %}<a  href="{{ site.feed_url }}"><img src="{{ site.image_dir }}/rss-48.png" title="Feed" class="rss"></a>{% endif %}
+            </div>
+          </div>
+        </div>
       </div>
-    </div>
-</div>
-<div class="content">
-  {{ content }}
-</div>
-</body>
+      <div class="body">
+        <div class="content">
+          {{ content }}
+        </div>
+      </div>
+  </body>
 </html>
