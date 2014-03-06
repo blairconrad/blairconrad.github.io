@@ -20,7 +20,7 @@ runner alleviated the pain, but the incident prompted a re-examination
 of the issue.
 
 While disabling shadow copies should resolve most slow startup
-problems caused by excessive working direcotry assemblies, and it may
+problems caused by excessive working directory assemblies, and it may
 [improve performance in other ways][shadowstart], recommending this to clients
 has always felt like a bit of a dodge to me, essentially pushing the
 problem off to someone else. There was also the lingering fear that
@@ -33,15 +33,14 @@ originally-proposed bootstrapper solution.
 
 ## Using a custom bootstrapper
 
-By default, after scanning all FakeItEasy-referencing assemblies in
-the AppDomain, FakeItEasy will examine all DLLs in the working
-directory. This behaviour can be changed by including in the AppDomain
-a class that implements `FakeItEasy.IBootstrapper`. As I write, this
-is the only behaviour that the bootstrapper controls:
+By default, after scanning all FakeItEasy-referencing assemblies
+currently loaded in the AppDomain, FakeItEasy&nbsp;1.18.0 will examine all DLLs in
+the working directory. This behaviour can be changed by including in
+the AppDomain a class that implements `FakeItEasy.IBootstrapper`. As I
+write, this is the only behaviour that the bootstrapper controls:
 
 {% highlight csharp %}
 /// <summary>
-/// Provides a list of assemblies to scan for extension points.
 /// Provides a list of assembly file names to scan for extension points, such as
 /// <see cref="IDummyDefinition"/>s, <see cref="IArgumentValueFormatter"/>s, and 
 /// <see cref="IFakeConfigurator"/>s.
@@ -56,13 +55,13 @@ The best way to implement the interface is to **extend
 `FakeItEasy.DefaultBootstrapper`**. This class defines the default
 FakeItEasy setup behaviour, so using it as a base allows
 clients to customize only those aspects of the initialization that
-matters to them.
+matter to them.
 
 While any list of assembly files can be provided by
 `GetAssemblyFileNamesToScanForExtensions`, I expect that most
-extensions that are defined will already be in the AppDomain, so the
-most common customization will be to disable external assembly
-scanning, like so:
+extensions that are defined will already be loaded in the current
+AppDomain, so the most common customization will be to disable
+external assembly scanning, like so:
 
 {% highlight csharp %}
 public class NoExternalScanningBootstrapper : FakeItEasy.DefaultBootstrapper
