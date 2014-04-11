@@ -157,10 +157,10 @@ end
 # rake watch["drafts"]
 desc "Serve and watch the site (with post limit or drafts)"
 task :watch, :option do |t, args|
+  puts '* Changing the codepage'
+  `chcp 65001`
   option = args[:option]
   if option.nil? or option.empty?
-    puts '* Changing the codepage'
-    `chcp 65001`
     execute("jekyll serve --watch --config _config.yml,_config.local.yml")
   else
     if option == "drafts"
