@@ -42,6 +42,12 @@ However, every year, I wish that the Region provided a
 wouldn't have to do this. But I don't do more than wish.
 
 This year, I'm doing more. For starters, I created a few Google Calendars. One for me (and my fellow Monday-pickup people), and four for everyone else in Waterloo (and Cambridge).
+The Region's web site gave me start and end weeks for pickups, so it was very easy to make a biweekly repeating event, using these Google Calendar settings:
+
+<div class="images">
+<img alt="Monday yard waste repeat schedule for Waterloo" src="{{ site.image_dir }}/yard-waste-repeat-details.png" style="border: 1px solid black">
+</div>
+
 Take them! Use them! If there's a problem, complain in the comments:
 
 <table>
