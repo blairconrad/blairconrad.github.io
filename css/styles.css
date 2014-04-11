@@ -285,3 +285,21 @@ blockquote {
     padding-right: 1em;
     background: #f8f8f8; 
 }
+
+table {
+    border-collapse:collapse;
+}
+
+table, th, td {
+    border: 1px solid #333333;
+}
+
+th {
+    background-color: #333333;
+    color: white;
+}
+
+td, th
+{
+    padding: 3px;
+}
