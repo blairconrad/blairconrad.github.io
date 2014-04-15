@@ -156,19 +156,22 @@ end
 # rake watch[number]
 # rake watch["drafts"]
 desc "Serve and watch the site (with post limit or drafts)"
-task :watch, :option do |t, args|
+task :watch, :drafts, :limit do |t, args|
+  args.with_defaults(:drafts => '', :limit => '')
   puts '* Changing the codepage'
   `chcp 65001`
-  option = args[:option]
-  if option.nil? or option.empty?
-    execute("jekyll serve --watch --config _config.yml,_config.local.yml")
-  else
-    if option == "drafts"
-      execute("jekyll serve --watch --config _config.yml,_config.local.yml --drafts")
-    else
-      execute("jekyll serve --watch --config _config.yml,_config.local.yml --limit_posts #{option}")
-    end
+  drafts = args[:drafts]
+  if ! drafts.empty?
+    drafts = "--drafts"
   end
+
+  limit = args[:limit]
+  if ! limit.empty?
+    limit = "--limit_posts #{limit}"
+  end
+
+  puts "jekyll serve --watch --config _config.yml,_config.local.yml #{drafts} #{limit}"
+  execute("jekyll serve --watch --config _config.yml,_config.local.yml #{drafts} #{limit}")
 end
 
 # rake preview
