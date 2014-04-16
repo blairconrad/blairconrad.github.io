@@ -3,8 +3,7 @@ layout: post
 title: Office Adventure&#58; Hard Drive Shuffle
 comments: true
 tags:
-    - OfficeAdventures
-    - Uncategorized
+    - diversions
 ---
 It's fashionable to complain about the IT department at the Day Job, but sometimes we get pretty good service. I had occasion to contact them today for two unrelated problems. The first, an issue with a Lotus Notes upgrade, was quickly resolved over the phone. The other problem involved hardware, and I'm well on the way to a resolution, with one minor snag.
 

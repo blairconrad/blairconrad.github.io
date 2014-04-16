@@ -3,8 +3,8 @@ layout: post
 title: Acronyms of the Day&#58; VOMIT and BARF
 comments: true
 tags:
-    - Uncategorized
-    - Words
+    - diversions
+    - words
 ---
 <p>I was listening to <a href="http://www.cbc.ca/ideas/podcast.html">CBC's Ideas Podcast</a> today, specifically to <i>You Are "Pre-Diseased", Part 2</i> (which aired on 18 January and is available for download until mid-February, in case you want to listen) when I heard a new acronym that's relevant to my Day Job.</p>
 <p><b>V</b>ictim <b>O</b>f <b>M</b>edical <b>I</b>maging <b>T</b>echnology refers to patients who are operated on after an abnormality is detected in an imaging procedure, but nothing is found during the operation.</p>
