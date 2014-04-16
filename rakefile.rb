@@ -170,7 +170,6 @@ task :watch, :drafts, :limit do |t, args|
     limit = "--limit_posts #{limit}"
   end
 
-  puts "jekyll serve --watch --config _config.yml,_config.local.yml #{drafts} #{limit}"
   execute("jekyll serve --watch --config _config.yml,_config.local.yml #{drafts} #{limit}")
 end
 
