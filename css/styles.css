@@ -168,6 +168,16 @@ dt {
     margin-right: 0.5em;
 }
 
+.figure {
+    text-align: center;
+}
+
+.figure img {
+    margin-left: 0.5em;
+    margin-right: 0.5em;
+    border: 1px solid black;
+}
+
 .social img {
     margin-left: 5px;
 }
@@ -284,4 +294,22 @@ blockquote {
     padding-left: 1em;
     padding-right: 1em;
     background: #f8f8f8; 
+}
+
+table {
+    border-collapse:collapse;
+}
+
+table, th, td {
+    border: 1px solid #333333;
+}
+
+th {
+    background-color: #333333;
+    color: white;
+}
+
+td, th
+{
+    padding: 3px;
 }
