@@ -2,6 +2,7 @@
 layout: page 
 title: "Yard Waste Collection Schedule" 
 permalink: /yard-waste-collection-schedule/
+comments: true
 ---
 
 As I [first discussed in April 2014][user-sourced-yard-waste], here are a few Google Calendars that I created in order to track residential yard waste collection days for (sections of) the Region of Waterloo.
