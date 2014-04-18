@@ -1,26 +1,21 @@
 ---
 layout: default
 ---
-{% if page.feature %}
-<div class="feature-image">
-  <img src="{{ page.feature }}"/>
-</div>
-{% endif %}
 <h1>{{ page.title }}</h1>
 {% include post-meta.html %}
-<div class="entry">
+<div>
 {{ content }}
 </div>
-<div id="page-navigation"> 
-  <div class="previous"> 
+<div> 
+  <nav>
     {% if page.previous.url %} 
     <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">&laquo;&nbsp;{{page.previous.title}}</a>
     {% endif %} 
   </div>
-  <div class="next"> 
+  <div>
     {% if page.next.url %} 
     <a href="{{page.next.url}}" title="Next Post: {{page.next.title}}">{{page.next.title}}&nbsp;&raquo;</a> 
     {% endif %} 
   </div>
-</div> 
+</nav> 
 {% include disqus.html %}
