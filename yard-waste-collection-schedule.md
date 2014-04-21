@@ -9,7 +9,7 @@ As I [first discussed in April 2014][user-sourced-yard-waste], here are a few Go
 
 I created the calendars from information [I found on the Region's web site][yard-waste-program]. I've made every effort to ensure that the calendars are correct, but nobody's perfect. I hope they're useful. I welcome any questions or comments.
 
-<table>
+<table class="grid">
   <tr>
     <th>Day of Week</th>
     <th colspan="3">Waterloo and Cambridge</th>

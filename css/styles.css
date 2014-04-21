@@ -40,8 +40,7 @@ nav ul {
 }
 
 body {
-    /* font-family: 'Open Sans', Helvetica, Arial, sans-serif; */
-font-family: 'Roboto', sans-serif;
+    font-family: 'Roboto', sans-serif;
 
     color: rgb(20%, 20%, 20%);
     background-color: {{ page.default_background_color }};
@@ -62,7 +61,8 @@ h1 {
 }
 
 h1, h2, h3 {
-font-family: 'Roboto Condensed', sans-serif;
+    font-family: 'Roboto Condensed', sans-serif;
+    font-weight: 500;
 }
 
 a {
@@ -122,10 +122,6 @@ table {
     border-collapse: collapse;
 }
 
-table, th, td {
-    border: {{ page.default_border }};
-}
-
 th {
     background-color: {{ page.default_background_color }};
 }
@@ -133,6 +129,10 @@ th {
 td, th
 {
     padding: 3px;
+}
+
+.grid th, .grid td {
+    border: {{ page.default_border }};
 }
 
 @media screen and (min-width: 40.5em) {
