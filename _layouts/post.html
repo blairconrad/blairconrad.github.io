@@ -4,9 +4,7 @@ layout: default
 <article>
   <header>
     <h1>{{ page.title }}</h1>
-    <div class="post-meta">
-      {{ page.date | date: "%Y-%m-%d" }} in {% for tag in page.tags %} <a href="/tags/#{{ tag }}-ref">{{ tag }}</a>{% endfor %}
-    </div>
+    {% include post-meta.html %}
   </header>
   {{ content }}
   {% include disqus.html %}

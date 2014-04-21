@@ -1,18 +1,18 @@
 ---
 layout: nill
 link_color: Firebrick
+default_background_color: "#F8F8F8"
+default_border: "1px solid #AAAAAA"
 ---
 .content {
-    max-width: 900px;
+    max-width: 960px;
     margin-left: auto;
     margin-right: auto;
 }
 
 .masthead {
-/*    background-color: white; */
     padding-top: 1em;
     padding-bottom: 1em;
-
     display: inline-block;
     width: 100%;
     text-align: center;
@@ -44,7 +44,7 @@ body {
 font-family: 'Roboto', sans-serif;
 
     color: rgb(20%, 20%, 20%);
-    background-color: #F8F8F8;
+    background-color: {{ page.default_background_color }};
     padding-left: 1em;
     padding-right: 1em;
     margin-top: auto;
@@ -74,9 +74,8 @@ a {
 article {
     background-color: white;
     margin-bottom: 1em;
-    margin-top: 1em;
     padding: 1em;
-    border: solid 1px #AAA;
+    border: {{ page.default_border }};
 }
 
 div.post-meta {
@@ -91,7 +90,49 @@ figure {
 figure img {
     margin-left: 0.5em;
     margin-right: 0.5em;
-    border: 1px solid #AAA;
+    border: {{ page.default_border }};
+}
+
+.social {
+    opacity: .40;
+    text-align: center;
+}
+
+pre {
+    background: {{ page.default_background_color }};
+    border: {{ page.default_border }}; 
+    overflow-x: auto;
+    overflow-y: hidden;
+    white-space: pre;
+    word-wrap: normal;
+    padding: 1px 1px 1px 1px;
+    line-height: 140%;
+}
+
+.series {
+    padding-left:.5em;
+    padding-right:.5em;
+    margin-left:2em;
+    margin-right:2em;
+    border:{{ page.default_border }};
+    background-color: {{ page.default_background_color }};
+}
+
+table {
+    border-collapse: collapse;
+}
+
+table, th, td {
+    border: {{ page.default_border }};
+}
+
+th {
+    background-color: {{ page.default_background_color }};
+}
+
+td, th
+{
+    padding: 3px;
 }
 
 @media screen and (min-width: 40.5em) {
@@ -120,54 +161,6 @@ figure img {
         padding-right: 3em;
         padding-top: 2em;
         padding-bottom: 2em;
-        
+        margin-bottom: 4em;
     }
-}
-
-/*
-
-Wheat, 597CA8, 755e33
-
-*/
-
-.social {
-    opacity: .40;
-    text-align: center;
-}
-
-pre {
-    background: #f8f8f8;
-    border: 1px solid #AAA; 
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: pre;
-    word-wrap: normal;
-    padding: 1px 1px 1px 1px;
-    line-height: 140%;
-}
-
-.series {
-    padding-left:.5em;
-    padding-right:.5em;
-    margin-left:2em;
-    margin-right:2em;
-    border:1px solid #AAA;
-    background-color:#f8f8f8;
-}
-
-table {
-    border-collapse:collapse;
-}
-
-table, th, td {
-    border: 1px solid #333333;
-}
-
-th {
-    background-color: #F8F8F8;
-}
-
-td, th
-{
-    padding: 3px;
 }

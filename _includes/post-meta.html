@@ -1,4 +1,4 @@
-<div>
-{% if post %}{% assign item = post %}{% else %}{% assign item = page %}{% endif %}
-Posted on {{ item.date | date: "%Y-%m-%d" }} in {% for tag in item.tags %} <a href="/tags/#{{ tag }}-ref">#{{ tag }}</a>{% endfor %}
+<div class="post-meta">
+  {% if post %}{% assign item = post %}{% else %}{% assign item = page %}{% endif %}
+  {{ item.date | date: "%Y-%m-%d" }} in {% for tag in item.tags %} <a href="/tags/#{{ tag }}-ref">{{ tag }}{% unless forloop.last %}, {% endunless %}</a>{% endfor %}
 </div>
