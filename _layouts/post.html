@@ -1,21 +1,13 @@
 ---
 layout: default
 ---
-<h1>{{ page.title }}</h1>
-{% include post-meta.html %}
-<div>
-{{ content }}
-</div>
-<div> 
-  <nav>
-    {% if page.previous.url %} 
-    <a href="{{page.previous.url}}" title="Previous Post: {{page.previous.title}}">&laquo;&nbsp;{{page.previous.title}}</a>
-    {% endif %} 
-  </div>
-  <div>
-    {% if page.next.url %} 
-    <a href="{{page.next.url}}" title="Next Post: {{page.next.title}}">{{page.next.title}}&nbsp;&raquo;</a> 
-    {% endif %} 
-  </div>
-</nav> 
-{% include disqus.html %}
+<article>
+  <header>
+    <h1>{{ page.title }}</h1>
+    <div class="post-meta">
+      {{ page.date | date: "%Y-%m-%d" }} in {% for tag in page.tags %} <a href="/tags/#{{ tag }}-ref">{{ tag }}</a>{% endfor %}
+    </div>
+  </header>
+  {{ content }}
+  {% include disqus.html %}
+</article>
