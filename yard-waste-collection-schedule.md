@@ -7,7 +7,7 @@ comments: true
 
 As I [first discussed in April 2014][user-sourced-yard-waste], here are a few Google Calendars that I created in order to track residential yard waste collection days for (sections of) the Region of Waterloo.
 
-I created the calendards from information [I found on the Region's web site][yard-waste-program]. I've made every effort to ensure that the calendars are correct, but nobody's perfect. I hope they're useful. I welcome any questions or comments.
+I created the calendars from information [I found on the Region's web site][yard-waste-program]. I've made every effort to ensure that the calendars are correct, but nobody's perfect. I hope they're useful. I welcome any questions or comments.
 
 <table>
   <tr>
