@@ -12,7 +12,7 @@ permalink: /tags/
 {% assign tag_words = site_tags | split:',' | sort %}
    {% for item in (0..num_words) %}{% unless forloop.last %}
      {% capture this_word %}{{ tag_words[item] | strip_newlines }}{% endcapture %}
-<h2 id="{{ this_word | cgi_escape }}-ref">#{{ this_word }}</h2>
+<h2 id="{{ this_word | cgi_escape }}-ref">{{ this_word }}</h2>
    <ul>
      {% for post in site.tags[this_word] %}{% if post.title != null %}
      <li>{{ post.date | date: "%Y-%m-%d" }} <a href="{{ post.url }}">{{ post.title }}</a></li>

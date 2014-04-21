@@ -1,20 +1,18 @@
 ---
 layout: default
 ---
-<p class="intro">My name is Blair Conrad. Sometimes I write here about
-things like <a href="http://www.libraryhippo.com/">LibraryHippo</a>
-and unit testing
-and <a href="http://fakeiteasy.github.io">FakeItEasy</a>.</p>
-
-<ul style="list-style: none; padding-left: 0;">
-{% for post in site.posts limit:10 %}
-<li class="recent-post">
-  <h1><a class="title" href="{{ post.url }}">{{ post.title }}</a></h1>
-  {% include post-meta.html %}
-  <div class="post-excerpt">
-    {{ post.excerpt | markdownify }}
-    <a href="{{ post.url }}">read more&hellip;</a>
-  </div>
-</li>
+{% if paginator.previous_page_path %}
+<nav><a href="{{ paginator.previous_page_path }}">newer posts</a></nav>
+{% endif %}
+{% for post in paginator.posts %}
+<article>
+  <header>
+    <h1><a class="title" href="{{ post.url }}">{{ post.title }}</a></h1>
+    {% include post-meta.html %}
+  </header>
+    {{ post.content | markdownify }}
+</article>
 {% endfor %}
-</ul>
+{% if paginator.next_page_path %}
+<nav><a href="{{ paginator.next_page_path }}">older posts</a></nav>
+{% endif %}

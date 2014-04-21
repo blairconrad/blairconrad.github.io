@@ -45,15 +45,15 @@ for everyone else in Waterloo (and Cambridge).  The Region's web site
 gave me start and end weeks for pickups, so it was very easy to make a
 biweekly repeating event, using these Google Calendar settings:
 
-<div class="figure">
-<img alt="Monday yard waste repeat schedule for Waterloo" src="{{ site.image_dir }}/yard-waste-repeat-details.png">
-</div>
+<figure>
+  <img alt="Monday yard waste repeat schedule for Waterloo" src="{{ site.image_dir }}/yard-waste-repeat-details.png">
+</figure>
 
 Lo and behold, it shows up in my calendar:
 
-<div class="figure">
-<img alt="Monday yard waste shown in Google Calendar" src="{{ site.image_dir }}/yard-waste-shown-in-calendar.png">
-</div>
+<figure>
+  <img alt="Monday yard waste shown in Google Calendar" src="{{ site.image_dir }}/yard-waste-shown-in-calendar.png">
+</figure>
 
 I created the Tuesday through Friday calendars by making the obvious
 modification to the schedule above.
