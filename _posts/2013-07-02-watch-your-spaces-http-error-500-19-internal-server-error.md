@@ -22,8 +22,11 @@ I'd never seen it before either, at least not in this exact incarnation. Take a 
 
 In case the text isn't so clear, here are the details:
 
-<table align="center" border="1" style="border-collapse:collapse;border:1p black;width:50%;margin-left:25%;margin-right:25%;">
-<col style="background-color:#CBE1EF;" />
+<table style="border-collapse:collapse;border:1px solid black;width:50%;margin-left:25%;margin-right:25%;">
+<colgroup>
+  <col style="background-color:#F8F8F8;" />
+  <col/>
+</colgroup>
 <tr><th style="border:none;padding:1px 3px;">Module</th><td style="border:none;padding:1px 3px;">IpRestrictionModule</td></tr>
 <tr><th style="border:none;padding:1px 3px;">Notification</th><td style="border:none;padding:1px 3px;">BeginRequest</td></tr>
 <tr><th style="border:none;padding:1px 3px;">Handler</th><td style="border:none;padding:1px 3px;">WebServiceHandlerFactory-Integrated-4.0</td></tr>
