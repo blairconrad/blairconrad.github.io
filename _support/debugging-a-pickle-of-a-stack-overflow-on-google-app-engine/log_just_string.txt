@@ -1,0 +1,1999 @@
+PS C:\PortableApps\Documents\Source\blairconrad\GoogleAppEngine\LibraryHippo\app> dev_appserver.py --show_mail_body true .\app.yaml
+INFO     2014-05-02 07:42:56,036 sdk_update_checker.py:242] Checking for updates to the SDK.
+INFO     2014-05-02 07:42:57,339 sdk_update_checker.py:270] The SDK is up to date.
+INFO     2014-05-02 07:42:57,387 api_server.py:171] Starting API server at: http://localhost:62596
+INFO     2014-05-02 07:42:57,391 dispatcher.py:182] Starting module "default" running at: http://localhost:8080
+INFO     2014-05-02 07:42:57,394 admin_server.py:117] Starting admin server at: http://localhost:8000
+INFO     2014-05-02 11:43:05,019 libraryhippo.py:665] running main
+INFO     2014-05-02 11:43:05,141 recording.py:665] Saved; key: __appstats__:085000, part: 75 bytes, full: 15277 bytes, overhead: 0.000 + 0.006; link: http://localhost:8080/_ah/stats/details?time=1399030985074
+INFO     2014-05-02 07:43:05,257 module.py:627] default: "GET /summary HTTP/1.1" 200 3191
+INFO     2014-05-02 07:43:05,285 module.py:627] default: "GET /static/stylesheets/main.css HTTP/1.1" 304 -
+INFO     2014-05-02 07:43:05,296 module.py:627] default: "GET /static/logo.png HTTP/1.1" 304 -
+INFO     2014-05-02 07:43:05,296 module.py:627] default: "GET /static/scripts/lh_jquery.js HTTP/1.1" 304 -
+INFO     2014-05-02 07:43:05,296 module.py:627] default: "GET /static/loading.gif HTTP/1.1" 304 -
+INFO     2014-05-02 11:43:05,770 libraryhippo.py:665] running main
+INFO     2014-05-02 11:43:05,841 libraryhippo.py:397] CheckCard called ahJkZXZ-bGlicmFyeWhpcHBvMjdyJAsSBkZhbWlseRiAgICAgICACgwLEgRDYXJkGICAgICAwK8KDA
+INFO     2014-05-02 11:43:05,880 libraryhippo.py:345] checking laurie clarke Waterloo Public Library
+INFO     2014-05-02 11:43:07,668 libraryhippo.py:372] saving checked card for laurie clarke
+INFO     2014-05-02 11:43:07,706 objectproperty.py:14] depth: 29, obj_type: <type 'NoneType'>, obj: None
+INFO     2014-05-02 11:43:07,707 objectproperty.py:14] depth: 28, obj_type: <type 'instance'>, obj: <data.CardStatus instance at 0x000000000600BFC8>
+INFO     2014-05-02 11:43:07,709 objectproperty.py:14] depth: 31, obj_type: <type 'dict'>, obj: {'info': [], 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2014, 7, 25), 'patron_name': u'laurie clarke', 'items': [<data.Item instance at 0x0000000005FE9508>], 'holds': [<data.Hold
+ instance at 0x00000000054DFD48>, <data.Hold instance at 0x0000000005FDF588>, <data.Hold instance at 0x0000000005FDB1C8>, <data.Hold instance at 0x0000000005FDBCC8>, <data.Hold instance at 0x0000000005FE0188>, <data.Hold instance at 0x0000000005FE0108>, <data.Hold instance at 0x0000000005FE0608>, <d
+ata.Hold instance at 0x0000000005FE0B88>, <data.Hold instance at 0x0000000005FE0148>, <data.Hold instance at 0x0000000005FE0708>, <data.Hold instance at 0x0000000005FE0808>, <data.Hold instance at 0x0000000005FE0948>, <data.Hold instance at 0x0000000005FE0A48>, <data.Hold instance at 0x0000000005FE0
+CC8>, <data.Hold instance at 0x0000000005FE1108>, <data.Hold instance at 0x0000000005F3D4C8>, <data.Hold instance at 0x0000000005FE1148>, <data.Hold instance at 0x0000000005FE11C8>, <data.Hold instance at 0x0000000005FE1208>, <data.Hold instance at 0x0000000005FE1248>, <data.Hold instance at 0x00000
+00005FE1288>, <data.Hold instance at 0x0000000005FE12C8>, <data.Hold instance at 0x0000000005FE1308>, <data.Hold instance at 0x0000000005FE1388>, <data.Hold instance at 0x0000000005FE13C8>, <data.Hold instance at 0x0000000005FE1408>, <data.Hold instance at 0x0000000005FE1448>, <data.Hold instance at
+ 0x0000000005FE1488>, <data.Hold instance at 0x0000000005FE14C8>, <data.Hold instance at 0x0000000005FE1508>, <data.Hold instance at 0x0000000005FE1548>, <data.Hold instance at 0x0000000005FE1588>, <data.Hold instance at 0x0000000005FE15C8>, <data.Hold instance at 0x0000000005FE1608>, <data.Hold ins
+tance at 0x0000000005FE1688>, <data.Hold instance at 0x0000000005FE16C8>, <data.Hold instance at 0x0000000005FE1708>, <data.Hold instance at 0x0000000005FE1748>, <data.Hold instance at 0x0000000005FE1788>]}
+INFO     2014-05-02 11:43:07,711 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'info'
+INFO     2014-05-02 11:43:07,713 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: []
+INFO     2014-05-02 11:43:07,716 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:07,717 objectproperty.py:14] depth: 35, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:07,720 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:07,721 objectproperty.py:14] depth: 35, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 7, 25)
+INFO     2014-05-02 11:43:07,723 objectproperty.py:14] depth: 38, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:07,726 objectproperty.py:14] depth: 38, obj_type: <type 'tuple'>, obj: ('\x07\xde\x07\x19',)
+INFO     2014-05-02 11:43:07,727 objectproperty.py:14] depth: 41, obj_type: <type 'str'>, obj: '\x07\xde\x07\x19'
+INFO     2014-05-02 11:43:07,730 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'patron_name'
+INFO     2014-05-02 11:43:07,732 objectproperty.py:14] depth: 35, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:07,733 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'items'
+INFO     2014-05-02 11:43:07,736 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: [<data.Item instance at 0x0000000005FE9508>]
+INFO     2014-05-02 11:43:07,737 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Item instance at 0x0000000005FE9508>
+INFO     2014-05-02 11:43:07,740 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': datetime.date(2014, 5, 22), 'library_name': u'Waterloo Public Library', 'author': u'Paula Daly', 'url': u'https://books.kpl.org/record=b2359686~S3', 'title': u'Just what kind of mother are you?
+', 'status_notes': [u'Renewed 1 time'], 'user': u'laurie clarke', 'items_url': u'https://books.kpl.org/patroninfo~S3/1210718/items'}
+INFO     2014-05-02 11:43:07,749 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:07,750 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 5, 22)
+INFO     2014-05-02 11:43:07,753 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:07,756 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xde\x05\x16',)
+INFO     2014-05-02 11:43:07,759 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xde\x05\x16'
+INFO     2014-05-02 11:43:07,760 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:07,763 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:07,766 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:07,767 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Paula Daly'
+INFO     2014-05-02 11:43:07,770 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:07,773 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2359686~S3'
+INFO     2014-05-02 11:43:07,775 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:07,778 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Just what kind of mother are you?'
+INFO     2014-05-02 11:43:07,779 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:07,782 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: [u'Renewed 1 time']
+INFO     2014-05-02 11:43:07,785 objectproperty.py:14] depth: 50, obj_type: <type 'unicode'>, obj: u'Renewed 1 time'
+INFO     2014-05-02 11:43:07,786 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:07,789 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:07,792 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'items_url'
+INFO     2014-05-02 11:43:07,795 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/items'
+INFO     2014-05-02 11:43:07,796 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'holds'
+INFO     2014-05-02 11:43:07,799 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: [<data.Hold instance at 0x00000000054DFD48>, <data.Hold instance at 0x0000000005FDF588>, <data.Hold instance at 0x0000000005FDB1C8>, <data.Hold instance at 0x0000000005FDBCC8>, <data.Hold instance at 0x00
+00000005FE0188>, <data.Hold instance at 0x0000000005FE0108>, <data.Hold instance at 0x0000000005FE0608>, <data.Hold instance at 0x0000000005FE0B88>, <data.Hold instance at 0x0000000005FE0148>, <data.Hold instance at 0x0000000005FE0708>, <data.Hold instance at 0x0000000005FE0808>, <data.Hold instance
+ at 0x0000000005FE0948>, <data.Hold instance at 0x0000000005FE0A48>, <data.Hold instance at 0x0000000005FE0CC8>, <data.Hold instance at 0x0000000005FE1108>, <data.Hold instance at 0x0000000005F3D4C8>, <data.Hold instance at 0x0000000005FE1148>, <data.Hold instance at 0x0000000005FE11C8>, <data.Hold
+instance at 0x0000000005FE1208>, <data.Hold instance at 0x0000000005FE1248>, <data.Hold instance at 0x0000000005FE1288>, <data.Hold instance at 0x0000000005FE12C8>, <data.Hold instance at 0x0000000005FE1308>, <data.Hold instance at 0x0000000005FE1388>, <data.Hold instance at 0x0000000005FE13C8>, <da
+ta.Hold instance at 0x0000000005FE1408>, <data.Hold instance at 0x0000000005FE1448>, <data.Hold instance at 0x0000000005FE1488>, <data.Hold instance at 0x0000000005FE14C8>, <data.Hold instance at 0x0000000005FE1508>, <data.Hold instance at 0x0000000005FE1548>, <data.Hold instance at 0x0000000005FE15
+88>, <data.Hold instance at 0x0000000005FE15C8>, <data.Hold instance at 0x0000000005FE1608>, <data.Hold instance at 0x0000000005FE1688>, <data.Hold instance at 0x0000000005FE16C8>, <data.Hold instance at 0x0000000005FE1708>, <data.Hold instance at 0x0000000005FE1748>, <data.Hold instance at 0x000000
+0005FE1788>]
+INFO     2014-05-02 11:43:07,801 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x00000000054DFD48>
+INFO     2014-05-02 11:43:07,802 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2014, 7, 4), 'author': '', 'url': u'https://books.kpl.org/record=b2359065~S3', 'title': u'The girls of August', 'sta
+tus_notes': [], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:07,805 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:07,813 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 4)
+INFO     2014-05-02 11:43:07,815 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:07,819 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:07,821 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:07,822 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:07,825 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:07,828 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 7, 4)
+INFO     2014-05-02 11:43:07,831 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:07,832 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xde\x07\x04',)
+INFO     2014-05-02 11:43:07,835 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xde\x07\x04'
+INFO     2014-05-02 11:43:07,838 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:07,841 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:07,842 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:07,845 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2359065~S3'
+INFO     2014-05-02 11:43:07,848 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:07,851 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The girls of August'
+INFO     2014-05-02 11:43:07,854 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:07,855 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: []
+INFO     2014-05-02 11:43:07,858 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:07,861 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:07,864 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:07,865 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:07,868 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:07,871 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:07,872 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FDF588>
+INFO     2014-05-02 11:43:07,875 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 26), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2014, 12, 1), 'author': '', 'url': u'https://books.kpl.org/record=b2378104~S3', 'title': u"Written in My Own Heart'
+s Blood", 'status_notes': [], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:07,878 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:07,881 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 26)
+INFO     2014-05-02 11:43:07,882 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:07,885 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 26
+INFO     2014-05-02 11:43:07,888 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:07,891 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:07,892 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:07,895 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 12, 1)
+INFO     2014-05-02 11:43:07,898 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:07,901 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xde\x0c\x01',)
+INFO     2014-05-02 11:43:07,904 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xde\x0c\x01'
+INFO     2014-05-02 11:43:07,905 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:07,908 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:07,911 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:07,914 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2378104~S3'
+INFO     2014-05-02 11:43:07,917 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:07,918 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u"Written in My Own Heart's Blood"
+INFO     2014-05-02 11:43:07,921 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:07,924 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: []
+INFO     2014-05-02 11:43:07,927 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:07,928 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:07,938 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:07,941 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:07,944 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:07,947 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:07,948 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FDB1C8>
+INFO     2014-05-02 11:43:07,950 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': '', 'url': u'https://books.kpl.org/record=b2392073~S3', 'title': u'China Dolls: A Novel', 's
+tatus_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:07,953 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:07,956 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 4)
+INFO     2014-05-02 11:43:07,959 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:07,960 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:07,963 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:07,966 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:07,969 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:07,970 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:07,973 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:07,976 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:07,979 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:07,982 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:07,983 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:07,986 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:07,989 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2392073~S3'
+INFO     2014-05-02 11:43:07,992 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:07,994 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'China Dolls: A Novel'
+INFO     2014-05-02 11:43:07,996 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,000 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,002 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,005 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,006 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,009 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,012 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,015 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,016 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,019 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FDBCC8>
+INFO     2014-05-02 11:43:08,020 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 13), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': '', 'url': u'https://books.kpl.org/record=b2392085~S3', 'title': u'Cop Town: A Novel', 'sta
+tus_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,023 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,026 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 13)
+INFO     2014-05-02 11:43:08,029 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:08,032 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 13
+INFO     2014-05-02 11:43:08,039 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,042 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,045 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,046 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:08,055 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,059 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:08,062 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:08,063 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,066 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,069 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,072 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2392085~S3'
+INFO     2014-05-02 11:43:08,075 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,076 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Cop Town: A Novel'
+INFO     2014-05-02 11:43:08,079 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,082 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,085 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,088 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,089 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,092 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,095 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,098 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,099 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,101 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0188>
+INFO     2014-05-02 11:43:08,105 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': '', 'url': u'https://books.kpl.org/record=b2392131~S3', 'title': u'Lucky Us', 'status_notes'
+: ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,107 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,109 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:08,111 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,115 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,117 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,119 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,121 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,125 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:08,127 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,130 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:08,132 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:08,134 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,138 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,140 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,142 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2392131~S3'
+INFO     2014-05-02 11:43:08,144 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,148 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Lucky Us'
+INFO     2014-05-02 11:43:08,150 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,153 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,154 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,157 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,160 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,163 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,164 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,167 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,170 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,171 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0108>
+INFO     2014-05-02 11:43:08,181 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (3, 16), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': '', 'url': u'https://books.kpl.org/record=b2392143~S3', 'title': u'The One and Only', 'stat
+us_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,184 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,187 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (3, 16)
+INFO     2014-05-02 11:43:08,190 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:08,193 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 16
+INFO     2014-05-02 11:43:08,196 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,198 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,200 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,203 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:08,206 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,209 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:08,211 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:08,214 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,217 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,220 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,223 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2392143~S3'
+INFO     2014-05-02 11:43:08,224 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,227 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The One and Only'
+INFO     2014-05-02 11:43:08,230 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,233 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,236 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,237 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,240 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,243 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,246 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,247 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,250 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,252 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0608>
+INFO     2014-05-02 11:43:08,255 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 3), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': '', 'url': u'https://books.kpl.org/record=b2392182~S3', 'title': u'Untitled Walk Series &#35
+;5', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,256 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,259 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 3)
+INFO     2014-05-02 11:43:08,262 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,265 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:08,266 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,269 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,272 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,275 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:08,276 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,279 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:08,282 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:08,285 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,286 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,289 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,299 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2392182~S3'
+INFO     2014-05-02 11:43:08,302 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,303 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Untitled Walk Series &#35;5'
+INFO     2014-05-02 11:43:08,305 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,309 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,311 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,313 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,315 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,318 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,321 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,322 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,325 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,328 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0B88>
+INFO     2014-05-02 11:43:08,329 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (3, 5), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 3, 30), 'author': u'Dennis Lehane', 'url': u'https://books.kpl.org/record=b2393385~S3', 'title': u'World gone
+by', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,335 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,339 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (3, 5)
+INFO     2014-05-02 11:43:08,342 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:08,345 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 5
+INFO     2014-05-02 11:43:08,348 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,351 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,352 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,355 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 3, 30)
+INFO     2014-05-02 11:43:08,358 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,361 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x03\x1e',)
+INFO     2014-05-02 11:43:08,364 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x03\x1e'
+INFO     2014-05-02 11:43:08,365 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,368 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Dennis Lehane'
+INFO     2014-05-02 11:43:08,371 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,372 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2393385~S3'
+INFO     2014-05-02 11:43:08,375 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,378 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'World gone by'
+INFO     2014-05-02 11:43:08,380 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,382 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,384 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,388 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,390 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,392 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,395 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,398 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,401 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,404 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0148>
+INFO     2014-05-02 11:43:08,405 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (7, 13), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 5), 'author': '', 'url': u'https://books.kpl.org/record=b2410784~S3', 'title': u'Grammy nominees 2014 [com
+pact disc]', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,417 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,421 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (7, 13)
+INFO     2014-05-02 11:43:08,423 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 7
+INFO     2014-05-02 11:43:08,426 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 13
+INFO     2014-05-02 11:43:08,427 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,430 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,433 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,436 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 5)
+INFO     2014-05-02 11:43:08,437 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,440 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x05',)
+INFO     2014-05-02 11:43:08,443 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x05'
+INFO     2014-05-02 11:43:08,446 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,447 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,450 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,453 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2410784~S3'
+INFO     2014-05-02 11:43:08,454 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,457 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Grammy nominees 2014 [compact disc]'
+INFO     2014-05-02 11:43:08,460 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,463 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,464 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,467 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,470 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,471 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,474 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,476 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,480 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,482 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0708>
+INFO     2014-05-02 11:43:08,483 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 9), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 6), 'author': '', 'url': u'https://books.kpl.org/record=b2412802~S3', 'title': u'The Book of Life: A Novel'
+, 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,486 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,489 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 9)
+INFO     2014-05-02 11:43:08,490 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:08,493 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 9
+INFO     2014-05-02 11:43:08,496 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,497 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,500 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,503 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 6)
+INFO     2014-05-02 11:43:08,506 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,507 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x06',)
+INFO     2014-05-02 11:43:08,510 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x06'
+INFO     2014-05-02 11:43:08,513 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,516 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,519 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,520 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412802~S3'
+INFO     2014-05-02 11:43:08,523 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,526 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Book of Life: A Novel'
+INFO     2014-05-02 11:43:08,528 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,530 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,540 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,542 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,546 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,548 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,549 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,552 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,555 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,556 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0808>
+INFO     2014-05-02 11:43:08,559 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (4, 10), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412886~S3', 'title': u'Mr. Mercedes: A Novel',
+'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,562 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,565 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (4, 10)
+INFO     2014-05-02 11:43:08,568 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:08,569 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 10
+INFO     2014-05-02 11:43:08,572 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,575 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,578 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,581 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,582 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,585 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,588 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,592 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,594 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,596 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,598 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412886~S3'
+INFO     2014-05-02 11:43:08,601 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,604 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Mr. Mercedes: A Novel'
+INFO     2014-05-02 11:43:08,608 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,611 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,615 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,618 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,621 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,622 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,625 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,628 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,631 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,634 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0948>
+INFO     2014-05-02 11:43:08,635 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 3), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412800~S3', 'title': u'Balancing Act', 'status_n
+otes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,638 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,641 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 3)
+INFO     2014-05-02 11:43:08,642 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:08,645 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:08,648 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,650 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,660 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,661 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,664 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,667 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,670 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,673 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,674 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,677 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,680 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412800~S3'
+INFO     2014-05-02 11:43:08,681 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,684 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Balancing Act'
+INFO     2014-05-02 11:43:08,687 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,690 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,691 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,694 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,697 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,700 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,701 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,703 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,707 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,709 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0A48>
+INFO     2014-05-02 11:43:08,711 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 3), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412815~S3', 'title': u'The City: A Novel', 'stat
+us_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,713 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,717 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 3)
+INFO     2014-05-02 11:43:08,719 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,721 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:08,723 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,726 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,729 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,733 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,739 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,742 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,744 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,747 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,750 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,753 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,755 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412815~S3'
+INFO     2014-05-02 11:43:08,756 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,759 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The City: A Novel'
+INFO     2014-05-02 11:43:08,762 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,763 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,766 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,769 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,772 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,773 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,776 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,779 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,788 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,789 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE0CC8>
+INFO     2014-05-02 11:43:08,792 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 5), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412826~S3', 'title': u'The Dead Will Tell', 'sta
+tus_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,796 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,799 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 5)
+INFO     2014-05-02 11:43:08,802 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,803 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 5
+INFO     2014-05-02 11:43:08,806 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,809 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,812 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,813 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,816 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,819 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,822 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,823 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,826 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,828 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,832 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412826~S3'
+INFO     2014-05-02 11:43:08,835 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,838 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Dead Will Tell'
+INFO     2014-05-02 11:43:08,839 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,842 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,845 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,848 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,849 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,852 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,855 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,857 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,859 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,861 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1108>
+INFO     2014-05-02 11:43:08,864 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412855~S3', 'title': u'Goodnight June: A Novel',
+ 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,867 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,868 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:08,871 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,875 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:08,877 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,880 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,881 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,884 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,887 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,890 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,891 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,901 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,904 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,907 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,908 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412855~S3'
+INFO     2014-05-02 11:43:08,911 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,914 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Goodnight June: A Novel'
+INFO     2014-05-02 11:43:08,917 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,918 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,921 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,924 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,927 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,928 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:08,931 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:08,934 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:08,937 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:08,938 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005F3D4C8>
+INFO     2014-05-02 11:43:08,940 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412859~S3', 'title': u'The Hurricane Sisters: A
+Novel', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:08,944 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:08,946 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 4)
+INFO     2014-05-02 11:43:08,948 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:08,950 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:08,953 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:08,956 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:08,959 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:08,960 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:08,963 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:08,966 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:08,969 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:08,970 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:08,973 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:08,976 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:08,979 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412859~S3'
+INFO     2014-05-02 11:43:08,980 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:08,983 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Hurricane Sisters: A Novel'
+INFO     2014-05-02 11:43:08,986 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:08,987 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:08,990 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:08,993 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:08,996 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:08,997 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,000 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,003 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,006 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,007 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1148>
+INFO     2014-05-02 11:43:09,009 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 3), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412874~S3', 'title': u'A Long Time Gone', 'statu
+s_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,019 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,022 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 3)
+INFO     2014-05-02 11:43:09,025 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,026 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 3
+INFO     2014-05-02 11:43:09,029 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,032 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,035 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,038 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,039 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,042 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,045 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,048 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,049 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,052 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,055 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412874~S3'
+INFO     2014-05-02 11:43:09,056 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,059 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'A Long Time Gone'
+INFO     2014-05-02 11:43:09,062 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,063 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,066 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,069 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,072 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,075 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,076 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,079 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,082 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,084 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE11C8>
+INFO     2014-05-02 11:43:09,085 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412882~S3', 'title': u'The Matchmaker: A Novel',
+ 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,088 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,091 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 4)
+INFO     2014-05-02 11:43:09,094 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,095 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:09,098 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,101 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,104 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,105 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,108 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,111 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,114 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,115 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,118 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,121 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,124 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412882~S3'
+INFO     2014-05-02 11:43:09,125 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,128 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Matchmaker: A Novel'
+INFO     2014-05-02 11:43:09,131 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,135 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,145 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,148 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,151 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,154 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,155 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,158 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,161 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,163 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1208>
+INFO     2014-05-02 11:43:09,165 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 10), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': u'Greg Iles', 'url': u'https://books.kpl.org/record=b2424900~S3', 'title': u'Natchez burnin
+g', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,167 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,170 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 10)
+INFO     2014-05-02 11:43:09,173 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:09,174 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 10
+INFO     2014-05-02 11:43:09,177 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,180 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,183 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,184 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,187 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,190 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,194 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,196 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,198 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Greg Iles'
+INFO     2014-05-02 11:43:09,201 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,203 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2424900~S3'
+INFO     2014-05-02 11:43:09,207 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,209 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Natchez burning'
+INFO     2014-05-02 11:43:09,211 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,213 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,217 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,219 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,221 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,223 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,226 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,229 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,232 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,233 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1248>
+INFO     2014-05-02 11:43:09,236 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 5), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412895~S3', 'title': u'One Kick: A Novel', 'stat
+us_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,239 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,240 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 5)
+INFO     2014-05-02 11:43:09,243 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,246 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 5
+INFO     2014-05-02 11:43:09,249 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,250 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,259 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,262 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,265 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,267 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,270 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,273 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,275 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,278 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,279 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412895~S3'
+INFO     2014-05-02 11:43:09,282 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,285 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'One Kick: A Novel'
+INFO     2014-05-02 11:43:09,288 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,289 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,292 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,295 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,296 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,299 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,302 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,305 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,306 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,309 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1288>
+INFO     2014-05-02 11:43:09,312 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 7), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412907~S3', 'title': u'Remains of Innocence: A B
+rady Novel of Suspense', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,313 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,316 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 7)
+INFO     2014-05-02 11:43:09,319 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,322 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 7
+INFO     2014-05-02 11:43:09,323 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,325 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,328 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,332 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,334 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,336 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,338 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,342 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,344 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,345 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,348 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412907~S3'
+INFO     2014-05-02 11:43:09,351 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,354 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Remains of Innocence: A Brady Novel of Suspense'
+INFO     2014-05-02 11:43:09,355 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,358 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,361 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,364 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,365 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,368 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,371 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,380 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,382 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,384 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE12C8>
+INFO     2014-05-02 11:43:09,387 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412918~S3', 'title': u'The Secret Life of Violet
+ Grant', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,388 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,391 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 2)
+INFO     2014-05-02 11:43:09,394 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,397 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:09,400 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,401 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,404 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,407 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,410 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,411 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,414 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,417 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,420 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,421 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,424 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412918~S3'
+INFO     2014-05-02 11:43:09,427 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,430 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Secret Life of Violet Grant'
+INFO     2014-05-02 11:43:09,433 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,434 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,437 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,440 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,443 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,444 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,447 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,450 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,451 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,453 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1308>
+INFO     2014-05-02 11:43:09,456 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412925~S3', 'title': u'The Skin Collector', 'sta
+tus_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,459 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,460 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 4)
+INFO     2014-05-02 11:43:09,463 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,466 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:43:09,469 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,471 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,473 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,476 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,479 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,480 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,490 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,493 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,496 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,499 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,500 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412925~S3'
+INFO     2014-05-02 11:43:09,503 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,506 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Skin Collector'
+INFO     2014-05-02 11:43:09,507 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,510 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,513 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,516 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,517 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,519 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,523 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,525 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,528 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,529 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1388>
+INFO     2014-05-02 11:43:09,532 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 17), 'author': '', 'url': u'https://books.kpl.org/record=b2412947~S3', 'title': u'Those Who Wish Me Dead',
+'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,539 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,542 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 2)
+INFO     2014-05-02 11:43:09,543 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,546 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:09,549 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,552 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,553 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,555 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 17)
+INFO     2014-05-02 11:43:09,559 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,562 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x11',)
+INFO     2014-05-02 11:43:09,565 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x11'
+INFO     2014-05-02 11:43:09,568 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,571 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,572 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,575 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2412947~S3'
+INFO     2014-05-02 11:43:09,578 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,581 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Those Who Wish Me Dead'
+INFO     2014-05-02 11:43:09,584 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,586 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,588 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,592 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,595 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,598 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,601 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,604 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,607 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,608 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE13C8>
+INFO     2014-05-02 11:43:09,611 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416227~S3', 'title': u'Angels Make Their Hope He
+re', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,622 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,625 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:09,628 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,631 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,634 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,635 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,638 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,641 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:09,644 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,645 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:09,648 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:09,651 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,654 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,657 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,658 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416227~S3'
+INFO     2014-05-02 11:43:09,661 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,664 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Angels Make Their Hope Here'
+INFO     2014-05-02 11:43:09,667 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,668 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,671 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,674 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,677 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,680 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,681 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,684 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,687 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,688 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1408>
+INFO     2014-05-02 11:43:09,690 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416258~S3', 'title': u'The Care and Management o
+f Lies: A Novel of the Great War', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,694 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,696 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 2)
+INFO     2014-05-02 11:43:09,698 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,701 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:09,703 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,706 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,709 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,711 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:09,713 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,717 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:09,719 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:09,721 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,723 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,726 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,729 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416258~S3'
+INFO     2014-05-02 11:43:09,732 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,734 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Care and Management of Lies: A Novel of the Great War'
+INFO     2014-05-02 11:43:09,736 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,746 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,749 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,752 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,753 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,756 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,759 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,762 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,763 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,766 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1448>
+INFO     2014-05-02 11:43:09,767 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416263~S3', 'title': u'Charleston: A Novel', 'st
+atus_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,770 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,773 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:09,776 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,778 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,780 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,782 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,786 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,788 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:09,790 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,792 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:09,796 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:09,799 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,801 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,802 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,805 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416263~S3'
+INFO     2014-05-02 11:43:09,808 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,811 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Charleston: A Novel'
+INFO     2014-05-02 11:43:09,812 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,815 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,818 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,821 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,822 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,825 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,828 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,831 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,836 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,838 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1488>
+INFO     2014-05-02 11:43:09,841 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416290~S3', 'title': u'The Darkest Hour', 'statu
+s_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,844 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,846 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 2)
+INFO     2014-05-02 11:43:09,848 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,851 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:09,854 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,862 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,865 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,868 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:09,871 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,874 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:09,877 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:09,878 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,881 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,884 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,885 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416290~S3'
+INFO     2014-05-02 11:43:09,888 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,891 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Darkest Hour'
+INFO     2014-05-02 11:43:09,892 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,895 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,898 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,900 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,903 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,904 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,907 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,910 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,913 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,914 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE14C8>
+INFO     2014-05-02 11:43:09,917 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416292~S3', 'title': u'A Deadly Business', 'stat
+us_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,918 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,921 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:09,924 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,927 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:09,928 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:09,931 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:09,934 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:09,937 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:09,940 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:09,941 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:09,944 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:09,947 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:09,950 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:09,951 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:09,954 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416292~S3'
+INFO     2014-05-02 11:43:09,957 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:09,960 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'A Deadly Business'
+INFO     2014-05-02 11:43:09,961 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:09,963 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:09,967 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:09,969 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:09,971 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:09,973 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:09,976 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:09,986 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:09,989 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:09,990 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1508>
+INFO     2014-05-02 11:43:09,993 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 18), 'author': '', 'url': u'https://books.kpl.org/record=b2416308~S3', 'title': u"Don't Look Back", 'status
+_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:09,994 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:09,997 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:10,000 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,003 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,006 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,007 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,009 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,013 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 18)
+INFO     2014-05-02 11:43:10,015 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,017 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x12',)
+INFO     2014-05-02 11:43:10,020 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x12'
+INFO     2014-05-02 11:43:10,023 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,025 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,028 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,029 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416308~S3'
+INFO     2014-05-02 11:43:10,032 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,035 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u"Don't Look Back"
+INFO     2014-05-02 11:43:10,038 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,039 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,042 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,045 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,046 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,049 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,052 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,055 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,056 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,059 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1548>
+INFO     2014-05-02 11:43:10,061 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 19), 'author': '', 'url': u'https://books.kpl.org/record=b2416379~S3', 'title': u'How to Tell Toledo from t
+he Night Sky: A Novel', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,063 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,065 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:10,069 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,072 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,073 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,075 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,078 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,081 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 19)
+INFO     2014-05-02 11:43:10,084 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,085 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x13',)
+INFO     2014-05-02 11:43:10,095 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x13'
+INFO     2014-05-02 11:43:10,098 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,101 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,102 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,105 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416379~S3'
+INFO     2014-05-02 11:43:10,108 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,109 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'How to Tell Toledo from the Night Sky: A Novel'
+INFO     2014-05-02 11:43:10,111 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,115 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,117 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,119 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,121 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,125 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,127 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,128 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,131 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,134 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1588>
+INFO     2014-05-02 11:43:10,135 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 7, 24), 'author': '', 'url': u'https://books.kpl.org/record=b2416478~S3', 'title': u'Return to the Beach House
+: A Novel', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,138 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,141 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 2)
+INFO     2014-05-02 11:43:10,144 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,145 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,148 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,151 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,154 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,155 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 7, 24)
+INFO     2014-05-02 11:43:10,158 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,161 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x07\x18',)
+INFO     2014-05-02 11:43:10,164 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x07\x18'
+INFO     2014-05-02 11:43:10,165 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,168 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,171 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,173 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416478~S3'
+INFO     2014-05-02 11:43:10,176 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,177 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Return to the Beach House: A Novel'
+INFO     2014-05-02 11:43:10,180 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,183 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,186 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,187 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,190 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,193 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,196 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,197 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,200 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,201 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE15C8>
+INFO     2014-05-02 11:43:10,204 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 10), 'author': u'by Henry M III  Robert [pbk.]', 'url': u'https://books.kpl.org/record=b2421592~S3', 'title
+': u"Robert's rules of order newly revised in brief", 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,456 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,464 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:10,474 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,480 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,483 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,486 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,487 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,490 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 10)
+INFO     2014-05-02 11:43:10,493 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,496 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\n',)
+INFO     2014-05-02 11:43:10,497 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\n'
+INFO     2014-05-02 11:43:10,500 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,503 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'by Henry M III  Robert [pbk.]'
+INFO     2014-05-02 11:43:10,506 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,507 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2421592~S3'
+INFO     2014-05-02 11:43:10,510 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,513 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u"Robert's rules of order newly revised in brief"
+INFO     2014-05-02 11:43:10,515 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,517 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,519 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,523 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,525 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,528 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,529 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,532 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,535 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,536 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1608>
+INFO     2014-05-02 11:43:10,539 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': '', 'url': u'https://books.kpl.org/record=b2416486~S3', 'title': u'Season of the Dragonflies
+: A Novel', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,542 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,545 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 2)
+INFO     2014-05-02 11:43:10,546 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,549 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,552 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,555 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,556 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,559 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,562 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,565 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,568 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,571 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,573 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,575 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,578 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416486~S3'
+INFO     2014-05-02 11:43:10,581 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,584 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Season of the Dragonflies: A Novel'
+INFO     2014-05-02 11:43:10,586 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,596 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,599 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,602 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,605 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,607 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,609 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,611 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,614 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,617 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1688>
+INFO     2014-05-02 11:43:10,618 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': u'Hannah Richell', 'url': u'https://books.kpl.org/record=b2424911~S3', 'title': u'The shadow
+ year', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,621 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,624 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 2)
+INFO     2014-05-02 11:43:10,627 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,628 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,632 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,637 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,640 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,641 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,644 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,648 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,650 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,653 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,654 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Hannah Richell'
+INFO     2014-05-02 11:43:10,657 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,660 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2424911~S3'
+INFO     2014-05-02 11:43:10,661 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,664 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The shadow year'
+INFO     2014-05-02 11:43:10,667 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,670 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,673 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,676 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,678 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,680 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,684 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,686 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,688 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,690 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE16C8>
+INFO     2014-05-02 11:43:10,693 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (2, 2), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': '', 'url': u'https://books.kpl.org/record=b2416520~S3', 'title': u'The Summer Wind', 'status
+_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,694 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,697 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (2, 2)
+INFO     2014-05-02 11:43:10,700 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,703 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 2
+INFO     2014-05-02 11:43:10,704 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,713 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,717 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,719 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,721 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,723 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,726 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,729 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,732 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,733 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,736 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416520~S3'
+INFO     2014-05-02 11:43:10,739 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,742 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The Summer Wind'
+INFO     2014-05-02 11:43:10,743 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,746 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,749 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,752 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,753 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,756 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,759 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,760 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,763 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,766 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1708>
+INFO     2014-05-02 11:43:10,769 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': u'Robert Barclay', 'url': u'https://books.kpl.org/record=b2424896~S3', 'title': u"The widow'
+s walk", 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,770 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,773 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:10,776 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,779 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,780 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,782 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,786 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,788 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,790 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,793 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,796 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,799 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,801 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Robert Barclay'
+INFO     2014-05-02 11:43:10,803 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,805 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2424896~S3'
+INFO     2014-05-02 11:43:10,809 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,811 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u"The widow's walk"
+INFO     2014-05-02 11:43:10,812 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,815 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,818 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,821 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,822 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,825 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,828 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,838 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,839 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,842 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1748>
+INFO     2014-05-02 11:43:10,845 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 1), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': '', 'url': u'https://books.kpl.org/record=b2416407~S3', 'title': u'Last Night at the Blue An
+gel: A Novel', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,846 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,848 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 1)
+INFO     2014-05-02 11:43:10,851 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,854 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:43:10,857 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,858 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,861 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,864 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,865 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,868 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,871 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,874 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,877 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:43:10,878 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,881 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2416407~S3'
+INFO     2014-05-02 11:43:10,884 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,885 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Last Night at the Blue Angel: A Novel'
+INFO     2014-05-02 11:43:10,888 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,891 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,892 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,895 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,898 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,900 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,903 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,904 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,907 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:10,910 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005FE1788>
+INFO     2014-05-02 11:43:10,911 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (6, 7), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2015, 8, 29), 'author': u'by Ken  Follett', 'url': u'https://books.kpl.org/record=b2417661~S3', 'title': u'Edge of E
+ternity', 'status_notes': ['frozen'], 'pickup': 'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:43:10,914 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:43:10,917 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (6, 7)
+INFO     2014-05-02 11:43:10,918 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 6
+INFO     2014-05-02 11:43:10,921 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 7
+INFO     2014-05-02 11:43:10,924 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:43:10,927 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:43:10,928 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:43:10,931 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2015, 8, 29)
+INFO     2014-05-02 11:43:10,934 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:43:10,937 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xdf\x08\x1d',)
+INFO     2014-05-02 11:43:10,947 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xdf\x08\x1d'
+INFO     2014-05-02 11:43:10,948 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:43:10,951 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'by Ken  Follett'
+INFO     2014-05-02 11:43:10,953 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:43:10,957 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2417661~S3'
+INFO     2014-05-02 11:43:10,959 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:43:10,960 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Edge of Eternity'
+INFO     2014-05-02 11:43:10,963 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:43:10,966 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: ['frozen']
+INFO     2014-05-02 11:43:10,969 objectproperty.py:14] depth: 50, obj_type: <type 'str'>, obj: 'frozen'
+INFO     2014-05-02 11:43:10,970 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:43:10,973 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'WPL Main Library'
+INFO     2014-05-02 11:43:10,976 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:43:10,979 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:43:10,980 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'holds_url'
+INFO     2014-05-02 11:43:10,983 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/holds'
+INFO     2014-05-02 11:43:11,085 recording.py:665] Saved; key: __appstats__:085800, part: 227 bytes, full: 178546 bytes, overhead: 0.008 + 0.046; link: http://localhost:8080/_ah/stats/details?time=1399030985832
+INFO     2014-05-02 07:43:11,095 module.py:627] default: "GET /checkcard/ahJkZXZ-bGlicmFyeWhpcHBvMjdyJAsSBkZhbWlseRiAgICAgICACgwLEgRDYXJkGICAgICAwK8KDA HTTP/1.1" 200 14144
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

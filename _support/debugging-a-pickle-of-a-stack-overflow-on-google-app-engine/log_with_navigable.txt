@@ -1,0 +1,211 @@
+INFO     2014-05-02 11:38:41,969 libraryhippo.py:372] saving checked card for laurie clarke
+INFO     2014-05-02 11:38:41,990 objectproperty.py:14] depth: 29, obj_type: <type 'NoneType'>, obj: None
+INFO     2014-05-02 11:38:41,992 objectproperty.py:14] depth: 28, obj_type: <type 'instance'>, obj: <data.CardStatus instance at 0x0000000005F22DC8>
+INFO     2014-05-02 11:38:41,993 objectproperty.py:14] depth: 31, obj_type: <type 'dict'>, obj: {'info': [], 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2014, 7, 25), 'patron_name': u'laurie clarke', 'items': [<data.Item instance at 0x0000000005EFF108>], 'holds': [<data.Hold
+ instance at 0x0000000005DB0988>, <data.Hold instance at 0x0000000005EF0DC8>, <data.Hold instance at 0x0000000005EF2908>, <data.Hold instance at 0x0000000005EF5D48>, <data.Hold instance at 0x0000000005EF51C8>, <data.Hold instance at 0x0000000005EF5D08>, <data.Hold instance at 0x0000000005EF5D88>, <d
+ata.Hold instance at 0x0000000005EF67C8>, <data.Hold instance at 0x0000000005EF6248>, <data.Hold instance at 0x0000000005EF6348>, <data.Hold instance at 0x0000000005EF6448>, <data.Hold instance at 0x0000000005EF6588>, <data.Hold instance at 0x0000000005EF6688>, <data.Hold instance at 0x0000000005EF6
+908>, <data.Hold instance at 0x00000000050771C8>, <data.Hold instance at 0x000000000542F348>, <data.Hold instance at 0x0000000005EF6D08>, <data.Hold instance at 0x0000000005EF6D88>, <data.Hold instance at 0x0000000005EF6DC8>, <data.Hold instance at 0x0000000005EF6E08>, <data.Hold instance at 0x00000
+00005EF6E48>, <data.Hold instance at 0x0000000005EF6E88>, <data.Hold instance at 0x0000000005EF6EC8>, <data.Hold instance at 0x0000000005EF6F48>, <data.Hold instance at 0x0000000005EF6F88>, <data.Hold instance at 0x0000000005EF6FC8>, <data.Hold instance at 0x0000000005EF9048>, <data.Hold instance at
+ 0x0000000005EF9088>, <data.Hold instance at 0x0000000005EF90C8>, <data.Hold instance at 0x0000000005EF9108>, <data.Hold instance at 0x0000000005EF9148>, <data.Hold instance at 0x0000000005EF9188>, <data.Hold instance at 0x0000000005EF91C8>, <data.Hold instance at 0x0000000005EF9208>, <data.Hold ins
+tance at 0x0000000005EF9288>, <data.Hold instance at 0x0000000005EF92C8>, <data.Hold instance at 0x0000000005EF9308>, <data.Hold instance at 0x0000000005EF9348>, <data.Hold instance at 0x0000000005EF9388>]}
+INFO     2014-05-02 11:38:41,996 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'info'
+INFO     2014-05-02 11:38:41,997 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: []
+INFO     2014-05-02 11:38:42,000 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:38:42,002 objectproperty.py:14] depth: 35, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:38:42,005 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:38:42,006 objectproperty.py:14] depth: 35, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 7, 25)
+INFO     2014-05-02 11:38:42,009 objectproperty.py:14] depth: 38, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:38:42,010 objectproperty.py:14] depth: 38, obj_type: <type 'tuple'>, obj: ('\x07\xde\x07\x19',)
+INFO     2014-05-02 11:38:42,013 objectproperty.py:14] depth: 41, obj_type: <type 'str'>, obj: '\x07\xde\x07\x19'
+INFO     2014-05-02 11:38:42,016 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'patron_name'
+INFO     2014-05-02 11:38:42,017 objectproperty.py:14] depth: 35, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:38:42,019 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'items'
+INFO     2014-05-02 11:38:42,022 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: [<data.Item instance at 0x0000000005EFF108>]
+INFO     2014-05-02 11:38:42,025 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Item instance at 0x0000000005EFF108>
+INFO     2014-05-02 11:38:42,026 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': datetime.date(2014, 5, 22), 'library_name': u'Waterloo Public Library', 'author': u'Paula Daly', 'url': u'https://books.kpl.org/record=b2359686~S3', 'title': u'Just what kind of mother are you?
+', 'status_notes': [u'Renewed 1 time'], 'user': u'laurie clarke', 'items_url': u'https://books.kpl.org/patroninfo~S3/1210718/items'}
+INFO     2014-05-02 11:38:42,029 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:38:42,039 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 5, 22)
+INFO     2014-05-02 11:38:42,040 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:38:42,043 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xde\x05\x16',)
+INFO     2014-05-02 11:38:42,046 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xde\x05\x16'
+INFO     2014-05-02 11:38:42,049 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:38:42,052 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:38:42,055 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:38:42,056 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Paula Daly'
+INFO     2014-05-02 11:38:42,059 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:38:42,062 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2359686~S3'
+INFO     2014-05-02 11:38:42,065 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:38:42,068 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Just what kind of mother are you?'
+INFO     2014-05-02 11:38:42,069 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:38:42,073 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: [u'Renewed 1 time']
+INFO     2014-05-02 11:38:42,076 objectproperty.py:14] depth: 50, obj_type: <type 'unicode'>, obj: u'Renewed 1 time'
+INFO     2014-05-02 11:38:42,079 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'user'
+INFO     2014-05-02 11:38:42,082 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'laurie clarke'
+INFO     2014-05-02 11:38:42,085 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'items_url'
+INFO     2014-05-02 11:38:42,088 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/patroninfo~S3/1210718/items'
+INFO     2014-05-02 11:38:42,092 objectproperty.py:14] depth: 35, obj_type: <type 'str'>, obj: 'holds'
+INFO     2014-05-02 11:38:42,094 objectproperty.py:14] depth: 35, obj_type: <type 'list'>, obj: [<data.Hold instance at 0x0000000005DB0988>, <data.Hold instance at 0x0000000005EF0DC8>, <data.Hold instance at 0x0000000005EF2908>, <data.Hold instance at 0x0000000005EF5D48>, <data.Hold instance at 0x00
+00000005EF51C8>, <data.Hold instance at 0x0000000005EF5D08>, <data.Hold instance at 0x0000000005EF5D88>, <data.Hold instance at 0x0000000005EF67C8>, <data.Hold instance at 0x0000000005EF6248>, <data.Hold instance at 0x0000000005EF6348>, <data.Hold instance at 0x0000000005EF6448>, <data.Hold instance
+ at 0x0000000005EF6588>, <data.Hold instance at 0x0000000005EF6688>, <data.Hold instance at 0x0000000005EF6908>, <data.Hold instance at 0x00000000050771C8>, <data.Hold instance at 0x000000000542F348>, <data.Hold instance at 0x0000000005EF6D08>, <data.Hold instance at 0x0000000005EF6D88>, <data.Hold
+instance at 0x0000000005EF6DC8>, <data.Hold instance at 0x0000000005EF6E08>, <data.Hold instance at 0x0000000005EF6E48>, <data.Hold instance at 0x0000000005EF6E88>, <data.Hold instance at 0x0000000005EF6EC8>, <data.Hold instance at 0x0000000005EF6F48>, <data.Hold instance at 0x0000000005EF6F88>, <da
+ta.Hold instance at 0x0000000005EF6FC8>, <data.Hold instance at 0x0000000005EF9048>, <data.Hold instance at 0x0000000005EF9088>, <data.Hold instance at 0x0000000005EF90C8>, <data.Hold instance at 0x0000000005EF9108>, <data.Hold instance at 0x0000000005EF9148>, <data.Hold instance at 0x0000000005EF91
+88>, <data.Hold instance at 0x0000000005EF91C8>, <data.Hold instance at 0x0000000005EF9208>, <data.Hold instance at 0x0000000005EF9288>, <data.Hold instance at 0x0000000005EF92C8>, <data.Hold instance at 0x0000000005EF9308>, <data.Hold instance at 0x0000000005EF9348>, <data.Hold instance at 0x000000
+0005EF9388>]
+INFO     2014-05-02 11:38:42,098 objectproperty.py:14] depth: 39, obj_type: <type 'instance'>, obj: <data.Hold instance at 0x0000000005DB0988>
+INFO     2014-05-02 11:38:42,101 objectproperty.py:14] depth: 42, obj_type: <type 'dict'>, obj: {'status': (1, 4), 'library_name': u'Waterloo Public Library', 'expires': datetime.date(2014, 7, 4), 'author': '', 'url': u'https://books.kpl.org/record=b2359065~S3', 'title': u'The girls of August', 'sta
+tus_notes': [], 'pickup': u'WPL Main Library', 'user': u'laurie clarke', 'holds_url': u'https://books.kpl.org/patroninfo~S3/1210718/holds'}
+INFO     2014-05-02 11:38:42,105 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status'
+INFO     2014-05-02 11:38:42,108 objectproperty.py:14] depth: 46, obj_type: <type 'tuple'>, obj: (1, 4)
+INFO     2014-05-02 11:38:42,115 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 1
+INFO     2014-05-02 11:38:42,118 objectproperty.py:14] depth: 49, obj_type: <type 'int'>, obj: 4
+INFO     2014-05-02 11:38:42,121 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'library_name'
+INFO     2014-05-02 11:38:42,124 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'Waterloo Public Library'
+INFO     2014-05-02 11:38:42,125 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'expires'
+INFO     2014-05-02 11:38:42,128 objectproperty.py:14] depth: 46, obj_type: <type 'datetime.date'>, obj: datetime.date(2014, 7, 4)
+INFO     2014-05-02 11:38:42,131 objectproperty.py:14] depth: 49, obj_type: <type 'type'>, obj: <type 'datetime.date'>
+INFO     2014-05-02 11:38:42,134 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: ('\x07\xde\x07\x04',)
+INFO     2014-05-02 11:38:42,137 objectproperty.py:14] depth: 52, obj_type: <type 'str'>, obj: '\x07\xde\x07\x04'
+INFO     2014-05-02 11:38:42,138 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'author'
+INFO     2014-05-02 11:38:42,141 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: ''
+INFO     2014-05-02 11:38:42,144 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'url'
+INFO     2014-05-02 11:38:42,148 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'https://books.kpl.org/record=b2359065~S3'
+INFO     2014-05-02 11:38:42,151 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'title'
+INFO     2014-05-02 11:38:42,154 objectproperty.py:14] depth: 46, obj_type: <type 'unicode'>, obj: u'The girls of August'
+INFO     2014-05-02 11:38:42,155 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'status_notes'
+INFO     2014-05-02 11:38:42,158 objectproperty.py:14] depth: 46, obj_type: <type 'list'>, obj: []
+INFO     2014-05-02 11:38:42,161 objectproperty.py:14] depth: 46, obj_type: <type 'str'>, obj: 'pickup'
+INFO     2014-05-02 11:38:42,164 objectproperty.py:14] depth: 46, obj_type: <class 'BeautifulSoup.NavigableString'>, obj: u'WPL Main Library'
+INFO     2014-05-02 11:38:42,167 objectproperty.py:14] depth: 49, obj_type: <type 'function'>, obj: <function _reconstructor at 0x0000000004E7C4A8>
+INFO     2014-05-02 11:38:42,168 objectproperty.py:14] depth: 49, obj_type: <type 'tuple'>, obj: (<class 'BeautifulSoup.NavigableString'>, <type 'unicode'>, u'WPL Main Library')
+INFO     2014-05-02 11:38:42,171 objectproperty.py:14] depth: 52, obj_type: <type 'type'>, obj: <class 'BeautifulSoup.NavigableString'>
+INFO     2014-05-02 11:38:42,174 objectproperty.py:14] depth: 52, obj_type: <type 'type'>, obj: <type 'unicode'>
+INFO     2014-05-02 11:38:42,177 objectproperty.py:14] depth: 52, obj_type: <type 'unicode'>, obj: u'WPL Main Library'
+INFO     2014-05-02 11:38:42,180 objectproperty.py:14] depth: 49, obj_type: <type 'dict'>, obj: {'nextSibling': None, 'next': u'\n', 'previousSibling': None, 'parent': <option value="w    " selected="selected">WPL Main Library</option>, 'previous': <option value="w    " selected="selected">WPL Main
+Library</option>}
+INFO     2014-05-02 11:38:42,183 objectproperty.py:14] depth: 53, obj_type: <type 'str'>, obj: 'nextSibling'
+INFO     2014-05-02 11:38:42,187 objectproperty.py:14] depth: 53, obj_type: <type 'NoneType'>, obj: None
+INFO     2014-05-02 11:38:42,190 objectproperty.py:14] depth: 53, obj_type: <type 'str'>, obj: 'next'
+INFO     2014-05-02 11:38:42,191 objectproperty.py:14] depth: 53, obj_type: <class 'BeautifulSoup.NavigableString'>, obj: u'\n'
+INFO     2014-05-02 11:38:42,194 objectproperty.py:14] depth: 56, obj_type: <type 'function'>, obj: <function _reconstructor at 0x0000000004E7C4A8>
+INFO     2014-05-02 11:38:42,197 objectproperty.py:14] depth: 56, obj_type: <type 'tuple'>, obj: (<class 'BeautifulSoup.NavigableString'>, <type 'unicode'>, u'\n')
+INFO     2014-05-02 11:38:42,201 objectproperty.py:14] depth: 59, obj_type: <type 'type'>, obj: <class 'BeautifulSoup.NavigableString'>
+INFO     2014-05-02 11:38:42,204 objectproperty.py:14] depth: 59, obj_type: <type 'type'>, obj: <type 'unicode'>
+INFO     2014-05-02 11:38:42,207 objectproperty.py:14] depth: 59, obj_type: <type 'unicode'>, obj: u'\n'
+INFO     2014-05-02 11:38:42,210 objectproperty.py:14] depth: 56, obj_type: <type 'dict'>, obj: {'nextSibling': <option value="wm+++">WPL McCormick Branch</option>, 'next': <option value="wm+++">WPL McCormick Branch</option>, 'previousSibling': <option value="w    " selected="selected">WPL Main Libr
+ary</option>, 'parent': <select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>, 'previous': u'WPL Main Library'}
+INFO     2014-05-02 11:38:42,214 objectproperty.py:14] depth: 60, obj_type: <type 'str'>, obj: 'nextSibling'
+INFO     2014-05-02 11:38:42,227 objectproperty.py:14] depth: 60, obj_type: <type 'instance'>, obj: <option value="wm+++">WPL McCormick Branch</option>
+INFO     2014-05-02 11:38:42,230 objectproperty.py:14] depth: 63, obj_type: <type 'dict'>, obj: {'escapeUnrecognizedEntities': False, 'name': u'option', 'parent': <select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>, 'string': u'WPL McCormick Branch', 'parserClass': <class BeautifulSoup.BeautifulSoup at 0x0000000004F1FBE8>, 'convertHTMLEntities': False, 'nextSibling': u'\n', 'next': u'WPL McCormick Branch', 'isSelfClosing': False, 'attrMap': {u'value': u'wm+++'}, 'convertXMLEntities': False, 'hidden':
+ False, 'previous': u'\n', 'previousSibling': u'\n', 'containsSubstitutions': False, 'contents': [u'WPL McCormick Branch'], 'attrs': [(u'value', u'wm+++')]}
+INFO     2014-05-02 11:38:42,234 objectproperty.py:14] depth: 67, obj_type: <type 'str'>, obj: 'escapeUnrecognizedEntities'
+INFO     2014-05-02 11:38:42,239 objectproperty.py:14] depth: 67, obj_type: <type 'bool'>, obj: False
+INFO     2014-05-02 11:38:42,243 objectproperty.py:14] depth: 67, obj_type: <type 'str'>, obj: 'name'
+INFO     2014-05-02 11:38:42,249 objectproperty.py:14] depth: 67, obj_type: <type 'unicode'>, obj: u'option'
+INFO     2014-05-02 11:38:42,253 objectproperty.py:14] depth: 67, obj_type: <type 'str'>, obj: 'parent'
+INFO     2014-05-02 11:38:42,256 objectproperty.py:14] depth: 67, obj_type: <type 'instance'>, obj: <select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>
+INFO     2014-05-02 11:38:42,262 objectproperty.py:14] depth: 70, obj_type: <type 'dict'>, obj: {'escapeUnrecognizedEntities': False, 'name': u'select', 'parent': <td class="patFuncPickup">
+<div class="patFuncPickupLabel">
+<label for="locb2359065x00">Pickup Location</label></div>
+<select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>
+</td>, 'parserClass': <class BeautifulSoup.BeautifulSoup at 0x0000000004F1FBE8>, 'convertHTMLEntities': False, 'nextSibling': u'\n', 'next': u'\n', 'isSelfClosing': False, 'convertXMLEntities': False, 'hidden': False, 'previous': u'\n', 'previousSibling': u'\n', 'containsSubstitutions': False, 'cont
+ents': [u'\n', <option value="ch+++">Country Hills Library-KPL</option>, u'\n', <option value="fh+++">Forest Heights Library-KPL</option>, u'\n', <option value="g++++">Grand River Stanley Pk Lib-KPL</option>, u'\n', <option value="m++++">Main Library-KPL</option>, u'\n', <option value="pp+++">Pionee
+r Park Library-KPL</option>, u'\n', <option value="w    " selected="selected">WPL Main Library</option>, u'\n', <option value="wm+++">WPL McCormick Branch</option>, u'\n', <option value="ww+++">WPL John M. Harper Branch</option>, u'\n'], 'attrs': [(u'name', u'locb2359065x00'), (u'id', u'locb2359065x
+00')]}
+INFO     2014-05-02 11:38:42,267 objectproperty.py:14] depth: 74, obj_type: <type 'str'>, obj: 'escapeUnrecognizedEntities'
+INFO     2014-05-02 11:38:42,273 objectproperty.py:14] depth: 74, obj_type: <type 'bool'>, obj: False
+INFO     2014-05-02 11:38:42,279 objectproperty.py:14] depth: 74, obj_type: <type 'str'>, obj: 'name'
+INFO     2014-05-02 11:38:42,286 objectproperty.py:14] depth: 74, obj_type: <type 'unicode'>, obj: u'select'
+INFO     2014-05-02 11:38:42,305 objectproperty.py:14] depth: 74, obj_type: <type 'str'>, obj: 'parent'
+INFO     2014-05-02 11:38:42,312 objectproperty.py:14] depth: 74, obj_type: <type 'instance'>, obj: <td class="patFuncPickup">
+<div class="patFuncPickupLabel">
+<label for="locb2359065x00">Pickup Location</label></div>
+<select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>
+</td>
+INFO     2014-05-02 11:38:42,318 objectproperty.py:14] depth: 77, obj_type: <type 'dict'>, obj: {'escapeUnrecognizedEntities': False, 'name': u'td', 'parent': <tr class="patFuncEntry">
+<td class="patFuncMark" align="center">
+<input type="checkbox" name="cancelb2359065x00" id="cancelb2359065x00" />
+</td>
+<td class="patFuncTitle">
+<label for="cancelb2359065x00"><a href="/record=b2359065~S3"><span class="patFuncTitleMain">The girls of August</span></a></label>
+<br /><label for="cancelb2359065x00"><a href="/record=b2359065~S3"><span class="patFuncTitleAlt"></span></a></label>
+<br />
+</td>
+<td class="patFuncStatus"> 1 of 4 holds </td>
+<td class="patFuncPickup">
+<div class="patFuncPickupLabel">
+<label for="locb2359065x00">Pickup Location</label></div>
+<select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>
+</td>
+<td class="patFuncCancel">07-04-14</td>
+<td class="patFuncFreeze" align="center"><em>This hold is too old to be suspended</em></td>
+</tr>, 'parserClass': <class BeautifulSoup.BeautifulSoup at 0x0000000004F1FBE8>, 'convertHTMLEntities': False, 'nextSibling': u'\n', 'next': u'\n', 'isSelfClosing': False, 'convertXMLEntities': False, 'hidden': False, 'previous': u'\n', 'previousSibling': u'\n', 'containsSubstitutions': False, 'cont
+ents': [u'\n', <div class="patFuncPickupLabel">
+<label for="locb2359065x00">Pickup Location</label></div>, u'\n', <select name="locb2359065x00" id="locb2359065x00">
+<option value="ch+++">Country Hills Library-KPL</option>
+<option value="fh+++">Forest Heights Library-KPL</option>
+<option value="g++++">Grand River Stanley Pk Lib-KPL</option>
+<option value="m++++">Main Library-KPL</option>
+<option value="pp+++">Pioneer Park Library-KPL</option>
+<option value="w    " selected="selected">WPL Main Library</option>
+<option value="wm+++">WPL McCormick Branch</option>
+<option value="ww+++">WPL John M. Harper Branch</option>
+</select>, u'\n'], 'attrs': [(u'class', u'patFuncPickup')]}
+INFO     2014-05-02 11:38:42,322 objectproperty.py:14] depth: 81, obj_type: <type 'str'>, obj: 'escapeUnrecognizedEntities'
+INFO     2014-05-02 11:38:42,328 objectproperty.py:14] depth: 81, obj_type: <type 'bool'>, obj: False
+INFO     2014-05-02 11:38:42,332 objectproperty.py:14] depth: 81, obj_type: <type 'str'>, obj: 'name'
+INFO     2014-05-02 11:38:42,336 objectproperty.py:14] depth: 81, obj_type: <type 'unicode'>, obj: u'td'

@@ -1,0 +1,126 @@
+2014-04-28 14:10:51.279 /admin/checkcard/ahBzfmxpYnJhcnloaXBwbzI3chgLEgZGYW1pbHkY8Mc-DAsSBENhcmQYAQw 200 7929ms 0kb AppEngine-Google; (+http://code.google.com/appengine) module=default version=1
+0.1.0.2 - - [28/Apr/2014:11:10:51 -0700] "GET /admin/checkcard/ahBzfmxpYnJhcnloaXBwbzI3chgLEgZGYW1pbHkY8Mc-DAsSBENhcmQYAQw HTTP/1.1" 200 84 "http://libraryhippo27.appspot.com/admin/checkallcards" "AppEngine-Google; (+http://code.google.com/appengine)" "libraryhippo27.appspot.com" ms=7930 cpu_ms=3916 cpm_usd=0.000492 queue_name=default task_name=7148864779095524084 app_engine_release=1.9.4 instance=00c61b117cf0d907b709f0f2eb0b1b3afeaff0
+I 2014-04-28 14:10:43.429
+checking [patron name redacted] Waterloo
+I 2014-04-28 14:10:47.550
+saving checked card for [patron name redacted]
+E 2014-04-28 14:10:51.061
+Failed to save checked card. Continuing.
+Traceback (most recent call last):
+  File "/base/data/home/apps/s~libraryhippo27/1.368776574735783966/libraryhippo.py", line 380, in save_checked_card
+    checked_card.payload = card_status
+  File "/base/data/home/runtimes/python27/python27_lib/versions/1/google/appengine/ext/db/__init__.py", line 614, in __set__
+    value = self.validate(value)
+  File "/base/data/home/apps/s~libraryhippo27/1.368776574735783966/gael/objectproperty.py", line 11, in validate
+    result = pickle.dumps(value)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 1374, in dumps
+    Pickler(file, protocol).dump(obj)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 224, in dump
+    self.save(obj)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 600, in save_list
+    self._batch_appends(iter(obj))
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 615, in _batch_appends
+    save(x)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 331, in save
+    self.save_reduce(obj=obj, *rv)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 419, in save_reduce
+    save(state)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 331, in save
+    self.save_reduce(obj=obj, *rv)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 419, in save_reduce
+    save(state)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/...(length 98720)
+I 2014-04-28 14:10:51.275
+Saved; key: __appstats__:043300, part: 190 bytes, full: 65479 bytes, overhead: 0.004 + 0.005; link: http://libraryhippo27.appspot.com/_ah/stats/details?time=1398708643356
