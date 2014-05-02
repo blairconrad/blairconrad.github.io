@@ -83,6 +83,10 @@ div.post-meta {
     font-size: 80%;
 }
 
+code {
+    font-size: 16px;
+}
+
 figure {
     text-align: center;
 }
