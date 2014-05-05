@@ -87,6 +87,10 @@ code {
     font-size: 16px;
 }
 
+pre code {
+    font-size: 13px;
+}
+
 figure {
     text-align: center;
 }
