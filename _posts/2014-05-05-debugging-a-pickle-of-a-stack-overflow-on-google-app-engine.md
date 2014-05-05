@@ -43,7 +43,7 @@ Traceback (most recent call last):
   File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
     f(self, obj) # Call unbound method with explicit self
 
-[about 80 lines of stack trace elided]
+<b>[about 80 lines of stack trace elided]</b>
 
   File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
     save(v)
@@ -131,7 +131,7 @@ happens. That shouldn't be more than **100**.
 
 
 How deep is too deep?
----------------------
+--------------------- 
 
 Popular wisdom on the web seems to be to increase the recursion limit
 when pickle runs into these kinds of problems. I was loath to do this,
@@ -143,7 +143,7 @@ room, "Just set the limit higher. That should help your user for now
 and it will give you more time to work on the problem."
 
 So I did. I was worried that the App Engine runtime wouldn't _let_ me
-change the recrusion limit, so I used
+change the recursion limit, so I used
 [sys.getrecursionlimit][getrecursionlimit] to log the depth,
 [sys.setrecursionlimit][setrecursionlimit], and
 `sys.getrecursionlimit` again to verify.
@@ -209,15 +209,21 @@ explains the deep deep recursion.
 
 The offending objects were in the `pickup` field of the `Hold`
 class. A quick fix to ensure we're storing a plain string, and the
-problem [was resolved][issue89].
+problem [was resolved][thefix].
 
 What a difference
 -----------------
 
 Aside from the obvious effect of correct e-mails, I was curious to see what other differences this change made.
 
-Before the fix, the serialization descended to a stack depth of **blah blah**, and produced a **blah blah**-byte blob.
-After, the maximum depth is **52**, and the blob size is **10779** bytes.
+Before the fix, the serialization descended to a stack depth of
+**892**, and produced a **546221**-byte blob.  After, the maximum
+depth is **52**, and the blob size is **10779** bytes. So everyone
+should benefit a little from lower resource usage and quicker
+card-checking. Fortunately, LibraryHippo isn't popular enough to exceed
+the free quotas, so I wasn't paying extra for compute or storage. Then
+again, if I had been, maybe I would've noticed the problem before a user
+did.
 
 [LibraryHippo]: http://libraryhippo.com
 [pickle]: https://docs.python.org/2/library/pickle.html
@@ -226,4 +232,4 @@ After, the maximum depth is **52**, and the blob size is **10779** bytes.
 [picklesource]: http://hg.python.org/cpython/file/0f6bdc2b0e38/Lib/pickle.py
 [beautifulsoup]: http://www.crummy.com/software/BeautifulSoup/
 [navigablestring]: http://www.crummy.com/software/BeautifulSoup/bs4/doc/#navigablestring
-[issue89]: https://code.google.com/p/libraryhippo/issues/detail?id=89
+[thefix]: https://code.google.com/p/libraryhippo/source/detail?r=fd04415d2009
