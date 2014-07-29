@@ -21,7 +21,7 @@ Here are some factors that will influence me. Some of these may be negotiable, i
 <ul>
 <li>We'd like to see coverage information in our build reports, so the tool should <b>run from the command line</b>.</li>
 <li>It'd be easier to put the coverage info our our build reports if the <b>coverage reports were in XML</b>.</li>
-<li>I really prefer a product that <b>has an auto-deploy</b>, so it can be bundled with the source tree and new developers or build servers just work. You may remember the pains I went to to <a href="/auto-deploying-typemock-isolator-without-trashing-the-installation/">auto-deploy TypeMock Isolator</a>.</li>
+<li>I really prefer a product that <b>has an auto-deploy</b>, so it can be bundled with the source tree and new developers or build servers just work. You may remember the pains I went to to <a href="{{ site.url }}{% post_url 2010-06-06-auto-deploying-typemock-isolator-without-trashing-the-installation %}">auto-deploy TypeMock Isolator</a>.</li>
 <li>While I'm on the subject, one of our products uses Isolator as its mocking framework, so the coverage tool should be able to <b>link with TypeMock Isolator</b>.</li>
 <li>We have a web services layer, which will be exercised by unit tests, but if we could gather stats on the layer as it's being exercised by the client-facing portion, that would be gravy. To that end, it should be possible to <b>cover IIS</b>.</li>
 <li>When I used TestDriven.NET + NCover a few years ago, I enjoyed being able to quickly see what my tests covered. This isn't a requirement of our current initiative, but <b>IDE integration</b> would be a bonus.</li>
