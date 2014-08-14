@@ -27,7 +27,7 @@ to minimize both.
 One way to improve productivity and increase consistency is to use
 [checklists][checklists].  When I showed up at FakeItEasy Enterprises,
 each new release was described by an issue that included a
-comprehensive checklist, such as the one:
+comprehensive checklist, such as this one:
 
 <figure>
   <a href="https://github.com/FakeItEasy/FakeItEasy/issues/272"><img src="{{ site.image_dir }}/release_checklist.png"></a>
