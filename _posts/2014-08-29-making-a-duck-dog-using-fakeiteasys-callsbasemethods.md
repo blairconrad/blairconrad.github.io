@@ -93,12 +93,11 @@ public class WrappingDog: Dog
 {% endhighlight %}
 
 
-Mr. Turovskyy suggests getting the desired behaviour by writting a
+Mr. Turovskyy suggests getting the desired behaviour by writing a
 manual `FakeDog` that overrides `Bark`, which will work, but is
-tedious and loses some of the benefits that FakeItEasy can
-provide.
+tedious and discards the benefits that FakeItEasy can provide.
 
-## Another Way
+## Another Way to Access Original Behaviour
 
 FakeItEasy can be used to get the desired behaviour. It provides a
 `CallsBaseMethod` method when configuring a fake. It does just what
@@ -133,7 +132,7 @@ public void BarkBark_CallsBaseMethod_UsesOverriddenBark()
 As of [FakeItEasy 1.24.0][onetwentyfour], there's an additional way to
 do this, and it may appeal more to users who want many methods on
 their fake to call the original class's version. There's a new
-[fake creation option][options] called `CallsBaseMethods`. It was
+[fake creation option][options] called [`CallsBaseMethods`][callsbasemethods]. It was
 [proposed][issue] by [Aleksander Heintz][alexandr], who also provided
 nearly the complete implementation. When used, it will cause _every_
 method on a fake to delegate to the faked type's implementation, if there
@@ -153,12 +152,14 @@ public void BarkBark_CallsBaseMethod_UsesOverriddenBark()
 }
 {% endhighlight %}
 
-The change in the first line means that when `dog` is created, every method will delegate to the version on
-`Dog`, but then `Bark` is overridden, and the base `BarkBark` will use
-that version.
+The change in the first line means that when `dog` is created, every
+method will delegate to the version on `Dog`.
+
+Then `Bark` is overridden, and the base `BarkBark` is able to use the
+new version.
 
 Now we can realize our dream of having a
-[Dr. Seuss-style DuckDog][duckdog]:
+[Seussian DuckDog][duckdog]:
 <figure>
   <img src="{{ site.image_dir }}/Duck-Dog.jpg">
 </figure>
@@ -167,5 +168,6 @@ Now we can realize our dream of having a
 [wrapping]: http://elekslabs.com/2014/03/fakeiteasy-be-careful-when-wrapping.html
 [onetwentyfour]: https://github.com/FakeItEasy/FakeItEasy/releases/tag/1.24.0
 [options]: https://github.com/FakeItEasy/FakeItEasy/wiki/Creating-Fakes#options
-[alexandr]: http://blog.alxandr.me/
+[alexandr]: http://alxandr.me/
 [issue]: https://github.com/FakeItEasy/FakeItEasy/issues/192
+[callsbasemethods]: https://github.com/FakeItEasy/FakeItEasy/wiki/Calling-base-methods#configuring-all-methods-at-once
