@@ -171,11 +171,9 @@ screen) can get old fast, so flake8 lets you put ever-repeated
 settings in a file. As promised, the following `setup.cfg` file lets
 me just run `flake8 App` and get the same results as above:
 
-{% highlight ini %}
-[flake8]
+<pre><code class="ini">[flake8]
 exclude = BeautifulSoup.py
-select = F
-{% endhighlight %}
+select = F</code></pre>
 
 ## Handy extension: naming
 

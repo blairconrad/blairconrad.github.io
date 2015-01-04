@@ -21,8 +21,7 @@ provide an alternative solution.
 
 Mr. Turovskyy supposes we want to fake out the following `Dog` class:
 
-{% highlight csharp %}
-public class Dog
+<pre><code class="csharp">public class Dog
 {
     public virtual string Bark()
     {
@@ -32,8 +31,7 @@ public class Dog
     {
         return Bark() + Bark();
     }
-}
-{% endhighlight %}
+}</code></pre>
 
 He notes that the default behaviour of a fake Dog, as made by `dog =
 A.Fake<Dog>()`, is for both `Bark` and `BarkBark` to return the empty
@@ -41,10 +39,8 @@ string, which is not always desirable.
 
 His next step is to create a fake by **wrapping a Dog object**:
 
-{% highlight csharp %}
-Dog realDog = newDog();
-Dog dog = A.Fake<Dog>(x => x.Wrapping(realDog));
-{% endhighlight %}
+<pre><code class="csharp">Dog realDog = newDog();
+Dog dog = A.Fake&lt;Dog&gt;(x =&gt; x.Wrapping(realDog));</code></pre>
 
 Now `Bark` and `BarkBark` return the original (expected) strings.
 
@@ -70,8 +66,7 @@ dog doesn't know about the fake Dog at all_, so it just calls its own
 Using the `Wrapping` option and then overriding `Bark` on the fake is
 equivalent to writing this manual wrapper:
 
-{% highlight csharp %}
-public class WrappingDog: Dog
+<pre><code class="csharp">public class WrappingDog: Dog
 {
     private readonly Dog realDog;
 
@@ -89,8 +84,7 @@ public class WrappingDog: Dog
     {
         return this.realDog.BarkBark();
     }
-}
-{% endhighlight %}
+}</code></pre>
 
 
 Mr. Turovskyy suggests getting the desired behaviour by writing a
@@ -103,29 +97,25 @@ FakeItEasy can be used to get the desired behaviour. It provides a
 `CallsBaseMethod` method when configuring a fake. It does just what
 you'd hope it would. Witness:
 
-{% highlight csharp %}
-Dog dog = A.Fake<Dog>();
-A.CallTo(() => dog.BarkBark()).CallsBaseMethod();
-{% endhighlight %}
+<pre><code class="csharp">Dog dog = A.Fake&lt;Dog&gt;();
+A.CallTo(() =&gt; dog.BarkBark()).CallsBaseMethod();</code></pre>
 
 This tells the fake Dog to call the real `Dog.BarkBark` when its
 `BarkBark` method is invoked. When this is combined with an override
 for `Bark`, we can write this passing test:
 
-{% highlight csharp %}
-[Test]
+<pre><code class="csharp">[Test]
 public void BarkBark_CallsBaseMethod_UsesOverriddenBark()
 {
-    Dog dog = A.Fake<Dog>();
+    Dog dog = A.Fake&lt;Dog&gt;();
 
-    A.CallTo(() => dog.BarkBark()).CallsBaseMethod();
-    A.CallTo(() => dog.Bark()).Returns("Quack!");
+    A.CallTo(() =&gt; dog.BarkBark()).CallsBaseMethod();
+    A.CallTo(() =&gt; dog.Bark()).Returns("Quack!");
 
     string result = dog.BarkBark();
 
     Assert.That(result, Is.EqualTo("Quack!Quack!"));
-}
-{% endhighlight %}
+}</code></pre>
 
 ## Call Base Methods More Conveniently
 
@@ -138,19 +128,17 @@ nearly the complete implementation. When used, it will cause _every_
 method on a fake to delegate to the faked type's implementation, if there
 is one. So the previous test could be written as
 
-{% highlight csharp %}
-[Test]
+<pre><code class="csharp">[Test]
 public void BarkBark_CallsBaseMethod_UsesOverriddenBark()
 {
-    Dog dog = A.Fake<Dog>(options => options.CallsBaseMethods());
+    Dog dog = A.Fake&lt;Dog&gt;(options =&gt; options.CallsBaseMethods());
 
-    A.CallTo(() => dog.Bark()).Returns("Quack!");
+    A.CallTo(() =&gt; dog.Bark()).Returns("Quack!");
 
     string result = dog.BarkBark();
 
     Assert.That(result, Is.EqualTo("Quack!Quack!"));
-}
-{% endhighlight %}
+}</code></pre>
 
 The change in the first line means that when `dog` is created, every
 method will delegate to the version on `Dog`.

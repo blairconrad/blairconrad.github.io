@@ -16,15 +16,16 @@ I wrote a utility class that worked with the urllib2 interface, but that didn't 
 <h4 id="why_a_transcript">Why a transcript?</h4>
 <p>The libraries don't provide a spec for their output, so I built the web scraper by trial and error, sometimes putting books on hold or taking them out just to get test data. Every once in a while something comes up that I haven't coded for and the application breaks. In these cases, I can't rely on the problem being reproducible, since the patron could've returned (or picked up) the item whose record was troublesome or some other library state might've changed. I need to know what the web site looked like when the problem occurred, and since the ultimate cause might be several pages back, I need a history.</p>
 <p>I started adding a transcript feature to the URLOpener - recording every request and response including headers. As I worked, I worried about two things:
-</p><ul>
-<li>the `fetch` logic was becoming convoluted, and</li>
-<li>the approach was inflexible - what if later I didn't want to follow redirects, or to keep a transcript?
-</li></ul>
+</p>
+
+* the `fetch` logic was becoming convoluted, and</li>
+* the approach was inflexible - what if later I didn't want to follow redirects, or to keep a transcript?
+
+
 <h4 id="decorators_to_the_rescue">Decorators to the rescue</h4>
 <p>I decided to separate each bit of functionality - following redirects, tracking cookies, and keeping a transcript - into its own <a href="http://en.wikipedia.org/wiki/Decorator_pattern">decorator</a>, to be applied as needed. First  I teased out the code that followed redirects, with my change to allow relative URLs:</p>
 
-{% highlight python %}
-class RedirectFollower():
+<pre><code class="python">class RedirectFollower():
     def __init__(self, fetcher):
         self.fetcher = fetcher
 
@@ -44,13 +45,11 @@ class RedirectFollower():
             else:
                 break
 
-        return response
-{% endhighlight %}
+        return response</code></pre>
 
 <p>After that, the cookie-handling code was easy to put in its own class:</p>
 
-{% highlight python %}
-class CookieHandler():
+<pre><code class="python">class CookieHandler():
     def __init__(self, fetcher):
         self.fetcher = fetcher
         self.cookie_jar = Cookie.SimpleCookie()
@@ -67,21 +66,17 @@ class CookieHandler():
         cookieHeader = ""
         for value in self.cookie_jar.values():
             cookieHeader += "%s=%s; " % (value.key, value.value)
-        return cookieHeader
-{% endhighlight %}
+        return cookieHeader</code></pre>
 
 <p>Now I had the `URLOpener` functionality back, just by creating an object like so:</p>
 
-{% highlight python %}
-fetch = RedirectFollower(CookieHandler(urlfetch.fetch))
-{% endhighlight %}
+<pre><code class="python">fetch = RedirectFollower(CookieHandler(urlfetch.fetch))</code></pre>
 
 <h4 id="implementing_transcripts">Implementing transcripts</h4>
 I still needed one more decorator - the transcriber.
 
 
-{% highlight python %}
-class Transcriber():
+<pre><code class="python">class Transcriber():
     def __init__(self, fetcher):
         self.fetcher = fetcher
         self. transactions = []
@@ -118,57 +113,46 @@ class Transcriber():
             return '''Response at %(time)s:
   status_code = %(status_code)d
   headers = %(headers)s
-  content = %(content)s''' % self.values
-{% endhighlight %}
+  content = %(content)s''' % self.values</code></pre>
 
 
 <p>To record all my transactions, all I have to do is wrap my fetcher one more time. When something goes wrong, I can examine the whole chain of calls and have a better shot at fixing the scraper.</p>
 
-{% highlight python %}
-fetch = Transcriber(RedirectFollower(CookieHandler(urlfetch.fetch)))
+<pre><code class="python">fetch = Transcriber(RedirectFollower(CookieHandler(urlfetch.fetch)))
 response = fetch(patron_account_url)
 try:
     process(response)
 except:
     logging.error('error checking account for ' + patron, exc_info=True)
     for action in fetch.transactions:
-            logging.debug(action)
-{% endhighlight %}
+            logging.debug(action)</code></pre>
 
 <h4 id="extra_fine_logging_without_rewriting_fetch">Extra-fine logging without rewriting fetch</h4>
 The exercise of transforming `URLOpener` into a series of decorators may seem like just that, an exercise that doesn't provide real value, but provides a powerful debugging tool for your other decorators. By moving the `Transcriber` to the inside of the chain of decorators, you can see each fetch that's made due to a redirect, and which cookies are set when:
 
-{% highlight python %}
-fetch = RedirectFollower(CookieHandler(Transcriber(urlfetch.fetch)))
-{% endhighlight %}
+<pre><code class="python">fetch = RedirectFollower(CookieHandler(Transcriber(urlfetch.fetch)))</code></pre>
 
 <p>The only trick is that the `Transcriber.transactions` attribute isn't available from the outermost decorator. This is easily solved by extracting a base class and having it delegate to the wrapped item.</p>
 
-{% highlight python %}
-class _BaseWrapper:
+<pre><code class="python">class _BaseWrapper:
     def __init__(self, fetcher):
         self.fetcher = fetcher
 
     def __getattr__(self, name):
-        return getattr(self.fetcher, name)
-{% endhighlight %}
+        return getattr(self.fetcher, name)</code></pre>
 
 <p>Then the other decorators extend `_BaseWrapper`, either losing their `__init__` or having them modified. For example, `CookieHandler` becomes:</p>
 
-{% highlight python %}
-class CookieHandler(_BaseWrapper):
+<pre><code class="python">class CookieHandler(_BaseWrapper):
     def __init__(self, fetcher):
         _BaseWrapper.__init__(self, fetcher)
         self.cookie_jar = Cookie.SimpleCookie()
-...
-{% endhighlight %}
+...</code></pre>
 
 <p>And then the following code works, and helped me diagnose a small bug I'd originally had in my `RedirectFollower`. As a bonus, if I ever need to get at `CookieHandler.cookie_jar`, it's right there too.</p>
-{% highlight python %}
-fetch = RedirectFollower(CookieHandler(Transcriber(urlfetch.fetch)))
+<pre><code class="python">fetch = RedirectFollower(CookieHandler(Transcriber(urlfetch.fetch)))
 fetch(patron_account_url)
 for action in fetch.transactions:
-    logging.debug(action)
-{% endhighlight %}
+    logging.debug(action)</code></pre>
 
 

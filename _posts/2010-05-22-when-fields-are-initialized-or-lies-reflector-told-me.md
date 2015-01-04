@@ -14,8 +14,7 @@ tags:
 
 <p>Specifically, what does this output?</p>
 
-{% highlight csharp %}
-class Print
+<pre><code class="csharp">class Print
 {
     public Print(string message)
     {
@@ -47,7 +46,7 @@ class Program
         new Derived();
     }
 }
-{% endhighlight %}
+</code></pre>
 
 <p>I don't often give much thought to the "field vs. base class constructor" thing, but I knew that the Base constructor would be called before the Derived constructor, and I'd seen disassembled code in <a href="http://www.red-gate.com/products/reflector/">Reflector</a> that showed field initialization as if it were the first code executed in a  constructor. My guess was:</p>
 <ul>

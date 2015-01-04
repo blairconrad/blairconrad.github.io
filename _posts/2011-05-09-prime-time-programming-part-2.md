@@ -151,8 +151,7 @@ Next, we have 5. Cross off its multiples (actually, they're already crossed off 
 <h3>A "borrowed" implementation</h3>
 The <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">wikipedia article</a> even provides a Python implementation, which I reproduce here in slightly altered form:
 
-{% highlight python linenos=table %}
-def eratosthenes_sieve(m):
+<pre><code class="python linenos=table">def eratosthenes_sieve(m):
     # Create a candidate list within which non-primes will be
     # marked as None; only candidates below sqrt(m) need be checked. 
     candidates = range(m+1)
@@ -166,8 +165,7 @@ def eratosthenes_sieve(m):
         candidates[2*i::i] = [None] * (m//i - 1)
  
     # Filter out non-primes and return the list.
-    return [i for i in candidates[2:] if i]
-{% endhighlight %}
+    return [i for i in candidates[2:] if i]</code></pre>
 I ran this to find my standard list of primes less than 10<sup>7</sup>, and was surprised at the results. The time to completion varied wildly on successive runs. Sometimes over <b>50</b> seconds, and sometimes as low as <b>13</b>. I noticed that when the run times were high, the laptop's hard drive was thrashing, and just afterward my other applications were unresponsive. 
 
 I reran the test and, with a little help from PerfMon, found out that the memory usage was off the chart. No, seriously. Right off the top. I had to rescale the graph to get everything to fit. the Private Bytes went way up over 200MB. On my 512 MB laptop with Firefox, emacs, and a few background processes, things slow to a crawl. With a smaller set of primes, or on more powerful iron, this implementation may work, but it's not going to meet my needs.
@@ -239,8 +237,7 @@ In this case, add another 2 to 12 to get 14 and insert it. Then increment n.
 
 <h3>Show me the code</h3>
 Here's an implementation of the <b>naive algorithm</b> presented above
-{% highlight python linenos=table %}
-def sieve():
+<pre><code class="python linenos=table">def sieve():
     composites = {}
     n = 2
     while True:
@@ -254,8 +251,7 @@ def sieve():
             # not there - prime
             composites[n*n] = n
             yield n
-        n += 1
-{% endhighlight %}
+        n += 1</code></pre>
 This implementation takes <b>26.8</b> seconds to generate all primes below 10<sup>7</sup>,  close to &#188; the time the best trial division algorithm took.
 
 <h3>Why is this method so great?</h3>
@@ -271,8 +267,7 @@ The method already incorporates some of the advantages of the souped-up trial di
 
 <h3>That's Odd</h3>
 In the sample runthrough above, the algorithm checks 4, 6, 8, 10, &hellip; for primality, even though no even number larger than 2 are prime. Here's an implementation that avoids that:
-{% highlight python linenos=table %}
-def odd_sieve():
+<pre><code class="python linenos=table">def odd_sieve():
    composites = {}
    yield 2
    n = 3
@@ -287,16 +282,14 @@ def odd_sieve():
            # not there - prime
            composites[n*n] = n
            yield n
-       n += 2
-{% endhighlight %}
+       n += 2</code></pre>
 
 This method generates primes less than 10<sup>7</sup> in <b>13.4</b> seconds. This is about half the time it took when we didn't pre-filter the evens. In the trial division case, when we cut out the even numbers, we were saving almost no work - one division per even number, out of potentially dozens or hundreds of divisions being performed. This time, we cut out an associative array lookup and insertion, and most numbers are checked by using only a small number of these operations. Let's see what else we can do.
 
 <h2>What about 3?</h2>
 
 If skipping the numbers that are divisible by 2 paid off, will skipping those divisible by 3 as well? Probably.
-{% highlight python linenos=table %}
-def sixish_sieve():
+<pre><code class="python linenos=table">def sixish_sieve():
     composites = {}
     yield 2
     yield 3
@@ -314,14 +307,12 @@ def sixish_sieve():
             composites[n*n] = n
             yield n
         n += step
-        step = 6 - step
-{% endhighlight %}
+        step = 6 - step</code></pre>
 Now the time to generate primes less than 10<sup>7</sup> is <b>11.9</b> seconds. Again, I think we've hit diminishing returns. We didn't get the 1/3 reduction I'd hoped, probably due to the more complicated "next multiple" calculation.
 
 <h3>YAGNI</h3>
 Things are going pretty well. There's only one thing that bothers me about the latest generator - we're storing too many composites in the associative array. Every time we find a prime number, its square is inserted in the array. Even 9999991<sup>2</sup> is put in the array, even though we'll never check to see if any number greater than 10<sup>7</sup> is prime. So, modifying the algorithm to omit storing composites that are too large, we get:
-{% highlight python linenos=table %}
-def sixish_sieve_max():
+<pre><code class="python linenos=table">def sixish_sieve_max():
     composites = {}
     yield 2
     yield 3
@@ -340,8 +331,7 @@ def sixish_sieve_max():
                 composites[n*n] = n
             yield n
         n += step
-        step = 6 - step
-{% endhighlight %}
+        step = 6 - step</code></pre>
 
 This generator takes <b>10.8</b> seconds to generate primes below 10<sup>7</sup> - modest improvement, and one I'd keep anyhow, since the code is barely more complicated than the previous version. However, the real boost, if there is any, is in the memory usage. When <code>sixish_sieve</code>  generates primes below 10<sup>7</sup>, the private bytes climb up to 52MB, but <code>sixish_sieve_max</code> stays below 25MB. The advantage continues as the problem set grows - when the upper limit is 2*10<sup>7</sup>, <code>sixish_sieve</code> takes 100MB, but <code>sixish_sieve_max</code> remains at a cool 25MB - I guess that's the difference between storing 1270607 composites and 607.
 

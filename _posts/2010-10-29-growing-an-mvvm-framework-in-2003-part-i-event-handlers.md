@@ -39,8 +39,7 @@ I'll demonstrate with a simpler app than the one from work, but will cover the t
 
 I didn't want to have to riddle my ViewModel with <code>+=</code>s just to be able to react to button presses and item selections from the view. I wanted to write something like:
 
-{% highlight csharp %}
-public void FindClick(object sender, EventArgs e)
+<pre><code class="csharp">public void FindClick(object sender, EventArgs e)
 {
     ICollection books = bookDepository.Find(TitleText);
     BookListItems.Clear();
@@ -48,24 +47,20 @@ public void FindClick(object sender, EventArgs e)
     {
         BookListItems.Add(book);
     }
-}
-{% endhighlight %}
+}</code></pre>
 and have the method run when the <code>Click</code> event on the <code>Find</code> button was raised. The method should use the value of the <code>Text</code> property of the <code>Title</code> TextBox to find a list of books and put them in the <code>Items</code> collection on the <code>BookList</code> ListBox.
 
 <h2>Wiring up Event Handlers</h2>
 I created a ViewModelBase class to handle all the infrastructure, so the BookListViewModel code could focus on app-related functions. The first thing <code>ViewModelBase.BindToView</code> does is seek out event handlers to bind to on the supplied View (which can be any Controller object):
  
-{% highlight csharp %}
-ArrayList allControls = AllControlsDescendingFrom(View);
+<pre><code class="csharp">ArrayList allControls = AllControlsDescendingFrom(View);
 foreach ( MethodInfo handler in EventHandlers() )
 {
     FindEventToListenTo(allControls, handler);
-}
-{% endhighlight %}
+}</code></pre>
 
 <code>AllControlsDescendingFrom</code> recursively looks through all the controls rooted at the View and returns them as a flat list. <code>EventHandlers</code> uses reflection to locate public methods on the ViewModel that have event-like signatures:
-{% highlight csharp %}
-private IEnumerable EventHandlers()
+<pre><code class="csharp">private IEnumerable EventHandlers()
 {
     ArrayList eventHandlers = new ArrayList();
     foreach ( MethodInfo method in this.GetType().GetMethods(BindingFlags.Instance | BindingFlags.Public) )
@@ -86,17 +81,13 @@ private bool isEventHandler(MethodInfo info)
          parameters.Length == 2 &&
          parameters[0].ParameterType == typeof(object) &&
          (typeof(EventArgs)).IsAssignableFrom(parameters[1].ParameterType));
-}
-{% endhighlight %}
+}</code></pre>
 Note the last line. I'd originally just checked that the second parameter <em>was of type <code>EventArgs</code></em>. This worked for many event types, like the Click event on a Button and the SelectedIndexChanged event on a ListBox, but failed to match others, such as a TextBox's KeyPress event:
-{% highlight csharp %}
-public delegate void KeyPressEventHandler(object sender, KeyPressEventArgs e)
-{% endhighlight %}
+<pre><code class="csharp">public delegate void KeyPressEventHandler(object sender, KeyPressEventArgs e)</code></pre>
 
 <code>FindEventToListenTo</code> looks through the allControls list. If there's a control with name <em>Controlname</em> and an event <em>Eventname</em>, it will bind to a handler named <em>ControlnameEventname</em>. For example method SearchClick would be hooked up to the Click event on a control called Search.
 
-{% highlight csharp linenos=table %}
-private void FindEventToListenTo(ArrayList allControls, MethodInfo handler)
+<pre><code class="csharp linenos=table">private void FindEventToListenTo(ArrayList allControls, MethodInfo handler)
 {
     foreach ( Control control in allControls )
     {
@@ -126,22 +117,19 @@ private bool ListenToEvent(Control control, MethodInfo method)
                     Delegate.CreateDelegate(eventInfo.EventHandlerType, this, method.Name)
                   });
     return true;
-}
-{% endhighlight %}
+}</code></pre>
 
 This is pretty straightforward, with two exceptions. Creating the delegate to wrap the ViewModel method was a little tricky&mdash;I had to reference the specific <code>EventHandlerType</code> that matched the event. Similarly to the EventArgs problem above, I'd originally tried to create an  <code>EventHandler</code>, which failed for certain events.
 
 The last piece is the <code>ControlAttributeName</code> method, which builds the desired attribute (in this case an event) name from a control and the ViewModel member that we want to bind to. The method assumes that the name of the ViewModel member (the handler) will start with the name of the control. If there's a match, it returns the rest of the member name. Otherwise, null. 
 The name comparison ignores case, which wasn't necessary to hook up method handlers, but proved to be useful when wiring up properties.
-{% highlight csharp %}
-private string ControlAttributeName(Control control, MemberInfo viewModelMember)
+<pre><code class="csharp">private string ControlAttributeName(Control control, MemberInfo viewModelMember)
 {
     if ( viewModelMember.Name.ToLower().StartsWith(control.Name.ToLower()) )
     {
         return viewModelMember.Name.Substring(control.Name.Length);
     }
     return null;
-}
-{% endhighlight %}
+}</code></pre>
 <h2>What's next?</h2>
 After wiring the event handlers, the ViewModelBase binds to the View's interesting properties. <a href="{{ site.url }}{% post_url 2010-11-10-growing-an-mvvm-framework-in-2003-part-ii-properties %}">Details to follow</a>.

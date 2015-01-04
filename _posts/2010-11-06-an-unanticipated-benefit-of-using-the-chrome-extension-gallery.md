@@ -34,12 +34,12 @@ Last night a new benefit reached out and figuratively grabbed me by the lapels a
 > 
 > In earlier versions of Chrome, the following syntax was supported:
 > 
-> {% highlight html %}<script src="example.js">{% endhighlight %}
+> <pre><code class="html">&lt;script src="example.js"&gt;</code></pre>
 >
->In current versions, this is no longer legal and must be changed to:
-> {% highlight html %}<script src="example.js"></script>{% endhighlight %}
+> In current versions, this is no longer legal and must be changed to:
+> <pre><code class="html">&lt;script src="example.js"&gt;&lt;/script&gt;</code></pre>
 > All you have to do is replace any instances of this pattern in your
-extension and re-upload, and it should work again.
+> extension and re-upload, and it should work again.
 > 
 > We try very hard to avoid ever making breaking changes to the
 > extension system, but in this case we did not notice it until the

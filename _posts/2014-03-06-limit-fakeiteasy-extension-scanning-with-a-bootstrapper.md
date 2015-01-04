@@ -39,17 +39,15 @@ the working directory. This behaviour can be changed by including in
 the AppDomain a class that implements `FakeItEasy.IBootstrapper`. As I
 write, this is the only behaviour that the bootstrapper controls:
 
-{% highlight csharp %}
-/// <summary>
+<pre><code class="csharp">/// &lt;summary&gt;
 /// Provides a list of assembly file names to scan for extension points, such as
-/// <see cref="IDummyDefinition"/>s, <see cref="IArgumentValueFormatter"/>s, and 
-/// <see cref="IFakeConfigurator"/>s.
-/// </summary>
-/// <returns>
+/// &lt;see cref="IDummyDefinition"/&gt;s, &lt;see cref="IArgumentValueFormatter"/&gt;s, and 
+/// &lt;see cref="IFakeConfigurator"/&gt;s.
+/// &lt;/summary&gt;
+/// &lt;returns&gt;
 /// A list of absolute paths pointing to assemblies to scan for extension points.
-/// </returns>
-IEnumerable<string> GetAssemblyFileNamesToScanForExtensions();
-{% endhighlight %}
+/// &lt;/returns&gt;
+IEnumerable&lt;string&gt; GetAssemblyFileNamesToScanForExtensions();&lt;/code&gt;&lt;/pre&gt;
 
 The best way to implement the interface is to **extend
 `FakeItEasy.DefaultBootstrapper`**. This class defines the default
@@ -63,15 +61,13 @@ extensions that are defined will already be loaded in the current
 AppDomain, so the most common customization will be to disable
 external assembly scanning, like so:
 
-{% highlight csharp %}
-public class NoExternalScanningBootstrapper : FakeItEasy.DefaultBootstrapper
+&lt;pre&gt;&lt;code class="csharp"&gt;public class NoExternalScanningBootstrapper : FakeItEasy.DefaultBootstrapper
 {
-    public override IEnumerable<string> GetAssemblyFilenamesToScanForExtensions()
+    public override IEnumerable&lt;string&gt; GetAssemblyFilenamesToScanForExtensions()
     {
-        return Enumerable.Empty<string>();
+        return Enumerable.Empty&lt;string&gt;();
     }
-}
-{% endhighlight %}
+}</code></pre>
 
 Of course, if there _were_ extensions defined in an external assembly
 file or two, the `GetAssemblyFilenamesToScanForExtensions`

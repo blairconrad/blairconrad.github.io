@@ -12,13 +12,12 @@ tags:
 <p>I recently converted the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. </p> 
 <p><a href="{{ site.image_dir }}/working_ajax.png"><img title="AJAX LibraryHippo" height="191" width="244" alt="AJAX LibraryHippo" src="{{ site.image_dir }}/working_ajax_thumb.png" align="right" border="0" /></a>When using Firefox or Chrome, as soon as the page loaded, the user would see a list of cards that LibraryHippo was checking, complete with <a href="http://en.wikipedia.org/wiki/Throbber">throbbers</a>. As results came in, the matching progress line would disappear and other tables would fill in, holding the results – books that have to go back, holds ready for pickup, etc. I don't mind admitting that I was a little proud of my first foray into AJAXy web programming.</p> 
 <p>The morning after I finished the update, a co-worker signed up. Unlike everyone else I knew, she used Internet Explorer. She hit the summary page and everything stalled. The progress list was populated, the throbbers were throbbing, and… that’s it. They just kept going. Oh, and a little indicator woke up in the status bar, saying that there was an error on the page: “<strong>Object doesn’t support this property or method</strong>”. The reported line numbers didn’t match my source file, but via judicious application of <code>alerts()</code>s, I was able to isolate the problem to a callback that’s executed on a successful card check to update a span that holds a row count:</p>
-{% highlight javascript linenos=table %}
-function refresh_table_count(table_selector)
+<pre><code class="javascript">function refresh_table_count(table_selector)
 {  
     count = $(table_selector + ' tbody tr').length;
     $(table_selector + ' thead #count').html(count);
 }
-{% endhighlight %}
+</code></pre>
 
 <p>That seemed pretty innocuous, and not dissimilar from code that I had elsewhere in the <code>&lt;script&gt;</code> block. Quick web searches revealed nothing, so I resorted to cutting and renaming bits until I could see what was going on. I was down to an HTML body with a single table definition, and the function above. The error persisted. Suspicious, I renamed the <code>count</code> variable to <code>c</code>, and the problem disappeared.</p>
 
@@ -35,15 +34,14 @@ function refresh_table_count(table_selector)
 
   <li>use more specific <code>id</code> attribute values (probably a good idea in any case) </li>
 
-  <li>use the <a href="http://www.w3schools.com/js/js_variables.asp"><code>var</code> statement to</a> declare all variables – this is safest and probably the easiest to remember:</li>
+  <li><a href="http://www.w3schools.com/js/js_variables.asp">use the <code>var</code> statement to declare all variables</a> – this is safest and probably the easiest to remember:</li>
 </ol>
 
-{% highlight javascript linenos=table %}
-function refresh_table_count(table_selector)
+<pre><code class="javascript">function refresh_table_count(table_selector)
 {
     var count = $(table_selector + ' tbody tr').length;
     $(table_selector + ' thead #count').html(count);
 }
-{% endhighlight %}
+</code></pre>
 
 <p>Now everything is working on the new page, and I've every confidence that <code>var</code> will help keep it so.

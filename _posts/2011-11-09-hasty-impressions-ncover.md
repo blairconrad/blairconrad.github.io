@@ -32,9 +32,7 @@ Oh. There's one more feature that I found - once you are examining a coverage re
 <h2>Command Line Execution</h2>
 The command line offers many and varied options for configuring the coverage run. Here's a sample invocation:
 
-{% highlight bat %}
-NCover.Console.exe //exclude-assemblies BookFinder.Tests //xml ..\..\coverage.nccover nunit-console.exe bin\debug\BookFinder.Tests.dll
-{% endhighlight bat %}
+<pre><code class="bat">NCover.Console.exe //exclude-assemblies BookFinder.Tests //xml ..\..\coverage.nccover nunit-console.exe bin\debug\BookFinder.Tests.dll</code></pre>
 
 Upon execution, NCover tells me this:
 
@@ -55,9 +53,7 @@ The GUI runner looks just like a GUI wrapper on top of the command line options 
 Reports are generated either from the GUI runner or by using the NCover.Reporting executable, which has a plethora of options for choosing XML or HTML reports of various flavours.
 XML reports contain all the information you might want to summarize for inclusion in build output, but they're <b>hard to understand</b>. Witness:
 
-{% highlight xml %}
-<stats acp="95" afp="80" abp="95" acc="20" ccavg="1.5" ccmax="5" ex="0" ei="1" ubp="12" ul="40" um="10" usp="39" vbp="63" vl="89" vsp="105" mvc="18" vc="2" vm="22" svc="120">
-{% endhighlight xml %}
+<pre><code class="xml">&lt;stats acp="95" afp="80" abp="95" acc="20" ccavg="1.5" ccmax="5" ex="0" ei="1" ubp="12" ul="40" um="10" usp="39" vbp="63" vl="89" vsp="105" mvc="18" vc="2" vm="22" svc="120"&gt;</code></pre>
 
 If you stare at this long enough (and correlate with a matching HTML report), you figure out that this means that there are
 <ul>
@@ -73,9 +69,7 @@ My Support Guy explained that you can xcopy deploy NCover using the <code>//reg<
 <h2>Mature Isolator Support</h2>
 From Visual Studio, under the Typemock menu, configure Typemock Isolator to Link with NCover&nsbsp;3.0.
 When using the <code>TypeMockStart</code> MSBuild task, use
-{% highlight xml %}
-<TypeMockStart Link="NCover3.0" ProfilerLaunchedFirst="true">
-{% endhighlight xml %}
+<pre><code class="xml">&lt;TypeMockStart Link="NCover3.0" ProfilerLaunchedFirst="true"&gt;</code></pre>
 and it <b>just works</b>, assuming you have TypeMock Isolator installed or <a href="/2010/06/06/auto-deploying-typemock-isolator-without-trashing-the-installation/">set to auto-deploy</a>.
 <h2>IIS</h2>
 IIS coverage is available, simply by selecting it from the <b>GUI runner options or from the command line</b> using the <code>//iis</code> switch. Other Windows Services can be covered in the same manner. Note though, that these features are only available in the Complete flavour of NCover 3.0.

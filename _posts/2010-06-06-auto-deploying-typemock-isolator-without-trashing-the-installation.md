@@ -22,23 +22,21 @@ In fact, the whole exercise of moving up to  2010 would've been over in almost n
 </ul>
 <p>We'd had a home-grown auto-deploy solution working with Isolator 3, but it was a little clunky and some of the details of the Isolator install had changed, so it wasn't really up to auto-deploying 6. Fortunately, I found a <a href="http://blog.typemock.com/2010/01/auto-deploy-typemock-isolator_25.html">Typemock Insider blog post about auto-deploying</a>.</p>
 <p>We use <a href="http://ant.apache.org/">Apache Ant</a> for our builds, but it was no trouble to shell out to an <a href="http://msdn.microsoft.com/en-us/library/0k6kkbsd.aspx">MSBuild</a> task to auto-deploy Isolator:</p>
-{% highlight xml %}
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <TypeMockLocation>path\to\TypeMock\Isolator\files</TypeMockLocation>
-    <NUNIT>path\to\nunit-console.exe</NUNIT>
-  </PropertyGroup>  
+<pre><code class="xml">&lt;Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TypeMockLocation&gt;path\to\TypeMock\Isolator\files&lt;/TypeMockLocation&gt;
+    &lt;NUNIT&gt;path\to\nunit-console.exe&lt;/NUNIT&gt;
+  &lt;/PropertyGroup&gt;  
 
-  <Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/>
+  &lt;Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/&gt;
 
-  <Target Name="RegisterTypeMock">
-    <TypeMockRegister Company="MyCompany" License="XXX-XXX" AutoDeploy="true"/> 
-    <TypeMockStart/>
-    <Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)"/>
-    <TypeMockStop Undeploy="true"/>
-  </Target>
- </Project>
-{% endhighlight %}
+  &lt;Target Name="RegisterTypeMock"&gt;
+    &lt;TypeMockRegister Company="MyCompany" License="XXX-XXX" AutoDeploy="true"/&gt; 
+    &lt;TypeMockStart/&gt;
+    &lt;Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)"/&gt;
+    &lt;TypeMockStop Undeploy="true"/&gt;
+  &lt;/Target&gt;
+ &lt;/Project></code></pre>
 
 <h4>Build Server Licenses</h4>
 <p>This worked really well - I was testing the tests on my local machine, watching Isolator auto-deploy and auto-undeploy. Everything was great, until I realized: we have two licenses&mdash;one for developers, and one for build servers. It only seemed right to use the appropriate one depending on whether we were building on a developer's machine or a build server. Fortunately, all our build servers set a specific environment variable, so it was a simple matter to have MSBuild pick the correct one.</p>
@@ -50,16 +48,15 @@ In fact, the whole exercise of moving up to  2010 would've been over in almost n
 
 <h4>Putting it all Together</h4>
 <p>Here's the MSBuild file I ended up with. It uses the correct license based on machine type, and only auto-deploys/undeploys when Isolator isn't installed - existing installations are left alone.</p>
-{% highlight xml %}
-<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <PropertyGroup>
-    <TypeMockLocation>path\to\TypeMock\Isolator\files</TypeMockLocation>
-    <NUNIT>path\to\nunit-console.exe</NUNIT>
+<pre><code class="xml">&lt;Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003"&gt;
+  &lt;PropertyGroup&gt;
+    &lt;TypeMockLocation&gt;path\to\TypeMock\Isolator\files&lt;/TypeMockLocation&gt;
+    &lt;NUNIT&gt;path\to\nunit-console.exe&lt;/NUNIT&gt;
 
-    <!-- Used to detect TypeMock installs. -->
-    <UsualTypeMockInstallDir>$(ProgramFiles)\TypeMock\Isolator\6.0</UsualTypeMockInstallDir>
+    &lt;!-- Used to detect TypeMock installs. --&gt;
+    &lt;UsualTypeMockInstallDir&gt;$(ProgramFiles)\TypeMock\Isolator\6.0&lt;/UsualTypeMockInstallDir&gt;
 
-    <!-- 
+    &lt;!-- 
          Only deploy Typemock if it's not already in the usual install dir.
 
          If developers install Typemock, they should install it in the
@@ -67,19 +64,18 @@ In fact, the whole exercise of moving up to  2010 would've been over in almost n
          whether or not we need to auto-deploy (since auto-deploy and
          undeploy can corrupt the TypeMock VisusalStudio Add-In, and
          interfere with the ability to run programs in the IDE.
-      -->
-    <DeployTypeMock>false</DeployTypeMock>
-    <DeployTypeMock Condition="!Exists('$(UsualTypeMockInstallDir)')">true</DeployTypeMock>
+      --&gt;
+    &lt;DeployTypeMock&gt;false&lt;/DeployTypeMock&gt;
+    &lt;DeployTypeMock Condition="!Exists('$(UsualTypeMockInstallDir)')"&gt;true&lt;/DeployTypeMock&gt;
 
-    <License>XXX-XXX</License>
-    <License Condition="'$(BuildServer)' != ''">YYY-YYY</License>
-  </PropertyGroup>
-  <Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/>
-  <Target Name="RegisterTypeMock">
-    <TypeMockRegister Company="MyCompany" License="$(License)" AutoDeploy="$(DeployTypeMock)"/> 
-    <TypeMockStart/>
-    <Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)" />
-    <TypeMockStop Undeploy="$(DeployTypeMock)"/>
-  </Target>
-</Project>
-{% endhighlight %}
+    &lt;License&gt;XXX-XXX&lt;/License&gt;
+    &lt;License Condition="'$(BuildServer)' != ''"&gt;YYY-YYY&lt;/License&gt;
+  &lt;/PropertyGroup&gt;
+  &lt;Import Project="$(TypeMockLocation)\TypeMock.MSBuild.Tasks"/&gt;
+  &lt;Target Name="RegisterTypeMock"&gt;
+    &lt;TypeMockRegister Company="MyCompany" License="$(License)" AutoDeploy="$(DeployTypeMock)"/&gt; 
+    &lt;TypeMockStart/&gt;
+    &lt;Exec ContinueOnError="false" Command="$(NUNIT) $(TestAssembly)" /&gt;
+    &lt;TypeMockStop Undeploy="$(DeployTypeMock)"/&gt;
+  &lt;/Target&gt;
+&lt;/Project&gt;</code></pre>

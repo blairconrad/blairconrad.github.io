@@ -84,8 +84,7 @@ The structure that was being pickled (`CardStatus`) was quite
 flat. Here are the involved classes' definitions. Unless noted
 otherwise, everything is a string or datetime:
 
-{% highlight python %}
-class CardStatus:
+<pre><code class="python">class CardStatus:
     def __init__(self, card, items=None, holds=None):
 
         self.library_name = card.library.name
@@ -118,8 +117,7 @@ class Item(Thing):
     def __init__(self, library, card):
         Thing.__init__(self, library, card)
 
-        self.items_url = ''
-{% endhighlight %}
+        self.items_url = ''</code></pre>
 
 So, one level for the `CardStatus`, one for `Thing`, one for `Hold`
 (or `Item`), one for a list, and one for the `status_notes` strings in
@@ -172,8 +170,7 @@ normal pickling things, but that also, for every object pickled,
 logged the stack depth, the object type, and its representation:
 
 
-{% highlight python %}
-import pickle
+<pre><code class="python">import pickle
 import logging
 import traceback
 
@@ -182,8 +179,7 @@ class SpyingPickler(pickle.Pickler, object):
         logging.info("depth: %d, obj_type: %s, obj: %s",
                      len(traceback.extract_stack()),
                      type(obj), repr(obj))
-        super(SpyingPickler, self).save(obj)
-{% endhighlight %}
+        super(SpyingPickler, self).save(obj)</code></pre>
 
 I ran this, and got reams of data. Scads and scads and scads, including what looked like to be large HTML documents. So I took out the `repr(obj)` and repeated. This was more manageable.
 
