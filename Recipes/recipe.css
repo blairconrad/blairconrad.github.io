@@ -1,0 +1,61 @@
+body { 
+  font-size: 12pt;
+  font-family: verdana;
+  background: white;
+}
+
+h1 {
+  font-size: 150%;
+}
+
+.variation h2 {
+  font-size: 100%;
+}
+
+a {
+  text-decoration: none;
+}
+
+a:hover {
+  color: blue;
+}
+
+table.recipe {
+  margin-left: 1em;
+  margin-right: auto;
+  border-left: 1px solid black;
+  border-bottom: 1px solid black;
+  padding: 0px 0px 0px 0px;
+
+  border-collapse:separate;
+  border-spacing:0px;
+}
+
+th, td {
+  border-right:1px solid black;
+  border-top:1px solid black;
+  padding: 2px 2px 2px 2px;
+}
+
+.altgroup {
+  background-color: #F8F8F8;
+}
+
+td.righthide {
+  border-right: hidden;
+}
+
+td.tophide {
+  border-top: hidden;
+}
+
+td.vertical{
+  text-align:center;
+  layout-flow: vertical-ideographic;
+  vertical-align: middle;
+}
+
+.confession {
+  text-align:center;
+}
+

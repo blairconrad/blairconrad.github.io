@@ -5,7 +5,7 @@ permalink: /about/
 ---
 
 <img src="../images/author-image.png" style="height:96px;width:96px;float:right">When away from a computer, I like
-books, food, volleyball, and games.
+books, <a href="../Recipes">food</a>, volleyball, and games.
 
 When at a computer, I'm a software developer at [Agfa
 Healthcare](http://www.agfahealthcare.com/usa/en/main/), the author of
