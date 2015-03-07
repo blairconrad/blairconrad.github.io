@@ -55,6 +55,10 @@ td.vertical{
   vertical-align: middle;
 }
 
+.center{
+  text-align: center;
+}
+
 .confession {
   text-align:center;
 }
