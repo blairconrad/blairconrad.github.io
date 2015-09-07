@@ -1,18 +1,17 @@
 ---
 layout: default
 ---
-{% if paginator.previous_page_path %}
-<nav><a href="{{ paginator.previous_page_path }}">newer posts</a></nav>
-{% endif %}
-{% for post in paginator.posts %}
+<div class="post-list">
+{% for post in site.posts limit:10 %}
 <article>
   <header>
     <h1><a class="title" href="{{ post.url }}">{{ post.title }}</a></h1>
     {% include post-meta.html %}
   </header>
-    {{ post.content | markdownify }}
+  {% if post.summary %}{{ post.summary | markdownify }}{% else %}{{ post.content | strip_html | truncatewords: 50 }}{% endif %}
+  (<a href="{{ post.url }}">read more</a>)
 </article>
 {% endfor %}
-{% if paginator.next_page_path %}
-<nav><a href="{{ paginator.next_page_path }}">older posts</a></nav>
-{% endif %}
+</div>
+<a href="archive">All posts</a>
+

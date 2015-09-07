@@ -1,7 +1,8 @@
 ---
 layout: nill
 link_color: Firebrick
-default_background_color: "#F8F8F8"
+default_background_color: "white"
+alternate_background_color: "#F8F8F8"
 default_border: "1px solid #AAAAAA"
 ---
 .content {
@@ -74,8 +75,11 @@ a {
 article {
     background-color: white;
     margin-bottom: 1em;
-    padding: 1em;
-    border: {{ page.default_border }};
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0em;
+    padding-right: 0em;
+    border: none; /*{{ page.default_border }}; */
 }
 
 div.post-meta {
@@ -85,7 +89,7 @@ div.post-meta {
 
 /* blockquote styling from http://css-tricks.com/snippets/css/simple-and-nice-blockquote-styling/ */
 blockquote {
-  background-color: {{ page.default_background_color }};
+  background-color: {{ page.alternate_background_color }};
   margin: 1.5em 10px;
   padding: 0.5em 10px;
   quotes: "\201C""\201D""\2018""\2019";
@@ -128,8 +132,7 @@ figure img {
 }
 
 pre {
-    background: {{ page.default_background_color }};
-    border: {{ page.default_border }}; 
+    background: {{ page.alternate_background_color }};
     overflow-x: auto;
     overflow-y: hidden;
     white-space: pre;
@@ -144,7 +147,7 @@ pre {
     margin-left:2em;
     margin-right:2em;
     border:{{ page.default_border }};
-    background-color: {{ page.default_background_color }};
+    background-color: {{ page.alternate_background_color }};
 }
 
 table {
@@ -152,7 +155,7 @@ table {
 }
 
 th {
-    background-color: {{ page.default_background_color }};
+    background-color: {{ page.alternate_background_color }};
 }
 
 td, th
@@ -162,6 +165,20 @@ td, th
 
 .grid th, .grid td {
     border: {{ page.default_border }};
+}
+
+ul.archive {
+    list-style-type: none;
+}
+
+ul.archive li {
+    list-style-type: none;
+    margin-bottom: 1em;
+}
+
+ul.archive li .post-meta a {
+    /* color: rgb(20%, 20%, 20%); */
+    font-weight: normal;
 }
 
 @media screen and (min-width: 40.5em) {
@@ -186,10 +203,15 @@ td, th
     }
 
     article {
-        padding-left: 3em;
-        padding-right: 3em;
         padding-top: 2em;
         padding-bottom: 2em;
-        margin-bottom: 4em;
     }
+
+    .post-list article {
+        margin-bottom: 0em;
+        padding-top: 1em;
+        padding-bottom: 1em;
+    }
+
+
 }
