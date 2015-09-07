@@ -15,9 +15,12 @@ permalink: /archive/
 </ul>
         {% endif %}
 <h2 id = "{{ year }}">{{ year }}</h2>
-<ul>
+<ul class="archive">
     {% endif %}
-  <li>{{ post.date | date: "%Y-%m-%d" }} <a href="{{ post.url }}">{{ post.title }}</a> </li>
+  <li>
+    <div><a href="{{ post.url }}">{{ post.title }}</a></div>
+    <div class="post-meta">{{ post.date | date: "%Y-%m-%d" }} in {% for tag in post.tags %} <a href="/tags/#{{ tag }}-ref">{{ tag }}{% unless forloop.last %}, {% endunless %}</a>{% endfor %}</div>
+  </li>
 {% endfor %}
 
 <!--

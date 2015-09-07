@@ -23,6 +23,6 @@ Framework _par excellence_.
 
 # Colophon
 
-* This site is generated using [Jekyll](http://jekyllrb.com/), and hosted on [GitHub Pages](http://pages.github.com). Site design nearly stolen from [TheCodeJunkie](http://thecodejunkie.com/).
+* This site is generated using [Jekyll](http://jekyllrb.com/), and hosted on [GitHub Pages](http://pages.github.com).
 * Social icons from  [Simple Icons](http://simpleicons.org/).
 
