@@ -24,8 +24,7 @@ In parts 1 and 3 (and 2, but I like part 3 better) I showed a tiny "framework" f
 
 <h2>Event handlers just work. Almost</h2>
 Recall that event handlers are defined on the ViewModel as plain old methods that happen to take a specific set of arguments&mdash;usually <code>object</code> and something that derives from <code>EventArgs</code>. This means that nothing special has to be done in order to exercise the methods during a unit test. The test doesn't have to trick the ViewModel into registering with an event or anything. The test just calls the method. And if the method doesn't care much about its arguments like <code>FindClick</code> doesn't, you can pass in nonsense:
-{% highlight csharp %}
-public class BookListViewModel
+<pre><code class="csharp">public class BookListViewModel
 {
     public void FindClick(object sender, EventArgs e)
     {
@@ -47,8 +46,7 @@ public class BookListViewModelTests
     {
         vm.FindClick(null, null);
     }
-}
-{% endhighlight %}
+}</code></pre>
 
 Of course, this isn't much of a test. Usually we'll want to set up some initial state for the ViewModel, and verify that the correct actions have been taken. In fact, as things stand, the property fields will all be null, so <code>TitleText.Value</code> and <code>BookListItems.Value</code> will error out.
 
@@ -58,8 +56,7 @@ Most event handlers will need to access the properties on the ViewModel, so the 
 <h3>Provide stub properties</h3>
 Last time I mentioned that the <code>PropertyStorageStrategy</code> would bring value. This is it. Recall the definitions of the ListProperty and the PropertyStorageStrategy:
 
-{% highlight csharp %}
-public class ListProperty: Property
+<pre><code class="csharp">public class ListProperty: Property
 {
     public ListProperty(PropertyStorageStrategy storage): base(storage)
     {}
@@ -75,13 +72,11 @@ public class ListProperty: Property
  {
      object Get();
      void Set(object value);
- }
-{% endhighlight %}
+ }</code></pre>
 
 The ListProperty (and BoolProperty and StringProperty) merely consult a PropertyStorageStrategy to obtain a value and they cast it to the correct type. Providing a dumb strategy that, instead of proxying a property on a View control, just holds a field will produce a property that can be used in tests:
 
-{% highlight csharp %}
-public class ValuePropertyStrategy: PropertyStorageStrategy 
+<pre><code class="csharp">public class ValuePropertyStrategy: PropertyStorageStrategy 
 {
       private object obj;
 
@@ -92,32 +87,27 @@ public class ValuePropertyStrategy: PropertyStorageStrategy
 
       public void Set(object value) { obj = value; }
       public object Get() { return obj; }
-}
-{% endhighlight %}
+}</code></pre>
 
 Then the test fixture setup can bind properties to the ViewModel:
-{% highlight csharp %}
-[SetUp]
+<pre><code class="csharp">[SetUp]
 public void SetUp()
 {
     vm = new BookListViewModel(new Control(), new FakeBookDepository());
     vm.TitleText = new StringProperty(new ValuePropertyStrategy(""));
     vm.BookListItems = new ListProperty(new ValuePropertyStrategy(new ArrayList()));
     ...
-}
-{% endhighlight %}
+}</code></pre>
 
 And tests can be constructed to provide initial property values (if the default isn't good enough) and interrogate them afterward.
-{% highlight csharp %}
-[Test]
+<pre><code class="csharp">[Test]
 public void FindClick_WithTitleG_FindsEndersGame()
 {
     vm.TitleText.Value = "G";
     vm.FindClick(null, null);
 
     Assert.IsTrue(vm.BookListItems.Value.Contains("Ender's Game"));
-}
-{% endhighlight %}
+}</code></pre>
 
 <h3>Auto-wiring the properties</h3>
 
@@ -126,8 +116,7 @@ Also, I'm against <i>anything</i> that adds a barrier to writing tests. And havi
 
 So, let's write a little code to handle the tedium for us.
 
-{% highlight csharp %}
-public class ValuePropertyBinder
+<pre><code class="csharp">public class ValuePropertyBinder
 {
       public static void Bind(ViewModelBase viewModel)
       {
@@ -153,20 +142,17 @@ public class ValuePropertyBinder
               throw new NotImplementedException("no known starting value for type " + propertyType);
          }
       }
-}
-{% endhighlight %}
+}</code></pre>
 
 This is very similar to the wiring we've seen before&mdash;find property fields, construct an object to implement the property, and hook it up. The only thing likely to need attention in the future is <code>MakeStartingValue</code>. A new property type(like DateTime), will require an expansion to the <code>if</code> chain. But that should be very infrequent.
 
 Now it's much easier to use the ViewModel in tests:
-{% highlight csharp %}
-[SetUp]
+<pre><code class="csharp">[SetUp]
 public void SetUp()
 {
    vm = new BookListViewModel(new Control(), new FakeBookDepository());
    ValuePropertyBinder.Bind(vm);
-}
-{% endhighlight %}
+}</code></pre>
 
 <h3>An alternative: brute force and ignorance</h3>
 This approach didn't occur to me until the project was over. Sigh.

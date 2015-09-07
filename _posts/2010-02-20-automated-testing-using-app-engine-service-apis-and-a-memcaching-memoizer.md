@@ -19,8 +19,7 @@ I'm a fan of Test-driven development, and automated testing in general. As such,
 
  
 
-{% highlight python %}
-class Card(db.Model):
+<pre><code class="python">class Card(db.Model):
     family = db.ReferenceProperty(Family)
     number = db.StringProperty()
     name = db.StringProperty()
@@ -29,41 +28,38 @@ class Card(db.Model):
 
     def pin_is_valid(self):
         return self.pin != ''
-{% endhighlight %}
+</code></pre>
 
 Unfortunately, testing this class isn't as straightforward as one would hope. Suppose I have this test file:
 
 
 
-{% highlight python %}
-from card import Card
+<pre><code class="python">from card import Card
 
 def test_card_blank_pin_is_invalid():
     c = Card()
     c.pin = ''
     assert not c.pin_is_valid()
-{% endhighlight %}
+</code></pre>
 
 It fails miserably, spewing out a string of import errors. Here's the tidied-up stack: 
 
 
 
-{% highlight python %}
->  from card import Card
+<pre><code class="python">>  from card import Card
 >  from google.appengine.ext import db
 >  from google.appengine.api import datastore
 >  from google.appengine.datastore import datastore_index
 >  from google.appengine.api import validation
 >  import yaml
 E ImportError: No module named yaml
-{% endhighlight %}
+</code></pre>
 
 Not so good. Fortunately, it’s not that hard to find out what needs to be done in order to make the imports work:
 
 
 
-{% highlight python %}
-import sys
+<pre><code class="python">import sys
 import dev_appserver
 sys.path = dev_appserver.EXTRA_PATHS + sys.path 
 
@@ -73,7 +69,7 @@ def test_card_blank_pin_is_invalid():
     c = Card()
     c.pin = ''
     assert not c.pin_is_valid()
-{% endhighlight %}
+</code></pre>
 
 Now Python can find all the imports it needs. For a while this was good enough, since I wasn’t testing any code that hit the datastore or actually used any of the app Engine Service APIs.
 
@@ -85,8 +81,7 @@ However, I recently found a need to use <a href="http://code.google.com/appengin
 
 
 
-{% highlight python %}
-import sys
+<pre><code class="python">import sys
 import dev_appserver
 sys.path = dev_appserver.EXTRA_PATHS + sys.path 
 
@@ -104,27 +99,25 @@ def test_memoize_formats_string_key_using_kwargs():
 
     cached_value = memcache.get('hippo rabbit zebra')
     assert 2 == cached_value
-{% endhighlight %}
+</code></pre>
 
 (`gael` is Google App Engine Library – my extension/utility package - as it grows and I gain experience, I may spin it out of LibraryHippo to be its own project.) Again, it failed miserably. Here’s a cleaned-up version of the failure:
 
 
 
-{% highlight python %}
->  result = pop_it(animal='rabbit')
+<pre><code class="python">>  result = pop_it(animal='rabbit')
 >  cached_result = google.appengine.api.memcache.get(key_value)
 >  self._make_sync_call('memcache', 'Get', request, response)
 >  return apiproxy.MakeSyncCall(service, call, request, response)
 >  assert stub, 'No api proxy found for service "%s"' % service
 E AssertionError: No api proxy found for service "memcache";
-{% endhighlight %}
+</code></pre>
 
 This was puzzling. All the imports were in place, so why the failure? This time the answer was a little harder to find, but tenacious searching paid off, and I stumbled on a Google Group post&#160; called <a href="http://groups.google.com/group/google-appengine-python/browse_thread/thread/435b20de9b1e5cc4?fwc=1&pli=1">Unit tests / google apis without running the dev app server</a>. The author had actually done the work to figure out what initialization code had to be run in order to get have the Service APIs work. The solution relied on hard-coded paths to the App Engine imports, but it was obvious how to combine it with the path manipulation I used earlier to produce this:
 
 
 
-{% highlight python %}
-import sys
+<pre><code class="python">import sys
 
 from dev_appserver import EXTRA_PATHS
 sys.path = EXTRA_PATHS + sys.path 
@@ -148,14 +141,13 @@ def test_memoize_formats_string_key_using_kwargs():
 
     cached_value = memcache.get('hippo rabbit zebra')
     assert 2 == cached_value
-{% endhighlight %}
+</code></pre>
 
 There’s an awful lot of boilerplate here, so I tried to clean up the module, moving the App Engine setup into a new module in gael:
 
 
 
-{% highlight python %}
-import sys
+<pre><code class="python">import sys
 
 def add_appsever_import_paths():
     from dev_appserver import EXTRA_PATHS
@@ -167,14 +159,13 @@ def initialize_service_apis():
     from google.appengine.tools.dev_appserver_main import ParseArguments
     args, option_dict = ParseArguments(sys.argv) # Otherwise the option_dict isn't populated.
     dev_appserver.SetupStubs('local', **option_dict)
-{% endhighlight %}
+</code></pre>
 
 Then the top of the test file becomes
 
 
 
-{% highlight python %}
-import gael.testing
+<pre><code class="python">import gael.testing
 gael.testing.add_appsever_import_paths()
 gael.testing.initialize_service_apis()
 
@@ -183,7 +174,7 @@ from gael.memcache import *
 
 def test_memoize_formats_string_key_using_kwargs():
     ...
-{% endhighlight %}
+</code></pre>
 
 <h2>The Decorator</h2>
 
@@ -191,8 +182,7 @@ In case anyone’s curious, here’s the <strong>memoize</strong> decorator I wa
 
 
 
-{% highlight python %}
-def memoize(key, seconds_to_keep=600):
+<pre><code class="python">def memoize(key, seconds_to_keep=600):
     def decorator(func):
         def wrapper(*args, **kwargs):
             if callable(key):
@@ -210,7 +200,7 @@ def memoize(key, seconds_to_keep=600):
             return result
         return wrapper
     return decorator
-{% endhighlight %}
+</code></pre>
 
 <h2>Faking out Memcache - Unit Testing the Decorator</h2>
 
@@ -222,8 +212,7 @@ Still, the unit testing approach would be better, so I looked at my decorator an
 
 
 
-{% highlight python %}
-def memoize(key, seconds_to_keep=600):
+<pre><code class="python">def memoize(key, seconds_to_keep=600):
     class memoize():
         def __init__(self, func):
             self.key = key
@@ -248,14 +237,13 @@ def memoize(key, seconds_to_keep=600):
             return result
 
     return memoize
-{% endhighlight %}
+</code></pre>
 
 Then the test can inject its own caching mechanism to override `self.cache`:
 
 
 
-{% highlight python %}
-class MyCache:
+<pre><code class="python">class MyCache:
     def __init__(self):
         self.cache = {}
 
@@ -278,7 +266,7 @@ def test_memoize_formats_string_key_using_kwargs():
 
     cached_value = cache.get('hippo rabbit zebra')
     assert 2 == cached_value
-{% endhighlight %}
+</code></pre>
 
 And that's it. Now I have a unit-tested implementation of my memoizer and two new helpers in my extension library.
 

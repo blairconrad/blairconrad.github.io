@@ -21,8 +21,7 @@ Briefly deterred, I regrouped and tried a different tack - something I like to c
 </ul>
 
 Next, I needed a way to switch between the frames. I put the image names in an array, initialized an index, and wrote a small function that uses <a href="https://developer.mozilla.org/en/window.setTimeout">window.setTimeout</a> to switch to a new icon every 0.3 seconds.
-{% highlight javascript %}
-var searching_images = ['searching_eyes_down.png',
+<pre><code class="javascript">var searching_images = ['searching_eyes_down.png',
                         'searching_eyes_right.png',
                         'searching_eyes_down.png',
                         'searching_eyes_left.png'];
@@ -38,13 +37,11 @@ function rotateIcon()
       image_index = (image_index + 1) % searching_images.length;
       window.setTimeout(rotateIcon, 300);
    }
-}
-{% endhighlight %}
+}</code></pre>
 
 Then I start the rotation just before hitting the web server to see if the book's available and stop it when a result is found. Flipping the <code>keep_switching_icon</code> flag as soon as the search completes ensures that the animating thread doesn't overwrite a "found" or "not found" icon.
 
-{% highlight javascript %}
-window.setTimeout(rotateIcon, 300);
+<pre><code class="javascript">window.setTimeout(rotateIcon, 300);
    
 var xhr = new XMLHttpRequest();
 xhr.open("GET", searchurl, true);
@@ -60,6 +57,5 @@ xhr.onreadystatechange = function()
        }
       // process found and not found cases
 };
-xhr.send();
-{% endhighlight %}
+xhr.send();</code></pre>
 

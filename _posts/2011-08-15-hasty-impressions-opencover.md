@@ -24,10 +24,8 @@ None that I can find.
 <h2>Command Line Execution</h2>
 Covering an application from the command line is <strong>easy</strong>, and reminiscent of using PartCover the same way. I used this command to see what code my BookFinder unit tests exercised:
 
-{% highlight bat %}
-OpenCover.Console.exe -arch:64 -register target:nunit-console.exe -targetargs:bin\debug\BookFinder.Tests.dll \
-                      -output:..\..\opencover.xml -filter:+[BookFinder.Core]*
-{% endhighlight bat %}
+<pre><code class="bat">OpenCover.Console.exe -arch:64 -register target:nunit-console.exe -targetargs:bin\debug\BookFinder.Tests.dll \
+                      -output:..\..\opencover.xml -filter:+[BookFinder.Core]*</code></pre>
 <!--more-->
 Let's look at that.
 
@@ -45,39 +43,35 @@ There isn't one, but I have to wonder if there won't be. Otherwise, why call the
 OpenCover doesn't generate a human-readable report. Instead, you can postprocess the coverage output. <b><a href="http://www.palmmedia.de/Net/ReportGenerator">ReportGenerator</a> is the recommended tool</b>, and it works like a charm.
 
 
-{% highlight bat %}
-ReportGenerator.exe .\opencover.xml XmlReport Xml
-{% endhighlight bat %}
+<pre><code class="bat">ReportGenerator.exe .\opencover.xml XmlReport Xml</code></pre>
 
 generates an XML report in the `Xml` directory. The summary looks like this:
 
-{% highlight xml %}
-<?xml version="1.0" encoding="utf-8"?>
-<CoverageReport scope="Summary">
-  <Summary>
-    <Generatedon>2011-08-05-2011-08-05</Generatedon>
-    <Parser>OpenCoverParser</Parser>
-    <Assemblies>1</Assemblies>
-    <Files>5</Files>
-    <Coverage>71.6%</Coverage>
-    <Coveredlines>126</Coveredlines>
-    <Coverablelines>176</Coverablelines>
-    <Totallines>495</Totallines>
-  </Summary>
-  <Assemblies>
-    <Assembly name="BookFinder.Core.DLL" coverage="71.6">
-      <Class name="BookFinder.BookDepository" coverage="85.7" />
-      <Class name="BookFinder.BookListViewModel" coverage="50" />
-      <Class name="BookFinder.BoolProperty" coverage="50" />
-      <Class name="BookFinder.BoundPropertyStrategy" coverage="0" />
-      <Class name="BookFinder.ListProperty" coverage="75" />
-      <Class name="BookFinder.Property" coverage="100" />
-      <Class name="BookFinder.StringProperty" coverage="100" />
-      <Class name="BookFinder.ViewModelBase" coverage="81" />
-    </Assembly>
-  </Assemblies>
-</CoverageReport>
-{% endhighlight xml %}
+<pre><code class="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;CoverageReport scope="Summary"&gt;
+  &lt;Summary&gt;
+    &lt;Generatedon&gt;2011-08-05-2011-08-05&lt;/Generatedon&gt;
+    &lt;Parser&gt;OpenCoverParser&lt;/Parser&gt;
+    &lt;Assemblies&gt;1&lt;/Assemblies&gt;
+    &lt;Files&gt;5&lt;/Files&gt;
+    &lt;Coverage&gt;71.6%&lt;/Coverage&gt;
+    &lt;Coveredlines&gt;126&lt;/Coveredlines&gt;
+    &lt;Coverablelines&gt;176&lt;/Coverablelines&gt;
+    &lt;Totallines&gt;495&lt;/Totallines&gt;
+  &lt;/Summary&gt;
+  &lt;Assemblies&gt;
+    &lt;Assembly name="BookFinder.Core.DLL" coverage="71.6"&gt;
+      &lt;Class name="BookFinder.BookDepository" coverage="85.7" /&gt;
+      &lt;Class name="BookFinder.BookListViewModel" coverage="50" /&gt;
+      &lt;Class name="BookFinder.BoolProperty" coverage="50" /&gt;
+      &lt;Class name="BookFinder.BoundPropertyStrategy" coverage="0" /&gt;
+      &lt;Class name="BookFinder.ListProperty" coverage="75" /&gt;
+      &lt;Class name="BookFinder.Property" coverage="100" /&gt;
+      &lt;Class name="BookFinder.StringProperty" coverage="100" /&gt;
+      &lt;Class name="BookFinder.ViewModelBase" coverage="81" /&gt;
+    &lt;/Assembly&gt;
+  &lt;/Assemblies&gt;
+&lt;/CoverageReport&gt;</code></pre>
 
 ReportGenerator also generates Html and LaTeX output, with a "summary" variant for each of the three output types.
 
@@ -92,9 +86,7 @@ I appreciate the coverage count by each of the lines - not as fancy as dotCover'
 <h2>Joining Coverage Runs</h2>
 Perhaps your test are scattered in space or time and you want to get an overview of all the code that's covered by them. OpenCover doesn't really do anything special for you, but <strong>ReportGenerator has your back</strong>. Specify multiple input files on the command line, and the results will be aggregated and added to a comprehensive report:
 
-{% highlight bat %}
-ReportGenerator.exe output1.xml;output2.xml;output3.xml XmlReport Xml
-{% endhighlight bat %}
+<pre><code class="bat">ReportGenerator.exe output1.xml;output2.xml;output3.xml XmlReport Xml</code></pre>
 
 <h2>DIY Auto-Deploy</h2>
 There's no built-in auto-deploy for OpenCover. However, <b>I made my own auto-deployable package</b> like so:
@@ -117,11 +109,9 @@ In less than an hour's work, I could upgrade a project so the build servers and 
 Isoloator and OpenCover don't work together out of the box, but thanks to advice I got from <a href="http://www.hmemcpy.com/blog/">Igal Tabachnik</a>, Typemock employee, it was not hard to change this.
 
 Isolator's supported coverage tools are partly configurable. There is a `typemockconfig.xml` under the Isolator install directory - typically `%ProgramFiles (x86)%\Typemock\Isoloator\6.0` (or `%ProgramFiles%`, I suppose). Mr. Tabachnik had me add
-{% highlight xml %}
-<Profiler Name="OpenCover" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7B8}" DirectLaunch="false">
-  <EnvironmentList />
-</Profiler>
-{% endhighlight xml %}
+<pre><code class="xml">&lt;Profiler Name="OpenCover" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7B8}" DirectLaunch="false"&gt;
+  &lt;EnvironmentList /&gt;
+&lt;/Profiler&gt;</code></pre>
 to the `ProfilerList` element, and everything meshed. His <a href="http://stackoverflow.com/questions/6698290/can-opencover-be-used-with-typemock-isolator">StackOverflow answer</a> provides full details and suggests that official support for OpenCover will be added to Isolator. 
 
 <h2>IIS</h2>

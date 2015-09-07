@@ -7,9 +7,10 @@
     
     <title>{% if page.title %}{{ page.title }} | {% endif %}{{ site.name }}</title>
     
-    <link rel="stylesheet" type="text/css" href="/css/github.css"/>
     <link rel="stylesheet" type="text/css" href="/css/styles.css"/>
     <link rel="stylesheet" type="text/css" href="http://fonts.googleapis.com/css?family=Roboto%20Condensed%7CRoboto%3Anormal%2Cbold%2Citalic%2C500"/>
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/styles/github.min.css">
+
     <link rel="canonical" href="{{ site.url }}{{ page.url | replace:'index.html','' }}"/>
     <link rel="author" href="https://plus.google.com/+{{ site.googleplus_profile }}?rel=author"/>
     <link rel="alternate" type="application/rss+xml" title="RSS feed for {{ site.name }}" href="{{ site.feed_url }}">
@@ -25,6 +26,8 @@
       ga('send', 'pageview');
     </script>
     {% endif %}
+    <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.8.0/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
   </head>
   <body>
     <div class="content">

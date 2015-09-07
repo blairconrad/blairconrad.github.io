@@ -25,8 +25,7 @@ Last time, I introduced a tiny Windows Forms application and described my effort
 
 Today I'll talk about properties. It's all very well to have a click on the "Find" button trigger the FindClick method on the ViewModel, but it's useless unless we know <em>what to look for</em>. I needed a way to pass the <code>Title.Text</code> value to the ViewModel so it could use it for the search.
  Then the FindClick method I showed last time would work:
-{% highlight csharp %}
-public void FindClick(object sender, EventArgs e)
+<pre><code class="csharp">public void FindClick(object sender, EventArgs e)
 {
     ICollection books = bookDepository.Find(TitleText);
     BookListItems.Clear();
@@ -34,8 +33,7 @@ public void FindClick(object sender, EventArgs e)
     {
         BookListItems.Add(book);
     }
-}
-{% endhighlight %}
+}</code></pre>
 
 <h2>A Failed Attempt</h2>
 First I tried using Windows Forms binding, with lamentable results. I wish I'd saved the intermediate steps, as I was probably doing something wrong and could've solicited help. Still, whether it was due to a lack of experience on my part, or a flaw in the system, the bindings just wouldn't work. I could bind bools and strings, but lists were right out. 
@@ -43,8 +41,7 @@ First I tried using Windows Forms binding, with lamentable results. I wish I'd s
 <h2>A Proxy for Properties</h2>
 I decided to rely on the storage objects that came with the View elements. This meant the ViewModel needed some way to proxy the properties on the View. Then a get or a set on the ViewModel object would flow right through, reading or writing the View's values.
 Here's what I came up with:
-{% highlight csharp %}
-public class BoundProperty: Property
+<pre><code class="csharp">public class BoundProperty: Property
 {
     private object obj;
     private PropertyInfo propertyInfo;
@@ -60,17 +57,13 @@ public class BoundProperty: Property
         get { return propertyInfo.GetValue(obj, null); }
         set { propertyInfo.SetValue(obj, value, null); }
     }
-}
-{% endhighlight %}
+}</code></pre>
 Ignore the <code>Property</code> base class for a bit. An instances <code>p</code> of type <code>BoundProperty</code> can be used to get and set values on the proxied object <code>obj</code> like so:
-{% highlight csharp %}
-p.Value = valueA;
-object valueB = p.Value;
-{% endhighlight %}
+<pre><code class="csharp">p.Value = valueA;
+object valueB = p.Value;</code></pre>
 
 Not incredibly thrilling, but one can work with it. Using the <code>.Value</code> in order to access the value was a little cumbersome, so I added a little syntactic sugar in the Property base class:
-{% highlight csharp %}
-public abstract class Property
+<pre><code class="csharp">public abstract class Property
 {
     public abstract object Value { get; set; }
 
@@ -88,32 +81,24 @@ public abstract class Property
     {
          return (IList) Value;
     } 
-}
-{% endhighlight %}
+}</code></pre>
 
 
 I really like the implicit operator functionality, which I'd never used before. I wish it could be used with interfaces, though. There's probably a good reason why it can't, but nothing comes to mind. Anyhow, I had to go another route for IList&mdash;the somewhat uninspiring <code>AsList</code> method. At this point, I was really missing generics.
 
 Still, it's nicer to be able to write
-{% highlight csharp %}
-string myString = p1;
-IList myList = p2.AsList();
-{% endhighlight %}
+<pre><code class="csharp">string myString = p1;
+IList myList = p2.AsList();</code></pre>
 instead of 
-{% highlight csharp %}
-string myString = (string) p1.Value;
-IList myList = (IList) p2.Value;
-{% endhighlight %}
+<pre><code class="csharp">string myString = (string) p1.Value;
+IList myList = (IList) p2.Value;</code></pre>
 
 <h2>Hooking up the Properties</h2>
 This is pretty much the same as hooking up the events like the last time. All we have to do is define a field (yes, a field) of type Property in the ViewModel:
-{% highlight csharp %}
-private Property titleText;
-{% endhighlight %}
+<pre><code class="csharp">private Property titleText;</code></pre>
 
 The ViewModelBase loops over all the Property fields and looks for View controls that have matching property names:
-{% highlight csharp %}
-foreach ( FieldInfo field in PropertyFields() )
+<pre><code class="csharp">foreach ( FieldInfo field in PropertyFields() )
 {
     FindPropertyToBindTo(allControls, field);
 }
@@ -137,18 +122,15 @@ private bool BindFieldToControl(Control control, FieldInfo field)
         field.SetValue(this, new BoundProperty(control, controlProperty));
     }
     return true;
-}
-{% endhighlight %}
+}</code></pre>
 
 Technically that's it, but the rest of the ViewModel's code is a little cleaner if we <a href="http://www.refactoring.com/catalog/selfEncapsulateField.html">self encapsulate the field</a>:
 
-{% highlight csharp %}
-public string TitleText
+<pre><code class="csharp">public string TitleText
 {
     get { return titleText; }
     set { titleText.Value = value; }
-}
-{% endhighlight %}
+}</code></pre>
 
 <h2>Remarks</h2>
 Once the infrastructure was in place, I really started enjoying developing the application. It was very liberating to add a new event handler just by writing a method with the right name and signature. And even adding access to a new property wasn't so bad&mdash;writing the three lines of code to segregate the conversions and <code>.Value</code>s was worth it to keep the event handler bodies nice and clean.

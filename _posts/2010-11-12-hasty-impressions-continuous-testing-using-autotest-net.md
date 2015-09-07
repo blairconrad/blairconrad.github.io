@@ -28,9 +28,7 @@ That's it. Well, for the basic setup.
 <h2>Running the WinForms monitor</h2>
 
 I opened a command prompt to the root of a small project and ran the WinForms monitor, telling it to look for changes in the current directory.
-{% highlight bat %}
-& 'C:\Program Files\AutoTest.Net\AutoTest.WinForms.exe' .
-{% endhighlight %}
+<pre><code class="bat">& 'C:\Program Files\AutoTest.Net\AutoTest.WinForms.exe' .</code></pre>
 
 The application started, presenting me with a rather frightening window
 

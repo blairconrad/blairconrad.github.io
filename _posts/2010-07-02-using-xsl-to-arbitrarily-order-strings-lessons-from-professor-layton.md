@@ -20,12 +20,10 @@ At the Day Job,  I usually work on a middleware component that contains a compon
 The actual report is an HTML page built from XML using an XSL transform - the main health check page queries various subcomponents that provide XML document sections. The sections are gathered and the XSLT sorts the results according to severity.
 
 The XSLT sorts the entries alphabetically by result string, using this XSL:
-{% highlight xml %}
-<xsl:apply-templates select="//Operation">
-    <xsl:sort order="ascending" select="Result" />
-    <xsl:sort order="ascending" select="Test" />
-</xsl:apply-templates>
-{% endhighlight %}
+<pre><code class="xml">&lt;xsl:apply-templates select="//Operation"&gt;
+    &lt;xsl:sort order="ascending" select="Result" /&gt;
+    &lt;xsl:sort order="ascending" select="Test" /&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
 Up 'til now, that worked great, but recently we had a need to add a third status - "Warning". The new report looked like this:
 
 <table border="1" style="border:1px solid black;border-collapse:collapse;">
@@ -72,15 +70,13 @@ The puzzle's fun, but what's the connection with the string ordering? The <a hre
 It's still not clear how to generate a "weight" for the strings. Like in the coin puzzle, we want to sum up a series of values that are mostly the same, but that differ for a single result severity. We're helped by the fact that the <a href="http://www.w3.org/TR/xpath/#function-number">number function</a> converts Boolean <code>true</code> values to 1 and <code>false</code> to 0. If we compare each result severity in the source XML to "Error", "Warning", and "OK" in turn, exactly one of these will give a true (1) response, and the rest will be false (0). 
 
 So, like the coin puzzle, where all weights are the same except for the counterfeits, we have a situation where all comparisons give the same value except for the true one. If we treat the sorting groups&mdash;Error, Warning, and OK&mdash;like the bags of coins, we can see how to rank the results. Multiplying the 0s and 1s by a factor that gives the preferred sort order produces a sum that acts as the perfect sort key:
-{% highlight xml %}
-<xsl:apply-templates select="//Operation">
-    <xsl:sort data-type="number" order="ascending"
+<pre><code class="xml">&lt;xsl:apply-templates select="//Operation"&gt;
+    &lt;xsl:sort data-type="number" order="ascending"
         select="(number(Result='Error') * 1)
               + (number(Result='Warning') * 2)
-              + (number(Result='OK') * 3)" />
-    <xsl:sort order="ascending" select="Result" />
-</xsl:apply-templates>
-{% endhighlight %}
+              + (number(Result='OK') * 3)" /&gt;
+    &lt;xsl:sort order="ascending" select="Result" /&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
 
 <ul>
 <li>a result severity of <b>Error</b> maps to 1 &times; 1 + 0 &times; 2 + 0 &times; 3 = <b>1</b></li>

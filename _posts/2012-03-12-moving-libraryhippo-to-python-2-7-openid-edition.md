@@ -57,8 +57,7 @@ After providing her credentials, the user was redirected to a page that asked he
 <p>This isn't a huge problem - it only affects administrators (me), and I could workaround by visiting a page that required any kind of login first, but it still stuck in my craw.
 Fortunately, the fix is very easy - just handle <code>/_ah/login_required</code>. I ripped off Nick's <code>OpenIdLoginHandler</code>, only instead of offering a choice of providers using <code>users.create_login_url</code>, this one <b>always redirects to Google's OpenId provider</b> page. With this fix, admins are able to go directly from a not-logged-in state to any admin required page.</p>
 
-{% highlight python %}
-class OpenIdLoginHandler(webapp2.RequestHandler):
+<pre><code class="python">class OpenIdLoginHandler(webapp2.RequestHandler):
     def get(self):
         continue_url = self.request.GET.get('continue')
         login_url = users.create_login_url(dest_url=continue_url)
@@ -69,8 +68,7 @@ class OpenIdLoginHandler(webapp2.RequestHandler):
 
 handlers = [ ...
     ('/_ah/login_required$', OpenIdLoginHandler),
-    ... ]
-{% endhighlight python %}
+    ... ]</code></pre>
 
 <h2>Using Other Providers</h2>
 <p>With the above solution, LibraryHippo's authentication system has the same functionality as before - users can login with a Google account. It's time to add support for other OpenID providers.</p>
@@ -82,8 +80,7 @@ handlers = [ ...
 <a href="{{ site.image_dir }}/server_error_myopenid-trimmed.png"><img style="display:block;margin-left:auto;margin-right:auto;" src="{{ site.image_dir }}/server_error_myopenid-trimmed.png?w=300" alt="Error: Server Error  The server encountered an error and could not complete your request. If the problem persists, please report your problem and mention this error message and the query that caused it." title="Server Error logging in with myopenid.com" width="450" height="82" /></a>
 <p>Once MyOpenID had confirmed my identity, and I was redirected back to the LibraryHippo application, App Engine threw a 500 Server Error. There's nothing in the logs - just the horrible error on the screen. In desperation, I stripped down my login handler to the bare minimum, using  <a href="http://code.google.com/appengine/articles/openid.html#ex">the example at <i>Using Federated Authentication via OpenID in Google App Engine</i></a> as my guide. I ended up with this class that reproduces the problem:</p>
 
-{% highlight python %}
-class TryLogin(webapp2.RequestHandler):
+<pre><code class="python">class TryLogin(webapp2.RequestHandler):
     def get(self):
         providers = {
             'Google'   : 'www.google.com/accounts/o8/id',
@@ -110,8 +107,7 @@ handlers = [
     ('/trylogin$', TryLogin),
     ('/_ah/login_required$', OpenIdLoginHandler),
     ...
-]
-{% endhighlight python %}
+]</code></pre>
 
 Interestingly, both <b>Yahoo! and WordPress work, but StackExchange</b> does not. If it weren't for Yahoo!, I'd guess that it's the direct provider federated identities that give App Engine problems (yes, Google is a direct provider, but I consider it to be an exception in any case).
 

@@ -24,19 +24,17 @@ Inspired by <a href="http://kitenet.net/~joey/svnhome/">Joey Hess's <i>keeping y
 
 <h4 id="getting_started">Getting Started</h4>
 Getting started with the profile is almost as easy as running
-{% highlight bat %}
-cd %USERPROFILE%\My Documents
+<pre><code class="bat">cd %USERPROFILE%\My Documents
 svn checkout http://svn.dayjob.com/path/to/PowerShellProfile/trunk WindowsPowerShell
-{% endhighlight %}
+</code></pre>
 
 After this, the user will have a directory inside their My Documents directory that looks something like this:
 
 <img src="{{ site.image_dir }}/powershellprofile2.png" alt="profile directory skeleton" title="PowerShellProfile" width="268" height="408" class="size-full wp-image-225" />
 
 It's not quite usable, though. By default PowerShell doesn't allow scripts to be run, so the new profile will be of no benefit to users. To ease their pain, the profile directory contains a <b>setup_powershell.bat</b> which runs 
-{% highlight bat %}
-powershell -Command "Set-ExecutionPolicy RemoteSigned"
-{% endhighlight %}
+<pre><code class="bat">powershell -Command "Set-ExecutionPolicy RemoteSigned"
+</code></pre>
 After running setup_powershell.bat, all a user has to do is start PowerShell and they will benefit from the new profile.
 
 <h4 id="windowspowershell">Inside the WindowsPowerShell Directory</h4>
@@ -46,8 +44,7 @@ At startup, each of these .ps1 files are each dot-sourced (using the <a href="{{
 Next, the <b>Scripts</b> directory, which is added to the user's <b>$env:PATH</b>. Each of the .ps1 files in the directory contains a standalone script that a user might choose to execute as they work. We have a number of Day&nbsp;Job-specific scripts as well as some Subversion helpers and two meta-scripts, designed to make it easier to work with the PowerShell profile.
 
 Since new users won't be familiar with all the scripts in the profile, and because new scripts might be added at any time, we include a script to provide a quick synopsis of the available scripts: <b>Get-ProfileHelp</b>. It scans the `Scripts` directory, printing out, in an easy-to-read table,  the Synopsis from the top of each script.
-{% highlight powershell %}
-#<#
+<pre><code class="powershell">#<#
 #.Synopsis
 #  Get help for the PowerShellProfile scripts
 ##>
@@ -69,7 +66,7 @@ Get-ScriptDirectory | Get-ChildItem -include "*.ps1" -recurse
     $o | Add-Member NoteProperty Synopsis $synopsis
     $o
 } | Format-Table -AutoSize
-{% endhighlight %}
+</code></pre>
 The `Get-ScriptDirectory` function just finds the location of the currently executing script. We'll see it later. Running the script gives output like this:
 
 <pre>
@@ -86,13 +83,12 @@ Update-Profile           Get the latest version of the PowerShell profile from S
 
 
 Rather than forcing users to navigate to the profile directory and run an `svn` command, the <b>Update-Profile.ps1</b> script will automatically update the profile source:
-{% highlight powershell %}
-#<#
+<pre><code class="powershell">#<#
 # .SYNOPSIS
 #     Get the latest version of the PowerShell profile from SVN
 ##>
 svn update (Split-Path $profile)
-{% endhighlight %}
+</code></pre>
 
 <h4 id="user_profile_directories">User Profile Directories</h4>
 In addition to the `Includes` and `Scripts` directories, each user of the PowerShell profile can have their own directory full of customizations. The name of the directory is taken from the <b>$env:USERNAME</b> variable. On startup, if the directory exists, any `Include` and `Scripts` directories are processed - being dot-sourced or added to the path, respectively. This allows users to have their own personal scripts and functions. In addition, the <b>profile.ps1</b> from the directory is dot-sourced.
@@ -103,8 +99,7 @@ Some users choose to commit their personal profile directories to the repository
 
 <h4 id="putting_it_all_together">Putting it All Together</h4>
 Finally we see the <b>Microsoft.PowerShell_profile.ps1</b> file that orchestrates all this:
-{% highlight powershell %}
-# Will turn on extra output to help debug profile-loading.
+<pre><code class="powershell"># Will turn on extra output to help debug profile-loading.
 # Don't check in as "true"
 $verbose = $false
 
@@ -183,4 +178,4 @@ Have fun!
 
     New-Item -path  $userProfile -itemType "file" -Force > Out-Null
 }
-{% endhighlight %}
+</code></pre>

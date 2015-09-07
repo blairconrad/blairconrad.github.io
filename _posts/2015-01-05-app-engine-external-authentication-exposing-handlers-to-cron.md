@@ -22,13 +22,11 @@ Engine, so this restriction had to be relaxed.
 My first thought was to remove the restriction from app.yaml and check
 for access in the handler like so:
 
-{% highlight python %}
-if (users.is_current_user_admin() or
+<pre><code class="python">if (users.is_current_user_admin() or
     self.is_external_user_admin()) # application code that understands the logged-in users
     # do stuff
 else:
-    self.abort(403)
-{% endhighlight %}
+    self.abort(403)</code></pre>
 
 Unfortunately, this fails miserably. When the handler is executed by a
 task or cron job, `users.is_current_user_admin` returns `False`.
@@ -53,15 +51,12 @@ affected handlers. One route is in the old "admin" subdirectory
 "system". The latter is secured in the app.yaml, just as before. Thus
 I have:
 
-{% highlight yaml %}
-# in app.yaml
+<pre><code class="yaml"># in app.yaml
 - url: /system/.*
   script: libraryhippo.application
-  login: admin
-{% endhighlight %}
+  login: admin</code></pre>
 
-{% highlight python %}
-# in the application's Python source
+<pre><code class="python"># in the application's Python source
 handlers = [
     # other handlers
     ('/admin/notify/(.*)$', Notify),
@@ -74,8 +69,7 @@ handlers = [
         not request_path.startswith('/admin/'))
         # do stuff
     else:
-        self.abort(403)
-{% endhighlight %}
+        self.abort(403)</code></pre>
 
 Thus the handler is executed if the user has admin rights or the URL
 isn't locked down by virtue of being below '/admin/'. The '/system/'

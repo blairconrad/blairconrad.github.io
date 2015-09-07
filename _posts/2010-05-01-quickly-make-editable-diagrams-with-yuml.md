@@ -47,8 +47,7 @@ I've unwittingly demonstrated a point I was trying to make - many of these desig
 
 To address some of these inconveniences, I created a tiny Python script that accepts a class diagram description, hits the yUML website to create an image from it, and saves the image to disk, embedding the diagram "source code" in the PNG's <a href="http://www.w3.org/TR/PNG/#11iTXt">iTXt chunk</a>:
 
-{% highlight python %}
-import urllib
+<pre><code class="python">import urllib
 import urllib2
 
 import png
@@ -82,7 +81,7 @@ def create(yuml, output_filename):
 if __name__ == '__main__':
     import sys
     sys.exit(create(*sys.argv[1:3]))
-{% endhighlight %}
+</code></pre>
 
 The <code>png</code> module is a very rudimentary PNG handling module that I wrote just for this script. There are ready-made Python PNG modules out there, but I thought they'd be too heavy to pull in for this, and that it'd be fun to write the PNG-handling code. It was.
 
@@ -95,8 +94,7 @@ read_yuml_from_png.py yuml_order_example.png
 
 And here's read_yuml_from_png.py:
 
-{% highlight python %}
-import png
+<pre><code class="python">import png
 
 def read(pngFilename):
     yuml = '&lt;&lt;no yuml found&gt;&gt;'
@@ -114,7 +112,7 @@ def read(pngFilename):
 if __name__ == '__main__':
     import sys
     sys.exit(read(sys.argv[1]))
-{% endhighlight %}
+</code></pre>
 
 and out pops the original class diagram description.
 

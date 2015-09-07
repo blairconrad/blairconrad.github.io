@@ -42,30 +42,22 @@ There was one aspect of this feature that I could imagine someone using - the ab
 So, running tests that cover some code is a cool feature, but it's <strong>not that useful</strong>. I'd rather see something like the automatic test runs and really cool "what's covered" information provided by <a href="http://continuoustests.com/">Mighty-Moose</a>.
 <h2>Command Line Execution</h2>
 Covering an application from the command line is <b>pretty straightforward</b>. I used this command to see what code my BookFinder unit tests exercised:
-{% highlight bat %}
-dotcover cover /TargetExecutable=nunit-console.exe /TargetArguments=.\BookFinder.Tests.dll /Output=dotCoverOutput /Filters=+:BookFinder.Core
-{% endhighlight %}
+<pre><code class="bat">dotcover cover /TargetExecutable=nunit-console.exe /TargetArguments=.\BookFinder.Tests.dll /Output=dotCoverOutput /Filters=+:BookFinder.Core</code></pre>
 BookFinder.Core is the only assembly I was interested in - it holds the business logic. "cover" takes multiple include and exclude filters, even using wildcards for assemblies, classes, and methods.
 
 One quite cool feature is to use the <b>help subcommand to generate an XML configuration file</b>, which can be used to specify the parameters for the <code>cover</code> command:
-{% highlight bat %}
-dotCover help cover coverSettings.xml
-{% endhighlight %}
+<pre><code class="bat">dotCover help cover coverSettings.xml</code></pre>
 will create a <code>coverSettings.xml</code> file that can be edited to specify the executable, arguments, and filters. Then use it like so:
-{% highlight bat %}
-dotCover cover coverSettings.xml
-{% endhighlight %} without having to specify the same batch of parameters all the time.
+<pre><code class="bat">dotCover cover coverSettings.xml</code></pre> without having to specify the same batch of parameters all the time.
 
 <h2>Joining Coverage Runs</h2>
 Multiple coverage snapshots - perhaps from running tests on different assemblies, or just from performing different test runs on the same application - <b>can be merged together</b> into a comprehensive snapshot:
-{% highlight bat %}
-dotCover merge /Source snapshot1;snapshot2 /Output mergedsnapshot
-{% endhighlight %}
+<pre><code class="bat">dotCover merge /Source snapshot1;snapshot2 /Output mergedsnapshot</code></pre>
 Just include all the snapshots, separated by semicolons. 
 <h2>XML Report</h2>
 After generating snapshots and optionally merging them, they can be  <b>turned into an XML report using the report command</b>:
 
-{% highlight bat %}dotcover report /Source=.\dotCoverOutput /Output=coverageReport.xml{% endhighlight %}
+<pre><code class="bat">dotcover report /Source=.\dotCoverOutput /Output=coverageReport.xml</code></pre>
 
 There are options to generate <b>HTML</b> and <b>JSON</b> as well.
 
@@ -81,11 +73,9 @@ dotCover <b>covers IIS, but only by using the plugin</b> - this means that the w
 
 <h2>Statement-level coverage</h2>
 As <a href="http://vcsjones.com/2011/01/03/dotcover-inaccurate-or-misunderstood/">Kevin Jones notes</a>, dotCover reports coverage of statements coverage, not sequence points. This means that a line like this:
-{% highlight bat %}
-return value &gt; 10
+<pre><code class="bat">return value &gt; 10
       ? Colors.Red
-      : Colors.White;
-{% endhighlight %} 
+      : Colors.White;</code></pre> 
 Will report as completely covered, even if it's executed only once - in order to ensure an accurate coverage report for this idea, the <code>?:</code> would have to be replaced by an if-else block.
 This isn't necessarily a major strike against the tool, but it's worth knowing, as it will skew the results somewhat.
 

@@ -45,14 +45,12 @@ Frustrated, I removed the whole <code>security</code> node. The service worked!
 
 So I took a closer look at the node:
 
-{% highlight xml %}
-<security>
-  <ipSecurity allowUnlisted="false">
-    <add ipAddress="127.0.0.1" allowed="true" />
-    <add ipAddress="1.2.3.4 " allowed="true" />
-  </ipSecurity>
-</security>
-{% endhighlight xml %}
+<pre><code class="xml">&lt;security&gt;
+  &lt;ipSecurity allowUnlisted="false"&gt;
+    &lt;add ipAddress="127.0.0.1" allowed="true" /&gt;
+    &lt;add ipAddress="1.2.3.4 " allowed="true" /&gt;
+  &lt;/ipSecurity&gt;
+&lt;/security&gt;</code></pre>
 
 
 Check out that "1.2.3.4" ipAddress. Now check it again. It's actually

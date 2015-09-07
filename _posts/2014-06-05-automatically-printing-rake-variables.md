@@ -73,8 +73,7 @@ partitioning and sorting." So, after a quick search for something that
 would allow printing of local Ruby variables, I found
 [`local_variables`][local_variables], and rewrote the task:
 
-{% highlight ruby %}
-desc "Print all variables"
+<pre><code class="ruby">desc "Print all variables"
 task :vars do
   print_vars(local_variables.sort.map { |name| [name.to_s, (eval name.to_s)] })  
 end
@@ -109,9 +108,7 @@ def print_vars(variables)
     puts value.map {|v| "  " + v }
     puts ""
   }
-end
-
-{% endhighlight %}
+end</code></pre>
 
 Points of interest:
 

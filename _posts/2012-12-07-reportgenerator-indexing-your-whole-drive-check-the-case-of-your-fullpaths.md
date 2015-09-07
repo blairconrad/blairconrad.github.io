@@ -34,20 +34,18 @@ D:\sandbox\project\src indexed.
 
 I took a peek at my .coverage.xml file and the ReportGenerator code and until I found the offending lines
 
-{% highlight xml linenos=table %}
-<Module dhash="9A-A3-0A-C0-1D-57-BA-2A-C2-D4-5B-9E-08-DE-BD-2D-46-04-AF-32">
-  <FullName>D:\Sandbox\project\src\Module\UnitTest\bin\Release\Module.dll</FullName>
-  <ModuleName>Module</ModuleName>
-  <Files>
+<pre><code class="xml">&lt;Module dhash="9A-A3-0A-C0-1D-57-BA-2A-C2-D4-5B-9E-08-DE-BD-2D-46-04-AF-32"&gt;
+  &lt;FullName&gt;D:\Sandbox\project\src\Module\UnitTest\bin\Release\Module.dll&lt;/FullName&gt;
+  &lt;ModuleName&gt;Module&lt;/ModuleName&gt;
+  &lt;Files&gt;
     …
-    <File uid="803" fullPath="D:\sandbox\project\src\Module\File1.cs" />
-    <File uid="806" fullPath="D:\Sandbox\project\src\Module\File2.cs" />
-    <File uid="808" fullPath="D:\sandbox\project\src\Module\File3.cs" />
-    …
-{% endhighlight xml linenos=table %}
+    &lt;File uid="803" fullPath="D:\sandbox\project\src\Module\File1.cs" /&gt;
+    &lt;File uid="806" fullPath="D:\Sandbox\project\src\Module\File2.cs" /&gt;
+    &lt;File uid="808" fullPath="D:\sandbox\project\src\Module\File3.cs" /&gt;
+    …</code></pre>
 
 Note the "Latin capital letter S" at the beginning of "Sandbox" on
-line 7. All the other lines had a "Latin small letter S".  When
+the line with uid 806. All the other lines had a "Latin small letter S".  When
 ReportGenerator goes looking for *.cs files to scan, it starts at the
 directory whose name is the longest common prefix of all the
 fullPaths. Because "S" isn't "s", it came up with "D:\".

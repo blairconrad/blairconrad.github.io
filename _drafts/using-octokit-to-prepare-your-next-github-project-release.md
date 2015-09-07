@@ -56,8 +56,7 @@ ensuring that release notes and thank-yous are accurate.
 
 The Rake task is called `create_milestone` and is fairly simple:
 
-{% highlight ruby %}
-desc "create new milestone, release issue and release"
+<pre><code>desc "create new milestone, release issue and release"
 task :create_milestone do |t|
   require 'octokit'
 
@@ -95,8 +94,7 @@ task :create_milestone do |t|
     )
   puts "Created release '#{version}'."
 end
-
-{% endhighlight %}
+</code></pre>
 
 As you can see, the task creates
 
@@ -113,8 +111,7 @@ The `version` variable is read from the `CommonAssemblyInfo.cs`
 file. The other relevant variables are defined in the rakefile, and of
 course would vary by project, but here's what we're using today:
 
-{% highlight ruby %}
-repo = 'FakeItEasy/FakeItEasy'
+<pre><code>repo = 'FakeItEasy/FakeItEasy'
 release_issue_labels = ['0 - Backlog', 'P2', 'build', 'documentation']
 release_issue_body = <<-eos
 **Ready** when all other issues forming part of the release are **Done**.
@@ -159,13 +156,11 @@ release_body = <<-eos
 With special thanks for contributions to this release from:
 
 * _&lt;user's actual name&gt;_ - _@&lt;github_userid&gt;_
-eos
-{% endhighlight %}
+eos</code></pre>
 
 The task's been a big help to me over the last few months, along with a companion task, `set_version`, which branches, updates the version number in `CommonAssemblyInfo.cs` and submits a pull request to GitHub:
 
-{% highlight ruby %}
-desc "Update version number"
+<pre><code>desc "Update version number"
 task :set_version, :new_version do |asm, args|
   current_branch = `git rev-parse --abbrev-ref HEAD`.strip()
   
@@ -207,8 +202,7 @@ task :set_version, :new_version do |asm, args|
     "preparing for #{new_version}"
   )
   puts "Created pull request \##{pull_request.number} '#{pull_request.title}'."
-end
-{% endhighlight %}
+end</code></pre>
 
 (`set_version_in_assemblyinfo` is a task that uses
 [Albacore][albacore] to write the new version number in the file. If
