@@ -33,14 +33,14 @@ Just in case you think there's some whitespace trickery going on or
 something, debug with me:
 
 <figure>
-  <img src="{{ site.image_dir }}/2015-10-03-select-may-not-be-broken/debugging.png">
+  <img src="{{ site.image_dir }}/2015-10-05-select-may-not-be-broken/debugging.png">
 </figure>
 
 How is this happening? The row's Library property is actually
 `DBNull`, but the dataset defines both `DefaultValue` and `NullValue`:
 
 <figure>
-  <img src="{{ site.image_dir }}/2015-10-03-select-may-not-be-broken/library_properties.png">
+  <img src="{{ site.image_dir }}/2015-10-05-select-may-not-be-broken/library_properties.png">
 </figure>
 
 So even though there was `DBNull` in the row, whenever I examined the
