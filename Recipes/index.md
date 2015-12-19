@@ -16,6 +16,7 @@ layout: default
 * [Brown Sugar Poppyseed Cake](brownSugarPoppyseedCake.html)
 * [Cherry, Chocolate, and Buttermilk Scones](cherryChocolateAndButtermilkScones.html)
 * [Chocolate Coating](chocolateCoating.html)
+* [Chocolate Coconut Macaroons](chocolateCoconutMacaroons.html)
 * [Chocolate Gingerbread](chocolateGingerbread.html)
 * [Chocolate Ice Cream, Philadelphia-Style](philadelphiaStyleChocolateIceCream.html)
 * [Chocolate Raspberry Curl Cake](chocolateRaspberryCurlCake.html)
