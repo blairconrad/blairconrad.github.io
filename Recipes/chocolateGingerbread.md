@@ -2,7 +2,7 @@
 layout: recipe
 title: Chocolate Gingerbread
 ---
-<table class="recipe">
+<table>
 <tr>
   <td>5 oz butter</td>
   <td rowspan="7">melt</td>

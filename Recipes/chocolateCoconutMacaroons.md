@@ -2,7 +2,7 @@
 layout: recipe
 title: Chocolate Coconut Macaroons
 ---
-<table class="recipe">
+<table>
 <tr>
   <td>4 oz (120 g) semi sweet or bittersweet chocolate, chopped</td>
   <td colspan="3">melt, then cool</td>
