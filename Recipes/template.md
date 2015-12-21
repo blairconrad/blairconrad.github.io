@@ -2,7 +2,9 @@
 layout: recipe
 title: %(title)s
 ---
-<table class="recipe">
+<table>
 </table>
+
+1.
 
 <p class="confession"></p>
