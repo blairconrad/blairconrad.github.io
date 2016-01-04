@@ -89,8 +89,7 @@ title: Salted Banoffee Tart
   <tr>
     <td>1&frac12; cups whipping cream</td>
     <td>whip it</td>
-    <td rowspan="3">stir</td>
-    <td rowspan="3" coslpan="2">&nbsp;</td>
+    <td rowspan="3" colspan="3">stir</td>
   </tr>
   <tr>
     <td>1&frac12; t sugar</td>
