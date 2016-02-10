@@ -31,8 +31,6 @@ kramdown:
   parse_block_html: true
 
 # Site settings
-paginate: 5
-paginate_path: "page:num"
 relative_permalinks: false
 permalink: /:year/:month/:day/:title/
 excerpt_separator: <!--more--> 
