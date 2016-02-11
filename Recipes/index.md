@@ -66,7 +66,7 @@ layout: default
 * [Roasted Eggplant](roastedEggplant.html)
 * [Rosemary Parmesan Shortbread](rosemaryParmesanShortbread.html)
 * [Sabl&eacute;s au Chocolat et &agrave; la Fleur de Sel](sablesAuChocolatEtALaFleurDeSel.html)
-* [Salted Banoffee Tart](saltedBanoffeTart.html)
+* [Salted Banoffee Tart](saltedBanoffeeTart.html)
 * [Salty Chocolate Chunk Cookies](saltyChocolateChunkCookies.html)
 * [Scalloped Potatoes](scallopedPotatoes.html)
 * [Scones with Chocolate Chips and Dried Cherries](sconesWithChocolateChipsAndDriedCherries.html)
