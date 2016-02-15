@@ -61,7 +61,7 @@ layout: default
 * [Pumpkin Spice Cookies](pumpkinSpiceCookies.html)
 * [Raspberry Cheese Coffee Cake](raspberryCheeseCoffeeCake.html)
 * [Rene's Dinner Rolls](renesDinnerRolls.html)
-* [Rhapsody in Blueberry](rhapsodyInBlueberry.html)
+* [Rhapsody in Blueberry](rhapsodyInBlueberry)
 * [Roast Turkey with Pan Gravy](roastTurkeyWithPanGravy)
 * [Roasted Cauliflower with Bacon and Garlic](roastedCauliflowerWithBaconAndGarlic.html)
 * [Roasted Eggplant](roastedEggplant.html)
