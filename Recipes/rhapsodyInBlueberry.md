@@ -61,4 +61,4 @@ and topping is golden brown.
 1. Cool for 10 minutes before serving.
 
 <p class="confession">Shamelessly stolen from [Eat, Shrink & Be
-Merry](http://www.eatshrinkandbemerry.com/section/view/?fnode=24)</p>
+Merry](http://janetandgreta.com/cookbook/eat-shrink-be-merry/)</p>
