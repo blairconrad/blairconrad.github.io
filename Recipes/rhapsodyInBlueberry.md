@@ -7,7 +7,7 @@ title: Rhapsody in Blueberry
     <td>&#x2153; c granulated sugar</td>
     <td rowspan="4">mix</td>
     <td rowspan="5">mix</td>
-    <td rowspan="11">put in a greased 9&Prime; by 13&Prime pan</td>
+    <td rowspan="11">put in a greased 9&Prime; by 13&Prime; pan</td>
     <td rowspan="11">bake 30 minutes at 375&deg;F</td>
     <td rowspan="11">cool 10 minutes</td>
 </td>
@@ -54,7 +54,7 @@ title: Rhapsody in Blueberry
 1. Combine oats, flour, brown sugar, and cinnamon.
 1. Add melted butter to oat mixture, and stir until it resembles
 coarse crumbs.
-1. Put blueberries in a greased 9&Prime; by 13&Prime baking dish. Top
+1. Put blueberries in a greased 9&Prime; by 13&Prime; baking dish. Top
 with crumb mixture.
 1. Bake a 375&deg;F for 30 minutes, until blueberries are bubbling
 and topping is golden brown.
