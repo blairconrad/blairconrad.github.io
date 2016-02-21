@@ -35,7 +35,7 @@ layout: default
 * [Elephant Bread](elephantBread.html)
 * [Espresso, White Chocolate, and Macadamia Nut Bark](espressoWhiteChocolateAndMacadamiaNutBark.html)
 * [Fancy Chocolate Chunk-Oatmeal Cookies](fancyChocolateChunk-OatmealCookies.html)
-* [Grape-Nuts Bread](grapeNutsBread.html)
+* [Grape-Nuts Bread](grapeNutsBread)
 * [Jiggly Jello](jigglyJello.html)
 * [Krispies](krispies.html)
 * [Macadamia and Coconut Clusters](macadamiaAndCoconutClusters.html)
