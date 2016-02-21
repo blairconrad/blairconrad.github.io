@@ -4,7 +4,7 @@ title: Grape-Nuts Bread
 ---
 <table>
   <tr>
-    <td>1&frac34; c water</td>
+    <td>1&frac23; c water</td>
     <td rowspan="8">Add to bread pan in order</td>
     <td rowspan="8">Bake in bread maker at medium crust setting</td>
   </tr>
