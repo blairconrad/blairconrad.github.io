@@ -44,7 +44,7 @@ How is this happening? The row's Library property is actually
 </figure>
 
 So even though there was `DBNull` in the row, whenever I examined the
-`Library` property, via code (such as the LINQ statements) or the
+`Library` property, via code (such as the LINQ statements) or
 visually in the debugger, it appeared to be "WPL".
 
 `Select`, however, wasn't fooled. It knew the value was `DBNull` and
