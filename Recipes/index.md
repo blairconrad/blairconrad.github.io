@@ -40,6 +40,7 @@ layout: default
 * [Jiggly Jello](jigglyJello.html)
 * [Krispies](krispies.html)
 * [Macadamia and Coconut Clusters](macadamiaAndCoconutClusters.html)
+* [Magically Moist Almond Cake](magicallyMoistAlmondCake)
 * [Maple-Nut Pralines](mapleNutPralines.html)
 * [Marble Cheesecake](marbleCheesecake.html)
 * [Mayan Chocolate Sparklers](mayanChocolateSparklers.html)
