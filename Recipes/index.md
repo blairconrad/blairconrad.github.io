@@ -53,7 +53,7 @@ layout: default
 * [Orange Vinaigrette](orangeVinaigrette.html)
 * [Parker House Rolls](parkerHouseRolls.html)
 * [Peanut Butter Balls](peanutButterBalls.html)
-* [Peanut Butter and Jelly Bars](peanutButterandJellyBars.html)
+* [Peanut Butter and Jelly Bars](peanutButterandJellyBars)
 * [Pecan-Molasses Toffee](pecanMolassesToffee.html)
 * [Pistachio Gelato](pistachioGelato.html)
 * [Pork Calvados](porkCalvados.html)
