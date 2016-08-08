@@ -1,15 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Language" content="en">
-  <title xml:lang="en">Peanut Butter and Jelly Bars</title>
-  <link rel="stylesheet" href="/css/recipe.css"/>
-</head>
-<body>
-<h1>Peanut Butter and Jelly Bars</h1>
-<table class="recipe">
+---
+layout: recipe
+title: Peanut Butter and Jelly Bars
+---
+<table>
 <tr>
   <td>1&frac12; c jam or jelly</td>
   <td colspan="5" class="righthide">&nbsp;</td>
@@ -60,24 +53,18 @@
 </tr>
 </table>
 
-<ol>
-  <li>Sift together flour, baking powder, and salt. Set aside.</li>
-  <li>Cream butter and sugar.</li>
-  <li>Mix in peanut butter.</li>
-  <li>Mix in eggs and vanilla.</li>
-  <li>Mix flour mixture into peanut butter mixture until just incorporated.</li>
-  <li>Spread &#x2154; of the dough into a greased and floured 9&Prime;&times13&Prime; pan.</li>
-  <li>Spread jam over the dough.</li>
-  <li>Sprinkle small pieces of dough over jam, leaving some jam exposed.</li>
-  <li>Sprinkle with peanuts.</li>
-  <li>Bake for 45 minutes at 350&deg;F, until golden brown.</li>
-</ol>
+1. Sift together flour, baking powder, and salt. Set aside.
+1. Cream butter and sugar.
+1. Mix in peanut butter.
+1. Mix in eggs and vanilla.
+1. Mix flour mixture into peanut butter mixture until just incorporated.
+1. Spread &#x2154; of the dough into a greased and floured 9&Prime;&times13&Prime; pan.
+1. Spread jam over the dough.
+1. Sprinkle small pieces of dough over jam, leaving some jam exposed.
+1. Sprinkle with peanuts.
+1. Bake for 45 minutes at 350&deg;F, until golden brown.
 
 <p>Makes a pan full of peanut butter and jelly bars.</p>
 <p class="confession">
-Adapted
-from <a href="http://emilymackenzie.blogspot.ca/2009/05/peanut-butter-and-jelly-bars.html">Emily</a>
-(I use less sugar), who stole it from Ina Garten.
+Adapted from [Ina Garten](http://www.foodnetwork.com/recipes/ina-garten/peanut-butter-and-jelly-bars-recipe.html). I use less sugar.
 </p>
-</body>
-</html>
