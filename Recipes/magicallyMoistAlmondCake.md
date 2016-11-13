@@ -4,11 +4,13 @@ title: Magically Moist Almond Cake
 ---
 <table>
   <tr>
-    <td>1&frac12; c almond flour (or meal)</td>
-    <td rowspan="4" colspan="3">Combine</td>
-    <td rowspan="9" colspan="3">Beat until creamy</td>
-    <td rowspan="9" colspan="3">Bake 30 minutes at 350&deg;F</td>
-  </tr>
+    <td>1&frac12; c almond flour</td>
+    <td rowspan="4" colspan="3">combine</td>
+    <td rowspan="9">stir</td>
+    <td rowspan="9">beat</td>
+    <td rowspan="9">spread in pan</td>
+    <td rowspan="9">bake at 350&deg;F for 30 minutes</td>
+</tr>
   <tr>
     <td>&frac12; c coconut flour</td>
   </tr>
@@ -19,13 +21,13 @@ title: Magically Moist Almond Cake
     <td>2 t baking powder</td>
   </tr>
   <tr>
-    <td>&frac34; c unsalted butter</td>
-    <td rowspan="2">Cream</td>
-    <td rowspan="3">Beat</td>
-    <td rowspan="5">Mix</td>
+    <td>&frac34; c (or try &frac12; c) unsalted butter</td>
+    <td rowspan="2">cream</td>
+    <td rowspan="3">beat</td>
+    <td rowspan="5">mix</td>
   </tr>
   <tr>
-    <td>&frac34; c sugar</td>
+    <td>&#x2154; c sugar</td>
   </tr>
   <tr>
     <td>4 eggs</td>
@@ -33,21 +35,22 @@ title: Magically Moist Almond Cake
   </tr>
   <tr>
     <td>&frac12; c milk</td>
-    <td class="righthide" colspan="2" rowspan="2">&nbsp;</td>
+    <td colspan="2" rowspan="2" class="righthide">&nbsp;</td>
   </tr>
   <tr>
     <td>1 t vanilla</td>
   </tr>
 </table>
 
-1. Preheat oven to 350&deg;F.
-2. Grease a 9&Prime;&times;13&Prime;-inch cake pan.
-6. Combine flours, salt, and baking powder.
-3. In a separate bowl, cream together butter and sugar until smooth.
-4. Add in eggs, one at a time, beating until fully blended.
-5. Add milk and vanilla; mix until combined.
-7. Stir dry ingredients into wet ingredients.
-8. Beat until creamy.
-9. Spread batter in prepared pan and bake for 30 minutes
 
-<p class="confession">Stolen from the back of Bob's Red Mill Almond Meal bag.</p>
+1. Grease a 9&Prime;&times;13&Prime; cake pan
+1. Combine flours, salt, and baking powder
+1. In a separate bowl, cream together butter and sugar until smooth
+1. Add in eggs, one at a time, and beat until fully blended
+1. Add milk and vanilla; mix until combined
+1. Stir dry ingredients into wet ingredients
+1. Beat until creamy
+1. Spread batter into prepared pan
+1. Bake at 350&deg;F for 30 minutes
+
+<p class="confession">Stolen from the back of Bob's Red Mill Almond Meal bag.</p> 
