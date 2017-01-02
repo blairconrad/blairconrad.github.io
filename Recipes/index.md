@@ -61,6 +61,7 @@ layout: default
 * [Pumpkin Chocolate Chip Bars](pumpkinChocolateChipBars.html)
 * [Pumpkin Cranberry Spice Cake](pumpkinCranberrySpiceCake.html)
 * [Pumpkin Spice Cookies](pumpkinSpiceCookies.html)
+* [Raisin Bread](raisinBread)
 * [Raspberry Cheese Coffee Cake](raspberryCheeseCoffeeCake.html)
 * [Rene's Dinner Rolls](renesDinnerRolls.html)
 * [Rhapsody in Blueberry](rhapsodyInBlueberry)
