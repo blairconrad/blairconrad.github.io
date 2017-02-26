@@ -77,6 +77,7 @@ layout: default
 * [Spiced Nuts](spicedNuts.html)
 * [Spinach Salad with Strawberries and Blueberries](spinachSaladWithBerries.html)
 * [Steamed Salmon in Black Bean Sauce](steamedSalmonInBlackBeanSauce.html)
+* [Sticky Rice](stickyRice)
 * [Stripey Chocolate Peanut Butter Loaf](stripeyChocolatePeanutButterLoaf.html)
 * [Thai Squash Soup with Shrimp](thaiSquashSoupWithShrimp.html)
 * [Three-Headed Rolls](threeHeadedRolls.html)
