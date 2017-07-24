@@ -7,7 +7,7 @@ layout: default
 * [Banana Sour Cream Bread](bananaSourCreamBread.html)
 * [Bird's Nest Cookies](birdsNestCookies.html)
 * [Biscuits](biscuits.html)
-* [Black-Bottom Cupcakes](blackBottomCupcakes.html)
+* [Black-Bottom Cupcakes](blackBottomCupcakes)
 * [Blair's Elephant Ice Cream](blairsElephantIceCream.html)
 * [Blue Chip Chocolate Chip Cookies](blueChipChocolateChipCookies.html)
 * [Blueberry Buttermilk Coffeecake](marryatsRageCake.html)
