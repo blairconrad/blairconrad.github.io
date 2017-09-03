@@ -68,7 +68,7 @@ layout: default
 * [Rhapsody in Blueberry](rhapsodyInBlueberry)
 * [Roast Turkey with Pan Gravy](roastTurkeyWithPanGravy)
 * [Roasted Cauliflower with Bacon and Garlic](roastedCauliflowerWithBaconAndGarlic.html)
-* [Roasted Eggplant](roastedEggplant.html)
+* [Roasted Eggplant](roastedEggplant)
 * [Rosemary Parmesan Shortbread](rosemaryParmesanShortbread.html)
 * [Sabl&eacute;s au Chocolat et &agrave; la Fleur de Sel](sablesAuChocolatEtALaFleurDeSel.html)
 * [Salted Banoffee Tart](saltedBanoffeeTart)
