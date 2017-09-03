@@ -26,7 +26,7 @@ title: Roasted Eggplant
 
 1. Cut the eggplant into 1&Prime; cubes and place in a bowl.
 1. Sprinkle salt, garlic and oil over eggplant.
-1. Toss well and alllow to site for 30 minutes for flavours to blend.
+1. Toss well and allow to sit for 30 minutes for flavours to blend.
 1. Spread cubes in a single layer on a baking sheet. They'll roast better with a little space between them.
 1. Roast at 375&deg; for about 45 minutes, tossing a few times during roasting. Roast until the cubes are brown and the insides creamy.
 1. Serve hot or at room temperature.
@@ -36,6 +36,5 @@ title: Roasted Eggplant
 <div class="variation">
 
 <h2>Variation: freezing</h2>
-<p>In theory, after roasting you could put the cooled cubes on a baking sheet in the freezer, and once hard, scrape them into a bag for freezing.
-  We've just put them in a bag without separately freezing. Let's see what happens.</p>
+<p>Place 1 pound of cooled eggpant into a medium freezer bag. Freeze.</p>
 </div>
