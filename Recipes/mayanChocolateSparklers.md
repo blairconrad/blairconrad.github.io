@@ -31,7 +31,7 @@ title: Mayan Chocolate Sparklers
   <td>&#188; t pepper</td>
 </tr>
 <tr>
-  <td>&#x215b;t cayenne</td>
+  <td>&#x215b; t cayenne</td>
 </tr>
 <tr>
   <td>1 T cinnamon</td>
