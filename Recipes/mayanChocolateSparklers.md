@@ -61,22 +61,22 @@ title: Mayan Chocolate Sparklers
 </table>
 
 
-1.line cookie sheets with parchment paper
-1.combine &#189; cup sugar and 1 teaspoon of cinnamon for
+1. line cookie sheets with parchment paper
+1. combine &#189; cup sugar and 1 teaspoon of cinnamon for
 topping. Set aside
-1.combine flour, cocoa, baking soda, black pepper, cayenne, and
+1. combine flour, cocoa, baking soda, black pepper, cayenne, and
 remaining tablespoon of cinnamon. Set aside
-1.beat shortening, butter, brown sugar, and remaining &#190; cup
+1. beat shortening, butter, brown sugar, and remaining &#190; cup
 granulated sugar until creamy
-1.beat in eggs, one at a time
-1.add flour mixture to wet ingredients. Mix until incorporated
-1.stir chocolate chips into dough
-1.roll dough into balls, 1&Prime; in diameter (about 22 g). Do not flatten
-1.roll balls into cinnamon and sugar topping. Place on cookie
+1. beat in eggs, one at a time
+1. add flour mixture to wet ingredients. Mix until incorporated
+1. stir chocolate chips into dough
+1. roll dough into balls, 1&Prime; in diameter (about 22 g). Do not flatten
+1. roll balls into cinnamon and sugar topping. Place on cookie
 sheets, about 2&Prime; apart
-1.bake 8&ndash;10 minutes at 350&deg;F
-1.cool 3&ndash;5 minutes on cookie sheet
-1.remove to wire rack and cool
+1. bake 8&ndash;10 minutes at 350&deg;F
+1. cool 3&ndash;5 minutes on cookie sheet
+1. remove to wire rack and cool
 
 <p>Makes about 54 cookies</p>
 <p>Note: Cookies can be frozen raw and stored in an airtight
