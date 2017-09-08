@@ -3,6 +3,7 @@ layout: recipe
 title: Mayan Chocolate Sparklers
 ---
 <table>
+<tr>
   <td>&#x2153; c sugar</td>
   <td rowspan="2" colspan="5">combine</td>
   <td rowspan="14">roll</td>
