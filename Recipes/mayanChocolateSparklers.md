@@ -1,16 +1,8 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Language" content="en">
-  <title xml:lang="en">Mayan Chocolate Sparklers</title>
-  <link rel="stylesheet" href="/css/recipe.css"/>
-</head>
-<body>
-<h1>Mayan Chocolate Sparklers</h1>
-<table class="recipe">
-<tr>
+---
+layout: recipe
+title: Mayan Chocolate Sparklers
+---
+<table>
   <td>&#x2153; c sugar</td>
   <td rowspan="2" colspan="5">combine</td>
   <td rowspan="14">roll</td>
@@ -38,7 +30,7 @@
   <td>&#188; t pepper</td>
 </tr>
 <tr>
-  <td>pinch cayenne</td>
+  <td>&#x215b;t cayenne</td>
 </tr>
 <tr>
   <td>1 T cinnamon</td>
@@ -67,29 +59,26 @@
 </tr>
 </table>
 
-<ol>
-<li>line cookie sheets with parchment paper</li>
-<li>combine &#189; cup sugar and 1 teaspoon of cinnamon for
-topping. Set aside</li>
-<li>combine flour, cocoa, baking soda, black pepper, cayenne, and
-remaining tablespoon of cinnamon. Set aside</li>
-<li>beat shortening, butter, brown sugar, and remaining &#190; cup
-granulated sugar until creamy</li>
-<li>beat in eggs, one at a time</li>
-<li>add flour mixture to wet ingredients. Mix until incorporated</li>
-<li>stir chocolate chips into dough</li>
-<li>roll dough into balls, 1&Prime; in diameter (about 22 g). Do not flatten</li>
-<li>roll balls into cinnamon and sugar topping. Place on cookie
-sheets, about 2&Prime; apart</li>
-<li>bake 8&ndash;10 minutes at 350&deg;F</li>
-<li>cool 3&ndash;5 minutes on cookie sheet</li>
-<li>remove to wire rack and cool</li>
-</ol>
+
+1.line cookie sheets with parchment paper
+1.combine &#189; cup sugar and 1 teaspoon of cinnamon for
+topping. Set aside
+1.combine flour, cocoa, baking soda, black pepper, cayenne, and
+remaining tablespoon of cinnamon. Set aside
+1.beat shortening, butter, brown sugar, and remaining &#190; cup
+granulated sugar until creamy
+1.beat in eggs, one at a time
+1.add flour mixture to wet ingredients. Mix until incorporated
+1.stir chocolate chips into dough
+1.roll dough into balls, 1&Prime; in diameter (about 22 g). Do not flatten
+1.roll balls into cinnamon and sugar topping. Place on cookie
+sheets, about 2&Prime; apart
+1.bake 8&ndash;10 minutes at 350&deg;F
+1.cool 3&ndash;5 minutes on cookie sheet
+1.remove to wire rack and cool
 
 <p>Makes about 54 cookies</p>
 <p>Note: Cookies can be frozen raw and stored in an airtight
 container. If baking from frozen, add 5 minutes to baking time.</p>
 <p class="confession">Stolen from <a href="http://www.robinhood.ca/feature/bib.2007.default.asp">Baking is Back 2007</a>, which I only
 realized was online as I typed this very paragraph.</p>
-</body>
-</html>

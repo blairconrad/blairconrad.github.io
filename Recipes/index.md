@@ -44,7 +44,7 @@ layout: default
 * [Magically Moist Almond Cake](magicallyMoistAlmondCake)
 * [Maple-Nut Pralines](mapleNutPralines.html)
 * [Marble Cheesecake](marbleCheesecake.html)
-* [Mayan Chocolate Sparklers](mayanChocolateSparklers.html)
+* [Mayan Chocolate Sparklers](mayanChocolateSparklers)
 * [Molasses Crumbles](molassesCrumbles.html)
 * [Natalie's Godmother's Not-So-Secret and Very Yummy Brownies](nataliesGodmothersNotSoSecretAndVeryYummyBrownies.html)
 * [Oatcakes](oatcakes.html)
