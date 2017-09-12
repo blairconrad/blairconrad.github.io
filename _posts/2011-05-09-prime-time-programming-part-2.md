@@ -187,39 +187,39 @@ The idea is pretty simple: start counting at 2, and keep a record of upcoming co
 <table>
   <tr><th>n</th><th>composites</th></tr>
   <tr>
-    <td>2</td><td>{}</code></td>
+    <td>2</td><td><code>{}</code></td>
     <td><b>2</b> isn't in composites, so yield it. Then insert 2<sup>2</sup> = 4 and increment n.</td>
   </tr>
   <tr>
-    <td>3</td><td>{4:2}</code></td>
+    <td>3</td><td><code>{4:2}</code></td>
     <td><b>3</b> isn't in composites, so yield it. Then insert 3<sup>2</sup> = 9 and increment n.</td>
   </tr>
   <tr>
-    <td>4</td><td>{4:2, 9:3}</code></td>
+    <td>4</td><td><code>{4:2, 9:3}</code></td>
     <td>4 is in composites, with value 2. Remove it, insert 4 + 2 = 6 and increment n.</td>
   </tr>
   <tr>
-    <td>5</td><td>{6:2, 9:3}</code></td>
+    <td>5</td><td><code>{6:2, 9:3}</code></td>
     <td><b>5</b> isn't in composites, so yield it. Then insert 5<sup>2</sup> = 25 and increment n.</td>
   </tr>
   <tr>
-    <td>6</td><td>{6:2, 9:3, 25:5}</code></td>
+    <td>6</td><td><code>{6:2, 9:3, 25:5}</code></td>
     <td>6 is in composites, with value 2. Remove it, insert 6  + 2 = 8 and increment n.</td>
   </tr>
   <tr>
-    <td>7</td><td>{8:2, 9:3, 25:5}</code></td>
+    <td>7</td><td><code>{8:2, 9:3, 25:5}</code></td>
     <td><b>7</b> isn't in composites, so yield it. Then insert 7<sup>2</sup> = 49 and increment n.</td>
   </tr>
   <tr>
-    <td>8</td><td>{8:2, 9:3, 25:5, 49:7}</code></td>
+    <td>8</td><td><code>{8:2, 9:3, 25:5, 49:7}</code></td>
     <td>8 is in composites, with value 2. Remove it, insert 8 + 2 = 10 and increment n.</td>
   </tr>
   <tr>
-    <td>9</td><td>{9:3, 10:2, 25:5, 49:7}</code></td>
+    <td>9</td><td><code>{9:3, 10:2, 25:5, 49:7}</code></td>
     <td>9 is in composites, with value 3. Remove it, insert 9 + 3 = 12 and increment n.</td>
   </tr>
   <tr>
-    <td>10</td><td>{10:2, 12:3, 25:5, 49:7}</code></td>
+    <td>10</td><td><code>{10:2, 12:3, 25:5, 49:7}</code></td>
     <td>10 is in composites, with value 2. Remove it, and... <b>wait</b>.</td>
   </tr>
 </table>
@@ -230,7 +230,7 @@ In this case, add another 2 to 12 to get 14 and insert it. Then increment n.
 <table>
 <tr><th>n</th><th>composites</th></tr>
 <tr>
-<td>11</td><td>{12:3, 14:2, 25:5, 49:7}</code></td>
+<td>11</td><td><code>{12:3, 14:2, 25:5, 49:7}</code></td>
 <td><b>11</b> isn't in composites, so yield it, insert 11<sup>2</sup> = 121, increment n, and continue&hellip;</td>
 </tr>
 </table>
