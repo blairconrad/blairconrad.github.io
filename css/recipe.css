@@ -1,5 +1,6 @@
 body {
     line-height: 1em;
+    color: black;
 }
 
 h1 {
@@ -23,7 +24,7 @@ table {
 th, td {
   border-right:1px solid black;
   border-top:1px solid black;
-  padding: 2px 2px 2px 2px;
+  text-align: center;
 }
 
 .altgroup {
@@ -42,6 +43,10 @@ td.vertical{
   text-align:center;
   layout-flow: vertical-ideographic;
   vertical-align: middle;
+}
+
+td:first-child {
+    text-align: left;
 }
 
 .center{

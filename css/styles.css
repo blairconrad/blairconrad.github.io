@@ -151,7 +151,7 @@ pre {
 
 table {
     border-collapse: collapse;
-    text-align: center;
+
 }
 
 th {
@@ -163,13 +163,6 @@ td, th
     padding: 3px;
 }
 
-td:first-child {
-    text-align: left;
-
-    /* Make a hanging indent */
-    padding-left: 1em;
-    text-indent: -1em;
-}
 
 .grid th, .grid td {
     border: {{ page.default_border }};
