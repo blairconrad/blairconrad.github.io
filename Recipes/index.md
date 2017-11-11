@@ -26,6 +26,7 @@ layout: default
 * [Confectioners' Sugar Icing](confectionersSugarIcing.html)
 * [Coq au Vin](coq_au_vin.html)
 * [Cranberry Oatmeal Cookies](cranberryOatmealCookies.html)
+* [Creamy Vegan Lemon Bars](creamyVeganLemonBars)
 * [Dave and Kate's Remarkable Brownies](daveAndKatesRemarkableBrownies.html)
 * [Decadent Double Chocolate Chip Cookies](decadentDoubleChocolateChipCookies.html)
 * [Double Chocolate Espresso and Cashew Cookies](doubleChocolateEspressoAndCashewCookies.html)
