@@ -60,7 +60,7 @@ layout: default
 * [Pistachio Gelato](pistachioGelato.html)
 * [Pork Calvados](porkCalvados.html)
 * [Pumpkin Bread with Dates](pumpkinBreadWithDates.html)
-* [Pumpkin Chocolate Chip Bars](pumpkinChocolateChipBars.html)
+* [Pumpkin Chocolate Chip Bars](pumpkinChocolateChipBars)
 * [Pumpkin Cranberry Spice Cake](pumpkinCranberrySpiceCake.html)
 * [Pumpkin Spice Cookies](pumpkinSpiceCookies.html)
 * [Raisin Bread](raisinBread)
