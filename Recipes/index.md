@@ -85,5 +85,6 @@ layout: default
 * [Three-Headed Rolls](threeHeadedRolls.html)
 * [Toasting Nuts](toastingNuts.html)
 * [Triple-Chocolate Brownies](tripleChocolateBrownies.html)
+* [Ultimate Banana Bread](ultimateBananaBread)
 * [Vanilla and Walnut Shortbread Hearts](vanillaAndWalnutShortbreadHearts.html)
 * [Yorkshire Pudding](yorkshirePudding.html)
