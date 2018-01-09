@@ -10,6 +10,7 @@ h1 {
 
 .variation h2 {
   font-size: 100%;
+  font-weight: bold;
 }
 
 table {
@@ -57,3 +58,6 @@ td:first-child {
   text-align:center;
 }
 
+li {
+  margin-bottom: 0.25em;
+}
