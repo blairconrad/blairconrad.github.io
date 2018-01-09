@@ -58,3 +58,6 @@ td:first-child {
   text-align:center;
 }
 
+li {
+  margin-bottom: 0.25em;
+}
