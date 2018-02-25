@@ -67,6 +67,7 @@ layout: default
 * [Pumpkin Spice Cookies](pumpkinSpiceCookies.html)
 * [Raisin Bread](raisinBread)
 * [Raspberry Cheese Coffee Cake](raspberryCheeseCoffeeCake.html)
+* [Real-Deal Chocolate Chip Cookies](realDealChocolateChipCookies)
 * [Rene's Dinner Rolls](renesDinnerRolls.html)
 * [Rhapsody in Blueberry](rhapsodyInBlueberry)
 * [Roast Turkey with Pan Gravy](roastTurkeyWithPanGravy)
