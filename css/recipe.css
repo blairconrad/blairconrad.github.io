@@ -13,6 +13,10 @@ h1 {
   font-weight: bold;
 }
 
+.variation p {
+  margin-left: 1.5em;
+}
+
 table {
   border-left: 1px solid black;
   border-bottom: 1px solid black;
