@@ -73,6 +73,7 @@ layout: default
 * [Roasted Eggplant](roastedEggplant)
 * [Rosemary Parmesan Shortbread](rosemaryParmesanShortbread.html)
 * [Sabl&eacute;s au Chocolat et &agrave; la Fleur de Sel](sablesAuChocolatEtALaFleurDeSel.html)
+* [Salmon Bulgogi](salmonBulgogi)
 * [Salted Banoffee Tart](saltedBanoffeeTart)
 * [Salty Chocolate Chunk Cookies](saltyChocolateChunkCookies.html)
 * [Scalloped Potatoes](scallopedPotatoes.html)
