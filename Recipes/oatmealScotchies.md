@@ -1,21 +1,14 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
-    "http://www.w3.org/TR/html4/loose.dtd">
-<html>
-<head>
-  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
-  <meta http-equiv="Content-Language" content="en">
-  <title xml:lang="en">Oatmeal Scotchies</title>
-  <link rel="stylesheet" href="/css/recipe.css"/>
-</head>
-<body>
-<h1>Oatmeal Scotchies</h1>
-<table class="recipe">
+---
+layout: recipe
+title: Oatmeal Scotchies
+---
+<table>
 <tr>
 <td>1&frac14; cups all-purpose flour</td>
 <td rowspan="4">combine</td>
 <td rowspan="9">beat</td>
 <td rowspan="11">stir</td>
-<td rowspan="11">bake 7&ndash;8 minutes at 375&deg;F</td>
+<td rowspan="11">bake 11&ndash;12 minutes at 375&deg;F</td>
 <td rowspan="11">cool 2 minutes on sheet</td>
 </tr>
 <tr>
@@ -25,7 +18,7 @@
 <td>&frac12; t salt</td>
 </tr>
 <tr>
-<td>&frac12; t ground cinnamon</td>
+<td>1 t ground cinnamon</td>
 </tr>
 <tr>
 <td>1 c (2 sticks) butter or margarine, softened</td>
@@ -52,25 +45,24 @@
 </tr>
 </table>
 
-<ol>
-<li>Combined flour, baking soda, salt, and cinnamon in a small
-bowl. Set aside.</li>
-<li>Beat together butter, sugars, eggs, and vanilla.</li>
-<li>Beat flour mixture  into butter mixture.</li>
-<li>Stir in oats and chips.</li>
-<li>Drop by rounded tablespoons onto ungreased baking sheets.</li>
-<li>Bake 7&ndash;8 minutes at 375&deg;F.</li>
-<li>Cool 2 minutes on sheet before transferring to racks.</li>
-</ol>
+1. Combined flour, baking soda, salt, and cinnamon in a small
+bowl. Set aside.
+2.Beat together butter, sugars, eggs, and vanilla.
+3. Beat flour mixture  into butter mixture.
+4. Stir in oats and chips.
+5. Drop by rounded tablespoons onto ungreased baking sheets.
+6. Bake 11&ndash;12 minutes at 375&deg;F.
+7. Cool 2 minutes on sheet before transferring to racks.
 
-<p>Makes about 48 cookies</p>
+Makes about 48 cookies
 
+<div class="variation">
 <h3>Variation: Pan Cookies</h3>
 Grease a 15&Prime;&times;10&Prime; pan. Spread dough into pan and bake
 18&ndash;22 minutes. Cool completely in pan.
+</div>
+
 
 <p class="confession">Shamelessly stolen from <a
 href="http://www.verybestbaking.com/recipes/18478/Oatmeal-Scotchies/detail.aspx/">Nestl&eacute;'s
 Very Best Baking</a></p>
-</body>
-</html>

@@ -51,7 +51,7 @@ layout: default
 * [Molasses Crumbles](molassesCrumbles.html)
 * [Natalie's Godmother's Not-So-Secret and Very Yummy Brownies](nataliesGodmothersNotSoSecretAndVeryYummyBrownies.html)
 * [Oatcakes](oatcakes.html)
-* [Oatmeal Scotchies](oatmealScotchies.html)
+* [Oatmeal Scotchies](oatmealScotchies)
 * [Old-Fashioned Beef Stew](oldFashionedBeefStew.html)
 * [Orange Glaze](orangeGlaze.html)
 * [Orange Vinaigrette](orangeVinaigrette.html)
