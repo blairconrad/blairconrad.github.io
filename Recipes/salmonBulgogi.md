@@ -10,10 +10,10 @@ title: Salmon "Bulgogi"
   <td rowspan="9">roast at 500&deg;F until 140&deg;F in the center</td>
 </tr>
 <tr>
-  <td>&frac13; cup chopped green onions</td>
+  <td>&frac13; c chopped green onions</td>
 </tr>
 <tr>
-  <td>&frac14; cup soy sauce</td>
+  <td>&frac14; c reduced-sodium soy sauce or coconut aminos<br/>&nbsp;&nbsp;(or 2 T regular soy sauce)</td>
 </tr>
 <tr>
   <td>1 T Chinese rice wine or dry Sherry</td>
