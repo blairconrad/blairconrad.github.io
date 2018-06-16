@@ -28,7 +28,7 @@ layout: default
 * [Cranberry Oatmeal Cookies](cranberryOatmealCookies.html)
 * [Creamy Vegan Lemon Bars](creamyVeganLemonBars)
 * [Dave and Kate's Remarkable Brownies](daveAndKatesRemarkableBrownies.html)
-* [Decadent Double Chocolate Chip Cookies](decadentDoubleChocolateChipCookies.html)
+* [Decadent Double Chocolate Chip Cookies](decadentDoubleChocolateChipCookies)
 * [Double Chocolate Espresso and Cashew Cookies](doubleChocolateEspressoAndCashewCookies.html)
 * [Double-Chocolate and Orange Truffles](doubleChocolateAndOrangeTruffles.html)
 * [Dressing](dressing.html)
