@@ -9,7 +9,7 @@ books, <a href="../Recipes">food</a>, volleyball, and games.
 
 When at a computer, I'm a software developer at [Agfa
 Healthcare](http://www.agfahealthcare.com/usa/en/main/), the author of
-[LibraryHippo](http://libraryhippo.com/), and the newest member of
+[LibraryHippo](http://libraryhippo.com/), and a member of
 [Team FakeItEasy](http://fakeiteasy.github.io/), .NET Mocking
 Framework _par excellence_.
 
