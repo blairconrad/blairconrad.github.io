@@ -33,8 +33,9 @@ title: Roasted Eggplant
 
 <p>Makes one pan of roasted eggplant cubes.</p>
 <p class="confession">Stolen from <a href="http://www.freshbitesdaily.com/roasted-eggplant/">Fresh Bites Daily</a></p>
-<div class="variation">
 
+<div class="variation">
 <h2>Variation: freezing</h2>
-<p>Place 1 pound of cooled eggpant into a medium freezer bag. Freeze.</p>
+<p>Place 1 pound of cooled eggpant into a medium freezer bag. Freeze. You can get 9&ndash;10 bags out of a 
+  <a href="https://photos.app.goo.gl/NpeE2XGy4LX3rwv27">bushel of eggplant</a>.</p>
 </div>
