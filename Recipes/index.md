@@ -13,7 +13,7 @@ layout: default
 * [Blueberry Buttermilk Coffeecake](marryatsRageCake.html)
 * [Bolognese Sauce](bologneseSauce.html)
 * [Boston Baked Beans](bostonBakedBeans)
-* [Brown Bread (with bread machine assist)](brownBread.html)
+* [Brown Bread (with bread machine assist)](brownBread)
 * [Brown Sugar Poppyseed Cake](brownSugarPoppyseedCake.html)
 * [Cherry, Chocolate, and Buttermilk Scones](cherryChocolateAndButtermilkScones.html)
 * [Chicken and Peaches](chickenAndPeaches)
