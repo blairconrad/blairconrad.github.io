@@ -17,7 +17,7 @@ title: Brown Bread
   <td>1&#188;&nbsp;c&nbsp;water</td>
 </tr>
 <tr>
-  <td>1/3&nbsp;c&nbsp;molasses</td>
+  <td>1/3&nbsp;c&nbsp;(110&nbsp;g)&nbsp;molasses</td>
 </tr>
 <tr>
   <td>3&#189;&nbsp;c&nbsp;flour</td>
