@@ -88,6 +88,7 @@ layout: default
 * [Steamed Salmon in Black Bean Sauce](steamedSalmonInBlackBeanSauce.html)
 * [Sticky Rice](stickyRice)
 * [Stripey Chocolate Peanut Butter Loaf](stripeyChocolatePeanutButterLoaf.html)
+* [Taro Coconut Milk with Tapioca Pearls](taroCoconutMilkWithTapiocaPearls)
 * [Thai Squash Soup with Shrimp](thaiSquashSoupWithShrimp.html)
 * [Three-Headed Rolls](threeHeadedRolls.html)
 * [Toasting Nuts](toastingNuts.html)
