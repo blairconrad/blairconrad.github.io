@@ -21,7 +21,7 @@ title: Magic Cookie Bars
   <td class="righthide">&nbsp;</td>
 </tr>
 <tr>
-  <td>2&frac13; c (8 oz) semi-sweet chocolate chips, or mixture of chocolate and butterscotch</td>
+  <td>1&frac13; c (8 oz) semi-sweet chocolate chips, or mixture of chocolate and butterscotch</td>
   <td rowspan="3" colspan="2" class="righthide">&nbsp;</td>
 </tr>
 <tr>
