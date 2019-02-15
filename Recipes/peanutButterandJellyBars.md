@@ -34,7 +34,7 @@ title: Peanut Butter and Jelly Bars
   <td>1 c granulated sugar</td>
 </tr>
 <tr>
-  <td>2 c creamy peanut butter</td>
+  <td>2 c (19 oz, by weight) creamy peanut butter</td>
   <td class="righthide">&nbsp;</td>
 </tr>
 <tr>
