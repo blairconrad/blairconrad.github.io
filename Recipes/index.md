@@ -16,6 +16,7 @@ layout: default
 * [Brown Bread (with bread machine assist)](brownBread)
 * [Brown Sugar Poppyseed Cake](brownSugarPoppyseedCake.html)
 * [Cherry, Chocolate, and Buttermilk Scones](cherryChocolateAndButtermilkScones.html)
+* [Chewy Black Licorice Chocolate Brownies](chewyBlackLicoriceChocolateBrownies)
 * [Chicken and Peaches](chickenAndPeaches)
 * [Chocolate Coating](chocolateCoating.html)
 * [Chocolate Coconut Macaroons](chocolateCoconutMacaroons)
