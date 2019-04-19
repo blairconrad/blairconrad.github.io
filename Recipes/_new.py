@@ -6,18 +6,21 @@ import sys
 
 def main(args=sys.argv[1:]):
     title = " ".join(args)
-    t = file("_template.md", "rb").read() % vars()
-    basename = "".join([a.capitalize() for a in args]).translate(None, "' ")
+    basename = "".join([a.capitalize() for a in args]).translate(
+        str.maketrans("", "", "' ")
+    )
     basename = basename[0].lower() + basename[1:]
     filename = basename + ".md"
 
     if os.path.exists(filename) or os.path.exists(basename + ".html"):
         raise Exception("we already have a recipe for " + title)
 
-    with file(filename, "wb") as f:
-        f.write(t)
+    with open("_template.md", "r") as template:
+        content = template.read() % vars()
+        with open(filename, "w") as new_recipe_file:
+            new_recipe_file.write(content)
 
-    with file("index.md", "r") as index_in:
+    with open("index.md", "r") as index_in:
         index_lines = [l.strip() for l in index_in.readlines()]
 
     done = False
@@ -33,10 +36,10 @@ def main(args=sys.argv[1:]):
     if not done:
         index_lines.append("* [" + title + "](" + basename + ")")
 
-    with file("index.md", "wb") as f:
+    with open("index.md", "w") as index_out:
         for line in index_lines:
-            f.write(line)
-            f.write("\r\n")
+            index_out.write(line)
+            index_out.write("\n")
 
     return 0
 
