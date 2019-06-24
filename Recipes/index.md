@@ -3,6 +3,7 @@ layout: default
 ---
 * [Almond Logs](almondLogs.html)
 * [A-maize-ing Cornbread](cornbread.html)
+* [Arnold Palmer Cookies](arnoldPalmerCookies)
 * [Banana Nut Cookies](bananaCookies.html)
 * [Banana Sour Cream Bread](bananaSourCreamBread.html)
 * [Bird's Nest Cookies](birdsNestCookies.html)
