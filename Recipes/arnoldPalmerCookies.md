@@ -45,7 +45,7 @@ title: Arnold Palmer Cookies
   <td colspan="3" class="righthide">&nbsp;</td>
 </tr>  
 <tr>
-  <td>7 t tea</td>
+  <td>7 t tea from regular bags like Red Rose or something. Adjust depending on strength and coarseness.</td>
   <td>grind</td>
   <td rowspan="2">mix</td>
   <td rowspan="8">beat</td>
@@ -96,7 +96,7 @@ title: Arnold Palmer Cookies
 
 
 **Make the iced tea cookie dough**
-1. Grind the tea if it isn’t finely ground enough (you can do this in a spice grinder or by placing it in a zip-top plastic bag and using a rolling pin to crush the leaves).
+1. Grind the tea (after measuring it). You can do this in a spice grinder or by placing it in a zip-top plastic bag and using a rolling pin to crush the leaves.
 1. Add the egg to the tea and beat to blend.
 1. Place the butter and both sugars in the bowl of the stand mixer (no need to wash it after making the lemon dough) and beat together on medium speed until the mixture looks lighter in color than when you started, about 1 minute.
 1. Add the baking powder, baking soda, and salt and beat for about 30 seconds to incorporate.
