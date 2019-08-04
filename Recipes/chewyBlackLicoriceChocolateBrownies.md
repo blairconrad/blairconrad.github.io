@@ -5,7 +5,7 @@ title: Chewy Black Licorice Chocolate Brownies
 <table>
 <tr>
   <td>1 c all-purpose flour</td>
-  <td rowspan="4" class="righthide">whisk</td>
+  <td rowspan="4" class="righthide">sift</td>
   <td rowspan="4">&nbsp;</td>
   <td rowspan="9">stir</td>
   <td rowspan="12">stir</td>
@@ -14,7 +14,7 @@ title: Chewy Black Licorice Chocolate Brownies
   <td rowspan="13">bake at 350&deg;F about 40 minutes</td>
 </tr>
 <tr>
-  <td>&frac12; c + 2 T unsweetened cocoa powder</td>
+  <td>&frac12; c + 2 T (60 g) unsweetened cocoa powder</td>
 </tr>
 <tr>
   <td>2 t ground anise seeds</td>
@@ -58,10 +58,10 @@ title: Chewy Black Licorice Chocolate Brownies
 
 1. Line a 9&Prime; square baking pan with paper or foil, leaving 2&Prime; of overhang on 2 sides.
    Brush the paper with butter.
-1. In a medium bowl, whisk the flour with the cocoa powder, anise seeds, and salt.
+1. In a medium bowl, sift the flour with the cocoa powder, anise seeds, and salt.
 1. In a large bowl, whisk the melted butter with both sugars.
 1. Whisk the eggs and vanilla into the sugary butter.
-1. Stir dry ingredients into wet miture.
+1. Stir dry ingredients into wet mixture.
 1. Stir three-fourths of the chocolate and licorice chews into the batter.
 1. Put batter in pan, smoothing the top.
 1. Gently press the remaining chocolate and licorice chews onto the batter.
