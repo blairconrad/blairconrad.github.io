@@ -7,7 +7,7 @@ title: Moussaka Made with Cauliflower Bechamel
   <td>3 russet potatoes</td>
   <td colspan="2" class="righthide">&nbsp;</td>
   <td>slice &frac14;&Prime; thick</td>
-  <td>brush with olive oil;<br/>sprinkle with salt and pepper</td>
+  <td>place on oiled baking sheet; brush with olive oil;<br/>sprinkle with salt and pepper</td>
   <td>bake 15 minutes at 450&deg;</td>
   <td class="righthide">&nbsp;</td>
   <td rowspan="23">layer:<br/>all potatoes,<br/>&frac12; eggplant,<br/>all the meat,<br/>&frac12; eggplant,<br/>all the bechamel</td>
@@ -18,7 +18,7 @@ title: Moussaka Made with Cauliflower Bechamel
   <td>slice &frac14;&ndash;&frac12;&Prime; thick</td>
   <td>sprinkle with salt</td>
   <td colspan="2">sweat 30 minutes, rinse, dry</td>
-  <td>brush with olive oil;<br/>sprinkle with salt and pepper</td>
+  <td>place on oiled baking sheet; brush with olive oil;<br/>sprinkle with salt and pepper</td>
   <td>bake 15 minutes at 450&deg;</td>
 </tr>
 <tr>
@@ -94,11 +94,11 @@ title: Moussaka Made with Cauliflower Bechamel
 1. Slice eggplant &frac14;&ndash;&frac12;&Prime; thick, as evenly as possible
 1. Lay eggplant slices in a colander and sprinkle generously with salt. Let sit for about 30 minutes
 1. Slice potatoes about &frac14;&Prime; thick
-1. Lay the potatoes on a baking sheet in a single layer
-1. Brush lightly with olive oil, then sprinkle wiht salt and pepper
+1. Lay the potatoes on an oiled baking sheet in a single layer
+1. Brush lightly with olive oil, then sprinkle with salt and pepper
 1. Bake for about 15 minutes, until cooked. Set aside.
 1. Rinse the eggplant under cool water. Pat dry with a towel.
-1. Layer the eggplant on the baking sheet, then brush them with olive oil and sprinkle with salt and pepper
+1. Layer the eggplant on an oiled baking sheet, then brush them with olive oil and sprinkle with salt and pepper
 1. Bake for about 15 minutes, until soft and lightly golden
 1. Chop the cauliflower and steam in the chicken broth until cooked through, 15&ndash;20 minutes
 1. Blend cauliflower (and any remaining broth from the pot), coconut milk, nutmeg, ghee, salt, and pepper until smooth. Taste and adjust seasonings
