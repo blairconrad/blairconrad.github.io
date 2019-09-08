@@ -4,7 +4,7 @@ title: Peanut Butter Balls
 ---
 <table>
   <tr>
-    <td>1 c peanut butter</td>
+    <td>1 c peanut butter (260&nbsp;g)</td>
     <td rowspan="4">mix</td>
     <td rowspan="5">mix just to incorporate</td>
     <td rowspan="5">roll into balls</td>
@@ -13,20 +13,20 @@ title: Peanut Butter Balls
     <td rowspan="6">chill</td>
   </tr>
   <tr>
-    <td>1 c icing sugar</td>
+    <td>1 c icing sugar (115&nbsp;g)</td>
   </tr>
   <tr>
-    <td>&frac12; c coconut flakes</td>
+    <td>&frac12; c coconut flakes (45&nbsp;g)</td>
   </tr>
   <tr>
-    <td>&frac14; c margarine</td>
+    <td>&frac14; c margarine (58&nbsp;g)</td>
   </tr>
   <tr>
-    <td colspan>1 c crisp rice cereal</td>
+    <td colspan>1 c crisp rice cereal (28&nbsp;g)</td>
     <td colspan="1" class="righthide">&nbsp;</td>
   </tr>
   <tr>
-    <td>approximately &frac14; lb of semisweet chocolate</td>
+    <td>approximately &frac14; lb of semisweet chocolate (225&nbsp;g)</td>
     <td colspan="4" class="righthide">melt</td>
   </tr>
 </table>
