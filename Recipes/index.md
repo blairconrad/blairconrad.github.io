@@ -60,7 +60,7 @@ layout: default
 * [Orange Glaze](orangeGlaze.html)
 * [Orange Vinaigrette](orangeVinaigrette.html)
 * [Parker House Rolls](parkerHouseRolls.html)
-* [Peanut Butter Balls](peanutButterBalls.html)
+* [Peanut Butter Balls](peanutButterBalls)
 * [Peanut Butter and Jelly Bars](peanutButterandJellyBars)
 * [Pecan-Molasses Toffee](pecanMolassesToffee.html)
 * [Pistachio Gelato](pistachioGelato.html)
