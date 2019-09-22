@@ -90,6 +90,7 @@ layout: default
 * [Spinach Salad with Strawberries and Blueberries](spinachSaladWithBerries.html)
 * [Steamed Salmon in Black Bean Sauce](steamedSalmonInBlackBeanSauce.html)
 * [Sticky Rice](stickyRice)
+* [Strawberry Rhubarb Pie](strawberryRhubarbPie)
 * [Stripey Chocolate Peanut Butter Loaf](stripeyChocolatePeanutButterLoaf.html)
 * [Taro Coconut Milk with Tapioca Pearls](taroCoconutMilkWithTapiocaPearls)
 * [Thai Squash Soup with Shrimp](thaiSquashSoupWithShrimp.html)
