@@ -42,6 +42,7 @@ layout: default
 * [Flourless Chocolate Orange Cake](flourlessChocolateOrangeCake)
 * [Gluten Free Pear Bread](glutenFreePearBread)
 * [Grape-Nuts Bread](grapeNutsBread)
+* [Hoisin-Glazed Salmon](hoisinGlazedSalmon)
 * [Jiggly Jello](jigglyJello.html)
 * [Krispies](krispies.html)
 * [Macadamia and Coconut Clusters](macadamiaAndCoconutClusters.html)
