@@ -101,4 +101,5 @@ layout: default
 * [Triple-Chocolate Brownies](tripleChocolateBrownies.html)
 * [Ultimate Banana Bread](ultimateBananaBread)
 * [Vanilla and Walnut Shortbread Hearts](vanillaAndWalnutShortbreadHearts.html)
+* [Whole Wheat Bread](wholeWheatBread)
 * [Yorkshire Pudding](yorkshirePudding.html)
