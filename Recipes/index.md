@@ -17,6 +17,7 @@ layout: default
 * [Boston Baked Beans](bostonBakedBeans)
 * [Brown Bread (with bread machine assist)](brownBread)
 * [Brown Sugar Poppyseed Cake](brownSugarPoppyseedCake.html)
+* [Buckwheat Banana Bread](buckwheatBananaBread)
 * [Cherry, Chocolate, and Buttermilk Scones](cherryChocolateAndButtermilkScones.html)
 * [Chewy Black Licorice Chocolate Brownies](chewyBlackLicoriceChocolateBrownies)
 * [Chicken and Peaches](chickenAndPeaches)
