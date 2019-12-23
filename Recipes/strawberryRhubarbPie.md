@@ -21,13 +21,13 @@ title: Strawberry Rhubarb Pie
 </tr>
 <tr>
   <td>3 c hulled and quartered strawberries (375 g)</td>
-  <td rowpan="2" class="righthide">&nbsp;</td>
+  <td rowspan="2" class="righthide">&nbsp;</td>
 </tr>
 <tr>
   <td>3 c rhubarb, sliced &frac12;&Prime; thick (375 g)</td>
 </tr>
 <tr>
-  <td>2 pie dough rounds</td>
+  <td>2 <a href="../pieCrust">pie dough</a> rounds</td>
   <td colspan="2" class="righthide">&nbsp;</td>
 </tr>
 </table>
