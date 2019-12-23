@@ -13,6 +13,7 @@ layout: default
 * [Blair's Elephant Ice Cream](blairsElephantIceCream.html)
 * [Blue Chip Chocolate Chip Cookies](blueChipChocolateChipCookies.html)
 * [Blueberry Buttermilk Coffeecake](marryatsRageCake.html)
+* [Blueberry Pie](blueberryPie)
 * [Bolognese Sauce](bologneseSauce.html)
 * [Boston Baked Beans](bostonBakedBeans)
 * [Brown Bread (with bread machine assist)](brownBread)
