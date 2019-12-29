@@ -68,6 +68,7 @@ layout: default
 * [Peanut Butter Balls](peanutButterBalls)
 * [Peanut Butter and Jelly Bars](peanutButterandJellyBars)
 * [Pecan-Molasses Toffee](pecanMolassesToffee.html)
+* [Perfect Cheesecake](perfectCheesecake)
 * [Pie Crust](pieCrust)
 * [Pistachio Gelato](pistachioGelato.html)
 * [Pork Calvados](porkCalvados.html)
