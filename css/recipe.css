@@ -8,6 +8,10 @@ h1 {
     margin-bottom: 0.5em;
 }
 
+h2 {
+    color: Firebrick;
+}
+
 .variation h2 {
   font-size: 100%;
   font-weight: bold;
