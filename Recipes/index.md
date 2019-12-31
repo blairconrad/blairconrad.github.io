@@ -103,6 +103,7 @@ layout: default
 * [Thai Squash Soup with Shrimp](thaiSquashSoupWithShrimp.html)
 * [Three-Headed Rolls](threeHeadedRolls.html)
 * [Toasting Nuts](toastingNuts.html)
+* [Triple Coconut Cream Pie](tripleCoconutCreamPie)
 * [Triple-Chocolate Brownies](tripleChocolateBrownies.html)
 * [Ultimate Banana Bread](ultimateBananaBread)
 * [Vanilla and Walnut Shortbread Hearts](vanillaAndWalnutShortbreadHearts.html)
