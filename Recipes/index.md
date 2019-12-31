@@ -11,6 +11,7 @@ layout: default
 * [Black Forest Pot Roast](blackForestPotRoast)
 * [Black-Bottom Cupcakes](blackBottomCupcakes)
 * [Blair's Elephant Ice Cream](blairsElephantIceCream.html)
+* [Blind-Baking a Pie Crust](blind-bakingAPieCrust)
 * [Blue Chip Chocolate Chip Cookies](blueChipChocolateChipCookies.html)
 * [Blueberry Buttermilk Coffeecake](marryatsRageCake.html)
 * [Blueberry Pie](blueberryPie)
