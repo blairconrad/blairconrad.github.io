@@ -1,2 +1,8 @@
-_site
-obj
+/docs/
+/src/plugins/
+/src/themes/
+/src/venv/
+
+__pycache__/
+.peru/
+.pytest_cache/

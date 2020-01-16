@@ -1,0 +1,63 @@
+---
+template: recipe
+title: Three-Headed Rolls
+---
+<table>
+
+  <tr>
+    <td>&#8531; c sugar</td>
+    <td rowspan="3">mix</td>
+    <td rowspan="4">dissolve</td>
+    <td rowspan="4">cool</td>
+    <td rowspan="7">mix</td>
+    <td rowspan="8">add</td>
+    <td rowspan="9">stir</td>
+    <td rowspan="9">let rise until double</td>
+    <td rowspan="9">punch</td>
+    <td rowspan="9">let rise half an hour</td>
+    <td rowspan="9">Bake at 300&deg;F for about 20 minutes</td>
+  </tr>
+  <tr>
+    <td>1 t salt</td>
+  </tr>
+  <tr>
+    <td>2 T margarine</td>
+  </tr>
+  <tr>
+    <td>1&#188;-1 &#8531; c boiling water</td>
+    <td class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>1 T yeast</td>
+    <td rowspan="3">dissolve</td>
+    <td rowspan="3">cool</td>
+    <td class="righthide" rowspan="3">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&#8531; c warm water</td>
+  </tr>
+  <tr>
+    <td>&#189; t sugar</td>
+  </tr>
+  <tr>
+    <td>1 egg</td>
+    <td>beat</td>
+    <td colspan="3" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>4&#189;-5 c flour</td>
+    <td class="righthide" colspan="5">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li>Pour boiling water over sugar, salt, and margarine. Dissolve and
+    cool
+  <li>Dissolve yeast and sugar in warm water. Cool
+  <li>Combine sugar and yeast mixture
+  <li>Beat 1 egg and add to yeast/sugar mixture
+  <li>Add flour
+  <li>Let rise until double in volume
+  <li>Punch, list rise again for half an hour
+  <li>Bake at 300&deg;F for about 20 minutes
+</ol>

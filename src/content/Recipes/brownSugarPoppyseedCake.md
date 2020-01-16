@@ -1,0 +1,74 @@
+template: recipe
+title: Brown Sugar Poppyseed Cake
+
+<table>
+<tr>
+  <td>1 c milk</td>
+  <td rowspan="3">combine and soak<br>20 minutes</td>
+  <td rowspan="7" class="righthide">&nbsp;</td>
+  <td rowspan="11">combine</td>
+  <td rowspan="12">fold</td>
+  <td rowspan="14">pour</td>
+     <td rowspan="14">bake at 350&deg;F 45 - 50 minutes</td>
+</tr>
+<tr>
+  <td>1 T vinegar</td>
+</tr>
+<tr>
+  <td>&#189; c poppy seeds</td>
+</tr>
+<tr>
+  <td>2&#189; c flour</td>
+  <td rowspan="4">combine</td>
+</tr>
+<tr>
+  <td>2 t baking powder</td>
+</tr>
+<tr>
+  <td>1 t baking soda</td>
+</tr>
+<tr>
+  <td>&#189 t salt</td>
+</tr>
+<tr>
+  <td>1 c margarine</td>
+  <td rowspan="2">cream</td>
+  <td rowspan="4">beat</td>
+</tr>
+<tr>
+  <td>1&#189; c brown sugar</td>
+</tr>
+<tr>
+  <td>4 egg yolks</td>
+  <td rowspan="2" class="toprighthide">&nbsp;</td>
+</tr>
+<tr>
+  <td>1 t vanilla</td>
+</tr>
+<tr>
+  <td>4 egg whites</td>
+  <td colspan="3">beat until stiff</td>
+</tr>
+<tr>
+  <td>4 t brown sugar</td>
+  <td rowspan="2" colspan="4">combine</td>
+</tr>
+<tr>
+  <td>1 T cinammon</td>
+</tr>
+</table>
+
+<ol>
+<li>Soak poppyseeds in milk and vinegar for 20 minutes</li>
+<li>Mix flour, baking powder, baking soda, and salt
+<li>Cream margarine and 1&#189; c brown sugar</li>
+<li>Add egg yolks and vanilla to margarine and sugar</li>
+<li>Add flour to creamed mixture in two batches, alternating with
+milky poppyseeds</li>
+<li>Beat egg whites until stiff peaks form</li>
+<li>Combine cinnamon and 4 t brown sugar</li>
+<li>Pour half the batter into a tub pan</li>
+<li>Sprinkle cinnamon mixture on batter</li>
+<li>Pour remaining batter into pan</li>
+<li>Bake at 350&deg;F for 45&ndash;50 minutes</li>
+</ol>
