@@ -1,0 +1,62 @@
+---
+template: recipe
+title: Thai Squash Soup with Shrimp
+---
+<table>
+  <tr>
+    <td>1 stalk lemongrass</td>
+    <td>bruise and cut</td>
+    <td rowspan="8">put in slow cooker</td>
+    <td rowspan="8">cook 4-6 hours on low</td>
+    <td rowspan="8">discard ginger and lemongrass</td>
+    <td rowspan="8">immersion blend to make smooth</td>
+    <td rowspan="9">cook on high for 15 minutes</td>
+    <td rowspan="10">add</td>
+  </tr>
+  <tr>
+    <td>4 c cubed peeled butternut squash</td>
+    <td rowspan="7" class="righthide">&nbsp</td>
+  </tr>
+  <tr>
+    <td>1 can (400 mL) coconut milk</td>
+  </tr>
+  <tr>
+    <td>2 c sodium-reduced chicken stock</td>
+  </tr>
+  <tr>
+    <td>1 T Thai red curry paste</td>
+  </tr>
+  <tr>
+    <td>6 thin slices of ginger root</td>
+  </tr>
+  <tr>
+    <td>1&#189; t fish sauce (or &#189; t salt)</td>
+  </tr>
+  <tr>
+    <td>&#188; t brown sugar</td>
+  </tr>
+  <tr>
+    <td>1 lb large raw shrimp, peeled and deveined</td>
+    <td colspan="5" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>2 T thinly sliced fresh mint or basil</td>
+    <td colspan="6" class="righthide">&nbsp;</td>
+  </tr>
+</table>
+
+<ol>
+  <li>Hit lemongrass with the top of a knife blade along the stalk to
+    bruise; cut into 1-inch lengths.</li>
+  <li>In slow cooker, combine squash, coconut milk, chicken stock, curry paste, ginger,
+    lemongrass, fish sauce, and brown sugar.</li>
+  <li>Cook 4-6 hours on low.</li>
+  <li>Discard ginger and lemongrass.</li>
+  <li>Whisk, mash, or blend squash to make a smooth soup.</li>
+  <li>Add shrimp and cook for 15 minutes on high.</li>
+  <li>Stir in (or top with) basil/mint.</li>
+</ol>
+
+<p class="confession">Shamelessly stolen from
+  <a href="http://www.canadianliving.com/food/quick_and_easy/thai_squash_soup_with_shrimp.php">the
+    January 2008 issue of Canadian Living</a>.</p>

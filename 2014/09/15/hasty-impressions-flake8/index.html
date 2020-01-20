@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=", Development, " />
+
+<meta property="og:title" content="Hasty Impressions: flake8 "/>
+<meta property="og:url" content="https://blairconrad.com/2014/09/15/hasty-impressions-flake8/" />
+<meta property="og:description" content="python flake8 HastyImpressions A little while ago, I was fixing a LibraryHippo issue in an area of the code that didn&#39;t have very good unit test coverage. As part of my fix, I moved one class from the main libraryhippo.py file to its own file. I integration-tested the fix …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2014-09-15T00:00:00-04:00" />
+<meta name="twitter:title" content="Hasty Impressions: flake8 ">
+<meta name="twitter:description" content="python flake8 HastyImpressions A little while ago, I was fixing a LibraryHippo issue in an area of the code that didn&#39;t have very good unit test coverage. As part of my fix, I moved one class from the main libraryhippo.py file to its own file. I integration-tested the fix …">
+
+        <title>Hasty Impressions: flake8  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2014/09/15/hasty-impressions-flake8/">
+                Hasty Impressions: flake8
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <ul>
+<li>python</li>
+<li>flake8</li>
+<li>HastyImpressions</li>
+</ul>
+<hr>
+<p>A little while ago, I was fixing <a href="https://github.com/LibraryHippo/LibraryHippo/pull/2">a LibraryHippo issue</a>
+in an area of the code that didn't have very good unit test
+coverage. As part of my fix, I moved one class from the main
+<code>libraryhippo.py</code> file to its own file. I integration-tested the fix,
+deployed the new version, and moved on.</p>
+<p>A day or so later, I noticed that I'd
+<a href="https://github.com/LibraryHippo/LibraryHippo/issues/3">broken a very important side effect</a> of the
+card-checking operation. The results of the check are cached and used
+later when sending out notifications. Because we still want to deliver
+a live report to users even if the caching fails, the failure is not
+detectable from the web page.</p>
+<p>Of course better test coverage would've picked this up, but it's the
+sort of error that just as easily would've been caught in a compiled language such as
+C#, or by a static analysis tool. So I decided to try out such a tool.</p>
+<p>A few web searches later, and it looked like <a href="https://pypi.python.org/pypi/flake8">flake8</a> was the
+thing to try. It bundles together</p>
+<ul>
+<li><a href="https://pypi.python.org/pypi/pyflakes">PyFlakes</a></li>
+<li><a href="https://pypi.python.org/pypi/pep8">pep8</a>, and</li>
+<li><a href="https://pypi.python.org/pypi/mccabe">mccabe</a></li>
+</ul>
+<p>None of which I'd heard of before, (at least as packages&mdash;I'd
+known of <a href="http://legacy.python.org/dev/peps/pep-0008/">PEP 8</a>  for a
+long time), but they claimed to do what I wanted. So I gave
+flake8 a go.</p>
+<h2>Initial impressions</h2>
+<p>Installation was as easy as running <code>pip install flake8</code>. It picked up
+the missing dependencies automatically, and I was ready to go in seconds.</p>
+<p>Too impatient to read any docs, I ran it:</p>
+<pre><code>LibraryHippo&gt; flake8
+Usage: flake8 [options] input ...
+flake8: error: input not specified
+</code></pre>
+
+<p>A helpful error message. I reran, specifying the application directory
+(<code>flake8 App</code>) and got&hellip; rather a lot of output. It looked
+like this:</p>
+<pre><code>app\BeautifulSoup.py:100:1: E265 block comment should start with '# '
+app\BeautifulSoup.py:107:1: E302 expected 2 blank lines, found 1
+app\BeautifulSoup.py:114:1: E302 expected 2 blank lines, found 1
+&vellip;
+app\cardchecker.py:61:13: F841 local variable 'name' is assigned to but never used
+app\cardchecker.py:63:80: E501 line too long (96 &gt; 79 characters)
+app\cardchecker.py:71:37: F821 undefined name 'clock'
+app\cardchecker.py:74:80: E501 line too long (84 &gt; 79 characters)
+app\cardchecker.py:75:1: W391 blank line at end of file
+&vellip;
+</code></pre>
+
+<p>and so on. Success!</p>
+<h2>Too many complaints!</h2>
+<p>Things seemed to be working, and it did identify the cause of my error
+(<code>app\cardchecker.py:71:37: F821 undefined name 'clock'</code>), but it was
+buried in way too much other information. </p>
+<p>flake8 reported <strong>823</strong> problems in my application (and that didn't
+even include the test code). This is a common problem when running any
+kind of analysis tool for the first time. Since we've not been running
+a tight ship, there are all kinds of problems in the
+code. Fortunately, like many tools of its ilk, flake8 lets us tailor
+the problems that are reported. I had two immediate goals:</p>
+<ul>
+<li>ignore complaints about the library 
+  <a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a>
+  (over half the complaints were from BeautifulSoup.py), and</li>
+<li>ignore (for now) less severe errors and style warnings</li>
+</ul>
+<p>Now, how to do that?</p>
+<h2>Command-line help</h2>
+<p>I hoped that the tool would give me useful help if I asked, and it
+did:</p>
+<pre><code>LibraryHippo&gt;flake8  -h
+Usage: flake8 [options] input ...
+
+Options:
+  --version             show program's version number and exit
+  -h, --help            show this help message and exit
+  -v, --verbose         print status messages, or debug with -vv
+  -q, --quiet           report only file names, or nothing with -qq
+  --first               show first occurrence of each error
+  --exclude=patterns    exclude files or directories which match these comma
+                        separated patterns (default:
+                        .svn,CVS,.bzr,.hg,.git,__pycache__)
+  --filename=patterns   when parsing directories, only check filenames
+                        matching these comma separated patterns (default:
+                        *.py)
+  --select=errors       select errors and warnings (e.g. E,W6)
+  --ignore=errors       skip errors and warnings (e.g. E4,W)
+  --show-source         show source code for each error
+  --show-pep8           show text of PEP 8 for each error (implies --first)
+  --statistics          count errors and warnings
+  --count               print total number of errors and warnings to standard
+                        error and set exit code to 1 if total is not null
+  --max-line-length=n   set maximum allowed line length (default: 79)
+  --hang-closing        hang closing bracket instead of matching indentation
+                        of opening bracket's line
+  --format=format       set the error format [default|pylint|&lt;custom&gt;]
+  --diff                report only lines changed according to the unified
+                        diff received on STDIN
+  -j JOBS, --jobs=JOBS  number of jobs to run simultaneously, or 'auto'
+  --exit-zero           exit with code 0 even if there are errors
+  --builtins=BUILTINS   define more built-ins, comma separated
+  --doctests            check syntax of the doctests
+  --max-complexity=MAX_COMPLEXITY
+                        McCabe complexity threshold
+  --install-hook        Install the appropriate hook for this repository.
+
+  Testing Options:
+    --benchmark         measure processing speed
+
+  Configuration:
+    The project options are read from the [flake8] section of the tox.ini
+    file or the setup.cfg file located in any parent folder of the path(s)
+    being processed.  Allowed options are: exclude, filename, select,
+    ignore, max-line-length, hang-closing, count, format, quiet, show-
+    pep8, show-source, statistics, verbose, jobs, builtins, doctests, max-
+    complexity.
+
+    --config=path       user config file location (default:
+                        C:\PortableApps\Home\.flake8)
+</code></pre>
+
+<p>Seems comprehensive. I bet a bunch of those would be quite handy
+in time, but right now, it looked like I wanted <code>--select</code> to limit
+the kinds of complaints. Based on the example, I figured I could use a
+single letter to include a whole class of complaints. And it looked like
+<code>--exclude</code> would keep flake8 from examining BeautifulSoup:</p>
+<pre><code>LibraryHippo&gt;flake8 App --select=F --exclude=BeautifulSoup.py
+App\cardchecker.py:6:1: F401 'DeadlineExceededError' imported but unused
+App\cardchecker.py:61:13: F841 local variable 'name' is assigned to but never used
+App\cardchecker.py:71:37: F821 undefined name 'clock'
+</code></pre>
+
+<p>There were complaints about other files, but the total count was down to
+31, which was quite manageable. The "F" codes come from PyFlakes, and
+don't necessarily mean "fatal" like I first thought. Some, such as
+F841, are valid problems, but hardly catastrophic. Still, it was a
+small matter to fix all the "F"s in the code. Later on, I went back,
+expanding to changing the <code>--select</code> to <code>F,E</code> and eventually omitting
+it altogther.</p>
+<h2>Command-line arguments are so tedious</h2>
+<p>Always specifying options to ignore files or set maximum line lengths
+(79 is just too short even for an editor taking up the left half of my
+screen) can get old fast, so flake8 lets you put ever-repeated
+settings in a file. As promised, the following <code>setup.cfg</code> file lets
+me just run <code>flake8 App</code> and get the same results as above:</p>
+<pre><code class="ini">[flake8]
+exclude = BeautifulSoup.py
+select = F</code></pre>
+
+<h2>Handy extension: naming</h2>
+<p>It's possible to write extensions for flake8, and a number already
+exist. In fact, mccabe looks to be implemented as an extension (and
+maybe the others, I didn't check). On a lark, I went looking and found
+the <a href="https://pypi.python.org/pypi/pep8-naming">pep8-naming</a>
+extension, which checks PEP 8 naming conventions (something
+not fully covered by pep8, I guess). Installation via pip was simple
+and now<br>
+<code>flake8 --version</code> reports</p>
+<pre><code>2.2.2 (pep8: 1.5.7, pyflakes: 0.8.1, mccabe: 0.2.1, naming: 0.2.2)
+CPython 2.7.2 on Windows</code></pre>
+
+<p>(And just running flake8 shows a whole bunch of "N8*"
+complaints such as</p>
+<pre><code>App\wpl.py:227:17: N806 variable in function should be lowercase
+App\gael\memcache.py:16:11: N801 class names should use CapWords convention
+</code></pre>
+
+<p>But that's my problem to deal with.)</p>
+<p>Writing new extensions doesn't look to be too difficult, if anyone
+listening is interested in helping the tool spell-check my symbol
+names (and maybe comments).</p>
+<h2>Impressions</h2>
+<p>A very useful static analysis tool that is easy to set up, runs
+quickly, and is configurable enough to start working on almost any
+codebase. So far the complaint descriptions seem good, and I can
+quickly resolve reported problems without consulting a manual. The
+extension ecosystem provides even more power, if you need it.</p>
+<h3>Will I Use It?</h3>
+<p>Absolutely, and you should too.</p>
+<p>I'm so committed to it that I wrote a "deploy.bat" file that will only
+deploy to Google App Engine if flake8 doesn't complain.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2014-09-15T00:00:00-04:00">2014-09-15</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

@@ -1,0 +1,81 @@
+template: recipe
+title: Cherry, Chocolate, and Buttermilk Scones
+
+<table>
+<tr>
+  <td>3 T sugar</td>
+  <td rowspan="2">mix</td>
+  <td rowspan="2" colspan="4" class="righthide">&nbsp;</td>
+  <td rowspan="13">press</td>
+  <td rowspan="13">bake 15-20 minutes at 375&deg;F (190&deg;C)</td>
+</tr>
+<tr>
+  <td>&#188; t cinnamon</td>
+</tr>
+<tr>
+  <td>1 c (140 g) all-purpose flour</td>
+  <td rowspan="7">whisk</td>
+  <td rowspan="8">cut</td>
+  <td rowspan="10">stir</td>
+  <td rowspan="11">stir</td>
+  <td rowspan="11">form and cut</td>
+</tr>
+<tr>
+  <td>1 c (140 g) cake flour</td>
+</tr>
+<tr>
+  <td>&#188; c (50 g) sugar</td>
+</tr>
+<tr>
+  <td>2 t baking powder</td>
+</tr>
+<tr>
+  <td>&#189; t baking soda</td>
+</tr>
+<tr>
+  <td>&#188; t salt</td>
+</tr>
+<tr>
+  <td>1 t orange zest</td>
+</tr>
+<tr>
+  <td>8 T (1 stick, 115 g) unsalted butter, cold</td>
+  <td>cube</td>
+</tr>
+<tr>
+  <td>&#190; c (90 g) dried cherries, sweet or sour</td>
+  <td class="righthide" colspan="2" rowspan="2">&nbsp;</td>
+</tr>
+<tr>
+  <td>&#8531; c (40 g) miniature chocolate chips</td>
+</tr>
+<tr>
+  <td>&#8532; c (170 ml) buttermilk</td>
+  <td class="righthide" colspan="3">&nbsp;</td>
+</tr>
+</table>
+
+<ol>
+<li>Stir together 3 T sugar and the cinnamon. Set aside.</li>
+<li>In a large bowl, whisk together the flours, remaining sugar, baking powder, baking
+soda, salt, and orange zest.</li>
+<li>Cut the butter into &#188;-inch cubes and add to the flour
+mixture. Cut in, using a pastry cutter, your fingers, or the paddle
+attachment of a stand mixer, until the mixture resembles cornmeal with
+evenly dispersed chunks of butter.</li>
+<li>Stir in the cherries and chocolate chips.</li>
+<li>Stir in the buttermilk, just until a wet sticky dough is
+formed.</li>
+<li>Turn out the dough onto a lightly-floured work surface. Pat into a
+round, 1&Prime; thick. Cut into 8 wedges.</li>
+<li>Press the top of each wedge into the reserved cinnamon-sugar
+mixture.</li>
+<li>Bake 15-20 minutes at 375&deg;F (190&deg;C), until firm to the
+touch and lightly golden brown.</li>
+</ol>
+
+<p>Makes 8 scones</p>
+<p>Variation: substitute an equal amount of any dried fruit for the
+cherries. Dried cranberries work very well.</p>
+<p class="confession">Shamelessly stolen from David Leibowitz's <a
+href="http://www.allconsuming.net/item/view/59713">The Great Book of Chocolate</a></p>

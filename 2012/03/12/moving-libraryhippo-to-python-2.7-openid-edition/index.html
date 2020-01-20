@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="appengine, myopenid, openid, python, python27, stackexchange, Development, " />
+
+<meta property="og:title" content="Moving LibraryHippo to Python 2.7 - OpenID edition "/>
+<meta property="og:url" content="https://blairconrad.com/2012/03/12/moving-libraryhippo-to-python-2.7-openid-edition/" />
+<meta property="og:description" content="Now that Google has announced that Python 2.7 is fully supported on Google App Engine, I figured I should get my act in gear and make convert LibraryHippo over. I&#39;d had a few aborted attempts earlier, but this time things are going much better. How We Got Here - Cloning …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2012-03-12T00:00:00-04:00" />
+<meta name="twitter:title" content="Moving LibraryHippo to Python 2.7 - OpenID edition ">
+<meta name="twitter:description" content="Now that Google has announced that Python 2.7 is fully supported on Google App Engine, I figured I should get my act in gear and make convert LibraryHippo over. I&#39;d had a few aborted attempts earlier, but this time things are going much better. How We Got Here - Cloning …">
+
+        <title>Moving LibraryHippo to Python 2.7 - OpenID edition  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2012/03/12/moving-libraryhippo-to-python-2.7-openid-edition/">
+                Moving LibraryHippo to Python 2.7 - OpenID edition
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>Now that Google has announced that <a title="Announcing the General Availability of the Python 2.7 Runtime for App Engine" href="http://googleappengine.blogspot.com/2012/02/announcing-general-availability-of.html">Python 2.7 is fully supported on Google App Engine</a>, I figured I should get my act in gear and make convert <a href="http://www.libraryhippo.com">LibraryHippo</a> over. I'd had a few aborted attempts earlier, but this time things are going much better.</p>
+
+<h2>How We Got Here - Cloning LibraryHippo</h2>
+
+<p>One of the requirements for moving to Python 2.7 is that the <a href="http://code.google.com/appengine/docs/python/python27/using27.html#Prerequisites">app must use the High Replication Datastore</a>, and LibraryHippo did not. Moreover, the only way to convert to the HRD is to <a href="http://code.google.com/appengine/docs/adminconsole/datastoreadmin.html#Copying_Entities_to_Another_Application">copy your data to a whole new application</a>. So I bit the bullet, and made a new application from the LibraryHippo source.</p>
+<p>When you set up a new application, you have the option of allowing federated authentication via <a href="http://openid.net/">OpenID</a>. I'd wanted to do this for some time, so I thought, "While I'm changing the datastore, template engine, and version of Python under the hood, why not add a little complexity?", and I picked it.</p>
+
+<h2>The Simplest Thing That Should Work - Google as Provider</h2>
+
+<p>In theory, LibraryHippo should be able to support any OpenID provider, but I wanted to start with Google as provider for a few reasons:
+<ul>
+<li>concentrating on one provider would <b>get the site running quickly</b> and I could add additional providers over time</li>
+<li>I need to <b>support existing users</b> - they've already registered with App Engine using Google, and I want things to keep working for them, and</li>
+<li>I wanted to <b>minimize my headaches</b> - I figure, if an organization supports both an OpenID client feature and an OpenID provider, they must work together as well as any other combination.</li>
+</ul></p>
+<p>Even though there's been official guidance around <a href="http://code.google.com/appengine/articles/openid.html">using OpenID in App Engine</a> since mid-2010, I started with <a href="http://blog.notdot.net/2010/05/Using-OpenID-authentication-on-App-Engine">Nick Johnson's article</a> for an overview - he's never steered me wrong before. And I'm glad I did. While the official guide is very informative, Nick broke things down really well. To quote him,</p>
+<blockquote>Once you've enabled OpenID authentication for your app, a few things change:
+<ul>
+  <li>URLs generated by create_login_url without a federated_identity parameter specified will redirect to the OpenID login page for Google Accounts.</li>
+  <li>URLs that are protected by "login: required" in app.yaml or web.xml will result in a redirect to the path "/_ah/login_required", with a "continue" parameter of the page originally fetched. This allows you to provide your own openid login page.</li>
+  <li>URLs generated by create_login_url with a federated_identity provider will redirect to the specified provider.</li>
+</ul>
+</blockquote>
+
+<p>That sounded pretty good - the existing application didn't use <code>login: required</code> anywhere, just <code>create_login_url</code> (without a <code>federated_identity</code>, of course).
+So, LibraryHippo should be good to go - every time create_login_url is used to generate a URL, it'll send users to Google Accounts. I tried it out.</p>
+
+<p><b>It just worked, almost.</b> When a not-logged-in user tried to access a page that required a login, she was directed to the Google Accounts page. There were cosmetic differences, but I don't think they're worth worrying about:</p>
+
+<table style="margin-left:auto;margin-right:auto;">
+<tr>
+
+<td><a href="https://blairconrad.com/images/standard_google_login-trimmed.png"><img src="https://blairconrad.com/images/standard_google_login-trimmed.png?w=300" alt="standard Google login page" title="standard Google login page" width="300" height="131" /></a><p style="text-align:center;">standard Google login page</p></td>
+<td><a href="https://blairconrad.com/images/federated_google_login-trimmed.png"><img src="https://blairconrad.com/images/federated_google_login-trimmed.png?w=300" alt="federated Google login page" title="federated Google login page" width="300" height="131" /></a><p style="text-align:center;">federated Google login page</p></td>
+</tr>
+</table>
+
+<p><a href="https://blairconrad.com/images/let_libraryhippo_see_email_address.png"><img align="right" src="https://blairconrad.com/images/let_libraryhippo_see_email_address.png?w=150" alt="Approve access to e-mail address" title="Approve access to e-mail address" width="150" height="41" /></a></p>
+<p>After providing her credentials, the user was redirected to a page that asked her if it was okay for LibraryHippo to know her e-mail address. After that approval was granted, it was back to the LibaryHippo site and everything operated as usual.</p>
+<p>However, <b>login: admin is still a problem</b>. I really shouldn't have been surprised by this, but login: admin seems to do the same thing that login: required does - redirect to /_ah/login_required, which is not found.</p>
+
+<p><a href="https://blairconrad.com/images/login_required_without_handler-trimmed.png"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://blairconrad.com/images/login_required_without_handler-trimmed.png?w=144" alt="Login Required Not Found" title="Login Required Not Found" width="144"></a>
+<p>This isn't a huge problem - it only affects administrators (me), and I could workaround by visiting a page that required any kind of login first, but it still stuck in my craw.
+Fortunately, the fix is very easy - just handle <code>/_ah/login_required</code>. I ripped off Nick's <code>OpenIdLoginHandler</code>, only instead of offering a choice of providers using <code>users.create_login_url</code>, this one <b>always redirects to Google's OpenId provider</b> page. With this fix, admins are able to go directly from a not-logged-in state to any admin required page.</p></p>
+<pre><code class="python">class OpenIdLoginHandler(webapp2.RequestHandler):
+    def get(self):
+        continue_url = self.request.GET.get('continue')
+        login_url = users.create_login_url(dest_url=continue_url)
+
+        self.redirect(login_url)        
+
+...
+
+handlers = [ ...
+    ('/_ah/login_required$', OpenIdLoginHandler),
+    ... ]</code></pre>
+
+<h2>Using Other Providers</h2>
+
+<p>With the above solution, LibraryHippo's authentication system has the same functionality as before - users can login with a Google account. It's time to add support for other OpenID providers.</p>
+
+<h3><i>username</i>.myopenid.com</h3>
+
+<p>I added a custom provider picker page as Nick suggested, and tried to login with my <a href="https://www.myopenid.com/">myOpenID</a> account, with my vanity URL as provider - blair.conrad.myopenid.com. The redirect to MyOpenID <b>worked just as it should</b>, and once I was authenticated, I landed back at LibraryHippo, at the "family creation" page, since LibraryHippo recognized me as a newly-authenticated user, with no history.</p>
+
+<h3>myopenid.com</h3>
+
+<p>Buoyed by my success, I tried again, this time using the "direct provider federated identity"  MyOpenID url - myopenid.com. It was <b>a complete disaster</b>.</p>
+
+<p><a href="https://blairconrad.com/images/server_error_myopenid-trimmed.png"><img style="display:block;margin-left:auto;margin-right:auto;" src="https://blairconrad.com/images/server_error_myopenid-trimmed.png?w=300" alt="Error: Server Error  The server encountered an error and could not complete your request. If the problem persists, please report your problem and mention this error message and the query that caused it." title="Server Error logging in with myopenid.com" width="450" height="82" /></a>
+<p>Once MyOpenID had confirmed my identity, and I was redirected back to the LibraryHippo application, App Engine threw a 500 Server Error. There's nothing in the logs - just the horrible error on the screen. In desperation, I stripped down my login handler to the bare minimum, using  <a href="http://code.google.com/appengine/articles/openid.html#ex">the example at <i>Using Federated Authentication via OpenID in Google App Engine</i></a> as my guide. I ended up with this class that reproduces the problem:</p></p>
+<pre><code class="python">class TryLogin(webapp2.RequestHandler):
+    def get(self):
+        providers = {
+            'Google'   : 'www.google.com/accounts/o8/id',
+            'MyOpenID' : 'myopenid.com',
+            'Blair Conrad\'s MyOpenID' : 'blair.conrad.myopenid.com',
+            'Blair Conrad\'s Wordpress' : 'blairconrad.wordpress.com',
+            'Yahoo' : 'yahoo.com',
+            'StackExchange': 'openid.stackexchange.com',
+            }
+
+        user = users.get_current_user()
+        if user:  # signed in already
+            self.response.out.write('Hello <em>%s</em>! [<a href="%s">sign out</a>]' % (
+                user.nickname(), users.create_logout_url(self.request.uri)))
+        else:     # let user choose authenticator
+            self.response.out.write('Hello world! Sign in at: ')
+            for name, uri in providers.items():
+                self.response.out.write('[<a href="%s">%s</a>]' % (
+                    users.create_login_url(dest_url= '/trylogin', federated_identity=uri), name))
+
+...
+
+handlers = [
+    ('/trylogin$', TryLogin),
+    ('/_ah/login_required$', OpenIdLoginHandler),
+    ...
+]</code></pre>
+
+<p>Interestingly, both <b>Yahoo! and WordPress work, but StackExchange</b> does not. If it weren't for Yahoo!, I'd guess that it's the direct provider federated identities that give App Engine problems (yes, Google is a direct provider, but I consider it to be an exception in any case).</p>
+<h2>Next steps</h2>
+
+<p>For now, I'm going to use the simple "just Google as federated ID provider" solution that I described above. It seems to work, and I'd rather see if I can find out why these providers fail before implementing an OpenID selector that excludes a few providers. Also, implementing the simple solution will allow me to experiment with federated IDs on the side, since I don't know how e-mail will work with federated IDs, or how best to add federated users as families' responsible parties. But that's a story for another day.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2012-03-12T00:00:00-04:00">2012-03-12</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#appengine-ref">appengine
+                    <span>7</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#myopenid-ref">myopenid
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#openid-ref">openid
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#python-ref">python
+                    <span>8</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#python27-ref">python27
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#stackexchange-ref">stackexchange
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

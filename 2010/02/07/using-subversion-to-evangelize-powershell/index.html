@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Development, PowerShell, Subversion, Development, " />
+
+<meta property="og:title" content="Using Subversion to Evangelize PowerShell "/>
+<meta property="og:url" content="https://blairconrad.com/2010/02/07/using-subversion-to-evangelize-powershell/" />
+<meta property="og:description" content="I&#39;ve never been really comfortable with the Windows Command prompt - whenever I can, I grab Cygwin to give myself a more familiar (and powerful) command-line environment. I really appreciate the tools included with the Unix command shells, as well as the easy composability of the utilities that come with Unix …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2010-02-07T00:00:00-05:00" />
+<meta name="twitter:title" content="Using Subversion to Evangelize PowerShell ">
+<meta name="twitter:description" content="I&#39;ve never been really comfortable with the Windows Command prompt - whenever I can, I grab Cygwin to give myself a more familiar (and powerful) command-line environment. I really appreciate the tools included with the Unix command shells, as well as the easy composability of the utilities that come with Unix …">
+
+        <title>Using Subversion to Evangelize PowerShell  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2010/02/07/using-subversion-to-evangelize-powershell/">
+                Using Subversion to Evangelize PowerShell
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>I've never been really comfortable with the Windows Command prompt - whenever I can, I grab <a href="http://www.cygwin.com/">Cygwin</a> to give myself a more familiar (and powerful) command-line environment. I really appreciate the tools included with the Unix command shells, as well as the easy composability of the utilities that come with Unix.</p>
+<p>Unsurprisingly, I was immediately attracted to <a href="http://blogs.msdn.com/powershell/default.aspx">PowerShell</a> - a powerful replacement shell for Windows, with .NET integration, a Unix-like pipeline that works on objects rather than strings, and has plenty of built-in cmdlets. I installed it and tried to work. There were familiar commands (many of the Unix and Windows command names are aliased to their PowerShell equivalents), and these both helped and hindered - it was easy to find a command, but the options were slightly off, so the commands my fingers knew produced errors or unexpected results. Eventually I fell off the wagon, reverting to cmd.exe. Over the next year or so, I would return to PowerShell, only to stop using it again.</p>
+<p>A few months ago, I was talking to the Guy in the Next Cubicle. He was also interested in PowerShell. We talked a little about the few scripts (neither of us had written new cmdlets) we'd made, and shared them. Having someone to talk to about PowerShell sparked something, and gave me the impetus to change my shortcuts to start PowerShell instead of cmd.exe. Unfortunately, sharing our scripts was awkward - usually via e-mail or instant messaging. In addition, as we improved our scripts, adding some to perform common tasks, we found the answers to some questions when people came for help was, "Well, if you had this PowerShell script, you'd just...", with no convenient way to get them the scripts.</p>
+<p>Finally we decided to do something about it, and initiated a plan to help share our setup among our coworkers. We wanted a system that:
+<ul>
+        <li>was easy to adopt,</li>
+    <li>made it easy to get and share scripts, and</li>
+    <li>was customizable - so people could have different prompts, for example</li>
+</ul></p>
+<p>Inspired by <a href="http://kitenet.net/~joey/svnhome/">Joey Hess's <i>keeping your life in svn</i></a>, we tried putting the whole profile directory under Subversion control. It was an easy choice, since everyone at the Day Job is already using Subversion to wrangle our source code.</p>
+<h4 id="getting_started">Getting Started</h4>
+
+<p>Getting started with the profile is almost as easy as running
+<pre><code class="bat">cd %USERPROFILE%\My Documents
+svn checkout http://svn.dayjob.com/path/to/PowerShellProfile/trunk WindowsPowerShell
+</code></pre></p>
+<p>After this, the user will have a directory inside their My Documents directory that looks something like this:</p>
+<p><img src="https://blairconrad.com/images/powershellprofile2.png" alt="profile directory skeleton" title="PowerShellProfile" width="268" height="408" class="size-full wp-image-225" /></p>
+<p>It's not quite usable, though. By default PowerShell doesn't allow scripts to be run, so the new profile will be of no benefit to users. To ease their pain, the profile directory contains a <b>setup_powershell.bat</b> which runs 
+<pre><code class="bat">powershell -Command "Set-ExecutionPolicy RemoteSigned"
+</code></pre>
+After running setup_powershell.bat, all a user has to do is start PowerShell and they will benefit from the new profile.</p>
+<h4 id="windowspowershell">Inside the WindowsPowerShell Directory</h4>
+
+<p>The first item of note inside the WindowsPowerShellDirectory is the <b>Includes</b> directory, which is populated with <code>.ps1</code> files. Each <code>.ps1</code> file contains functions to be loaded into memory and made available for the user's session. 
+At startup, each of these .ps1 files are each dot-sourced (using the <a href="https://blairconrad.com/2010/01/29/expand-your-scope-you-can-dot-source-more-than-just-files/">dot-source from a function trick I talked about last time</a>).</p>
+<p>Next, the <b>Scripts</b> directory, which is added to the user's <b>$env:PATH</b>. Each of the .ps1 files in the directory contains a standalone script that a user might choose to execute as they work. We have a number of Day&nbsp;Job-specific scripts as well as some Subversion helpers and two meta-scripts, designed to make it easier to work with the PowerShell profile.</p>
+<p>Since new users won't be familiar with all the scripts in the profile, and because new scripts might be added at any time, we include a script to provide a quick synopsis of the available scripts: <b>Get-ProfileHelp</b>. It scans the <code>Scripts</code> directory, printing out, in an easy-to-read table,  the Synopsis from the top of each script.
+<pre><code class="powershell">#&lt;#</p>
+<h1>.Synopsis</h1>
+<h1>Get help for the PowerShellProfile scripts</h1>
+<h2>&gt;</h2>
+<p>Get-ScriptDirectory | Get-ChildItem -include "<em>.ps1" -recurse
+ | ForEach-Object {
+    $name = $<em>.Name; $name = $name.Remove($name.Length-4)
+    $synopsis = ""
+    $content = (Get-Content $</em>.PSPath)
+    for ($i = 0; $i -le ($content.length - 1); $i += 1)
+    {
+       if ( $content[$i] -like '</em>.Synopsis*' )
+       {
+           $synopsis = $content[$i+1].Substring(1).Trim()
+           break
+       }
+    }
+    $o = New-Object Object
+    $o | Add-Member NoteProperty Name $name
+    $o | Add-Member NoteProperty Synopsis $synopsis
+    $o
+} | Format-Table -AutoSize
+</code></pre>
+The <code>Get-ScriptDirectory</code> function just finds the location of the currently executing script. We'll see it later. Running the script gives output like this:</p>
+<pre>
+Name                     Synopsis
+----                     --------
+Copy-Branch              Copy an SVN branch, and optionally switch to the new branch
+Get-ProfileHelp          Get help for the PowerShellProfile scripts
+Get-SslCertificate       Load and display an SSL Certificate from a host
+Import-ResharperSettings Import Resharper 4.5 settings from a file
+Merge-Branch             Merge SVN commits back into the current working directory
+Switch-Branch            Switch to a new SVN branch
+Update-Profile           Get the latest version of the PowerShell profile from SVN
+</pre>
+
+<p>Rather than forcing users to navigate to the profile directory and run an <code>svn</code> command, the <b>Update-Profile.ps1</b> script will automatically update the profile source:
+<pre><code class="powershell">#&lt;#</p>
+<h1>.SYNOPSIS</h1>
+<h1>Get the latest version of the PowerShell profile from SVN</h1>
+<h2>&gt;</h2>
+<p>svn update (Split-Path $profile)
+</code></pre></p>
+<h4 id="user_profile_directories">User Profile Directories</h4>
+
+<p>In addition to the <code>Includes</code> and <code>Scripts</code> directories, each user of the PowerShell profile can have their own directory full of customizations. The name of the directory is taken from the <b>$env:USERNAME</b> variable. On startup, if the directory exists, any <code>Include</code> and <code>Scripts</code> directories are processed - being dot-sourced or added to the path, respectively. This allows users to have their own personal scripts and functions. In addition, the <b>profile.ps1</b> from the directory is dot-sourced.</p>
+<p>If a user runs PowerShell and doesn't already have a profile directory, a welcome message is printed to the screen, explaining basic usage of the profile. Then a profile directory is created and populated with an empty <code>profile.ps1</code> to get the user started and to keep them from being welcomed again.</p>
+<p>Some users choose to commit their personal profile directories to the repository, and some don't - there's no requirement either way. If someone chose, they could even use an <code>svn:externals</code> on the <code>WindowsPowerShell</code> directory and host their personal directory in another part of the repository or even a different repository.</p>
+<h4 id="putting_it_all_together">Putting it All Together</h4>
+
+<p>Finally we see the <b>Microsoft.PowerShell_profile.ps1</b> file that orchestrates all this:
+<pre><code class="powershell"># Will turn on extra output to help debug profile-loading.</p>
+<h1>Don't check in as "true"</h1>
+<p>$verbose = $false</p>
+<h1>A convenience function to get the directory the current script lives in</h1>
+<h1>- useful for importing from relative paths</h1>
+<p>function Get-ScriptDirectory
+{
+  $Invocation = (Get-Variable MyInvocation -Scope 1).Value
+  Split-Path $Invocation.MyCommand.Path
+}</p>
+<p>function Include-ProfileDirectory([string] $directory)
+{
+    # Load every file in the Includes subdirectory -
+    # hopefully they can be loaded in any order.
+    # The Includes directory should contain files that define functions and 
+    # filters to be executed later, but not scripts that need to do
+    # something when the file is sourced.
+    if ( Test-Path ($directory + '\Includes') )
+    {
+        Get-ChildItem -Path:($directory + '\Includes') -Filter:*.ps1 | ForEach-Object {
+            if ( $verbose )
+            {
+                Write-Output ("importing " + $<em>.PSPath)
+            }
+            . $</em>.PSPath
+        }
+    }</p>
+<div class="highlight"><pre><span></span><span class="err"># The Scripts directory should contain PowerShell scripts that someone</span>
+<span class="err"># might want to be executed, so we&#39;ll add it to our path.</span>
+<span class="err">if ( Test-Path &quot;$directory\Scripts&quot; )</span>
+<span class="err">{</span>
+<span class="err">    $env:PATH = &quot;$($env:PATH);$directory\Scripts&quot;</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>}</p>
+<h1>dot-source the Include-ProfileDirectory function. If we run it</h1>
+<h1>directly,  all the included functions will be scoped inside the</h1>
+<h1>Include-ProfileDirectory command, and inaccessible to the user.</h1>
+<p>. Include-ProfileDirectory(Get-ScriptDirectory)</p>
+<h1>Look for user-specfic customizations. If they're there, load them.</h1>
+<p>$userProfileDir = ((Get-ScriptDirectory) + '\' + $env:USERNAME)
+if ( Test-Path $userProfileDir )
+{
+    if ( $verbose )
+    {
+        Write-Output "including $userProfileDir"
+    }
+    . Include-ProfileDirectory($userProfileDir)</p>
+<div class="highlight"><pre><span></span><span class="err">$userProfile = ($userProfileDir + &#39;\profile.ps1&#39;)</span>
+<span class="err">if ( Test-Path $userProfile )</span>
+<span class="err">{</span>
+<span class="err">    . $userProfile</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>}
+else
+{
+    Write-Host -foregroundColor yellow -backgroundColor darkblue @"</p>
+<p>Welcome to the DayJob PowerShell Profile.  It looks like this is your
+first time here, so I'll create a new profile for you. This profile
+will be called</p>
+<p>$userProfile</p>
+<p>If you want to customize your PowerShell experience, you can edit this
+file. Eventually you may want to modify files in the containing directories,
+but keep in mind that those changes will affect other users.</p>
+<p>Have fun!</p>
+<p>"@</p>
+<div class="highlight"><pre><span></span><span class="err">New-Item -path  $userProfile -itemType &quot;file&quot; -Force &gt; Out-Null</span>
+</pre></div>
+
+
+<p>}
+</code></pre></p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2010-02-07T00:00:00-05:00">2010-02-07</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#development-ref">Development
+                    <span>20</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#powershell-ref">PowerShell
+                    <span>2</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#subversion-ref">Subversion
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
