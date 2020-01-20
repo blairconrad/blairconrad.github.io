@@ -1,0 +1,243 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Miscellany</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/miscellany.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2014-04-16T00:00:00-04:00</updated><entry><title>User-Sourced Calendar Feeds for Waterloo Yard Waste Pickup</title><link href="https://blairconrad.com/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/" rel="alternate"></link><published>2014-04-16T00:00:00-04:00</published><updated>2014-04-16T00:00:00-04:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2014-04-16:/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/</id><summary type="html">&lt;p&gt;(Thanks to &lt;a href="http://blog.jonudell.net/"&gt;Jon Udell&lt;/a&gt;, whose insightful posts
+are the only reason this would ever have occurred to me.)&lt;/p&gt;
+&lt;p&gt;I live in &lt;a href="http://www.waterloo.ca/"&gt;Waterloo, Ontario&lt;/a&gt;, a city with weekly
+residential waste collection. My collection day is Monday. In the warm months, there's an
+additional biweekly (that's every 2 weeks, not twice a …&lt;/p&gt;</summary><content type="html">&lt;p&gt;(Thanks to &lt;a href="http://blog.jonudell.net/"&gt;Jon Udell&lt;/a&gt;, whose insightful posts
+are the only reason this would ever have occurred to me.)&lt;/p&gt;
+&lt;p&gt;I live in &lt;a href="http://www.waterloo.ca/"&gt;Waterloo, Ontario&lt;/a&gt;, a city with weekly
+residential waste collection. My collection day is Monday. In the warm months, there's an
+additional biweekly (that's every 2 weeks, not twice a week)
+collection of what's called &lt;em&gt;yard waste&lt;/em&gt;: grass clippings, raked-up
+leaves, tree branches, and so on.&lt;/p&gt;
+&lt;p&gt;People in my area (including me) have trouble remembering &lt;em&gt;which&lt;/em&gt;
+weeks are yard waste weeks.  This means that every two weeks I get to
+see collections of plant material left at the curb outside people's
+homes and then brought in a day or two later, only to reappear the
+next week.&lt;/p&gt;
+&lt;p&gt;I use tools to augment my memory. Every year, at
+the beginning of the warm season, I visit the Region of Waterloo's
+website where I can learn about their &lt;a href="http://www.regionofwaterloo.ca/en/aboutTheEnvironment/seasonalservices.asp#yardwaste"&gt;Yard waste residential
+collection program&lt;/a&gt;. Here I find links to two
+PDFs: a &lt;a href="http://www.regionofwaterloo.ca/en/aboutTheEnvironment/resources/YardWastebrochure2013-14WEBREV.pdf#yardwaste"&gt;pretty version of the schedule for Waterloo&lt;/a&gt;, and an
+&lt;a href="http://www.regionofwaterloo.ca/en/aboutTheEnvironment/resources/2014YardWasteSCHEDULEODAWEB.pdf"&gt;"accessible"&lt;/a&gt; version.&lt;/p&gt;
+&lt;p&gt;I look at one of those schedules, and I create a recurrning Google
+Calendar event. Then my phone tells me on Sunday night whether to haul
+the tree parts to the street. It works really well.&lt;/p&gt;
+&lt;p&gt;However, every year, I've wished that the Region provided an
+&lt;a href="http://en.wikipedia.org/wiki/ICalendar"&gt;.iCalendar&lt;/a&gt; feed or created a Google Calendar for me so I
+wouldn't have to do this. But I haven't done more than wish.&lt;/p&gt;
+&lt;p&gt;This year, I'm doing more. For starters, I created a few Google
+Calendars. One for me (and my fellow Monday-pickup people), and four
+for everyone else in Waterloo (and Cambridge).  The Region's web site
+gave me start and end weeks for pickups, so it was very easy to make a
+biweekly repeating event, using these Google Calendar settings:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img alt="Monday yard waste repeat schedule for Waterloo" src="https://blairconrad.com/images/yard-waste-repeat-details.png"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;Lo and behold, it shows up in my calendar:&lt;/p&gt;
+&lt;figure&gt;
+  &lt;img alt="Monday yard waste shown in Google Calendar" src="https://blairconrad.com/images/yard-waste-shown-in-calendar.png"&gt;
+&lt;/figure&gt;
+
+&lt;p&gt;I created the Tuesday through Friday calendars by making the obvious
+modification to the schedule above.&lt;/p&gt;
+&lt;p&gt;I put
+[all the calendars on a separate page][yard-waste-collection-schedule]
+that I intend to maintain until the Region provides replacements. Or I
+move. Go! Get one for your collection day.&lt;/p&gt;
+&lt;p&gt;Next, I'm going to pester the Region, showing them how easy it was to
+do this and to see if they'd be willing to carry on with the work next
+year. If something comes of it, I'll let you know.&lt;/p&gt;
+&lt;p&gt;[yard-waste-collection-schedule]: {{ site.url }}/yard-waste-collection-schedule/&lt;/p&gt;</content><category term="Miscellany"></category><category term="icalendar"></category><category term="syndication"></category><category term="waterloo"></category><category term="diversions"></category></entry><entry><title>BBC Top 100 Books</title><link href="https://blairconrad.com/2010/12/31/bbc-top-100-books/" rel="alternate"></link><published>2010-12-31T00:00:00-05:00</published><updated>2010-12-31T00:00:00-05:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-12-31:/2010/12/31/bbc-top-100-books/</id><summary type="html">&lt;p&gt;A meme, from &lt;a href="http://nomagichere.blogspot.com/2010/12/bbc-top-100-books.html?utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed%3A+blogger%2FNoMagicHere+%28No+Magic+Here%29"&gt;No Magic Here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today's challenge, the &lt;a href="http://www.bbc.co.uk/arts/bigread/top100.shtml"&gt;BBC Top 100&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Instructions: Bold those books you’ve read in their entirety, italicize the ones you started but didn’t finish or read an excerpt.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;b&gt;Pride and Prejudice&lt;/b&gt; – Jane Austen&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Lord of the Rings&lt;/b&gt; – JRR Tolkien&lt;/li&gt;
+&lt;li&gt;Jane Eyre – Charlotte …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;A meme, from &lt;a href="http://nomagichere.blogspot.com/2010/12/bbc-top-100-books.html?utm_source=feedburner&amp;amp;utm_medium=feed&amp;amp;utm_campaign=Feed%3A+blogger%2FNoMagicHere+%28No+Magic+Here%29"&gt;No Magic Here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Today's challenge, the &lt;a href="http://www.bbc.co.uk/arts/bigread/top100.shtml"&gt;BBC Top 100&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Instructions: Bold those books you’ve read in their entirety, italicize the ones you started but didn’t finish or read an excerpt.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;b&gt;Pride and Prejudice&lt;/b&gt; – Jane Austen&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Lord of the Rings&lt;/b&gt; – JRR Tolkien&lt;/li&gt;
+&lt;li&gt;Jane Eyre – Charlotte Bronte&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Harry Potter series&lt;/b&gt; – JK Rowling (all)&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;To Kill a Mockingbird&lt;/b&gt; – Harper Lee&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;The Bible&lt;/i&gt;&lt;/li&gt;
+&lt;li&gt;Wuthering Heights – Emily Bronte&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Nineteen Eighty Four&lt;/b&gt; – George Orwell&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;His Dark Materials&lt;/i&gt; – Philip Pullman&lt;/li&gt;
+&lt;li&gt;Great Expectations – Charles Dickens&lt;/li&gt;
+&lt;li&gt;Little Women – Louisa M Alcott&lt;/li&gt;
+&lt;li&gt;Tess of the D’Urbervilles – Thomas Hardy&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Catch 22&lt;/b&gt; – Joseph Heller&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Complete Works of Shakespeare&lt;/i&gt;&lt;/li&gt;
+&lt;li&gt;Rebecca – Daphne Du Maurier&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Hobbit&lt;/b&gt; – JRR Tolkien&lt;/li&gt;
+&lt;li&gt;Birdsong – Sebastian Faulks&lt;/li&gt;
+&lt;li&gt;Catcher in the Rye – JD Salinger&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Time Traveller’s Wife&lt;/b&gt; – Audrey Niffenegger&lt;/li&gt;
+&lt;li&gt;Middlemarch – George Eliot&lt;/li&gt;
+&lt;li&gt;Gone With The Wind – Margaret Mitchell&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Great Gatsby&lt;/b&gt; – F Scott Fitzgerald&lt;/li&gt;
+&lt;li&gt;Bleak House – Charles Dickens&lt;/li&gt;
+&lt;li&gt;War and Peace – Leo Tolstoy&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Hitch Hiker’s Guide to the Galaxy&lt;/b&gt; – Douglas Adams&lt;/li&gt;
+&lt;li&gt;Brideshead Revisited – Evelyn Waugh&lt;/li&gt;
+&lt;li&gt;Crime and Punishment – Fyodor Dostoyevsky&lt;/li&gt;
+&lt;li&gt;Grapes of Wrath – John Steinbeck&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Alice in Wonderland&lt;/b&gt; – Lewis Carroll&lt;/li&gt;
+&lt;li&gt;The Wind in the Willows – Kenneth Grahame&lt;/li&gt;
+&lt;li&gt;Anna Karenina – Leo Tolstoy&lt;/li&gt;
+&lt;li&gt;David Copperfield – Charles Dickens&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Chronicles of Narnia&lt;/b&gt; – CS Lewis&lt;/li&gt;
+&lt;li&gt;Emma – Jane Austen&lt;/li&gt;
+&lt;li&gt;Persuasion – Jane Austen&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Lion, The Witch and The Wardrobe&lt;/b&gt; – CS Lewis&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Kite Runner&lt;/b&gt; – Khaled Hosseini&lt;/li&gt;
+&lt;li&gt;Captain Corelli’s Mandolin – Louis De Berniere&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Memoirs of a Geisha&lt;/b&gt; – Arthur Golden&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Winnie the Pooh&lt;/b&gt; – AA Milne&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Animal Farm&lt;/b&gt; – George Orwell&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Da Vinci Code&lt;/b&gt; – Dan Brown&lt;/li&gt;
+&lt;li&gt;One Hundred Years of Solitude – Gabriel Garcia Marquez&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;A Prayer for Owen Meaney&lt;/b&gt; – John Irving&lt;/li&gt;
+&lt;li&gt;The Woman in White – Wilkie Collins&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Anne of Green Gables&lt;/b&gt; – LM Montgomery&lt;/li&gt;
+&lt;li&gt;Far From The Madding Crowd – Thomas Hardy&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Handmaid’s Tale&lt;/b&gt; – Margaret Atwood&lt;/li&gt;
+&lt;li&gt;Lord of the Flies – William Golding&lt;/li&gt;
+&lt;li&gt;Atonement – Ian McEwan&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Life of Pi&lt;/b&gt; – Yann Martel&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Dune&lt;/b&gt; – Frank Herbert&lt;/li&gt;
+&lt;li&gt;Cold Comfort Farm – Stella Gibbons&lt;/li&gt;
+&lt;li&gt;Sense and Sensibility – Jane Austen&lt;/li&gt;
+&lt;li&gt;A Suitable Boy – Vikram Seth&lt;/li&gt;
+&lt;li&gt;The Shadow of the Wind – Carlos Ruiz Zafon&lt;/li&gt;
+&lt;li&gt;A Tale Of Two Cities – Charles Dickens&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Brave New World&lt;/b&gt; – Aldous Huxley&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Curious Incident of the Dog in the Night-time&lt;/b&gt; – Mark Haddon&lt;/li&gt;
+&lt;li&gt;Love In The Time Of Cholera – Gabriel Garcia Marquez&lt;/li&gt;
+&lt;li&gt;Of Mice and Men – John Steinbeck&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Lolita&lt;/b&gt; – Vladimir Nabokov&lt;/li&gt;
+&lt;li&gt;The Secret History – Donna Tartt&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Lovely Bones&lt;/b&gt; – Alice Sebold&lt;/li&gt;
+&lt;li&gt;Count of Monte Cristo – Alexandre Dumas&lt;/li&gt;
+&lt;li&gt;On The Road – Jack Kerouac&lt;/li&gt;
+&lt;li&gt;Jude the Obscure – Thomas Hardy&lt;/li&gt;
+&lt;li&gt;Bridget Jones’s Diary – Helen Fielding&lt;/li&gt;
+&lt;li&gt;Midnight’s Children – Salman Rushdie&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Moby Dick&lt;/i&gt; – Herman Melville&lt;/li&gt;
+&lt;li&gt;Oliver Twist – Charles Dickens&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Dracula&lt;/b&gt; – Bram Stoker&lt;/li&gt;
+&lt;li&gt;The Secret Garden – Frances Hodgson Burnett&lt;/li&gt;
+&lt;li&gt;Notes From A Small Island – Bill Bryson&lt;/li&gt;
+&lt;li&gt;Ulysses – James Joyce&lt;/li&gt;
+&lt;li&gt;The Bell Jar – Sylvia Plath&lt;/li&gt;
+&lt;li&gt;Swallows and Amazons – Arthur Ransome&lt;/li&gt;
+&lt;li&gt;Germinal – Emile Zola&lt;/li&gt;
+&lt;li&gt;Vanity Fair – William Makepeace Thackeray&lt;/li&gt;
+&lt;li&gt;Possession – AS Byatt&lt;/li&gt;
+&lt;li&gt;A Christmas Carol – Charles Dickens&lt;/li&gt;
+&lt;li&gt;Cloud Atlas – David Mitchell&lt;/li&gt;
+&lt;li&gt;The Color Purple – Alice Walker&lt;/li&gt;
+&lt;li&gt;The Remains of the Day – Kazuo Ishiguro&lt;/li&gt;
+&lt;li&gt;Madame Bovary – Gustave Flaubert&lt;/li&gt;
+&lt;li&gt;A Fine Balance – Rohinton Mistry&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Charlotte’s Web&lt;/b&gt; – EB White&lt;/li&gt;
+&lt;li&gt;The Five People You Meet In Heaven – Mitch Albom&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Adventures of Sherlock Holmes&lt;/i&gt; – Sir Arthur Conan Doyle&lt;/li&gt;
+&lt;li&gt;The Faraway Tree Collection – Enid Blyton&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Heart of Darkness&lt;/b&gt; – Joseph Conrad&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;The Little Prince&lt;/b&gt; – Antoine De Saint-Exupery&lt;/li&gt;
+&lt;li&gt;The Wasp Factory – Iain Banks&lt;/li&gt;
+&lt;li&gt;Watership Down – Richard Adams&lt;/li&gt;
+&lt;li&gt;A Confederacy of Dunces – John Kennedy Toole&lt;/li&gt;
+&lt;li&gt;A Town Like Alice – Nevil Shute&lt;/li&gt;
+&lt;li&gt;The Three Musketeers – Alexandre Dumas&lt;/li&gt;
+&lt;li&gt;&lt;i&gt;Hamlet&lt;/i&gt; – William Shakespeare&lt;/li&gt;
+&lt;li&gt;&lt;b&gt;Charlie and the Chocolate Factory&lt;/b&gt; – Roald Dahl&lt;/li&gt;
+&lt;li&gt;Les Miserables – Victor Hugo&lt;/li&gt;
+&lt;/ol&gt;</content><category term="Miscellany"></category><category term="Books"></category><category term="Meme"></category></entry><entry><title>Office Adventure: Hard Drive Shuffle</title><link href="https://blairconrad.com/2010/12/09/office-adventure-hard-drive-shuffle/" rel="alternate"></link><published>2010-12-09T00:00:00-05:00</published><updated>2010-12-09T00:00:00-05:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-12-09:/2010/12/09/office-adventure-hard-drive-shuffle/</id><summary type="html">&lt;p&gt;It's fashionable to complain about the IT department at the Day Job, but sometimes we get pretty good service. I had occasion to contact them today for two unrelated problems. The first, an issue with a Lotus Notes upgrade, was quickly resolved over the phone. The other problem involved hardware …&lt;/p&gt;</summary><content type="html">&lt;p&gt;It's fashionable to complain about the IT department at the Day Job, but sometimes we get pretty good service. I had occasion to contact them today for two unrelated problems. The first, an issue with a Lotus Notes upgrade, was quickly resolved over the phone. The other problem involved hardware, and I'm well on the way to a resolution, with one minor snag.&lt;/p&gt;
+&lt;p&gt;While rebooting to pick up part of the Notes fix, I noticed something strange on my BIOS screen. I have two hard drives in my workstation, RAID-1ed together. The BIOS displayed one drive as green, and one red. Red is bad. I mentioned this to the Notes Fixer. Half an hour later I was contacted by a different IT guy. He wanted to come by and take the bad drive so he could order another one. "Sure!" said I.&lt;/p&gt;
+&lt;p&gt;IT Guy rebooted my machine again so he could see which drive was faulty. Then powered it down, popped open the case, extracted the hard drive and blew on it, releasing a cloud of toxic dust right above my tea. All this in less time than it takes to type it. He popped closed the case, and off  he went.&lt;/p&gt;
+&lt;p&gt;I started booting. I also powered up my computer. The computer beeped funny as it started up. I checked out the BIOS screen. One red drive.&lt;/p&gt;
+&lt;p&gt;No green drive.&lt;/p&gt;
+&lt;p&gt;"He took the wrong one!" I said, and hared off after him.&lt;/p&gt;
+&lt;p&gt;There I was, running through the halls, wearing one boot and one sock. &lt;strong&gt;Thump&lt;/strong&gt;-thump. &lt;strong&gt;Thump&lt;/strong&gt;-thump. &lt;strong&gt;Thump&lt;/strong&gt;-thump. &lt;/p&gt;
+&lt;p&gt;"IT Guy," I called, as he hove into view. You see, I wanted to make sure I got him before he put the drive under the Big Magnet. Also, I didn't know where he sits.&lt;/p&gt;
+&lt;p&gt;I explained the problem.&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;b&gt;B&lt;/b&gt;: You took the wrong drive. I'd like that one back.&lt;br&gt;
+&lt;b&gt;ITG&lt;/b&gt;: Oh! Right. Thanks for coming after me.&lt;br&gt;
+&lt;b&gt;B&lt;/b&gt;: No problem. Of course, it wasn't for your benefit.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;We walked back to my cubicle, where he swapped drives and all was well. Then he left, with a cheerful, "We should have the new drive by tomorrow morning. Hey, where's your shoe?"&lt;/p&gt;</content><category term="Miscellany"></category><category term="diversions"></category></entry><entry><title>Library Lookup - find books in your library</title><link href="https://blairconrad.com/2010/07/25/library-lookup-find-books-in-your-library/" rel="alternate"></link><published>2010-07-25T00:00:00-04:00</published><updated>2010-07-25T00:00:00-04:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-07-25:/2010/07/25/library-lookup-find-books-in-your-library/</id><summary type="html">&lt;p&gt;I'm an avid reader, but not an avid collector of objects, so I prefer to get books from the library. As you might imagine, I was initially thrilled to discover &lt;a href="http://jonudell.net/udell/2006-01-30-further-adventures-in-lightweight-service-composition.html" /&gt;the greasemonkey user script&lt;/a&gt; version  of &lt;a href="http://jonudell.net/LibraryLookup.html"&gt;Jon Udell's LibraryLookup bookmarklet&lt;/a&gt;. The ability to visit web pages about books and be …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I'm an avid reader, but not an avid collector of objects, so I prefer to get books from the library. As you might imagine, I was initially thrilled to discover &lt;a href="http://jonudell.net/udell/2006-01-30-further-adventures-in-lightweight-service-composition.html" /&gt;the greasemonkey user script&lt;/a&gt; version  of &lt;a href="http://jonudell.net/LibraryLookup.html"&gt;Jon Udell's LibraryLookup bookmarklet&lt;/a&gt;. The ability to visit web pages about books and be told whether the books are in one's library is just incredibly convenient.&lt;/p&gt;
+&lt;p&gt;After a while, I wanted more - I wanted the script to work on more pages, and I wanted it to tell me if the book was in &lt;i&gt;any&lt;/i&gt; of the three libraries that are available to me. So I reworked the script, modularizing it so it was easy to plug in additional libraries and source web pages. The resulting &lt;a href="http://blairconrad.googlecode.com/svn/trunk/greasemonkey/XisbnLibraryLookupWpl.user.js"&gt;XISBN Library Lookup script&lt;/a&gt; has served me well for years.&lt;/p&gt;
+&lt;p&gt;Recently, though, I've been using &lt;a href="http://www.google.com/chrome/"&gt;Google Chrome&lt;/a&gt; as my browser, and the user script (for whatever reason) doesn't work with Chrome's greasemonkey-to-extension translator. So, I've been "libary lookupless", and keenly felt the lack. &lt;/p&gt;
+&lt;div class="images"&gt;
+&lt;a href="https://chrome.google.com/extensions/detail/lopekoojcojbmfpkbncnpihmjbbkdgdk"&gt;&lt;img src="https://blairconrad.com/images/icon_128.png" border="0" alt="LibraryLookup icon" title="LibraryLookup" width="128" height="128" class="alignright size-full wp-image-571" /&gt;&lt;/a&gt;
+&lt;/div&gt;
+
+&lt;p&gt;I figured this was an excellent opportunity to learn how to write Chrome extensions, and it was not too difficult.  The first incarnation of the new
+&lt;a href="https://chrome.google.com/extensions/detail/lopekoojcojbmfpkbncnpihmjbbkdgdk"&gt;Library Lookup Chrome Extension&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;is available in the extension gallery. It's in its infancy, but it supports the these libraries:
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://www.wpl.ca/"&gt;Waterloo Public Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://kpl.org/"&gt;Kitchener Public Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://rwl.library.on.ca/"&gt;Region of Waterloo Library&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;And it will start looking up libraries when you browse to a book's page at:
+&lt;ul&gt;
+&lt;li&gt;&lt;b&gt;any site that has the ISBN in the URL&lt;/b&gt;, including (but not limited to)
+  &lt;ul&gt;
+    &lt;li&gt;&lt;a href="http://www.amazon.com/"&gt;Amazon.com&lt;/a&gt; (and country-specific variants),&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.chapters.indigo.ca/"&gt;Chapters/Indigo&lt;/a&gt;, and&lt;/li&gt;
+    &lt;li&gt;&lt;a href="http://www.powells.com/"&gt;Powell's Books&lt;/a&gt;,&lt;/li&gt;
+  &lt;/ul&gt;
+  &lt;li&gt;&lt;a href="http://www.goodreads.com/"&gt;Goodreads&lt;/a&gt;,&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.allconsuming.net" /&gt;All Consuming&lt;/a&gt;, and&lt;/li&gt;
+  &lt;li&gt;&lt;a href="http://www.librarything.com"&gt;LibraryThing&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;&lt;/p&gt;
+&lt;p&gt;Try it now! Install the extension, visit &lt;a href="http://www.amazon.ca/Time-Travelers-Wife-Audrey-Niffenegger/dp/0676976336"&gt;a book page&lt;/a&gt;, and (if it's in the libraries) click on the handy "book found" page icon in the URL bar to see where your book is:&lt;/p&gt;
+&lt;div class="images"&gt;
+&lt;a href="https://blairconrad.com/images/found_tttw.png"&gt;&lt;img src="https://blairconrad.com/images/found_tttw.png?w=300" alt="Library Lookup finds The Time Traveler&amp;#039;s Wife" title="found_tttw" width="300" height="127" class="aligncenter size-medium wp-image-528" /&gt;&lt;/a&gt;
+&lt;/div&gt;</content><category term="Miscellany"></category><category term="LibraryLookup"></category></entry><entry><title>libraryhippo.com lives</title><link href="https://blairconrad.com/2010/07/13/libraryhippo.com-lives/" rel="alternate"></link><published>2010-07-13T00:00:00-04:00</published><updated>2010-07-13T00:00:00-04:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-07-13:/2010/07/13/libraryhippo.com-lives/</id><summary type="html">&lt;p&gt;For a while now, I've been dithering over getting LibraryHippo its own domain name. I hadn't, mostly because I'm a little lazy and cheap and afraid of the domain registration process.
+Yesterday at the Day Job, a co-worker (whose name just might be an anagram of &lt;b&gt;Yen Waster&lt;/b&gt;), on learning …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For a while now, I've been dithering over getting LibraryHippo its own domain name. I hadn't, mostly because I'm a little lazy and cheap and afraid of the domain registration process.
+Yesterday at the Day Job, a co-worker (whose name just might be an anagram of &lt;b&gt;Yen Waster&lt;/b&gt;), on learning that libraryhippo.com was available, plunked a $10 bill on my desk and insisted that I buy the domain. I called him foolish and tried to return the money, but he was adamant.&lt;/p&gt;
+&lt;p&gt;So, after an hour's work last night, and as a result of Mr. Waster's generosity, I invite you to check out the majesty of&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;&lt;a href="http://www.libraryhippo.com"&gt;www.libraryhippo.com&lt;/a&gt;&lt;/strong&gt;&lt;/p&gt;</content><category term="Miscellany"></category><category term="LibraryHippo"></category><category term="Profligateness"></category></entry><entry><title>Brandon Sanderson - Good author and class act</title><link href="https://blairconrad.com/2010/01/24/brandon-sanderson-good-author-and-class-act/" rel="alternate"></link><published>2010-01-24T00:00:00-05:00</published><updated>2010-01-24T00:00:00-05:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-01-24:/2010/01/24/brandon-sanderson-good-author-and-class-act/</id><summary type="html">&lt;p&gt;I won't talk about every book I read here - that's what &lt;a href="http://www.goodreads.com/hippopottoman"&gt;Goodreads&lt;/a&gt; is for. However, every once in a while something exceptional's bound to come up, and I'll be compelled to mention it here. This is one such thing.
+Anyone who's talked to me this year will have heard how …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I won't talk about every book I read here - that's what &lt;a href="http://www.goodreads.com/hippopottoman"&gt;Goodreads&lt;/a&gt; is for. However, every once in a while something exceptional's bound to come up, and I'll be compelled to mention it here. This is one such thing.
+Anyone who's talked to me this year will have heard how much I enjoyed Brandon Sanderson's &lt;a href="http://www.brandonsanderson.com/portal/Mistborn-Trilogy"&gt;Mistborn Trilogy&lt;/a&gt;. Individually, they're very good books, but as a whole, they're exceptional - the planning Mr. Sanderson put into the books ties them together to provide a tight, compelling read, the likes of which I rarely see. Anyhow, before Christmas, Mr. Sanderson &lt;a href="http://www.brandonsanderson.com/blog/848/Give-the-Gift-of-Mistborn-for-Ten-Days-Only-%28Also-Posters%29"&gt;offered the Gift of Mistborn for 10 days&lt;/a&gt; - buy 7 signed, hard cover, first edition &lt;i&gt;Mistborn: The Final Empire&lt;/i&gt; for $70US, plus shipping. I thought this was a tremendous deal and convinced a coworker to go in on it with me.&lt;/p&gt;
+&lt;p&gt;A few days after I ordered, I received an e-mail saying that Mr. Sanderson had accidentally signed and personalized the entire trilogy for me, so he'd be sending me those as well. And sure enough they arrived just after Christmas, looking absolutely beautiful.&lt;/p&gt;
+&lt;p&gt;This was a very generous thing to do. He could've said, "Ooops, I ruined those copies," and sold them at a discount or ground them up and burnt them to heat his house. Instead, he poured more of his own money into shipping the books to Canada, just to make me happy.&lt;/p&gt;
+&lt;p&gt;Thanks!&lt;/p&gt;</content><category term="Miscellany"></category><category term="Books"></category></entry><entry><title>Acronyms of the Day: VOMIT and BARF</title><link href="https://blairconrad.com/2010/01/19/acronyms-of-the-day-vomit-and-barf/" rel="alternate"></link><published>2010-01-19T00:00:00-05:00</published><updated>2010-01-19T00:00:00-05:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-01-19:/2010/01/19/acronyms-of-the-day-vomit-and-barf/</id><summary type="html">&lt;p&gt;I was listening to &lt;a href="http://www.cbc.ca/ideas/podcast.html"&gt;CBC's Ideas Podcast&lt;/a&gt; today, specifically to &lt;i&gt;You Are "Pre-Diseased", Part 2&lt;/i&gt; (which aired on 18 January and is available for download until mid-February, in case you want to listen) when I heard a new acronym that's relevant to my Day Job.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;V&lt;/b&gt;ictim &lt;b&gt;O&lt;/b&gt;f &lt;b&gt;M …&lt;/b&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;I was listening to &lt;a href="http://www.cbc.ca/ideas/podcast.html"&gt;CBC's Ideas Podcast&lt;/a&gt; today, specifically to &lt;i&gt;You Are "Pre-Diseased", Part 2&lt;/i&gt; (which aired on 18 January and is available for download until mid-February, in case you want to listen) when I heard a new acronym that's relevant to my Day Job.&lt;/p&gt;
+
+&lt;p&gt;&lt;b&gt;V&lt;/b&gt;ictim &lt;b&gt;O&lt;/b&gt;f &lt;b&gt;M&lt;/b&gt;edical &lt;b&gt;I&lt;/b&gt;maging &lt;b&gt;T&lt;/b&gt;echnology refers to patients who are operated on after an abnormality is detected in an imaging procedure, but nothing is found during the operation.&lt;/p&gt;
+
+&lt;p&gt;Closely related is &lt;b&gt;B&lt;/b&gt;rainlessly &lt;b&gt;A&lt;/b&gt;pplying &lt;b&gt;R&lt;/b&gt;adiological &lt;b&gt;F&lt;/b&gt;indings - treating the result of an imaging study, not the patient and her symptoms.&lt;/p&gt;
+
+&lt;p&gt;I don't mean to make light of the plight of patients who undergo operations or treatments when they're not warranted, but I thought the acronyms themselves are good for a chuckle. &lt;a href="http://ctsurgcomplications.wikia.com/wiki/VOMIT:_victim_of_medical_%28or_modern%29_imaging_%28or_investigational%29_technology"&gt;Read more.&lt;/a&gt;&lt;/p&gt;</content><category term="Miscellany"></category><category term="diversions"></category><category term="words"></category></entry><entry><title>New Year's Python Meme</title><link href="https://blairconrad.com/2010/01/09/new-years-python-meme/" rel="alternate"></link><published>2010-01-09T00:00:00-05:00</published><updated>2010-01-09T00:00:00-05:00</updated><author><name>Blair Conrad</name></author><id>tag:blairconrad.com,2010-01-09:/2010/01/09/new-years-python-meme/</id><summary type="html">&lt;p&gt;It's a little late, but I'm participating in &lt;a href="http://tarekziade.wordpress.com/2009/12/28/new-years-python-meme/"&gt;Tarek Ziadé's Python Meme&lt;/a&gt; (&lt;a href="http://www.mechanicalcat.net/richard/log/Python/New_Year_s_Python_meme"&gt;via Richard Jones&lt;/a&gt;):
+&lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;What’s the coolest Python application, framework or library you have discovered in 2009?&lt;/strong&gt;
+              &lt;p&gt;&lt;a href="http://code.google.com/appengine/"&gt;Google App Engine&lt;/a&gt;. I'd known of it before, but hadn't tried it until early this year when I started to &lt;a href="/2010/01/08/meet-libraryhippo/"&gt;work …&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;&lt;/ol&gt;&lt;/p&gt;</summary><content type="html">&lt;p&gt;It's a little late, but I'm participating in &lt;a href="http://tarekziade.wordpress.com/2009/12/28/new-years-python-meme/"&gt;Tarek Ziadé's Python Meme&lt;/a&gt; (&lt;a href="http://www.mechanicalcat.net/richard/log/Python/New_Year_s_Python_meme"&gt;via Richard Jones&lt;/a&gt;):
+&lt;ol&gt;
+    &lt;li&gt;&lt;strong&gt;What’s the coolest Python application, framework or library you have discovered in 2009?&lt;/strong&gt;
+              &lt;p&gt;&lt;a href="http://code.google.com/appengine/"&gt;Google App Engine&lt;/a&gt;. I'd known of it before, but hadn't tried it until early this year when I started to &lt;a href="/2010/01/08/meet-libraryhippo/"&gt;work on LibraryHippo&lt;/a&gt;.&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;What new programming technique did you learn in 2009?&lt;/strong&gt;
+              &lt;p&gt;I'm not sure if this counts as a technique, but I recently found (and found a use for) Jean-Paul S. Boodhoo's &lt;a href="http://blog.jpboodhoo.com/TheStaticGatewayPattern.aspx"&gt;Static Gateway Pattern&lt;/a&gt;. At the Day Job, we have a lot of hard-coded dependencies and reliance on well-known static methods for authorization. The Static Gateway Pattern made it easy to provide an injectable implementation without rewriting the whole application. I expect it to continue to be useful, at least until we take the time to introduce a full  &lt;a href="http://en.wikipedia.org/wiki/Inversion_of_Control"&gt;Inversion of Control&lt;/a&gt; container.&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;What’s the name of the open source project you contributed the most in 2009? What did you do?&lt;/strong&gt;
+              &lt;p&gt;I didn't, really. Unless you count LibraryHippo. I've an interest in working on &lt;a href="http://code.google.com/p/noda-time/"&gt;Noda Time&lt;/a&gt;, but I haven't managed to yet.&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;What was the Python blog or website you read the most in 2009?&lt;/strong&gt;
+              &lt;p&gt;&lt;a href="http://wordaligned.org/"&gt;Word Aligned&lt;/a&gt;&lt;/p&gt;&lt;/li&gt;
+    &lt;li&gt;&lt;strong&gt;What are the three top things you want to learn in 2010?&lt;/strong&gt;
+              &lt;ul&gt;
+                  &lt;li&gt;more &lt;a href="http://technet.microsoft.com/en-us/scriptcenter/dd742419.aspx"&gt;PowerShell&lt;/a&gt;&lt;/li&gt;
+                  &lt;li&gt;.NET Framework 4.0, and whatever I've missed since 1.1...&lt;/li&gt;
+                  &lt;li&gt;&lt;a href="http://api.jquery.com/category/ajax/"&gt;jQuery Ajax&lt;/a&gt;&lt;/li&gt;
+              &lt;/ul&gt;&lt;/li&gt;
+&lt;/ol&gt;&lt;/p&gt;</content><category term="Miscellany"></category><category term="Development"></category><category term="Meme"></category><category term="Python"></category></entry></feed>

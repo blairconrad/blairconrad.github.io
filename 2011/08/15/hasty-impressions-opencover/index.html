@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=".NET, coverage, OpenCover, HastyImpressions, Isolator, Testing, TypeMock, Development, " />
+
+<meta property="og:title" content="Hasty Impressions: OpenCover "/>
+<meta property="og:url" content="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/" />
+<meta property="og:description" content="OpenCover is developed by Shaun Wilde. He was a developer on (and is the only remaining maintainer of) PartCover. He&#39;s used what he learned working on PartCover to develop OpenCover, but OpenCover is a new implementation, not a port. I tried OpenCover 1.0.514. Since I downloaded a couple …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2011-08-15T00:00:00-04:00" />
+<meta name="twitter:title" content="Hasty Impressions: OpenCover ">
+<meta name="twitter:description" content="OpenCover is developed by Shaun Wilde. He was a developer on (and is the only remaining maintainer of) PartCover. He&#39;s used what he learned working on PartCover to develop OpenCover, but OpenCover is a new implementation, not a port. I tried OpenCover 1.0.514. Since I downloaded a couple …">
+
+        <title>Hasty Impressions: OpenCover  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">
+                Hasty Impressions&#58; OpenCover
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p><a href="https://github.com/sawilde/opencover">OpenCover</a> is developed by Shaun Wilde. He was a developer on (and is the only remaining maintainer of) PartCover. He's used what he learned working on PartCover to develop OpenCover, but OpenCover is a new implementation, not a port.</p>
+<p>I tried OpenCover 1.0.514. Since I downloaded a couple weeks ago there have been 3 more releases, with the 1.0.606 release promising a big performance improvement.
+<h2>The Cost</h2>
+Free! And you can get the source.
+<h2>VS integration</h2>
+None that I can find.
+<h2>Command Line Execution</h2>
+Covering an application from the command line is <strong>easy</strong>, and reminiscent of using PartCover the same way. I used this command to see what code my BookFinder unit tests exercised:</p>
+<pre><code class="bat">OpenCover.Console.exe -arch:64 -register target:nunit-console.exe -targetargs:bin\debug\BookFinder.Tests.dll \
+                      -output:..\..\opencover.xml -filter:+[BookFinder.Core]*</code></pre>
+
+<!--more-->
+
+<p>Let's look at that.</p>
+<ul>
+<li><code>-arch:64</code> - I'm running on a 64-bit system. I didn't get any results without this.</li>
+<li><code>-register</code> - I'm auto-deploying OpenCover. More on that later.</li>
+<li><code>-target:nunit-console.exe</code> - I like NUnit</li>
+<li><code>-targetargs:bin\debug\BookFinder.Tests.dll</code> - arguments to NUnit to tell it what assembly to test, and how.</li>
+<li><code>-output:..\..\opencover.xml</code> - where to put the coverage results. This file is not a report - it's intended for machines to read, not humans.</li>
+<li><code>-filter:+[BookFinder.Core]*</code> - BookFinder.Core is the only assembly I was interested in - it holds the business logic.</li>
+</ul>
+<h2>GUI Runner</h2>
+
+<p>There isn't one, but I have to wonder if there won't be. Otherwise, why call the command line coverer <strong>OpenCover.Console.exe</strong>?</p>
+<h2>XML Report</h2>
+
+<p>OpenCover doesn't generate a human-readable report. Instead, you can postprocess the coverage output. <b><a href="http://www.palmmedia.de/Net/ReportGenerator">ReportGenerator</a> is the recommended tool</b>, and it works like a charm.</p>
+<pre><code class="bat">ReportGenerator.exe .\opencover.xml XmlReport Xml</code></pre>
+
+<p>generates an XML report in the <code>Xml</code> directory. The summary looks like this:</p>
+<pre><code class="xml">&lt;?xml version="1.0" encoding="utf-8"?&gt;
+&lt;CoverageReport scope="Summary"&gt;
+  &lt;Summary&gt;
+    &lt;Generatedon&gt;2011-08-05-2011-08-05&lt;/Generatedon&gt;
+    &lt;Parser&gt;OpenCoverParser&lt;/Parser&gt;
+    &lt;Assemblies&gt;1&lt;/Assemblies&gt;
+    &lt;Files&gt;5&lt;/Files&gt;
+    &lt;Coverage&gt;71.6%&lt;/Coverage&gt;
+    &lt;Coveredlines&gt;126&lt;/Coveredlines&gt;
+    &lt;Coverablelines&gt;176&lt;/Coverablelines&gt;
+    &lt;Totallines&gt;495&lt;/Totallines&gt;
+  &lt;/Summary&gt;
+  &lt;Assemblies&gt;
+    &lt;Assembly name="BookFinder.Core.DLL" coverage="71.6"&gt;
+      &lt;Class name="BookFinder.BookDepository" coverage="85.7" /&gt;
+      &lt;Class name="BookFinder.BookListViewModel" coverage="50" /&gt;
+      &lt;Class name="BookFinder.BoolProperty" coverage="50" /&gt;
+      &lt;Class name="BookFinder.BoundPropertyStrategy" coverage="0" /&gt;
+      &lt;Class name="BookFinder.ListProperty" coverage="75" /&gt;
+      &lt;Class name="BookFinder.Property" coverage="100" /&gt;
+      &lt;Class name="BookFinder.StringProperty" coverage="100" /&gt;
+      &lt;Class name="BookFinder.ViewModelBase" coverage="81" /&gt;
+    &lt;/Assembly&gt;
+  &lt;/Assemblies&gt;
+&lt;/CoverageReport&gt;</code></pre>
+
+<p>ReportGenerator also generates Html and LaTeX output, with a "summary" variant for each of the three output types.</p>
+<p>The XML report would be most useful for inclusion in build result reports, but I found the HTML version easy to use to examine coverage results down to the method level.</p>
+<div class="images">
+<a href="https://blairconrad.com/images/html_summary.png"><img title="html_summary" align="top" src="https://blairconrad.com/images/html_summary.png?w=270" alt="HTML Coverage Summary" width="270" height="300" /></a>&nbsp;<a href="https://blairconrad.com/images/html_detail.png"><img title="html_detail" align="top" src="https://blairconrad.com/images/html_detail.png?w=300" alt="HTML Coverage Detail" width="300" height="208" /></a>
+</div>
+
+<p>I appreciate the coverage count by each of the lines - not as fancy as dotCover's "which tests cover this", but it could be a helpful clue when you're trying to decide what you need to do to improve your coverage.</p>
+<h2>Joining Coverage Runs</h2>
+
+<p>Perhaps your test are scattered in space or time and you want to get an overview of all the code that's covered by them. OpenCover doesn't really do anything special for you, but <strong>ReportGenerator has your back</strong>. Specify multiple input files on the command line, and the results will be aggregated and added to a comprehensive report:</p>
+<pre><code class="bat">ReportGenerator.exe output1.xml;output2.xml;output3.xml XmlReport Xml</code></pre>
+
+<h2>DIY Auto-Deploy</h2>
+
+<p>There's no built-in auto-deploy for OpenCover. However, <b>I made my own auto-deployable package</b> like so:
+<ol>
+<li>install OpenCover</li>
+<li>copy the <code>C:\Program Files (x86)\OpenCover</code> directory somewhere - call this your <i>package directory</i></li>
+<li>uninstall OpenCover - you won't need it any more</li>
+</ol></p>
+<p>Then I just made sure my coverage build step 
+<ul>
+<li>knew where the OpenCover package directory was (for the build system at the Day Job, I added it to our "subscribes")</li>
+<li>used the <code>-register</code> flag mentioned above to register OpenCover before running the tests</li>
+</ul>
+That's it. No muss, no fuss. I did a similar (but easier, since there's no registration needed) trick with ReportGenerator, and all of a sudden I have a no-deploy system.</p>
+<p>In less than an hour's work, I could upgrade a project so the build servers and all the developers could run a coverage target, with no action on their part, other than pulling the updated source tree and building. (Which is pretty much what the build server does all day long anyhow...)</p>
+<h2>DIY (for now) Coverage with Isoloator</h2>
+
+<p>Isoloator and OpenCover don't work together out of the box, but thanks to advice I got from <a href="http://www.hmemcpy.com/blog/">Igal Tabachnik</a>, Typemock employee, it was not hard to change this.</p>
+<p>Isolator's supported coverage tools are partly configurable. There is a <code>typemockconfig.xml</code> under the Isolator install directory - typically <code>%ProgramFiles (x86)%\Typemock\Isoloator\6.0</code> (or <code>%ProgramFiles%</code>, I suppose). Mr. Tabachnik had me add
+<pre><code class="xml">&lt;Profiler Name="OpenCover" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7B8}" DirectLaunch="false"&gt;
+  &lt;EnvironmentList /&gt;
+&lt;/Profiler&gt;</code></pre>
+to the <code>ProfilerList</code> element, and everything meshed. His <a href="http://stackoverflow.com/questions/6698290/can-opencover-be-used-with-typemock-isolator">StackOverflow answer</a> provides full details and suggests that official support for OpenCover will be added to Isolator. </p>
+<h2>IIS</h2>
+
+<p>I can't find any special IIS support. I'm not saying OpenCover can't be used to cover an application running in IIS, only that I didn't find any help for it. I may investigate this later.</p>
+<h2>Sequence Point coverage</h2>
+
+<p>OpenCover counts sequence points, not statements. Yay!</p>
+<h2>Conclusion</h2>
+
+<p><strong>Pros:</strong>
+<ul>
+    <li>free</li>
+        <li>open source</li>
+        <li>active project</li>
+    <li>XML/HTML/LaTeX reports (via ReportGenerator)</li>
+    <li>report merging (via ReportGenerator)</li>
+    <li>Isolator support is easy to add (and may be included in future Isolators)</li>
+        <li>auto-deploy package is easy to make</li>
+</ul>
+<strong>Cons:</strong>
+<ul>
+    <li>no IDE integration</li>
+    <li>no help with IIS profiling</li>
+</ul></p>
+<p>I really like OpenCover. It's easy to use, relatively full-featured, and free. In a work environment, where there's a tonne of developers who want the in-IDE profiling experience, it may not be the best bet, but I'd use it for my personal .NET projects in a flash. </p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2011-08-15T00:00:00-04:00">2011-08-15</time>
+        <h4>.NET Coverage Tools</h4>
+    <ul class="multi-parts-list">
+            <li >
+            <a href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/" title="Can you cover me&#63; Looking for a .NET coverage tool">Part 1: Can you cover me&#63; Looking for a .NET coverage tool</a>
+            </li>
+            <li >
+            <a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/" title="Hasty Impressions&#58; dotCover 1.1">Part 2: Hasty Impressions&#58; dotCover 1.1</a>
+            </li>
+            <li >
+            <a href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/" title="Hasty Impressions&#58; PartCover">Part 3: Hasty Impressions&#58; PartCover</a>
+            </li>
+            <li  class="active-part">
+            Part 4: Hasty Impressions&#58; OpenCover
+            </li>
+            <li >
+            <a href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/" title="Hasty Impressions&#58; NCover">Part 5: Hasty Impressions&#58; NCover</a>
+            </li>
+            <li >
+            <a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/" title="Best all-around .NET coverage tool - OpenCover">Part 6: Best all-around .NET coverage tool - OpenCover</a>
+            </li>
+    </ul>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#.net-ref">.NET
+                    <span>16</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#coverage-ref">coverage
+                    <span>7</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#hastyimpressions-ref">HastyImpressions
+                    <span>5</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#isolator-ref">Isolator
+                    <span>5</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#opencover-ref">OpenCover
+                    <span>4</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#testing-ref">Testing
+                    <span>10</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#typemock-ref">TypeMock
+                    <span>5</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

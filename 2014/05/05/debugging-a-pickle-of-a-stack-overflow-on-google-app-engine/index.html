@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="pickle, AppEngine, LibraryHippo, Python, Development, " />
+
+<meta property="og:title" content="Debugging a Pickle of a Stack Overflow on Google App Engine "/>
+<meta property="og:url" content="https://blairconrad.com/2014/05/05/debugging-a-pickle-of-a-stack-overflow-on-google-app-engine/" />
+<meta property="og:description" content="A few days ago, a user e-mailed me a bug report for LibraryHippo. For the previous 55 days, she&#39;d been receiving the same (erroneous) morning e-mail about what library materials she had due. However, when she checked her family&#39;s account summary on the web page, it was correct. (The exact …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2014-05-05T00:00:00-04:00" />
+<meta name="twitter:title" content="Debugging a Pickle of a Stack Overflow on Google App Engine ">
+<meta name="twitter:description" content="A few days ago, a user e-mailed me a bug report for LibraryHippo. For the previous 55 days, she&#39;d been receiving the same (erroneous) morning e-mail about what library materials she had due. However, when she checked her family&#39;s account summary on the web page, it was correct. (The exact …">
+
+        <title>Debugging a Pickle of a Stack Overflow on Google App Engine  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2014/05/05/debugging-a-pickle-of-a-stack-overflow-on-google-app-engine/">
+                Debugging a Pickle of a Stack Overflow on Google App Engine
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>A few days ago, a user e-mailed me a bug report for
+<a href="http://libraryhippo.com">LibraryHippo</a>. For the previous 55 days, she'd been
+receiving the same (erroneous) morning e-mail about what library
+materials she had due. However, when she checked her family's account
+summary on the web page, it was correct.</p>
+<blockquote>
+<p>(The exact cause of the problem won't be of interest to many people,
+but I thought the way it presented, and how I diagnosed it, might
+help someone out. Read on!)</p>
+</blockquote>
+<p>I checked the logs, and sure enough, there was an error. Sort of like this:</p>
+<pre>
+I 2014-04-28 14:10:43.429 checking [patron name redacted] Waterloo
+I 2014-04-28 14:10:47.550 saving checked card for [patron name redacted]
+<b>E 2014-04-28 14:10:51.061 Failed to save checked card. Continuing.</b>
+Traceback (most recent call last):
+  File "/base/data/home/apps/s~libraryhippo27/1.368776574735783966/libraryhippo.py", line 380, in save_checked_card
+    checked_card.payload = card_status
+  File "/base/data/home/runtimes/python27/python27_lib/versions/1/google/appengine/ext/db/__init__.py", line 614, in __set__
+    value = self.validate(value)
+  File "/base/data/home/apps/s~libraryhippo27/1.368776574735783966/gael/objectproperty.py", line 11, in validate
+    result = pickle.dumps(value)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 1374, in dumps
+    Pickler(file, protocol).dump(obj)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 224, in dump
+    self.save(obj)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+
+<b>[about 80 lines of stack trace elided]</b>
+
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 663, in _batch_setitems
+    save(v)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 725, in save_inst
+    save(stuff)
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 286, in save
+    f(self, obj) # Call unbound method with explicit self
+  File "/base/data/home/runtimes/python27/python27_dist/lib/python2.7/pickle.py", line 649, in save_dict
+    self._batch_setitems(obj.iteritems())
+  File "/base/data/home/runtimes/python27/python27_dist/...(length 98720)
+I 2014-04-28 14:10:51.275 Saved; key: __appstats__:043300, part: 190 bytes, full: 65479 bytes, overhead: 0.004 + 0.005; link: http://libraryhippo27.appspot.com/_ah/stats/details?time=1398708643356
+</pre>
+
+<p>Whenever LibraryHippo checks a patron's library card, it saves the
+results to the datastore to be used to construct the next day's
+e-mails, but an inability to save doesn't keep the results from being
+displayed on the web page. So that part made sense. </p>
+<p>The next step was to figure out what was going wrong with the save.
+The logs indicated that <a href="https://docs.python.org/2/library/pickle.html">pickle</a> was using more stack frames
+than were available.</p>
+<h2>I try to debug it</h2>
+<p>I added a copy of the offending card to my family's account on the live site. Same problem.
+Then I fired up the dev environment at home and did the same thing. Everything worked like a charm.</p>
+<p>That was unexpected. So, as a last resort, I started thinking.</p>
+<h2>Why so deep?</h2>
+<p>The structure that was being pickled (<code>CardStatus</code>) was quite
+flat. Here are the involved classes' definitions. Unless noted
+otherwise, everything is a string or datetime:</p>
+<pre><code class="python">class CardStatus:
+    def __init__(self, card, items=None, holds=None):
+
+        self.library_name = card.library.name
+        self.patron_name = card.name
+        self.items = items or []  # Items
+        self.holds = holds or []  # Holds
+        self.info = []            # strings
+        self.expires = datetime.date.max
+
+class Thing():
+    def __init__(self, library, card):
+
+        self.library_name = library.name
+        self.user = card.name
+        self.title = ''
+        self.author = ''
+        self.url = ''
+        self.status = ''
+        self.status_notes = []    # strings
+
+class Hold(Thing):
+    def __init__(self, library, card):
+        Thing.__init__(self, library, card)
+
+        self.pickup = ''
+        self.holds_url = ''
+        self.expires = datetime.date.max
+
+class Item(Thing):
+    def __init__(self, library, card):
+        Thing.__init__(self, library, card)
+
+        self.items_url = ''</code></pre>
+
+<p>So, one level for the <code>CardStatus</code>, one for <code>Thing</code>, one for <code>Hold</code>
+(or <code>Item</code>), one for a list, and one for the <code>status_notes</code> strings in
+the list. That's 5 levels. And probably pickle encodes a <code>dict</code> in a
+few of the of the complex types. Let's be generous and say 10 levels,
+each of which take maybe 5 nested pickle functions. That's about
+50. Plus however deep we are in the stack before the pickling
+happens. That shouldn't be more than <strong>100</strong>.</p>
+<h2>How deep is too deep?</h2>
+<p>Popular wisdom on the web seems to be to increase the recursion limit
+when pickle runs into these kinds of problems. I was loath to do this,
+as I'd be constantly worrying about what depth to allow and whether
+it'd be enough and so on.</p>
+<p>While I dithered over that, my wife called to me from the television
+room, "Just set the limit higher. That should help your user for now
+and it will give you more time to work on the problem."</p>
+<p>So I did. I was worried that the App Engine runtime wouldn't <em>let</em> me
+change the recursion limit, so I used
+<a href="https://docs.python.org/2/library/sys.html#sys.getrecursionlimit">sys.getrecursionlimit</a> to log the depth,
+<a href="https://docs.python.org/2/library/sys.html#sys.setrecursionlimit">sys.setrecursionlimit</a>, and
+<code>sys.getrecursionlimit</code> again to verify.</p>
+<p>Turns out that:</p>
+<ul>
+<li>The default recursion limit on App Engine's environment is <strong>800</strong>.</li>
+<li>You <em>can</em> change the limit. I went up to <strong>20000</strong>.</li>
+<li>In the dev environment the limit is <strong>1000</strong>.</li>
+</ul>
+<p>The higher limit on the production server fixed things. I relaxed a
+little, and started thinking.</p>
+<p>Maybe the 800/1000 difference accounted for things working at home,
+but not in production. I used <code>sys.setrecursionlimit</code> to change the
+limit at home, and reproduced the error. Huzzah! Now I could move more
+quickly.</p>
+<h2>Inserting diagnostics into pickle</h2>
+<p>Back to the question of why pickle was recursing so deeply. I don't
+routinely debug Python, relying instead on the power of logging
+statements. Thus, I decided to provide a custom pickler that did
+normal pickling things, but that also, for every object pickled,
+logged the stack depth, the object type, and its representation:</p>
+<pre><code class="python">import pickle
+import logging
+import traceback
+
+class SpyingPickler(pickle.Pickler, object):
+    def save(self, obj):
+        logging.info("depth: %d, obj_type: %s, obj: %s",
+                     len(traceback.extract_stack()),
+                     type(obj), repr(obj))
+        super(SpyingPickler, self).save(obj)</code></pre>
+
+<p>I ran this, and got reams of data. Scads and scads and scads, including what looked like to be large HTML documents. So I took out the <code>repr(obj)</code> and repeated. This was more manageable.</p>
+<pre>
+&hellip;
+depth: 176, obj_type: <class 'BeautifulSoup.NavigableString'>
+depth: 179, obj_type: <type 'function'>
+depth: 179, obj_type: <type 'tuple'>
+depth: 182, obj_type: <type 'type'>
+depth: 182, obj_type: <type 'type'>
+depth: 182, obj_type: <type 'unicode'>
+&hellip;
+</pre>
+
+<p>Already we can see that we're quite deep in the stack, but the real
+surprise was the <code>BeautifulSoup.NavigableString</code>. LibraryHippo uses
+<a href="http://www.crummy.com/software/BeautifulSoup/">BeautifulSoup</a> to scrape the libraries' web pages. A
+<a href="http://www.crummy.com/software/BeautifulSoup/bs4/doc/#navigablestring"><code>NavigableString</code></a> is basically a Unicode string
+plus navigation. To support the navigation, the instance points at
+what looks to be a DOM model of <strong>the entire parsed HTML page</strong>. That
+explains the deep deep recursion.</p>
+<p>The offending objects were in the <code>pickup</code> field of the <code>Hold</code>
+class. A quick fix to ensure we're storing a plain string, and the
+problem <a href="https://code.google.com/p/libraryhippo/source/detail?r=fd04415d2009">was resolved</a>.</p>
+<h2>What a difference</h2>
+<p>Aside from the obvious effect of correct e-mails, I was curious to see what other differences this change made.</p>
+<p>Before the fix, the serialization descended to a stack depth of
+<strong>892</strong>, and produced a <strong>546221</strong>-byte blob.  After, the maximum
+depth is <strong>52</strong>, and the blob size is <strong>10779</strong> bytes. So everyone
+should benefit a little from lower resource usage and quicker
+card-checking. Fortunately, LibraryHippo isn't popular enough to exceed
+the free quotas, so I wasn't paying extra for compute or storage. Then
+again, if I had been, maybe I would've noticed the problem before a user
+did.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2014-05-05T00:00:00-04:00">2014-05-05</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#appengine-ref">AppEngine
+                    <span>7</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#libraryhippo-ref">LibraryHippo
+                    <span>7</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#pickle-ref">pickle
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#python-ref">Python
+                    <span>8</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

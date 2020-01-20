@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="Development, Sorting, XSLT, Development, " />
+
+<meta property="og:title" content="Using XSL to arbitrarily order strings - lessons from Professor Layton "/>
+<meta property="og:url" content="https://blairconrad.com/2010/07/02/using-xsl-to-arbitrarily-order-strings-lessons-from-professor-layton/" />
+<meta property="og:description" content="At the Day Job, I usually work on a middleware component that contains a component that monitors the state of the system. A &#34;health check&#34;, if you will. The component can be monitored automatically so notifications can be triggered on error conditions, or it can be used by a human …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2010-07-02T00:00:00-04:00" />
+<meta name="twitter:title" content="Using XSL to arbitrarily order strings - lessons from Professor Layton ">
+<meta name="twitter:description" content="At the Day Job, I usually work on a middleware component that contains a component that monitors the state of the system. A &#34;health check&#34;, if you will. The component can be monitored automatically so notifications can be triggered on error conditions, or it can be used by a human …">
+
+        <title>Using XSL to arbitrarily order strings - lessons from Professor Layton  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2010/07/02/using-xsl-to-arbitrarily-order-strings-lessons-from-professor-layton/">
+                Using XSL to arbitrarily order strings - lessons from Professor Layton
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>At the Day Job,  I usually work on a middleware component that contains a component that monitors the state of the system. A "health check", if you will. The component can be monitored automatically so notifications can be triggered on error conditions, or it can be used by a human. In the latter case, the user sees a list of tests performed on the system, sorted first by test outcome and then by test name. To help the user identify problems, any errors encountered are pushed to the top of the results page. Here's a sample:</p>
+<table border="1" style="border:1px solid black;border-collapse:collapse;">
+<tr style="background:#DDDDDD;"><th>Result</th><th>Test</th><th>Notes</th></tr>
+<tr><td>Error</td><td>Nacelle Polarization</td><td>unpolarized</td></tr>
+<tr><td>OK</td><td>Dilithium Crystals</td><td>&nbsp;</td></tr>
+<tr><td>OK</td><td>Jefferies tube</td><td>&nbsp;</td></tr>
+<tr><td>OK</td><td>Warp Coils</td><td>&nbsp;</td></tr>
+</table>
+
+<p>The actual report is an HTML page built from XML using an XSL transform - the main health check page queries various subcomponents that provide XML document sections. The sections are gathered and the XSLT sorts the results according to severity.</p>
+<p>The XSLT sorts the entries alphabetically by result string, using this XSL:
+<pre><code class="xml">&lt;xsl:apply-templates select="//Operation"&gt;
+    &lt;xsl:sort order="ascending" select="Result" /&gt;
+    &lt;xsl:sort order="ascending" select="Test" /&gt;
+&lt;/xsl:apply-templates&gt;</code></pre>
+Up 'til now, that worked great, but recently we had a need to add a third status - "Warning". The new report looked like this:</p>
+<table border="1" style="border:1px solid black;border-collapse:collapse;">
+<tr style="background:#DDDDDD;"><th>Result</th><th>Test</th><th>Notes</th></tr>
+<tr><td>Error</td><td>Nacelle Polarization</td><td>unpolarized</td></tr>
+<tr><td>OK</td><td>Dilithium Crystals</td><td>&nbsp;</td></tr>
+<tr><td>OK</td><td>Warp Coils</td><td>&nbsp;</td></tr>
+<tr><td>Warning</td><td>Jefferies tube</td><td>partly blocked</td></tr>
+</table>
+
+<p>It would be better for Warning to be grouped between Error and OK. Unfortunately, it wasn't obvious how to do this. A few Google searches later, I'd found <a href="http://www.oxygenxml.com/archives/xsl-list/200603/msg00506.html">a post by Nick Fitzsimons that described his solution to the problem</a>. After trying his approach, I was struck by a feeling of deja vu: I'd seen this, and recently, but where?</p>
+<h2>Professor Layton to the Rescue</h2>
+
+<p>Then it hit me. It's a classic puzzle. I'm sure it's appeared in many places, but I recently saw it in the game <a href="http://professorlaytonds.com/">Professor Layton and the Diabolical Box</a>.</p>
+<p>The Fake Coins puzzle asks
+<blockquote>
+There are 10 coins in each of the five bags below. One of these bags is filled with fake coins that are lighter than the real ones. A real coin weighs 10 units, but a false coin is one unit lighter. If you're  using a scale that can register up to 200 units, what is the fewest number of times you could use the scale to find the one bag filled with fake coins?
+</blockquote></p>
+<div class="images">
+<a href="https://blairconrad.com/images/fake_coins.png"><img src="https://blairconrad.com/images/fake_coins.png" alt="fake coins puzzle" title="fake coins puzzle" width="256" height="192" class="aligncenter size-full wp-image-494" /></a>
+</div>
+
+<p>I'm going to spoil the puzzle, so if you want to figure it out yourself, stop reading now.</p>
+<p>The answer is "one". The interesting part is the approach: 
+take 1 coin from bag 1, 2 coins from bag 2, and so on. Weigh them. There's a total of 15 coins, so if they were all genuine, the weight would be 150 units, but we know that each counterfeit coin is one unit less. So,
+<ul>
+<li>if bag 1 contains the fakes, the total weight will be 150 - 1 = 149</li>
+<li>if bag 2 contains the fakes, the total weight will be 150 - 2 = 148</li>
+<li>if bag 3 contains the fakes, the total weight will be 150 - 3 = 147</li>
+<li>if bag 4 contains the fakes, the total weight will be 150 - 4 = 146</li>
+<li>if bag 5 contains the fakes, the total weight will be 150 - 5 = 145</li>
+</ul></p>
+<p>It's a nice trick - coins from each bag contribute either 10 or 9 units - the weight difference between a good and a bad coin is 1, so we magnify that constant difference by different amounts to produce a single value that identifies which group the fake(s) come from.</p>
+<h2>From coins to result severity</h2>
+
+<p>The puzzle's fun, but what's the connection with the string ordering? The <a href="http://www.w3.org/TR/xslt#sorting">XSLT sort function</a> operates on a single sort key generated from the input nodes, kind of like the single value (the weight) generated from a set of coins in the puzzle. </p>
+<p>It's still not clear how to generate a "weight" for the strings. Like in the coin puzzle, we want to sum up a series of values that are mostly the same, but that differ for a single result severity. We're helped by the fact that the <a href="http://www.w3.org/TR/xpath/#function-number">number function</a> converts Boolean <code>true</code> values to 1 and <code>false</code> to 0. If we compare each result severity in the source XML to "Error", "Warning", and "OK" in turn, exactly one of these will give a true (1) response, and the rest will be false (0). </p>
+<p>So, like the coin puzzle, where all weights are the same except for the counterfeits, we have a situation where all comparisons give the same value except for the true one. If we treat the sorting groups&mdash;Error, Warning, and OK&mdash;like the bags of coins, we can see how to rank the results. Multiplying the 0s and 1s by a factor that gives the preferred sort order produces a sum that acts as the perfect sort key:
+<pre><code class="xml">&lt;xsl:apply-templates select="//Operation"&gt;
+    &lt;xsl:sort data-type="number" order="ascending"
+        select="(number(Result='Error') * 1)
+              + (number(Result='Warning') * 2)
+              + (number(Result='OK') * 3)" /&gt;
+    &lt;xsl:sort order="ascending" select="Result" /&gt;
+&lt;/xsl:apply-templates&gt;</code></pre></p>
+<ul>
+<li>a result severity of <b>Error</b> maps to 1 &times; 1 + 0 &times; 2 + 0 &times; 3 = <b>1</b></li>
+<li>a result severity of <b>Warning</b> maps to 0 &times; 1 + 1 &times; 2 + 0 &times; 3 = <b>2</b></li>
+<li>a result severity of <b>OK</b> maps to  0 &times; 1 + 0 &times; 2 + 1 &times; 3 = <b>3</b></li>
+</ul>
+
+<p>The select code is a little long, and not obvious when starting from an empty slate, but it has some nice features:
+<ul>
+<li>extending the sort for new result severities is straightforward - just add a term with the appropriate multiplier</li>
+<li>if we introduce a new severity without adding it to the sort, it sorts to the top - probably the best possible default action</li>
+<li>most importantly, it works. We now get a good health check result:</li>
+</ul></p>
+<table border="1" style="border:1px solid black;border-collapse:collapse;">
+<tr style="background:#DDDDDD;"><th>Result</th><th>Test</th><th>Notes</th></tr>
+<tr><td>Error</td><td>Nacelle Polarization</td><td>unpolarized</td></tr>
+<tr><td>Warning</td><td>Jefferies tube</td><td>partly blocked</td></tr>
+<tr><td>OK</td><td>Dilithium Crystals</td><td>&nbsp;</td></tr>
+<tr><td>OK</td><td>Warp Coils</td><td>&nbsp;</td></tr>
+</table>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2010-07-02T00:00:00-04:00">2010-07-02</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#development-ref">Development
+                    <span>20</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#sorting-ref">Sorting
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#xslt-ref">XSLT
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

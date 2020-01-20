@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content="rake, ruby, local_variables, Development, " />
+
+<meta property="og:title" content="Automatically Printing Rake (or other Ruby) Variables "/>
+<meta property="og:url" content="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/" />
+<meta property="og:description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2014-06-05T00:00:00-04:00" />
+<meta name="twitter:title" content="Automatically Printing Rake (or other Ruby) Variables ">
+<meta name="twitter:description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …">
+
+        <title>Automatically Printing Rake (or other Ruby) Variables  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/">
+                Automatically Printing Rake (or other Ruby) Variables
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <p>The <a href="http://fakeiteasy.github.io/">FakeItEasy</a> rakefile contains a <code>vars</code> target
+(brainchild of <a href="http://adamralph.com/">Adam Ralph</a>) that can be used to print out
+the local variables defined in the script. Mostly these are static
+variables, such as the path to the <a href="http://nunit.org/">NUnit</a> command, but some,
+such as the upcoming FakeItEasy version, are computed. Logging these
+computed variables can help debug misbehaving builds.</p>
+<p>If ever something goes wrong, we can check the <a href="http://www.jetbrains.com/teamcity/">TeamCity</a>
+build log and see something like this:</p>
+<pre>
+assembly_info:     Source/CommonAssemblyInfo.cs
+mspec_command:     Source/packages/Machine.Specifications.0.8.0/tools/mspec-clr4.exe
+nuget_command:     Source/packages/NuGet.CommandLine.2.8.0/tools/NuGet.exe
+nunit_command:     Source/packages/NUnit.Runners.2.6.3/tools/nunit-console.exe
+nuspec:            Source/FakeItEasy.nuspec
+output_folder:     Build
+repo:              FakeItEasy/FakeItEasy
+solution:          Source/FakeItEasy.sln
+ssl_cert_file_url: http://curl.haxx.se/ca/cacert.pem
+version:           1.21.0
+
+integration_tests:
+  Source/FakeItEasy.IntegrationTests/bin/Release/FakeItEasy.IntegrationTests.dll
+  Source/FakeItEasy.IntegrationTests.VB/bin/Release/FakeItEasy.IntegrationTests.VB.dll
+
+release_body:
+  * **Changed**: _&lt;description&gt;_ - _#&lt;issue number&gt;_
+  * **New**: _&lt;description&gt;_ - _#&lt;issue number&gt;_
+  * **Fixed**: _&lt;description&gt;_ - _#&lt;issue number&gt;_
+
+  With special thanks for contributions to this release from:
+
+  * _&lt;user's actual name&gt;_ - _@&lt;github_userid&gt;_
+
+release_issue_body:
+  **Ready** when all other issues forming part of the release are **Done**.
+
+  - [ ] run code analysis in VS in *Release* mode and address violations (send a regular PR which must be merged before continuing)
+  - [ ] check build, update draft release in [GitHub UI](https://github.com/FakeItEasy/FakeItEasy/releases)
+         including release notes, mentioning non-owner contributors, if any
+&hellip;
+</pre>
+
+<p><a href="https://github.com/FakeItEasy/FakeItEasy/blob/343a7a221906cc4c14971b46c3731c8a072eaf51/rakefile.rb#L36">Originally</a>, the <code>vars</code> task was hand-written, so
+whenever we added a new variable we had to update the task. Not too
+long ago, I added a new variable, and (surprisingly) remembered to update
+<code>vars</code>. However, Adam noticed that I had put the <code>puts</code> statement in
+the task in the wrong place, so the declaration order didn't match the
+printed order. A small thing, but the small things matter.</p>
+<p>So, we had a chat about the best way to present the
+variables. Declaration order is attractive, but I pushed a different
+approach: first, separating the variables with short values, such as
+<code>assembly_info</code>, from variables with long values, such as
+<code>release_body</code>. This keeps the short values from becoming lost in the
+noise of the longer ones.  Second: sort lexicographically within the
+groups, to aid scanning.</p>
+<p>We came to an agreement, but as I started to make the change, I
+thought, "Why make humans worry about this? Computers are good at
+partitioning and sorting." So, after a quick search for something that
+would allow printing of local Ruby variables, I found
+<a href="http://www.ruby-doc.org/core-2.0.0/Kernel.html#method-i-local_variables"><code>local_variables</code></a>, and rewrote the task:</p>
+<pre><code class="ruby">desc "Print all variables"
+task :vars do
+  print_vars(local_variables.sort.map { |name| [name.to_s, (eval name.to_s)] })  
+end
+
+def print_vars(variables)
+
+  scalars = []
+  vectors = []
+
+  variables.each { |name, value|
+    if value.respond_to?('each')
+      vectors << [name, value.map { |v| v.to_s }]
+    else
+      string_value = value.to_s
+      lines = string_value.lines
+      if lines.length > 1
+        vectors << [name, lines]
+      else
+        scalars << [name, string_value]
+      end
+    end
+  }
+
+  scalar_name_column_width = scalars.map { |s| s[0].length }.max
+  scalars.each { |name, value| 
+    puts "#{name}:#{' ' * (scalar_name_column_width - name.length)} #{value}"
+  }
+
+  puts
+  vectors.each { |name, value| 
+    puts "#{name}:"
+    puts value.map {|v| "  " + v }
+    puts ""
+  }
+end</code></pre>
+
+<p>Points of interest:</p>
+<ol>
+<li>The task delegates to a function right away, to avoid creating new
+  variables that would be found by <code>local_variables</code>. </li>
+<li>The first thing the method does is partition variables into
+  "scalars", to be rendered on the same line as the variable name, and
+  "vectors", which have multiple elements or lines, and are rendered
+  <em>below</em> the variable name.</li>
+<li>As a bonus, the scalar variable names padded so the values can all land on a "tab stop"</li>
+</ol>
+<p>Best of all, now we can add rake variables willy-nilly, with nary a
+thought about printing them out. It just happens.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2014-06-05T00:00:00-04:00">2014-06-05</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#local_variables-ref">local_variables
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#rake-ref">rake
+                    <span>1</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#ruby-ref">ruby
+                    <span>1</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>

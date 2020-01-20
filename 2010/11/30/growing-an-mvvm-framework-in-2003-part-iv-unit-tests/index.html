@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="author" content="Blair Conrad" />
+
+        <meta property="og:type" content="article" />
+        <meta name="twitter:card" content="summary">
+
+<meta name="keywords" content=".NET, Frameworks, MVVM, Testing, Development, " />
+
+<meta property="og:title" content="Growing an MVVM Framework in 2003, part IV—Unit Tests "/>
+<meta property="og:url" content="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/" />
+<meta property="og:description" content="This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1. * Part I—Event Handlers * Part II—Properties * Part III —Properties Redux * Part IV—Unit Tests * Part V—Reflections and Regrets Full source code can be found in my Google Code repository …" />
+<meta property="og:site_name" content="Blair Conrad" />
+<meta property="og:article:author" content="Blair Conrad" />
+<meta property="og:article:published_time" content="2010-11-30T00:00:00-05:00" />
+<meta name="twitter:title" content="Growing an MVVM Framework in 2003, part IV—Unit Tests ">
+<meta name="twitter:description" content="This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1. * Part I—Event Handlers * Part II—Properties * Part III —Properties Redux * Part IV—Unit Tests * Part V—Reflections and Regrets Full source code can be found in my Google Code repository …">
+
+        <title>Growing an MVVM Framework in 2003, part IV—Unit Tests  · Blair Conrad
+</title>
+        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
+        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
+
+        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+
+
+    </head>
+    <body>
+        <div id="content">
+            <div class="navbar navbar-static-top">
+                <div class="navbar-inner">
+                    <div class="container-fluid">
+                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </a>
+                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
+                        <div class="nav-collapse collapse">
+                            <ul class="nav pull-right top-menu">
+                                <li >
+                                    <a href=
+                                       https://blairconrad.com
+                                    >Home</a>
+                                </li>
+                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
+                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
+                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
+                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container-fluid">
+                <div class="row-fluid">
+                    <div class="span1"></div>
+                    <div class="span10">
+<article itemscope>
+<div class="row-fluid">
+    <header class="page-header span10 offset2">
+        <h1>
+            <a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">
+                Growing an MVVM Framework in 2003, part IV&mdash;Unit Tests
+            </a>
+        </h1>
+    </header>
+</div>
+
+<div class="row-fluid">
+        <div class="span8 offset2 article-content">
+            
+            <div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+<p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
+
+* <a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Part I&mdash;Event Handlers</a>
+* <a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Part II&mdash;Properties</a>
+* <a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Part III &mdash;Properties Redux</a>
+* Part IV&mdash;Unit Tests
+* <a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Part V&mdash;Reflections and Regrets</a>
+
+<p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository</a>.</p>
+</div>
+
+<p>In parts 1 and 3 (and 2, but I like part 3 better) I showed a tiny "framework" for binding View properties and events to properties and methods on a ViewModel. In addition to avoiding the tedium and noise of wiring up events by hand, I'd hoped to implement a structure that would make unit testing easier. Let's see how that went.</p>
+<h2>Event handlers just work. Almost</h2>
+
+<p>Recall that event handlers are defined on the ViewModel as plain old methods that happen to take a specific set of arguments&mdash;usually <code>object</code> and something that derives from <code>EventArgs</code>. This means that nothing special has to be done in order to exercise the methods during a unit test. The test doesn't have to trick the ViewModel into registering with an event or anything. The test just calls the method. And if the method doesn't care much about its arguments like <code>FindClick</code> doesn't, you can pass in nonsense:
+<pre><code class="csharp">public class BookListViewModel
+{
+    public void FindClick(object sender, EventArgs e)
+    {
+        ICollection books = bookDepository.Find(TitleText.Value);
+        IList bookListItems = BookListItems.Value;</p>
+<div class="highlight"><pre><span></span><span class="err">    bookListItems.Clear();</span>
+<span class="err">    foreach ( string book in books )</span>
+<span class="err">    {</span>
+<span class="err">         bookListItems.Add(book);</span>
+<span class="err">    }</span>
+<span class="err">}</span>
+</pre></div>
+
+
+<p>}</p>
+<p>public class BookListViewModelTests
+{
+    [Test]
+    public void CallFindClick()
+    {
+        vm.FindClick(null, null);
+    }
+}</code></pre></p>
+<p>Of course, this isn't much of a test. Usually we'll want to set up some initial state for the ViewModel, and verify that the correct actions have been taken. In fact, as things stand, the property fields will all be null, so <code>TitleText.Value</code> and <code>BookListItems.Value</code> will error out.</p>
+<h2>Putting something behind the properties</h2>
+
+<p>Most event handlers will need to access the properties on the ViewModel, so the tests must hook up the properties.</p>
+<h3>Provide stub properties</h3>
+
+<p>Last time I mentioned that the <code>PropertyStorageStrategy</code> would bring value. This is it. Recall the definitions of the ListProperty and the PropertyStorageStrategy:</p>
+<pre><code class="csharp">public class ListProperty: Property
+{
+    public ListProperty(PropertyStorageStrategy storage): base(storage)
+    {}
+
+    public IList Value
+    {
+        get { return (IList) storage.Get(); }
+        set { storage.Set(value); }
+    }
+}
+
+ public interface PropertyStorageStrategy
+ {
+     object Get();
+     void Set(object value);
+ }</code></pre>
+
+<p>The ListProperty (and BoolProperty and StringProperty) merely consult a PropertyStorageStrategy to obtain a value and they cast it to the correct type. Providing a dumb strategy that, instead of proxying a property on a View control, just holds a field will produce a property that can be used in tests:</p>
+<pre><code class="csharp">public class ValuePropertyStrategy: PropertyStorageStrategy 
+{
+      private object obj;
+
+      public ValuePropertyStrategy(object initialValue)
+      {
+         this.obj = initialValue;
+      }
+
+      public void Set(object value) { obj = value; }
+      public object Get() { return obj; }
+}</code></pre>
+
+<p>Then the test fixture setup can bind properties to the ViewModel:
+<pre><code class="csharp">[SetUp]
+public void SetUp()
+{
+    vm = new BookListViewModel(new Control(), new FakeBookDepository());
+    vm.TitleText = new StringProperty(new ValuePropertyStrategy(""));
+    vm.BookListItems = new ListProperty(new ValuePropertyStrategy(new ArrayList()));
+    ...
+}</code></pre></p>
+<p>And tests can be constructed to provide initial property values (if the default isn't good enough) and interrogate them afterward.
+<pre><code class="csharp">[Test]
+public void FindClick_WithTitleG_FindsEndersGame()
+{
+    vm.TitleText.Value = "G";
+    vm.FindClick(null, null);</p>
+<div class="highlight"><pre><span></span><span class="err">Assert.IsTrue(vm.BookListItems.Value.Contains(&quot;Ender&#39;s Game&quot;));</span>
+</pre></div>
+
+
+<p>}</code></pre></p>
+<h3>Auto-wiring the properties</h3>
+
+<p>This works, and pretty well. There's not that much noise associated with setting up the fake properties. Still, why should there be any? After so much trouble to remove the tedious wiring up from the production code, it seems wrong to leave it in the testing code.
+Also, I'm against <i>anything</i> that adds a barrier to writing tests. And having to hand-wire a few (or a dozen) properties before you can start testing is definitely a barrier. </p>
+<p>So, let's write a little code to handle the tedium for us.</p>
+<pre><code class="csharp">public class ValuePropertyBinder
+{
+      public static void Bind(ViewModelBase viewModel)
+      {
+          foreach ( FieldInfo field in viewModel.PropertyFields() )
+          {
+              ValuePropertyStrategy propertyStorageStrategy = new ValuePropertyStrategy(MakeStartingValue(field.FieldType));
+
+              ConstructorInfo propertyConstructor = field.FieldType.GetConstructor(new Type[] {typeof (PropertyStorageStrategy)});
+              object propertyField = propertyConstructor.Invoke(new object[] {propertyStorageStrategy});
+              field.SetValue(viewModel, propertyField);
+          }
+      }
+
+      private static object MakeStartingValue(Type fieldType)
+      {
+         Type propertyType = fieldType.GetProperty("Value").PropertyType;
+
+         if ( propertyType == typeof(IList) ) { return new ArrayList(); }
+         if ( propertyType == typeof(string) ) { return ""; }
+         if ( propertyType == typeof(bool) ) { return false; }
+         else
+         { 
+              throw new NotImplementedException("no known starting value for type " + propertyType);
+         }
+      }
+}</code></pre>
+
+<p>This is very similar to the wiring we've seen before&mdash;find property fields, construct an object to implement the property, and hook it up. The only thing likely to need attention in the future is <code>MakeStartingValue</code>. A new property type(like DateTime), will require an expansion to the <code>if</code> chain. But that should be very infrequent.</p>
+<p>Now it's much easier to use the ViewModel in tests:
+<pre><code class="csharp">[SetUp]
+public void SetUp()
+{
+   vm = new BookListViewModel(new Control(), new FakeBookDepository());
+   ValuePropertyBinder.Bind(vm);
+}</code></pre></p>
+<h3>An alternative: brute force and ignorance</h3>
+
+<p>This approach didn't occur to me until the project was over. Sigh.
+The production code works by binding the ViewModel to a View. The test setup could do that. I'd taken pains to keep any kind of code or behaviour out of the View, so there shouldn't be any side effects, and there's no need to show any of the GUI elements. Honestly, the technical downsides seem pretty limited.</p>
+<p>Even so, I don't <i>like</i> this solution. For the BookFinder application, the View is simple enough that I'm confident the approach would work, but I have concerns over using it in a more complex application. Also, I prefer to reduce the amount of auxiliary production code that's used in tests. In the off chance that something does go wrong, it's nice to be able to have a small set of production code to look at</p>
+<h2>Summing up</h2>
+
+<p>With the ValuePropertyBinder (or much-maligned "just bind the ViewModel  to the actual Model"), tests are really easy to set up and run. As easy as writing the production code. And they're readable. The only troublesome dependencies are the models. Totally worth the effort.</p>
+
+
+             
+ 
+            
+            
+            
+
+
+
+
+
+
+            <hr/>
+        </div>
+        <section id="article-sidebar" class="span2">
+            <h4>Published</h4>
+            <time itemprop="dateCreated" datetime="2010-11-30T00:00:00-05:00">2010-11-30</time>
+            <h4>Category</h4>
+            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
+            <h4>Tags</h4>
+            <ul class="list-of-tags tags-in-article">
+                <li><a href="https://blairconrad.com/tags.html#.net-ref">.NET
+                    <span>16</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#frameworks-ref">Frameworks
+                    <span>6</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#mvvm-ref">MVVM
+                    <span>6</span>
+</a></li>
+                <li><a href="https://blairconrad.com/tags.html#testing-ref">Testing
+                    <span>10</span>
+</a></li>
+            </ul>
+<h4>Contact</h4>
+<div id="sidebar-social-link">
+    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
+    </a>
+    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
+    </a>
+    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
+        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
+    </a>
+</div>
+            
+
+
+
+
+
+            
+
+
+
+
+
+        </section>
+</div>
+</article>
+                    </div>
+                    <div class="span1"></div>
+                </div>
+            </div>
+        </div>
+<footer>
+
+
+
+
+    <div id="fpowered">
+        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
+        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
+    </div>
+</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
+        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
+        <script>
+            function validateForm(query)
+            {
+                return (query.length > 0);
+            }
+        </script>
+
+    <script>
+    (function () {
+        if (window.location.hash.match(/^#comment-\d+$/)) {
+            $('#comment_thread').collapse('show');
+        }
+    })();
+    window.onhashchange=function(){
+        if (window.location.hash.match(/^#comment-\d+$/))
+            window.location.reload(true);
+    }
+    $('#comment_thread').on('shown', function () {
+        var link = document.getElementById('comment-accordion-toggle');
+        var old_innerHTML = link.innerHTML;
+        $(link).fadeOut(200, function() {
+            $(this).text('Click here to hide comments').fadeIn(200);
+        });
+        $('#comment_thread').on('hidden', function () {
+            $(link).fadeOut(200, function() {
+                $(this).text(old_innerHTML).fadeIn(200);
+            });
+        })
+    })
+</script>
+
+    </body>
+    <!-- Theme: Elegant built for Pelican
+        License : MIT -->
+</html>
