@@ -80,7 +80,7 @@ DIRECT_TEMPLATES = [
 ]
 RECIPES_SAVE_AS = "Recipes/index.html"
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
