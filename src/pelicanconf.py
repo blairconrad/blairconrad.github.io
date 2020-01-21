@@ -79,6 +79,7 @@ DIRECT_TEMPLATES = [
     "404",
     "Recipes",
 ]
+RECIPES_SAVE_AS = "Recipes/index.html"
 
 DEFAULT_PAGINATION = 10
 
