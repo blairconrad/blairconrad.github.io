@@ -21,8 +21,7 @@ PROJECTS = [
 ]
 
 PATH = "content"
-OUTPUT_PATH = ".."
-OUTPUT_RETENTION = [".git", ".gitignore", ".nojekyll", "src", "README.md"]
+OUTPUT_PATH = "output"
 THEME = "themes/elegant"
 
 
