@@ -27,7 +27,7 @@ title: Strawberry Rhubarb Pie
   <td>3 c rhubarb, sliced &frac12;&Prime; thick (375 g)</td>
 </tr>
 <tr>
-  <td>2 <a href="../pieCrust">pie dough</a> rounds</td>
+  <td>2 <a href="{filename}pieCrust.md">pie dough</a> rounds</td>
   <td colspan="2" class="righthide">&nbsp;</td>
 </tr>
 </table>

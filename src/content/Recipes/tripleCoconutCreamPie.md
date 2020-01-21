@@ -126,7 +126,7 @@ Makes one pie.
 1. Mash into a disk
 1. Chill for 1 hour&ndash;1 week
 1. Roll and place in 9&Prime; pie pan. Flute edge
-1. [Blind-bake the pie crust](../blind-bakingAPieCrust)
+1. [Blind-bake the pie crust]({filename}blind-bakingAPieCrust.md)
 1. Cool completely
 
 ## Coconutty Topping
