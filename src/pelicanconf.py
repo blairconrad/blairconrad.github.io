@@ -21,7 +21,7 @@ PROJECTS = [
 ]
 
 PATH = "content"
-OUTPUT_PATH = "output"
+OUTPUT_PATH = "../_local_build"
 THEME = "themes/elegant"
 
 
