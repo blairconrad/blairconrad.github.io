@@ -31,7 +31,7 @@ DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["series"]
+PLUGINS = ["neighbors", "series"]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None

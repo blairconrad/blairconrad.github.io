@@ -8,7 +8,7 @@ imports:
     # plugins|extract_toc: plugins/
     # plugins|tipue_search: plugins/
     # plugins|liquid_tags: plugins/
-    # plugins|neighbors: plugins/
+    plugins|neighbors: plugins/
     # plugins|render_math: plugins/
     # plugins|related_posts: plugins/
     # plugins|share_post: plugins/
@@ -29,3 +29,6 @@ git module plugins:
 
 rule series:
     pick: series
+
+rule neighbors:
+    pick: neighbors
