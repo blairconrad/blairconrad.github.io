@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os
+
 AUTHOR = "Blair Conrad"
 SITENAME = "Blair Conrad"
 SITEURL = ""
@@ -88,12 +90,12 @@ RELATIVE_URLS = True
 
 DISPLAY_PAGES_ON_MENU = False
 
-STATIC_PATHS = ["images", "css", "Recipes", "extra/keybase.txt", "extra/CNAME"]
+STATIC_PATHS = ["images", "css", "Recipes", "extra"]
 
 PAGE_PATHS = ["pages", "Recipes"]
 
-EXTRA_PATH_METADATA = {
-    "extra/CNAME": {"path": "CNAME"},
-    "extra/keybase.txt": {"path": "keybase.txt"},
-    "images/favicon.ico": {"path": "favicon.ico"},
-}
+EXTRA_PATH_METADATA = {}
+for (path, directories, files) in os.walk(os.path.join("content", "extra")):
+    for f in files:
+        full_path = (path + "/" + f).replace("\\", "/")
+        EXTRA_PATH_METADATA[full_path[8:]] = {"path": full_path[14:]}
