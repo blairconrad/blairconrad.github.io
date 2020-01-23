@@ -87,7 +87,12 @@ td:first-child {
 }
 
 .confession {
-  text-align:center;
+  text-align: center;
+}
+
+footer {
+  text-align: right;
+  border-top: 1px solid rgba(0, 0, 0, 0.2);
 }
 
 li {
