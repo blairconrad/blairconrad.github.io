@@ -1,0 +1,68 @@
+==================================================================
+https://keybase.io/blairconrad
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of http://blairconrad.com
+  * I am blairconrad (https://keybase.io/blairconrad) on keybase.
+  * I have a public key with fingerprint AEBB E24E D9E2 977B 77EA  F60B 0958 0635 4B75 3431
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "01012d3e30cec5581e9d1d95afb075c93b7425020b1a2d10ee6174ce5e71ba7b1a180a",
+            "fingerprint": "aebbe24ed9e2977b77eaf60b095806354b753431",
+            "host": "keybase.io",
+            "key_id": "095806354b753431",
+            "kid": "01012d3e30cec5581e9d1d95afb075c93b7425020b1a2d10ee6174ce5e71ba7b1a180a",
+            "uid": "256e5ea74c5c658fa61795ed07f1be00",
+            "username": "blairconrad"
+        },
+        "service": {
+            "hostname": "blairconrad.com",
+            "protocol": "http:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "ctime": 1481035738,
+    "expire_in": 157680000,
+    "prev": "bd902726b57ff525387b80d59b626982366203a8d194de1d14c62578cd85d14e",
+    "seqno": 9,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+-----BEGIN PGP MESSAGE-----
+Version: Keybase OpenPGP v2.0.58
+Comment: https://keybase.io/crypto
+
+yMIhAnicrZJbSBRRGMdXa1dcKiMlIlNiCnxwqXNm9syZ2QTJRBMsELxEF7dz5pzV
+QZ1ZZ1fzUtGDaGD3TM1LSdlDFwgKoojQNJIoKAoyhEgIkkoieikitDNWT752Xg7f
+9/2+/3fhe7R8icef0L1zRyVOTicJTx8ONHh2FTyfapWozZqlUKtUwxc+Xst4LB6u
+MZkUkgAEUGYKV4DBDYQ0yHUGmY5IhAKMDF2hOCgjIAMKicwg4FyFOGhwxDGkBAsv
+1ACRAlLEtKq4E3VMKy5kCaeUy0HOdC7rGFOMOYmogAIdaUBVUJBipAQVKBKr7Zib
+IZqjJMY3mbbwCSP8p73F/H/uu2FBTkaqCBFBIENFWoQIWkecARyBlAPggjHuWKSO
+C5rWEtMxbMshTDoUkESg0TS4u1t3mMXQJsOuEwpRx47bhl0rgtXxeDTk5saboy58
+gNPwX5kwNS0mlikSGrkTM21LCkFBGnHT1YVBDQIFYUULSLwpajo8bLoEwqoGxHPL
+8Ea3PtOBjGWVIhyJIBkpGqYaYEinqqzqmqyoqgwUojGoBxmHDAYNVUZYM5iGhMEl
+d7B6y5ZCumiTVAnJmFllkXiDw6VDY6N7l3oS/B6fN9E9Mo8/eeW/07vckzRfVLS+
+8pj1Pc2bF1698VTu8ScvvnoLmj2z+6t9qR8CV9NyXvSRwOC2nDsVM6U9qPKi1ptb
+/qpaf87LJ46sW/WYfXkX+bR7z1ziuC/Nl29nrag/OJ7sN/ubhgp/fL5RP5iS+PNs
+e9nRlpHMax2fZ8cG8k77r53wZe7Vh0rn9lHPhuzhilHfrHetE+rbXndm+9iFYv56
+j3Lvl3dZx62JyeHm6euT79c86GpZQWeuPPq29L737N3bJ1vy2ZrZqYm21Mns6Wej
+c1vLMl5v+Th1eMz0dgy+Le5KykrJPf+yv+RTxXxbhqoWbmWpnZeSujtHOt+kZ/Zu
+bi8paMvIP9fReTNzdbjmN2cFNhQ=
+=iSYN
+-----END PGP MESSAGE-----
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/blairconrad
+
+==================================================================
