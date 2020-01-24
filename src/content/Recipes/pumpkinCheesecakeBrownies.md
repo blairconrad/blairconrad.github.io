@@ -1,6 +1,6 @@
 ---
 template: recipe
-title: Pumpking Cheesecake Brownies
+title: Pumpkin Cheesecake Brownies
 ---
 <table>
 <tr>
