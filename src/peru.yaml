@@ -6,7 +6,7 @@ imports:
     # plugins|better_figures_and_images: plugins/
     # plugins|better_codeblock_line_numbering: plugins/
     # plugins|extract_toc: plugins/
-    # plugins|tipue_search: plugins/
+    plugins|tipue_search: plugins/
     # plugins|liquid_tags: plugins/
     plugins|neighbors: plugins/
     # plugins|render_math: plugins/
@@ -32,3 +32,6 @@ rule series:
 
 rule neighbors:
     pick: neighbors
+
+rule tipue_search:
+    pick: tipue_search

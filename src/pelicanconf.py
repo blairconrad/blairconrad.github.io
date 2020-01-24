@@ -33,7 +33,7 @@ DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["neighbors", "series"]
+PLUGINS = ["neighbors", "series", "tipue_search"]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -77,6 +77,7 @@ DIRECT_TEMPLATES = [
     "categories",
     "authors",
     "archives",
+    "search",
     "404",
     "Recipes",
 ]
