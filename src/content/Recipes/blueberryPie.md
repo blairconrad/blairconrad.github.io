@@ -32,7 +32,7 @@ title: Blueberry Pie
   <td>&frac18; t salt</td>
 </tr>  
 <tr>
-  <td>2 <a href="../pieCrust">pie dough</a> rounds</td>
+  <td>2 <a href="{filename}pieCrust.md">pie dough</a> rounds</td>
   <td class="righthide">&nbsp;</td>
 </tr>
 </table>

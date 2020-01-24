@@ -55,4 +55,4 @@ title: Gluten Free Pear Bread
 7. Cool in the pan for 5 minutes.
 8. Remove from pan and cool on a wire rack.
 
-<p class="confession">Stolen from [simply gluten-free](https://simplygluten-free.com/blog/2011/04/gluten-free-pear-bread.html)</p>
+<p class="confession">Stolen from <a href="https://simplygluten-free.com/blog/2011/04/gluten-free-pear-bread.html">simply gluten-free</a></p>

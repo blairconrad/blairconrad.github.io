@@ -45,4 +45,4 @@ title: Chocolate Coconut Macaroons
 7. Let cool on the baking sheet for about 10 minutes
 8. Let cool on a wire rack
 
-<p class="confession">Stolen from the [Joy of Baking](http://www.joyofbaking.com/ChocolateCoconutMacaroons.html)</p>
+<p class="confession">Stolen from the <a href="http://www.joyofbaking.com/ChocolateCoconutMacaroons.html">Joy of Baking</p>

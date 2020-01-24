@@ -68,4 +68,4 @@ title: Chocolate Gingerbread
 8. Pour batter into prepared pan.
 9. Bake at 350&deg;F until set, maybe 45 minutes. Watch it.
 
-<p class="confession">Adapted from [the recipe on the Crosby's Molasses box](http://www.crosbys.com/chocolate-gingerbread-cake).</p>
+<p class="confession">Adapted from <a href="http://www.crosbys.com/chocolate-gingerbread-cake">the recipe on the Crosby's Molasses box</a>.</p>

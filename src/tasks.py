@@ -78,6 +78,11 @@ def preview(c):
 @task
 def livereload(c):
     """Automatically reload browser tab upon file modification."""
+    import asyncio
+
+    asyncio.set_event_loop_policy(
+        asyncio.WindowsSelectorEventLoopPolicy()
+    )  # python-3.8.0a4
     from livereload import Server
 
     build(c)
@@ -96,6 +101,20 @@ def livereload(c):
     for extension in static_file_extensions:
         static_file = "{0}/static/**/*{1}".format(theme_path, extension)
         server.watch(static_file, lambda: build(c))
+
+    # Watch additional templates and static assets
+    for template_overrides_path in SETTINGS["THEME_TEMPLATES_OVERRIDES"]:
+        template = "{}/*".format(template_overrides_path)
+        print("watching", template)
+        server.watch(template, lambda: build(c))
+    for extension in static_file_extensions:
+        for static_path in SETTINGS["STATIC_PATHS"]:
+            static_file = "{0}/{1}/**/*{2}".format(
+                SETTINGS["PATH"], static_path, extension
+            )
+            print("watching", static_file)
+            server.watch(static_file, lambda: build(c))
+
     # Serve output path on configured port
     server.serve(port=CONFIG["port"], root=CONFIG["deploy_path"])
 

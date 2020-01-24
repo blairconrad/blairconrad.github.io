@@ -66,5 +66,5 @@ title: Peanut Butter and Jelly Bars
 
 <p>Makes a pan full of peanut butter and jelly bars.</p>
 <p class="confession">
-Adapted from [Ina Garten](http://www.foodnetwork.com/recipes/ina-garten/peanut-butter-and-jelly-bars-recipe.html). I use less sugar.
+Adapted from <a href="http://www.foodnetwork.com/recipes/ina-garten/peanut-butter-and-jelly-bars-recipe.html">Ina Garten</a>. I use less sugar.
 </p>

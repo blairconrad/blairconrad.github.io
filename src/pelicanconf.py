@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+import os
+
 AUTHOR = "Blair Conrad"
 SITENAME = "Blair Conrad"
 SITEURL = ""
@@ -21,8 +23,7 @@ PROJECTS = [
 ]
 
 PATH = "content"
-OUTPUT_PATH = ".."
-OUTPUT_RETENTION = [".git", ".gitignore", ".nojekyll", "src", "README.md"]
+OUTPUT_PATH = "../_local_build"
 THEME = "themes/elegant"
 
 
@@ -32,7 +33,7 @@ DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["series"]
+PLUGINS = ["neighbors", "series", "tipue_search"]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -76,12 +77,13 @@ DIRECT_TEMPLATES = [
     "categories",
     "authors",
     "archives",
+    "search",
     "404",
     "Recipes",
 ]
 RECIPES_SAVE_AS = "Recipes/index.html"
 
-DEFAULT_PAGINATION = 10
+DEFAULT_PAGINATION = False
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
@@ -89,12 +91,12 @@ RELATIVE_URLS = True
 
 DISPLAY_PAGES_ON_MENU = False
 
-STATIC_PATHS = ["images", "css", "Recipes", "extra/keybase.txt", "extra/CNAME"]
+STATIC_PATHS = ["images", "Recipes", "extra"]
 
 PAGE_PATHS = ["pages", "Recipes"]
 
-EXTRA_PATH_METADATA = {
-    "extra/CNAME": {"path": "CNAME"},
-    "extra/keybase.txt": {"path": "keybase.txt"},
-    "images/favicon.ico": {"path": "favicon.ico"},
-}
+EXTRA_PATH_METADATA = {}
+for (path, directories, files) in os.walk(os.path.join("content", "extra")):
+    for f in files:
+        full_path = (path + "/" + f).replace("\\", "/")
+        EXTRA_PATH_METADATA[full_path[8:]] = {"path": full_path[14:]}
