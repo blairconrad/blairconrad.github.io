@@ -90,7 +90,7 @@ RELATIVE_URLS = True
 
 DISPLAY_PAGES_ON_MENU = False
 
-STATIC_PATHS = ["images", "css", "Recipes", "extra"]
+STATIC_PATHS = ["images", "Recipes", "extra"]
 
 PAGE_PATHS = ["pages", "Recipes"]
 
