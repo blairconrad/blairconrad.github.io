@@ -17,12 +17,18 @@ imports:
     # plugins|post_stats: plugins/
     # plugins|photos: plugins/
     # revealmd: plugins/revealmd/
+    plugins|i18n_subsites: plugins/
+    themes|pelican-bootstrap3: themes/
 
 
 
 git module elegant:
     url: https://github.com/Pelican-Elegant/elegant.git
     rev: next
+
+git module themes:
+    url: https://github.com/getpelican/pelican-themes.git
+    rev: master
 
 git module plugins:
     url: https://github.com/getpelican/pelican-plugins.git
@@ -33,5 +39,12 @@ rule series:
 rule neighbors:
     pick: neighbors
 
+rule i18n_subsites:
+    pick: i18n_subsites
+
 rule tipue_search:
     pick: tipue_search
+
+rule pelican-bootstrap3:
+    pick: pelican-bootstrap3
+
