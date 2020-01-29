@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>LibraryHippo 2020 - Motivation and Plan | Blair Conrad</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="LibraryHippo 2020 - Motivation and Plan" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - Motivation and Plan" />
+  <meta property="og:url" content="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" />
+  <meta property="og:description" content="For some years, I&#39;ve run a hobby project, open to all, but mostly used by a few of my friends and family, called LibraryHippo. I find it useful, and for a long time, it was a joy to work on. Lately, the project&#39;s not much fun. I&#39;ve had the urge …" />
+  <meta name="twitter:description" content="For some years, I&#39;ve run a hobby project, open to all, but mostly used by a few of my friends and family, called LibraryHippo. I find it useful, and for a long time, it was a joy to work on. Lately, the project&#39;s not much fun. I&#39;ve had the urge …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Motivation and Plan">
+                  LibraryHippo 2020 - Motivation and Plan
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-02-06T00:00:00-05:00">2020-02-06</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                  /
+                  <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                  /
+                  <a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+                  /
+                  <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                </span>
+              </div>
+            <aside class="m-block m-default">
+              <h3>Part 1 of the LibraryHippo 2020 series:</h3>
+              <ol>
+                <li>
+                  LibraryHippo 2020 - Motivation and Plan (this article)
+                </li>
+              </ol>
+            </aside>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>For some years, I've run a hobby project, open to all, but mostly used by a few
+of my friends and family, called <a href="http://libraryhippo.com/">LibraryHippo</a>. I
+find it useful, and for a long time, it was a joy to work on.</p>
+<p>Lately, the project's not much fun. I've had the urge to make small tweaks or
+add the odd feature, but I haven't bothered. Whenever I'm tempted to, there've
+been a few speedbumps:</p>
+<ol>
+<li>it's written in Python 2.7, which I'm trying to leave behind, and</li>
+<li>it's running on Google App Engine</li>
+</ol>
+<p>I'm grateful to Google for providing a free tier of App Engine for projects such
+as mine to run on, and I've benefitted a lot from it, but it's not without its
+downsides:</p>
+<ol>
+<li>many of the services have custom interfaces, that I only use there, so they
+   fade from my memory, and</li>
+<li>it seems every time I come back to the project, I have to update my SDK to
+   even work with LibraryHippo, and sometimes learn new commands to deploy or
+   monitor the service</li>
+</ol>
+<p>Since Python 2.7 is now unsupported, I'm looking to upgrade to 3.7. App Engine
+documentation now suggests writing the application in
+<a href="https://palletsprojects.com/p/flask/">Flask</a>, rather than the older framework.
+The project seems well-regarded, so I read some documentation and looked at
+Miguel Grinberg's amazing
+<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">The Flask Mega-Tutorial</a>,
+(which I highly recommend: it's eminently readable, obviously well-researched,
+and espouses good overall development practices), and decided to give that a
+try.</p>
+<p>I figured that since I'm doing a near-complete rewrite anyhow (some of the core
+code should survive), it might be time to explore different hosting options,
+making use of commodity databases, authentication, queuing, etc.</p>
+<p>After a little searching, it looks as if <a href="https://heroku.com">Heroku</a> might be
+the platform that meets my needs, which are:</p>
+<ol>
+<li>web app hosting</li>
+<li>a small (perhaps a few MB) persistent datastore</li>
+<li>scheduled jobs</li>
+<li>authentication via social accounts</li>
+<li>sending e-mail</li>
+<li>free, or nearly so; as I said, this is a hobby project, and I'm not willing
+   to dump several tens of dollars into it every month</li>
+</ol>
+<p>I've other requirements, but these aren't likely to be deal-breakers:</p>
+<ol>
+<li>custom domain name</li>
+<li>job queues</li>
+</ol>
+<p>Over the next few posts, I'm going to pick high-risk requirements from the above
+list, and attempt to satisfy them via a Flask web application running on
+Heroku's free tier. If I can satisfy (in the most rudimentary way) these
+requirements, I'll pursue a full conversion.</p>
+<p>I'll assign issues and pull requests that I make for this work to the
+<a href="https://github.com/LibraryHippo/LibraryHippo/milestone/1">LibraryHippo 2020</a>
+milestone.</p>
+<p>Hopefully the series will serve as entertainment or education for you, and a
+useful reference for me when I wonder how or why I did something.</p>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

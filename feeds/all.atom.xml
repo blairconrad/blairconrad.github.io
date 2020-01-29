@@ -1,5 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2017-02-21T00:00:00-05:00</updated><entry><title>Automatically Sync nupkg and project.json Dependencies</title><link href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/" rel="alternate"></link><published>2017-02-21T00:00:00-05:00</published><updated>2017-02-21T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2017-02-21:/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/</id><summary type="html">&lt;p&gt;Recently while working on an open source .NET project,
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-02-06T00:00:00-05:00</updated><entry><title>LibraryHippo 2020 - Motivation and Plan</title><link href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="alternate"></link><published>2020-02-06T00:00:00-05:00</published><updated>2020-02-06T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-06:/2020/02/06/libraryhippo-2020-motivation-and-plan/</id><summary type="html">&lt;p&gt;For some years, I've run a hobby project, open to all, but mostly used by a few
+of my friends and family, called &lt;a href="http://libraryhippo.com/"&gt;LibraryHippo&lt;/a&gt;. I
+find it useful, and for a long time, it was a joy to work on.&lt;/p&gt;
+&lt;p&gt;Lately, the project's not much fun. I've had the urge …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For some years, I've run a hobby project, open to all, but mostly used by a few
+of my friends and family, called &lt;a href="http://libraryhippo.com/"&gt;LibraryHippo&lt;/a&gt;. I
+find it useful, and for a long time, it was a joy to work on.&lt;/p&gt;
+&lt;p&gt;Lately, the project's not much fun. I've had the urge to make small tweaks or
+add the odd feature, but I haven't bothered. Whenever I'm tempted to, there've
+been a few speedbumps:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;it's written in Python 2.7, which I'm trying to leave behind, and&lt;/li&gt;
+&lt;li&gt;it's running on Google App Engine&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I'm grateful to Google for providing a free tier of App Engine for projects such
+as mine to run on, and I've benefitted a lot from it, but it's not without its
+downsides:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;many of the services have custom interfaces, that I only use there, so they
+   fade from my memory, and&lt;/li&gt;
+&lt;li&gt;it seems every time I come back to the project, I have to update my SDK to
+   even work with LibraryHippo, and sometimes learn new commands to deploy or
+   monitor the service&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Since Python 2.7 is now unsupported, I'm looking to upgrade to 3.7. App Engine
+documentation now suggests writing the application in
+&lt;a href="https://palletsprojects.com/p/flask/"&gt;Flask&lt;/a&gt;, rather than the older framework.
+The project seems well-regarded, so I read some documentation and looked at
+Miguel Grinberg's amazing
+&lt;a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world"&gt;The Flask Mega-Tutorial&lt;/a&gt;,
+(which I highly recommend: it's eminently readable, obviously well-researched,
+and espouses good overall development practices), and decided to give that a
+try.&lt;/p&gt;
+&lt;p&gt;I figured that since I'm doing a near-complete rewrite anyhow (some of the core
+code should survive), it might be time to explore different hosting options,
+making use of commodity databases, authentication, queuing, etc.&lt;/p&gt;
+&lt;p&gt;After a little searching, it looks as if &lt;a href="https://heroku.com"&gt;Heroku&lt;/a&gt; might be
+the platform that meets my needs, which are:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;web app hosting&lt;/li&gt;
+&lt;li&gt;a small (perhaps a few MB) persistent datastore&lt;/li&gt;
+&lt;li&gt;scheduled jobs&lt;/li&gt;
+&lt;li&gt;authentication via social accounts&lt;/li&gt;
+&lt;li&gt;sending e-mail&lt;/li&gt;
+&lt;li&gt;free, or nearly so; as I said, this is a hobby project, and I'm not willing
+   to dump several tens of dollars into it every month&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I've other requirements, but these aren't likely to be deal-breakers:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;custom domain name&lt;/li&gt;
+&lt;li&gt;job queues&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Over the next few posts, I'm going to pick high-risk requirements from the above
+list, and attempt to satisfy them via a Flask web application running on
+Heroku's free tier. If I can satisfy (in the most rudimentary way) these
+requirements, I'll pursue a full conversion.&lt;/p&gt;
+&lt;p&gt;I'll assign issues and pull requests that I make for this work to the
+&lt;a href="https://github.com/LibraryHippo/LibraryHippo/milestone/1"&gt;LibraryHippo 2020&lt;/a&gt;
+milestone.&lt;/p&gt;
+&lt;p&gt;Hopefully the series will serve as entertainment or education for you, and a
+useful reference for me when I wonder how or why I did something.&lt;/p&gt;</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="AppEngine"></category><category term="heroku"></category></entry><entry><title>Automatically Sync nupkg and project.json Dependencies</title><link href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/" rel="alternate"></link><published>2017-02-21T00:00:00-05:00</published><updated>2017-02-21T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2017-02-21:/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/</id><summary type="html">&lt;p&gt;Recently while working on an open source .NET project,
 I forgot to update the &lt;code&gt;.nuspec&lt;/code&gt; after changing a package
 dependency in my &lt;code&gt;project.json&lt;/code&gt;. Of course the resulting nupkg
 contained the wrong dependency. Fortunately, the package
