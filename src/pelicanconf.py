@@ -79,7 +79,7 @@ DIRECT_TEMPLATES = [
     "authors",
     "archives",
     "search",
-    #    "404",
+    "404",
     "Recipes",
 ]
 RECIPES_SAVE_AS = "Recipes/index.html"
