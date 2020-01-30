@@ -1,81 +1,145 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<html lang="en"     prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml" >
+
+<head>
+    <title>Can you cover me? Looking for a .NET coverage tool - Blair Conrad</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+<link rel="canonical" href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/">
+
         <meta name="author" content="Blair Conrad" />
+        <meta name="keywords" content=".NET,coverage,IIS,Isolator,Testing,TypeMock" />
+        <meta name="description" content="Recently at the Day Job, my boss&#39;s boss has been on a &#34;code confidence&#34; kick. We&#39;ve always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he&#39;s looking to improve the process. Part of this push involves getting better at measuring which tests exercise …" />
 
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
-
-<meta name="keywords" content=".NET, coverage, IIS, Isolator, Testing, TypeMock, Development, " />
-
-<meta property="og:title" content="Can you cover me? Looking for a .NET coverage tool "/>
-<meta property="og:url" content="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/" />
-<meta property="og:description" content="Recently at the Day Job, my boss&#39;s boss has been on a &#34;code confidence&#34; kick. We&#39;ve always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he&#39;s looking to improve the process. Part of this push involves getting better at measuring which tests exercise …" />
-<meta property="og:site_name" content="Blair Conrad" />
-<meta property="og:article:author" content="Blair Conrad" />
-<meta property="og:article:published_time" content="2011-07-18T00:00:00-04:00" />
-<meta name="twitter:title" content="Can you cover me? Looking for a .NET coverage tool ">
-<meta name="twitter:description" content="Recently at the Day Job, my boss&#39;s boss has been on a &#34;code confidence&#34; kick. We&#39;ve always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he&#39;s looking to improve the process. Part of this push involves getting better at measuring which tests exercise …">
-
-        <title>Can you cover me? Looking for a .NET coverage tool  · Blair Conrad
-</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+        <meta property="og:site_name" content="Blair Conrad" />
+        <meta property="og:type" content="article"/>
+        <meta property="og:title" content="Can you cover me? Looking for a .NET coverage tool"/>
+        <meta property="og:url" content="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/"/>
+        <meta property="og:description" content="Recently at the Day Job, my boss&#39;s boss has been on a &#34;code confidence&#34; kick. We&#39;ve always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he&#39;s looking to improve the process. Part of this push involves getting better at measuring which tests exercise …"/>
+        <meta property="article:published_time" content="2011-07-18" />
+            <meta property="article:section" content="Development" />
+            <meta property="article:tag" content=".NET" />
+            <meta property="article:tag" content="coverage" />
+            <meta property="article:tag" content="IIS" />
+            <meta property="article:tag" content="Isolator" />
+            <meta property="article:tag" content="Testing" />
+            <meta property="article:tag" content="TypeMock" />
+            <meta property="article:author" content="Blair Conrad" />
 
 
-    </head>
-    <body>
-        <div id="content">
-            <div class="navbar navbar-static-top">
-                <div class="navbar-inner">
-                    <div class="container-fluid">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
-                        <div class="nav-collapse collapse">
-                            <ul class="nav pull-right top-menu">
-                                <li >
-                                    <a href=
-                                       https://blairconrad.com
-                                    >Home</a>
-                                </li>
-                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
-                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
-                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
-                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css" />
+
+    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://blairconrad.com/theme/css/pygments/github.css"
+        rel="stylesheet">
+    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css" />
+    <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
+
+    <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        title="Blair Conrad ATOM Feed" />
+
+    <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
+        title="Blair Conrad Development ATOM Feed" />
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top"
+        role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://blairconrad.com/" class="navbar-brand">
+Blair Conrad                </a>
             </div>
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span1"></div>
-                    <div class="span10">
-<article itemscope>
-<div class="row-fluid">
-    <header class="page-header span10 offset2">
-        <h1>
-            <a href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/">
-                Can you cover me&#63; Looking for a .NET coverage tool
-            </a>
-        </h1>
-    </header>
-</div>
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Recipes">Recipes</a></li>
+                        <li class="active" >
+                            <a href="https://blairconrad.com/category/development.html">Development</a>
+                        </li>
+                        <li >
+                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
+                        </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><span>
+                            <form class="navbar-search" action="/search.html">
+                                <input type="text" class="search-query" placeholder="Search" name="q"
+                                    id="tipue_search_input" required>
+                            </form>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </div> <!-- /.navbar -->
 
-<div class="row-fluid">
-        <div class="span8 offset2 article-content">
-            
-            <p>Recently at the Day Job, my boss's boss has been on a "code confidence" kick. We've always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he's looking to improve the process. Part of this push involves getting better at measuring which tests exercise what parts of the code. We want to know this for the usual reasons: we can identify gaps in our testing, or more likely find opportunities to cover some areas earlier in the testing cycle. It'd be nice to know that a particularly critical section of code has been adequately exercised by the per-build unit tests, without having to wait for nightly integration testing or wait even longer for a human to get their grubby mitts on it.</p>
+    <!-- Banner -->
+    <!-- End Banner -->
+
+    <!-- Content Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+    <section id="content">
+        <article>
+            <header class="page-header">
+                <h1>
+                    <a href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/"
+                       rel="bookmark"
+                       title="Permalink to Can you cover me? Looking for a .NET coverage tool">
+                        Can you cover me&#63; Looking for a .NET coverage tool
+                    </a>
+                </h1>
+            </header>
+            <div class="entry-content">
+                <div class="panel">
+                    <div class="panel-body">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-07-18T00:00:00-04:00"> 2011-07-18</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 1 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/iis.html">IIS</a>
+/
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                </div>
+                <p>Recently at the Day Job, my boss's boss has been on a "code confidence" kick. We've always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he's looking to improve the process. Part of this push involves getting better at measuring which tests exercise what parts of the code. We want to know this for the usual reasons: we can identify gaps in our testing, or more likely find opportunities to cover some areas earlier in the testing cycle. It'd be nice to know that a particularly critical section of code has been adequately exercised by the per-build unit tests, without having to wait for nightly integration testing or wait even longer for a human to get their grubby mitts on it.</p>
 <p>To that end, I'm looking for a .NET coverage tool to dazzle us with tales of test runs. Over the next little while, I'll look at a few candidates, summarize my findings, and hopefully come up with a winner.</p>
 <h2>Considerations</h2>
 
@@ -99,151 +163,83 @@ Googling has lead me to these candidates, which I'll be examining in the next li
 <li><a href="https://github.com/sawilde/opencover">OpenCover</a> (<a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">my impression</a>)</li>
 </ul></p>
 <p><b>Update</b>: <a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/">I picked one</a>.</p>
+            </div>
+            <!-- /.entry-content -->
+<section class="well" id="related-posts">
+    <h4>Part 1 of the .NET Coverage Tools series</h4>
+       <h5>Next articles</h5>
+       <ul>
+           <li><a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">Hasty Impressions&#58; dotCover 1.1</a></li>
+           <li><a href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/">Hasty Impressions&#58; PartCover</a></li>
+           <li><a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">Hasty Impressions&#58; OpenCover</a></li>
+           <li><a href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/">Hasty Impressions&#58; NCover</a></li>
+           <li><a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/">Best all-around .NET coverage tool - OpenCover</a></li>
+       </ul>
+</section>
+        </article>
+    </section>
 
+            </div>
+            <div class="col-sm-3" id="sidebar">
+                <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
 
-             
- 
-            
-            
-            
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/blairconrad"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://twitter.com/hippopottoman"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.goodreads.com/user/show/1066544-blair-conrad"><i class="fa fa-goodreads-square fa-lg"></i> Goodreads</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
 
+<!-- Sidebar/Series -->
+<li class="list-group-item">
+  <h4><i class="fa fa-tags fa-lg"></i><span class="icon-label">Series</span></h4>
+  <ul class="list-group">
+    <li class="list-group-item">
+      <h5>Next article</h5>
+      <a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">Hasty Impressions&#58; dotCover 1.1</a>
+    </li>
+  </ul>
+</li>
+<!-- End Sidebar/Series -->
 
-
-
-
-
-            <hr/>
-            <aside>
-            <nav>
-            <ul class="articles-timeline">
-                <li class="previous-article">« <a href="https://blairconrad.com/2011/05/09/prime-time-programming-part-2/" title="Previous: Prime Time Programming, Part 2">Prime Time Programming, Part 2</a></li>
-                <li class="next-article"><a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/" title="Next: Hasty Impressions: dotCover 1.1">Hasty Impressions: dotCover 1.1</a> »</li>
-            </ul>
-            </nav>
-            </aside>
-        </div>
-        <section id="article-sidebar" class="span2">
-            <h4>Published</h4>
-            <time itemprop="dateCreated" datetime="2011-07-18T00:00:00-04:00">2011-07-18</time>
-        <h4>.NET Coverage Tools</h4>
-    <ul class="multi-parts-list">
-            <li  class="active-part">
-            Part 1: Can you cover me&#63; Looking for a .NET coverage tool
-            </li>
-            <li >
-            <a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/" title="Hasty Impressions&#58; dotCover 1.1">Part 2: Hasty Impressions&#58; dotCover 1.1</a>
-            </li>
-            <li >
-            <a href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/" title="Hasty Impressions&#58; PartCover">Part 3: Hasty Impressions&#58; PartCover</a>
-            </li>
-            <li >
-            <a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/" title="Hasty Impressions&#58; OpenCover">Part 4: Hasty Impressions&#58; OpenCover</a>
-            </li>
-            <li >
-            <a href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/" title="Hasty Impressions&#58; NCover">Part 5: Hasty Impressions&#58; NCover</a>
-            </li>
-            <li >
-            <a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/" title="Best all-around .NET coverage tool - OpenCover">Part 6: Best all-around .NET coverage tool - OpenCover</a>
-            </li>
-    </ul>
-            <h4>Category</h4>
-            <a class="category-link" href="https://blairconrad.com/categories.html#development-ref">Development</a>
-            <h4>Tags</h4>
-            <ul class="list-of-tags tags-in-article">
-                <li><a href="https://blairconrad.com/tags.html#.net-ref">.NET
-                    <span>16</span>
-</a></li>
-                <li><a href="https://blairconrad.com/tags.html#coverage-ref">coverage
-                    <span>7</span>
-</a></li>
-                <li><a href="https://blairconrad.com/tags.html#iis-ref">IIS
-                    <span>4</span>
-</a></li>
-                <li><a href="https://blairconrad.com/tags.html#isolator-ref">Isolator
-                    <span>5</span>
-</a></li>
-                <li><a href="https://blairconrad.com/tags.html#testing-ref">Testing
-                    <span>10</span>
-</a></li>
-                <li><a href="https://blairconrad.com/tags.html#typemock-ref">TypeMock
-                    <span>5</span>
-</a></li>
-            </ul>
-<h4>Contact</h4>
-<div id="sidebar-social-link">
-    <a href="http://github.com/blairconrad" title="" target="_blank" rel="nofollow noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" aria-label="GitHub" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1B1817"/><path fill="#fff" d="M335 499c14 0 12 17 12 17H165s-2-17 12-17c13 0 16-6 16-12l-1-50c-71 16-86-28-86-28-12-30-28-37-28-37-24-16 1-16 1-16 26 2 40 26 40 26 22 39 59 28 74 22 2-17 9-28 16-35-57-6-116-28-116-126 0-28 10-51 26-69-3-6-11-32 3-67 0 0 21-7 70 26 42-12 86-12 128 0 49-33 70-26 70-26 14 35 6 61 3 67 16 18 26 41 26 69 0 98-60 120-117 126 10 8 18 24 18 48l-1 70c0 6 3 12 16 12z"/></svg>
-    </a>
-    <a href="http://twitter.com/hippopottoman" title="" target="_blank" rel="nofollow noopener noreferrer">
-        <svg xmlns="http://www.w3.org/2000/svg" aria-label="Twitter" role="img" viewBox="0 0 512 512"><rect width="512" height="512" rx="15%" fill="#1da1f3"/><path fill="#fff" d="M437 152a72 72 0 0 1-40 12 72 72 0 0 0 32-40 72 72 0 0 1-45 17 72 72 0 0 0-122 65 200 200 0 0 1-145-74 72 72 0 0 0 22 94 72 72 0 0 1-32-7 72 72 0 0 0 56 69 72 72 0 0 1-32 1 72 72 0 0 0 67 50 200 200 0 0 1-105 29 200 200 0 0 0 309-179 200 200 0 0 0 35-37"/></svg>
-    </a>
-    <a href="https://www.goodreads.com/user/show/1066544-blair-conrad" title="" target="_blank" rel="nofollow noopener noreferrer">
-        <svg height="512" viewBox="0 0 512 512" width="512" xmlns="http://www.w3.org/2000/svg"><rect fill="#EAE6CF" height="512" rx="64" width="512"/><path d="m254.92444 336.92444c43.2889-.36 74.07112-22.01333 92.33334-64.95111h.95556v65.48889c0 4.88-.32 12.44889-.95556 22.73333-1.30222 10.64445-4.78222 22.10223-10.42666 34.36889-5.65778 11.54667-14.79112 21.38667-27.37778 29.49778-12.44889 8.84-29.81778 13.44-52.12001 13.80444-21.48444 0-39.65333-5.59555-54.52444-16.77777-15.2-11.00889-24.08001-28.87111-26.65778-53.58667h-18.89778c1.93778 32.11111 12.18667 55.02667 30.76444 68.74222 18.08889 13.16445 41.04001 19.75556 68.83556 19.75556 27.45778 0 48.87112-5.14223 64.21778-15.43111 15.18223-9.92 26.08445-22.28445 32.71556-37.08 6.62222-14.79111 10.58222-28.86667 11.86667-42.21334.98222-13.35555 1.45778-22.91555 1.45778-28.68889v-270.088875h-18.90667v59.537775h-.95556c-7.27555-21.82667-19.30666-38.333335-36.12-49.524445-16.96-11.00445-35.70222-16.51111-56.21333-16.51111-35.72001.72444-62.85779 14.52444-81.43112 41.40889-19.07111 26.697775-28.59556 59.631105-28.59556 98.782195 0 40.23557 9.04445 73.52001 27.13334 99.86224 18.27555 26.88889 45.89778 40.51111 82.90222 40.87111zm-68.34222-224.89777c14.85333-24.359995 37.63111-36.986665 68.34222-37.888885 31.50223.90666 54.83556 13.17333 70.03556 36.808885 15.18223 23.64 22.77778 52.05331 22.77778 85.25331s-7.59555 61.43112-22.77778 84.70668c-15.2 24.72444-38.53333 37.34667-70.03556 37.88889-29.72889-.54667-52.36-12.81778-67.86222-36.80889-15.67556-23.27556-23.50667-51.87112-23.50667-85.79112-.004-31.75556 7.67111-59.81332 23.02667-84.16887z" fill="#743901"/></svg>
-    </a>
-</div>
-            
-
-
-
-
-
-            
-
-
-
-
-
-        </section>
-</div>
-</article>
-                    </div>
-                    <div class="span1"></div>
-                </div>
+  </ul>
+</section>
+<!-- End Sidebar -->                </aside>
             </div>
         </div>
-<footer>
-
-
-
-
-    <div id="fpowered">
-        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
-        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
     </div>
-</footer>            <script src="//code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
-            }
-        </script>
+    <!-- End Content Container -->
 
-    <script>
-    (function () {
-        if (window.location.hash.match(/^#comment-\d+$/)) {
-            $('#comment_thread').collapse('show');
-        }
-    })();
-    window.onhashchange=function(){
-        if (window.location.hash.match(/^#comment-\d+$/))
-            window.location.reload(true);
-    }
-    $('#comment_thread').on('shown', function () {
-        var link = document.getElementById('comment-accordion-toggle');
-        var old_innerHTML = link.innerHTML;
-        $(link).fadeOut(200, function() {
-            $(this).text('Click here to hide comments').fadeIn(200);
-        });
-        $('#comment_thread').on('hidden', function () {
-            $(link).fadeOut(200, function() {
-                $(this).text(old_innerHTML).fadeIn(200);
-            });
-        })
-    })
-</script>
+<footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Blair Conrad
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+    <script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
 
-    </body>
-    <!-- Theme: Elegant built for Pelican
-        License : MIT -->
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://blairconrad.com/theme/js/respond.min.js"></script>
+
+
+
+
+</body>
+
 </html>

@@ -24,7 +24,7 @@ PROJECTS = [
 
 PATH = "content"
 OUTPUT_PATH = "../_local_build"
-THEME = "themes/elegant"
+THEME = "themes/pelican-bootstrap3"
 
 
 TIMEZONE = "America/Toronto"
@@ -33,7 +33,8 @@ DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["neighbors", "series", "tipue_search"]
+PLUGINS = ["neighbors", "series", "tipue_search", "i18n_subsites"]
+JINJA_ENVIRONMENT = {"extensions": ["jinja2.ext.i18n"]}
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -42,13 +43,13 @@ TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
 
-# Blogroll
-LINKS = (
-    ("Pelican", "http://getpelican.com/"),
-    ("Python.org", "http://python.org/"),
-    ("Jinja2", "http://jinja.pocoo.org/"),
-    ("You can modify those links in your config file", "#"),
-)
+# # Blogroll
+# LINKS = (
+#     ("Pelican", "http://getpelican.com/"),
+#     ("Python.org", "http://python.org/"),
+#     ("Jinja2", "http://jinja.pocoo.org/"),
+#     ("You can modify those links in your config file", "#"),
+# )
 
 # Social widget
 SOCIAL = (
@@ -78,7 +79,7 @@ DIRECT_TEMPLATES = [
     "authors",
     "archives",
     "search",
-    "404",
+    #    "404",
     "Recipes",
 ]
 RECIPES_SAVE_AS = "Recipes/index.html"
@@ -100,3 +101,21 @@ for (path, directories, files) in os.walk(os.path.join("content", "extra")):
     for f in files:
         full_path = (path + "/" + f).replace("\\", "/")
         EXTRA_PATH_METADATA[full_path[8:]] = {"path": full_path[14:]}
+
+
+# BOOTSTRAP3
+DISPLAY_ARTICLE_INFO_ON_INDEX = True
+SHOW_ARTICLE_CATEGORY = True
+CUSTOM_CSS = "theme/css/custom.css"
+PYGMENTS_STYLE = "github"
+# BOOTSTRAP_NAVBAR_INVERSE = True
+
+# ABOUT_ME = "I'm Blair"
+DISPLAY_ARCHIVE_ON_SIDEBAR = True
+
+# HIDE_SIDEBAR = True
+# PADDED_SINGLE_COLUMN_STYLE = True
+
+MENUITEMS = [("Recipes", "/Recipes")]
+DISPLAY_SERIES_ON_SIDEBAR = True
+SHOW_SERIES = True

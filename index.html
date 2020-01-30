@@ -1,235 +1,1777 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta name="author" content="Blair Conrad" />
+<html lang="en"     prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml" >
 
-        <meta property="og:type" content="article" />
-        <meta name="twitter:card" content="summary">
-
-<meta property="og:title" content="Blair Conrad"/>
-<meta name="twitter:title" content="Blair Conrad">
-<meta property="og:url" content="https://blairconrad.com" />
-<meta property="og:site_name" content="Blair Conrad" />
-<meta property="og:article:author" content="Blair Conrad" />
-        <title>Blair Conrad
-</title>
-        <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" rel="stylesheet">
-        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/elegant.prod.css" media="screen">
-        <link rel="stylesheet" type="text/css" href="https://blairconrad.com/theme/css/custom.css" media="screen">
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad - Full Atom Feed" />
+<head>
+    <title>Blair Conrad</title>
+    <!-- Using the latest rendering mode for IE -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-    </head>
-    <body>
-        <div id="content">
-            <div class="navbar navbar-static-top">
-                <div class="navbar-inner">
-                    <div class="container-fluid">
-                        <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                            <span class="icon-bar"></span>
-                        </a>
-                        <a class="brand" href="https://blairconrad.com/"><span class=site-name>Blair Conrad</span></a>
-                        <div class="nav-collapse collapse">
-                            <ul class="nav pull-right top-menu">
-                                <li  class="active">
-                                    <a href=
-                                       https://blairconrad.com
-                                    >Home</a>
-                                </li>
-                                <li ><a href="https://blairconrad.com/categories.html">Categories</a></li>
-                                <li ><a href="https://blairconrad.com/tags.html">Tags</a></li>
-                                <li ><a href="https://blairconrad.com/archives.html">Archives</a></li>
-                                <li><form class="navbar-search" action="https://blairconrad.com/search.html" onsubmit="return validateForm(this.elements['q'].value);"> <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input"></form></li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
+
+<link rel="canonical" href="https://blairconrad.com">
+    <meta name="author" content="Blair Conrad" />
+
+    <!-- Open Graph tags -->
+    <meta property="og:site_name" content="Blair Conrad" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Blair Conrad" />
+    <meta property="og:url" content="https://blairconrad.com" />
+    <meta property="og:description" content="Blair Conrad" />
+
+
+
+    <!-- Bootstrap -->
+    <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css" />
+
+    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
+
+    <link href="https://blairconrad.com/theme/css/pygments/github.css"
+        rel="stylesheet">
+    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css" />
+    <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
+
+    <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
+        title="Blair Conrad ATOM Feed" />
+
+
+</head>
+
+<body>
+
+    <div class="navbar navbar-default navbar-fixed-top"
+        role="navigation">
+        <div class="container">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="https://blairconrad.com/" class="navbar-brand">
+Blair Conrad                </a>
             </div>
-            <div class="container-fluid">
-                <div class="row-fluid">
-                    <div class="span1"></div>
-                    <div class="span10">
+            <div class="collapse navbar-collapse navbar-ex1-collapse">
+                <ul class="nav navbar-nav">
+                    <li><a href="/Recipes">Recipes</a></li>
+                        <li >
+                            <a href="https://blairconrad.com/category/development.html">Development</a>
+                        </li>
+                        <li >
+                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
+                        </li>
+                </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><span>
+                            <form class="navbar-search" action="/search.html">
+                                <input type="text" class="search-query" placeholder="Search" name="q"
+                                    id="tipue_search_input" required>
+                            </form>
+                        </span>
+                    </li>
+                </ul>
+            </div>
+            <!-- /.navbar-collapse -->
+        </div>
+    </div> <!-- /.navbar -->
+
+    <!-- Banner -->
+    <!-- End Banner -->
+
+    <!-- Content Container -->
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-9">
+            <article>
+                <h2><a href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/">Automatically Sync nupkg and project.json Dependencies</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2017-02-21T00:00:00-05:00"> 2017-02-21</time>
+    <!-- </span> -->
 
 
-<div class="row-fluid">
 
-    <div class="row-fluid">
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
 
-        <div class="span8 offset2">
-            <header>
-            <h1 id="my-projects">My Projects</h1>
-            </header>
-            <ul class="list-all-articles">
-                <li>
-                <a href="https://fakeiteasy.github.io/" title="FakeItEasy - The easy mocking library for .NET">FakeItEasy - The easy mocking library for .NET</a> <span class="proj-desc">A .Net dynamic fake framework for creating all types of fake objects, mocks, stubs etc.</span>
-                </li>
-            </ul>
-            <ul class="list-all-articles">
-                <li>
-                <a href="http://libraryhippo.com/" title="LibraryHippo">LibraryHippo</a> <span class="proj-desc">Monitor your family's library accounts at the: Waterloo Public Library, Kitchener Public Library, and Region of Waterloo Library</span>
-                </li>
-            </ul>
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Recently while working on an open source .NET project,
+I forgot to update the <code>.nuspec</code> after changing a package
+dependency in my <code>project.json</code>. Of course the resulting nupkg
+contained the wrong dependency. Fortunately, the package
+wasn't published in that state, but I didn't want to risk such a thing …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2015/10/05/select-may-not-be-broken-but-its-bent/">Select May Not be Broken, But it's Bent</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2015-10-05T00:00:00-04:00"> 2015-10-05</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Earlier this week at the day job I ran into an interesting problem
+working with a <a href="https://msdn.microsoft.com/en-us/library/system.data.datatable(v=vs.100).aspx">DataTable</a>.  A view that's supposed to show
+a subset of the table's rows showed nothing. I dropped into the
+debugger and became even more confused.</p>
+<p>Visually inspecting the DataTable showed that there was a …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2015/10/05/select-may-not-be-broken-but-its-bent/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/">App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2015-01-05T00:00:00-05:00"> 2015-01-05</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Since Google is <a href="https://developers.google.com/accounts/docs/OpenID2">deprecating OpenID 2.0 support</a>, I
+decided to update <a href="/tags/#LibraryHippo-ref">LibraryHippo</a> to authenticate via
+<a href="http://oauth.net/">OAuth 2.0</a>, which is a story in itself, but I'm here to talk
+about what happened next.</p>
+<p>LibraryHippo has a set of handlers that are accessed primarily via the
+<a href="https://cloud.google.com/appengine/docs/python/config/cron">Cron</a> and <a href="https://cloud.google.com/appengine/docs/python/taskqueue/">Task Queue …</a></p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/09/15/hasty-impressions-flake8/">Hasty Impressions: flake8</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-09-15T00:00:00-04:00"> 2014-09-15</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><ul>
+<li>python</li>
+<li>flake8</li>
+<li>HastyImpressions</li>
+</ul>
+<hr>
+<p>A little while ago, I was fixing <a href="https://github.com/LibraryHippo/LibraryHippo/pull/2">a LibraryHippo issue</a>
+in an area of the code that didn't have very good unit test
+coverage. As part of my fix, I moved one class from the main
+<code>libraryhippo.py</code> file to its own file. I integration-tested the fix …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/09/15/hasty-impressions-flake8/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/08/29/making-a-duck-dog-using-fakeiteasys-callsbasemethods/">Making a Duck-Dog using FakeItEasy's CallsBaseMethod(s)</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-08-29T00:00:00-04:00"> 2014-08-29</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+/
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>A while back, Roman Turovskyy wrote
+<a href="http://elekslabs.com/2014/03/fakeiteasy-be-careful-when-wrapping.html">FakeItEasy: Be Careful When Wrapping an Existing Object</a>,
+an interesting post highlighting some of the difficulties of faking
+classes (as opposed to interfaces, which by virtue of having no
+behaviour of their own, are quite a bit more predictable). It's
+well-written and I enjoyed …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/08/29/making-a-duck-dog-using-fakeiteasys-callsbasemethods/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/">Automatically Printing Rake (or other Ruby) Variables</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-06-05T00:00:00-04:00"> 2014-06-05</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/rake.html">rake</a>
+/
+<a href="https://blairconrad.com/tag/ruby.html">ruby</a>
+/
+<a href="https://blairconrad.com/tag/local_variables.html">local_variables</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>The <a href="http://fakeiteasy.github.io/">FakeItEasy</a> rakefile contains a <code>vars</code> target
+(brainchild of <a href="http://adamralph.com/">Adam Ralph</a>) that can be used to print out
+the local variables defined in the script. Mostly these are static
+variables, such as the path to the <a href="http://nunit.org/">NUnit</a> command, but some,
+such as the upcoming FakeItEasy version, are computed. Logging these …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/05/05/debugging-a-pickle-of-a-stack-overflow-on-google-app-engine/">Debugging a Pickle of a Stack Overflow on Google App Engine</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-05-05T00:00:00-04:00"> 2014-05-05</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/pickle.html">pickle</a>
+/
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+/
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>A few days ago, a user e-mailed me a bug report for
+<a href="http://libraryhippo.com">LibraryHippo</a>. For the previous 55 days, she'd been
+receiving the same (erroneous) morning e-mail about what library
+materials she had due. However, when she checked her family's account
+summary on the web page, it was correct.</p>
+<blockquote>
+<p>(The exact …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/05/05/debugging-a-pickle-of-a-stack-overflow-on-google-app-engine/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/">User-Sourced Calendar Feeds for Waterloo Yard Waste Pickup</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-04-16T00:00:00-04:00"> 2014-04-16</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/icalendar.html">icalendar</a>
+/
+<a href="https://blairconrad.com/tag/syndication.html">syndication</a>
+/
+<a href="https://blairconrad.com/tag/waterloo.html">waterloo</a>
+/
+<a href="https://blairconrad.com/tag/diversions.html">diversions</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>(Thanks to <a href="http://blog.jonudell.net/">Jon Udell</a>, whose insightful posts
+are the only reason this would ever have occurred to me.)</p>
+<p>I live in <a href="http://www.waterloo.ca/">Waterloo, Ontario</a>, a city with weekly
+residential waste collection. My collection day is Monday. In the warm months, there's an
+additional biweekly (that's every 2 weeks, not twice a …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2014/03/06/limit-fakeiteasy-extension-scanning-with-a-bootstrapper/">Limit FakeItEasy extension scanning with a bootstrapper</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2014-03-06T00:00:00-05:00"> 2014-03-06</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><strong>As of version <a href="https://github.com/FakeItEasy/FakeItEasy/releases/tag/1.18.0">1.18.0</a>, a client-supplied bootstrapper can be used to
+determine which external assembly files are scanned during startup.</strong></p>
+<p>Last time, I talked about how [FakeItEasy extension scanning had
+improved in version 1.13.0][betterscan]. While this change has dramatically
+improved startup times in many situations …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2014/03/06/limit-fakeiteasy-extension-scanning-with-a-bootstrapper/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2013/07/08/better-formatter-auto-discovery-in-fakeiteasy-1.13.0/">Better formatter auto-discovery in FakeItEasy 1.13.0</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2013-07-08T00:00:00-04:00"> 2013-07-08</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+/
+<a href="https://blairconrad.com/tag/nancy.html">Nancy</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>A few weeks ago, I wrote about <a href="https://blairconrad.com/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">the problems that FakeItEasy's
+assembly scanning <b>was causing</b></a> while it was looking for user-defined extensions. To recap,
+FakeItEasy was scanning all assemblies in the AppDomain and the
+working directory, looking for types that implemented
+<code>IArgumentValueFormatter</code>, <code>IDummyDefinition</code>, or
+<code>IFakeConfigurator</code>. This process was quite slow …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2013/07/08/better-formatter-auto-discovery-in-fakeiteasy-1.13.0/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2013/07/02/watch-your-spaces-http-error-500.19-internal-server-error/">Watch your spaces - HTTP Error 500.19 - Internal Server Error</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2013-07-02T00:00:00-04:00"> 2013-07-02</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/500-19.html">500-19</a>
+/
+<a href="https://blairconrad.com/tag/iis.html">iis</a>
+/
+<a href="https://blairconrad.com/tag/iis7.html">iis7</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Late last week at the Day Job, a colleague came to me with a problem. The web service he was trying to hit was throwing an error he'd never seen before:</p>
+<blockquote style="color:#CC0000;">
+HTTP Error 500.19 - Internal Server Error
+The requested page cannot be accessed because the related configuration data for …</blockquote>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2013/07/02/watch-your-spaces-http-error-500.19-internal-server-error/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2013/06/24/fixated-on-fixie-the-birth-of-a-new-unit-test-runner/">Fixated on Fixie - the birth of a new unit test runner</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2013-06-24T00:00:00-04:00"> 2013-06-24</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/fixie.html">fixie</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I enjoy reading about how software is made, and I like unit testing frameworks. So, when I heard about <a href="http://www.headspring.com/author/patrick/">Patrick Plioi</a>'s new project <a href="http://plioi.github.io/fixie/">Fixie</a>, I rushed to check it out.</p>
+<p>In this case, "check it out" doesn't mean "clone the repo and dig around the source code". Nor does …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2013/06/24/fixated-on-fixie-the-birth-of-a-new-unit-test-runner/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">FakeItEasy's argument formatter auto-discovery - boon and inconvenience</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2013-06-17T00:00:00-04:00"> 2013-06-17</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><ul>
+<li>.NET</li>
+<li>FakeItEasy</li>
+</ul>
+<hr>
+<p>Hi again. At the Day Job, we've recently dropped <a href="http://www.typemock.com/isolator-product-page">Typemock Isolator</a> and <a href="http://sourceforge.net/apps/mediawiki/nmock2">NMock2</a> as the mocking frameworks of choice in the products that I work on. We've jumped on the <a href="http://fakeiteasy.github.io">FakeItEasy</a> bandwagon. So far, we're enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2012/12/07/reportgenerator-indexing-your-whole-drive-check-the-case-of-your-fullpaths./">ReportGenerator indexing your whole drive? Check the case of your fullPaths.</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2012-12-07T00:00:00-05:00"> 2012-12-07</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
+/
+<a href="https://blairconrad.com/tag/reportgenerator.html">ReportGenerator</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><em><strong>[Update on 2013-06-22:</strong> I should've
+mentioned this a while ago, but the issue and patch I submitted were
+accepted and built into ReportGenerator 1.7.3.0, so if you have
+anything newer, you should be good.]</em></p>
+
+<p>Recently I was working on a project at the Day Job, using OpenCover …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2012/12/07/reportgenerator-indexing-your-whole-drive-check-the-case-of-your-fullpaths./">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2012/03/12/moving-libraryhippo-to-python-2.7-openid-edition/">Moving LibraryHippo to Python 2.7 - OpenID edition</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2012-03-12T00:00:00-04:00"> 2012-03-12</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">appengine</a>
+/
+<a href="https://blairconrad.com/tag/myopenid.html">myopenid</a>
+/
+<a href="https://blairconrad.com/tag/openid.html">openid</a>
+/
+<a href="https://blairconrad.com/tag/python.html">python</a>
+/
+<a href="https://blairconrad.com/tag/python27.html">python27</a>
+/
+<a href="https://blairconrad.com/tag/stackexchange.html">stackexchange</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Now that Google has announced that <a title="Announcing the General Availability of the Python 2.7 Runtime for App Engine" href="http://googleappengine.blogspot.com/2012/02/announcing-general-availability-of.html">Python 2.7 is fully supported on Google App Engine</a>, I figured I should get my act in gear and make convert <a href="http://www.libraryhippo.com">LibraryHippo</a> over. I'd had a few aborted attempts earlier, but this time things are going much better.</p>
+
+<h2>How We Got Here - Cloning …</h2>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2012/03/12/moving-libraryhippo-to-python-2.7-openid-edition/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/">Best all-around .NET coverage tool - OpenCover</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-12-15T00:00:00-05:00"> 2011-12-15</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 6 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>This is the gala awards show, where my chosen coverage tool is announced. </p>
+<p>If you've come this far, you've probably already read the title, and it won't surprise you to learn that I've chosen <a href="https://github.com/sawilde/opencover">OpenCover</a>. It offered the best fit for my requirements - the only areas where I found it …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/">Hasty Impressions&#58; NCover</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-11-09T00:00:00-05:00"> 2011-11-09</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 5 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+/
+<a href="https://blairconrad.com/tag/iis.html">IIS</a>
+/
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/ncover.html">NCover</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>[TOC]</p>
+<p>I tried <a href="http://www.ncover.com/">NCover</a> 3.4.18.6937. 
+<h2>The Cost</h2>
+NCover Complete is $479 plus $179 for a 1-year subscription (which gives free version updates). I thought this was <b>a little steep</b>. NCover Classic is $199/$99. I looked at NCover Complete, because that's the kind of trial version they …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">Hasty Impressions&#58; OpenCover</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-08-15T00:00:00-04:00"> 2011-08-15</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 4 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
+/
+<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+/
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><a href="https://github.com/sawilde/opencover">OpenCover</a> is developed by Shaun Wilde. He was a developer on (and is the only remaining maintainer of) PartCover. He's used what he learned working on PartCover to develop OpenCover, but OpenCover is a new implementation, not a port.</p>
+<p>I tried OpenCover 1.0.514. Since I downloaded a couple …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/">Hasty Impressions&#58; PartCover</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-08-05T00:00:00-04:00"> 2011-08-05</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 3 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+/
+<a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
+/
+<a href="https://blairconrad.com/tag/partcover.html">PartCover</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><h2>Technical stuff</h2>
+
+<p>PartCover has a GUI runner as well as a command-line mode. It integrates with Isolator, but doesn't offer any help for those wanting to profile IIS-hosted applications.
+There are some XSL files provided that allow one to generate HTML reports, but probably the better way is to use …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">Hasty Impressions&#58; dotCover 1.1</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-07-29T00:00:00-04:00"> 2011-07-29</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 2 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/dotcover.html">dotCover</a>
+/
+<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+/
+<a href="https://blairconrad.com/tag/iis.html">IIS</a>
+/
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/mightymoose.html">MightyMoose</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I tried <a href="http://www.jetbrains.com/dotcover/">JetBrains dotCover</a> 1.1, integrated with ReSharper 5.1 running in VS2008.
+<h2>The Cost</h2>
+A lifetime license, with 1 year of free upgrades is <s>$199</s> $149 - a special introductory price.</p>
+<p>This isn't usurious, but considering that ReSharper C# edition, a tool that changes the way I work every …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/">Can you cover me&#63; Looking for a .NET coverage tool</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-07-18T00:00:00-04:00"> 2011-07-18</time>
+    <!-- </span> -->
+
+    <i class="fa fa-list"></i>
+    Part 1 of .NET Coverage Tools
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+/
+<a href="https://blairconrad.com/tag/iis.html">IIS</a>
+/
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Recently at the Day Job, my boss's boss has been on a "code confidence" kick. We've always done various levels of automated and manual unit, integration, issue, system, and regression testing, but he's looking to improve the process. Part of this push involves getting better at measuring which tests exercise …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/05/09/prime-time-programming-part-2/">Prime Time Programming, Part 2</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-05-09T00:00:00-04:00"> 2011-05-09</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/primes.html">Primes</a>
+/
+<a href="https://blairconrad.com/tag/profiling.html">Profiling</a>
+/
+<a href="https://blairconrad.com/tag/projecteuler.html">ProjectEuler</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><a href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/">Last time</a> I presented a truly horrible prime number generator I was using for <a href="http://projecteuler.net/">Project Euler</a> problems. Then I presented a revamped generator that used trial division. By adding various refinements to the generator, we saw the time required to generate primes less than 10<sup>7</sup> shrink from hours to …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/05/09/prime-time-programming-part-2/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/">Prime Time Programming, Part 1</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-04-25T00:00:00-04:00"> 2011-04-25</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/primes.html">Primes</a>
+/
+<a href="https://blairconrad.com/tag/profiling.html">Profiling</a>
+/
+<a href="https://blairconrad.com/tag/projecteuler.html">ProjectEuler</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>From time to time, I find myself caught up in the heady world of <a href="http://projecteuler.net/" title="Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.">Project Euler</a>. It's almost like playing <a href="http://professorlaytonds.com/">Professor Layton</a> or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces.</p>
+<p>If you look at the Project Euler problems for any length of time, you'll …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/02/27/how-to-completely-disable-autofac-components/">How to completely disable Autofac components</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-02-27T00:00:00-05:00"> 2011-02-27</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/autofac.html">Autofac</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>This week I started working with the <a href="http://code.google.com/p/autofac/">Autofac</a> <a href="http://www.martinfowler.com/articles/injection.html">Inversion of Control container</a> at the Day Job. The first project I tried to introduce Autofac to needed a plugin system. I figured this was a perfect use of <a href="http://nblumhardt.com/2010/01/the-relationship-zoo/">Autofac's implicit relationship handlers</a>. Sure enough, a</p>
+<pre><code class="csharp">container.Resolve&lt;IEnumerable&lt;IPlugin&gt;&gt;()</code></pre>
+
+<p>did the …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/02/27/how-to-completely-disable-autofac-components/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Growing an MVVM Framework in 2003, part V&mdash;Reflections and Regrets</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2011-02-15T00:00:00-05:00"> 2011-02-15</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+<p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
+
+* <a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Part I&mdash;Event Handlers</a>
+* <a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Part II &mdash; Properties</a>
+* <a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Part III  &mdash; Properties Redux</a>
+* <a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">Part IV&mdash;Unit Tests</a>
+* Part V&mdash;Reflections and Regrets
+
+<p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository …</a></p></div>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/12/31/bbc-top-100-books/">BBC Top 100 Books</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-12-31T00:00:00-05:00"> 2010-12-31</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/books.html">Books</a>
+/
+<a href="https://blairconrad.com/tag/meme.html">Meme</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>A meme, from <a href="http://nomagichere.blogspot.com/2010/12/bbc-top-100-books.html?utm_source=feedburner&amp;utm_medium=feed&amp;utm_campaign=Feed%3A+blogger%2FNoMagicHere+%28No+Magic+Here%29">No Magic Here</a>.</p>
+<p>Today's challenge, the <a href="http://www.bbc.co.uk/arts/bigread/top100.shtml">BBC Top 100</a>.</p>
+<p>Instructions: Bold those books you’ve read in their entirety, italicize the ones you started but didn’t finish or read an excerpt.</p>
+<ol>
+<li><b>Pride and Prejudice</b> – Jane Austen</li>
+<li><b>The Lord of the Rings</b> – JRR Tolkien</li>
+<li>Jane Eyre – Charlotte …</li></ol>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/12/31/bbc-top-100-books/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/12/09/office-adventure-hard-drive-shuffle/">Office Adventure&#58; Hard Drive Shuffle</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-12-09T00:00:00-05:00"> 2010-12-09</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/diversions.html">diversions</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>It's fashionable to complain about the IT department at the Day Job, but sometimes we get pretty good service. I had occasion to contact them today for two unrelated problems. The first, an issue with a Lotus Notes upgrade, was quickly resolved over the phone. The other problem involved hardware …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/12/09/office-adventure-hard-drive-shuffle/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">Growing an MVVM Framework in 2003, part IV&mdash;Unit Tests</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-30T00:00:00-05:00"> 2010-11-30</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+<p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
+
+* <a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Part I&mdash;Event Handlers</a>
+* <a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Part II&mdash;Properties</a>
+* <a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Part III &mdash;Properties Redux</a>
+* Part IV&mdash;Unit Tests
+* <a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Part V&mdash;Reflections and Regrets</a>
+
+<p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository …</a></p></div>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Growing an MVVM Framework in 2003, part III&mdash;Properties Redux</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-21T00:00:00-05:00"> 2010-11-21</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+<p>This post is from a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
+
+* <a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Part I&mdash;Event Handlers</a>
+* <a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Part II &#8211; Properties</a>
+* Part III  &#8211; Properties Redux
+* <a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">Part IV&mdash;Unit Tests</a>
+* <a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Part V&mdash;Reflections and Regrets</a>
+
+<p>Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-11-mvvm-.net1.1/BookFinder">Google Code repository …</a></p></div>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/14/autotest.net-updated-now-and-then-notices-broken-builds/">AutoTest.Net updated - now (and then) notices broken builds</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-14T00:00:00-05:00"> 2010-11-14</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/autotest.net.html">AutoTest.Net</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I received a useful comment on <a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">Friday's post about AutoTest.Net</a>. In the wee hours of Saturday, <a href="http://codebetter.com/blogs/gregyoung/">Greg Young</a>, wrote to say</p>
+<blockquote>
+<p>It should detect broken builds without any problem. We have been running it daily for about 1.5 months.<br>
+Perhaps you could grab me via email and reproduce …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/14/autotest.net-updated-now-and-then-notices-broken-builds/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/">Hasty impressions&#58; Continuous testing using AutoTest.NET</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-12T00:00:00-05:00"> 2010-11-12</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/autotest.net.html">AutoTest.Net</a>
+/
+<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><a href="http://abdullin.com/journal/2010/11/11/mighty-moose-smart-continuous-unit-tests-for-net-and-mono.html">Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET</a>, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I'm a huge fan of continuous testing. I've been using <a href="http://codespeak.net/py/dist/test/">py.test</a> to run my Python unit tests for years now, almost solely because …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Growing an MVVM Framework in 2003, part II&mdash;Properties</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-10T00:00:00-05:00"> 2010-11-10</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+
+<p>This is second post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
+
+* <a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Part I&mdash;Event Handlers</a>
+* Part II&mdash;Properties
+* <a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Part III &mdash;Properties Redux
+* <a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">Part IV&mdash;Unit Tests</a>
+* <a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Part V&mdash;Reflections and Regrets</a>
+
+Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code …</a></a></div>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/11/06/an-unanticipated-benefit-of-using-the-chrome-extension-gallery/">An unanticipated benefit of using the Chrome Extension Gallery</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-11-06T00:00:00-04:00"> 2010-11-06</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/chromeextensions.html">ChromeExtensions</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I've written 3 Google Chrome Extensions. The first two were for use at the Day Job, so I initially hosted them on an internal server. Eventually I moved them out to the <a href="https://chrome.google.com/extensions">Chrome Extension Gallery</a>. There are a few benefits to doing this over self-hosting:</p>
+<ul>
+<li>better publicity - as it's the …</li></ul>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/11/06/an-unanticipated-benefit-of-using-the-chrome-extension-gallery/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">Growing an MVVM Framework in 2003, part I&mdash;Event Handlers</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-10-29T00:00:00-04:00"> 2010-10-29</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><div style="padding-left:.5em;padding-right:.5em;margin-left:2em;margin-right:2em;border:1px solid #EEE;background-color:#F8F8F8;">
+
+This is one post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.
+
+* Part I&mdash;Event Handlers
+* <a href="https://blairconrad.com/2010/11/10/growing-an-mvvm-framework-in-2003-part-ii-properties/">Part II&mdash;Properties</a>
+* <a href="https://blairconrad.com/2010/11/21/growing-an-mvvm-framework-in-2003-part-iii-properties-redux/">Part III &mdash;Properties Redux
+* <a href="https://blairconrad.com/2010/11/30/growing-an-mvvm-framework-in-2003-part-iv-unit-tests/">Part IV&mdash;Unit Tests</a>
+* <a href="https://blairconrad.com/2011/02/15/growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets/">Part V&mdash;Reflections and Regrets</a>
+
+Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code …</a></a></div>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/10/29/growing-an-mvvm-framework-in-2003-part-i-event-handlers/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/08/08/animating-google-chrome-extension-page-action-icons/">Animating Google Chrome Extension Page Action Icons</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-08-08T00:00:00-04:00"> 2010-08-08</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/animatedgifs.html">AnimatedGIFs</a>
+/
+<a href="https://blairconrad.com/tag/chromeextensions.html">ChromeExtensions</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/javascript.html">JavaScript</a>
+/
+<a href="https://blairconrad.com/tag/settimeout.html">setTimeout</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm enjoying using (and working on) Library Lookup</a>, but I'm not entirely satisfied with the Page Action icons that pop up when searching, or when a book is found, or not found. In particular, I wanted a small animation while the search was ongoing, something like this: <img src="https://blairconrad.com/images/animated_search.gif" alt="animated_search" title="([^"]+)" width="12" height="16" class="alignnone size-full wp-image-565" />.</p>
+<p>Unfortunately, the animated …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/08/08/animating-google-chrome-extension-page-action-icons/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/07/25/library-lookup-find-books-in-your-library/">Library Lookup - find books in your library</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-07-25T00:00:00-04:00"> 2010-07-25</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/librarylookup.html">LibraryLookup</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm an avid reader, but not an avid collector of objects, so I prefer to get books from the library. As you might imagine, I was initially thrilled to discover <a href="http://jonudell.net/udell/2006-01-30-further-adventures-in-lightweight-service-composition.html" />the greasemonkey user script</a> version  of <a href="http://jonudell.net/LibraryLookup.html">Jon Udell's LibraryLookup bookmarklet</a>. The ability to visit web pages about books and be …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/07/25/library-lookup-find-books-in-your-library/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/07/13/libraryhippo.com-lives/">libraryhippo.com lives</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-07-13T00:00:00-04:00"> 2010-07-13</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+/
+<a href="https://blairconrad.com/tag/profligateness.html">Profligateness</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>For a while now, I've been dithering over getting LibraryHippo its own domain name. I hadn't, mostly because I'm a little lazy and cheap and afraid of the domain registration process.
+Yesterday at the Day Job, a co-worker (whose name just might be an anagram of <b>Yen Waster</b>), on learning …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/07/13/libraryhippo.com-lives/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/07/02/using-xsl-to-arbitrarily-order-strings-lessons-from-professor-layton/">Using XSL to arbitrarily order strings - lessons from Professor Layton</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-07-02T00:00:00-04:00"> 2010-07-02</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/sorting.html">Sorting</a>
+/
+<a href="https://blairconrad.com/tag/xslt.html">XSLT</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>At the Day Job,  I usually work on a middleware component that contains a component that monitors the state of the system. A "health check", if you will. The component can be monitored automatically so notifications can be triggered on error conditions, or it can be used by a human …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/07/02/using-xsl-to-arbitrarily-order-strings-lessons-from-professor-layton/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/06/06/auto-deploying-typemock-isolator-without-trashing-the-installation/">Auto-deploying TypeMock Isolator Without Trashing the Installation</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-06-06T00:00:00-04:00"> 2010-06-06</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/isolator.html">Isolator</a>
+/
+<a href="https://blairconrad.com/tag/msbuild.html">MSBuild</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+/
+<a href="https://blairconrad.com/tag/typemock.html">TypeMock</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>At the Day Job, we use <a href="http://site.typemock.com/typemock-isolator-product">TypeMock Isolator</a> as the isolation framework for the client portion of our flagship product. Historically we'd used version 3, but recently I had the opportunity to upgrade the code and build system to use the 2010 (or "version 6") edition.</p>
+
+<h4>Backward Compatibility</h4>
+
+<p>I was …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/06/06/auto-deploying-typemock-isolator-without-trashing-the-installation/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/05/22/when-fields-are-initialized-or-lies-reflector-told-me/">When Fields are Initialized, or "Lies Reflector Told Me"</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-05-22T00:00:00-04:00"> 2010-05-22</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/.net.html">.NET</a>
+/
+<a href="https://blairconrad.com/tag/c.html">C#</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/reflector.html">Reflector</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>The other day a coworker came to me with a Tricky Language Question. He and another chap had just finished working through a bug that had arisen due to a misunderstanding of C# constructor and field initialization order. The question?</p>
+
+<blockquote>
+<p>In a derived class, when does field initialization occur, relative …</p></blockquote>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/05/22/when-fields-are-initialized-or-lies-reflector-told-me/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/05/01/quickly-make-editable-diagrams-with-yuml/">Quickly make editable diagrams with yUML</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-05-01T00:00:00-04:00"> 2010-05-01</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/png.html">PNG</a>
+/
+<a href="https://blairconrad.com/tag/yuml.html">yUML</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm always on the lookout for convenient tools for creating diagrams that can be used for software development. <a href="http://www.balsamiq.com/">Balsamiq</a> is my tool of choice for UI mockups - it's great for whipping up stylized interfaces in very little time.</p>
+<p>Balsamiq does a great job of simplifying mockup creation, since it takes …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/05/01/quickly-make-editable-diagrams-with-yuml/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/04/02/watch-even-if-youre-not-building-an-mvvm-app/">Watch, even if you're not building an MVVM App</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-04-02T00:00:00-04:00"> 2010-04-02</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/coroutines.html">Coroutines</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/frameworks.html">Frameworks</a>
+/
+<a href="https://blairconrad.com/tag/mvvm.html">MVVM</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm about two weeks behind the wave, but this week I found the time to watch Rob Eisenberg's Mix 10 <a href="http://live.visitmix.com/MIX10/Sessions/EX15">Build your own MVVM Framework talk</a> (who says having the flu is all bad?).</p>
+<p>It's well worth the hour and twenty minutes. If you haven't yet, grab a tea, fire …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/04/02/watch-even-if-youre-not-building-an-mvvm-app/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/">IE binds to id attributes, or “How I learned to love var”</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-03-07T00:00:00-05:00"> 2010-03-07</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/ajax.html">Ajax</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/ie.html">IE</a>
+/
+<a href="https://blairconrad.com/tag/javascript.html">JavaScript</a>
+/
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I recently converted the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. </p>
+
+<p><p><a href="https://blairconrad.com/images/working_ajax.png"><img title="AJAX LibraryHippo" height="191" width="244" alt="AJAX LibraryHippo" src="https://blairconrad.com/images/working_ajax_thumb.png" align="right" border="0" /></a>When using Firefox or Chrome, as …</p></p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/02/20/automated-testing-using-app-engine-service-apis-and-a-memcaching-memoizer/">Automated Testing using App Engine Service APIs (and a Memcaching Memoizer)</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-02-20T00:00:00-05:00"> 2010-02-20</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+/
+<a href="https://blairconrad.com/tag/decorators.html">Decorators</a>
+/
+<a href="https://blairconrad.com/tag/gael.html">Gael</a>
+/
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+/
+<a href="https://blairconrad.com/tag/memcache.html">Memcache</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+/
+<a href="https://blairconrad.com/tag/testing.html">Testing</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm a fan of Test-driven development, and automated testing in general. As such, I’ve been trying ensure that the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> code has an adequate set of automated tests before deploying new versions.</p>
+<h2>Importing Google App Engine Modules</h2>
+
+<p>Unfortunately, testing code that relies on the <a title="Google App Engine" href="http://code.google.com/appengine/">Google App Engine</a> SDK is …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/02/20/automated-testing-using-app-engine-service-apis-and-a-memcaching-memoizer/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/02/12/a-first-look-at-appstats-wheres-my-time-spent/">A first look at Appstats - where's my time spent?</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-02-12T00:00:00-05:00"> 2010-02-12</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+/
+<a href="https://blairconrad.com/tag/appstats.html">Appstats</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>After hearing about the release of Google's App Engine SDK 1.3.1, I rushed out to try the new <a href="http://code.google.com/appengine/docs/python/tools/appstats.html">Appstats Event Recorder</a> to help profile LibraryHippo. I didn't expect great things, as I'm generally happy with the performance, with one notable exception, but I was curious about the tool …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/02/12/a-first-look-at-appstats-wheres-my-time-spent/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/02/10/waiting-pays-off-again-google-app-engine-gets-datastore-retries/">Waiting pays off again - Google App Engine gets Datastore retries</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-02-10T00:00:00-05:00"> 2010-02-10</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>Sometimes when we wait a little, the universe provides for us. Last year, I was holding off taking LibraryHippo live because it's almost useless without daily notifications. At the time, Google App Engine had no scheduled tasks. I'd just resigned myself to soliciting users and setting up a cron job …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/02/10/waiting-pays-off-again-google-app-engine-gets-datastore-retries/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/02/07/using-subversion-to-evangelize-powershell/">Using Subversion to Evangelize PowerShell</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-02-07T00:00:00-05:00"> 2010-02-07</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/powershell.html">PowerShell</a>
+/
+<a href="https://blairconrad.com/tag/subversion.html">Subversion</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I've never been really comfortable with the Windows Command prompt - whenever I can, I grab <a href="http://www.cygwin.com/">Cygwin</a> to give myself a more familiar (and powerful) command-line environment. I really appreciate the tools included with the Unix command shells, as well as the easy composability of the utilities that come with Unix …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/02/07/using-subversion-to-evangelize-powershell/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/29/expand-your-scope-you-can-dot-source-more-than-just-files/">expand your scope - you can dot-source more than just files</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-29T00:00:00-05:00"> 2010-01-29</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/powershell.html">PowerShell</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I'm working on a  <a href="../../../02/07/using-subversion-to-evangelize-powershell/">small project</a> that will require me to dot-source some PowerShell files in order to load their functions, aliases, and variables and make them available in a session. Actually, I have to do a little more than dot-source each file, but I'll keep the example simple to …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/29/expand-your-scope-you-can-dot-source-more-than-just-files/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/24/brandon-sanderson-good-author-and-class-act/">Brandon Sanderson - Good author and class act</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-24T00:00:00-05:00"> 2010-01-24</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/books.html">Books</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I won't talk about every book I read here - that's what <a href="http://www.goodreads.com/hippopottoman">Goodreads</a> is for. However, every once in a while something exceptional's bound to come up, and I'll be compelled to mention it here. This is one such thing.
+Anyone who's talked to me this year will have heard how …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/24/brandon-sanderson-good-author-and-class-act/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/19/acronyms-of-the-day-vomit-and-barf/">Acronyms of the Day&#58; VOMIT and BARF</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-19T00:00:00-05:00"> 2010-01-19</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/diversions.html">diversions</a>
+/
+<a href="https://blairconrad.com/tag/words.html">words</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I was listening to <a href="http://www.cbc.ca/ideas/podcast.html">CBC's Ideas Podcast</a> today, specifically to <i>You Are "Pre-Diseased", Part 2</i> (which aired on 18 January and is available for download until mid-February, in case you want to listen) when I heard a new acronym that's relevant to my Day Job.</p>
+
+<p><b>V</b>ictim <b>O</b>f <b>M …</b></p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/19/acronyms-of-the-day-vomit-and-barf/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/17/cookies-redirects-and-transcripts-supercharging-urlfetch/">Cookies, Redirects, and Transcripts - Supercharging urlfetch</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-17T00:00:00-05:00"> 2010-01-17</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
+/
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p><a href="http://libraryhippo.appspot.com/">LibraryHippo</a>'s main function is fetching current library account status for patrons. Since I have no special relationship with any of the libraries involved, LibraryHippo <a href="http://en.wikipedia.org/wiki/Web_scraping">web scrapes</a> the libraries' web interfaces.</p>
+
+<p>The library websites issue cookies and redirects, so I needed to do something to augment the <a href="http://code.google.com/appengine/docs/python/urlfetch/">URL Fetch Python …</a></p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/17/cookies-redirects-and-transcripts-supercharging-urlfetch/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/09/new-years-python-meme/">New Year's Python Meme</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-09T00:00:00-05:00"> 2010-01-09</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/development.html">Development</a>
+/
+<a href="https://blairconrad.com/tag/meme.html">Meme</a>
+/
+<a href="https://blairconrad.com/tag/python.html">Python</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>It's a little late, but I'm participating in <a href="http://tarekziade.wordpress.com/2009/12/28/new-years-python-meme/">Tarek Ziadé's Python Meme</a> (<a href="http://www.mechanicalcat.net/richard/log/Python/New_Year_s_Python_meme">via Richard Jones</a>):
+<ol>
+    <li><strong>What’s the coolest Python application, framework or library you have discovered in 2009?</strong>
+              <p><a href="http://code.google.com/appengine/">Google App Engine</a>. I'd known of it before, but hadn't tried it until early this year when I started to <a href="/2010/01/08/meet-libraryhippo/">work …</a></p></li></ol></p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/09/new-years-python-meme/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+            <article>
+                <h2><a href="https://blairconrad.com/2010/01/08/meet-libraryhippo/">Meet LibraryHippo</a></h2>
+                    <div class="well well-sm">
+<footer class="post-info">
+    <!-- <span class="published"> -->
+    <i class="fa fa-calendar"></i><time datetime="2010-01-08T00:00:00-05:00"> 2010-01-08</time>
+    <!-- </span> -->
+
+
+
+    <i class="fa fa-folder"></i>
+    <a href="https://blairconrad.com/category/development.html"></i>Development</a>
+
+
+<i class="fa fa-tags"></i>
+<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+    
+</footer><!-- /.post-info -->                    </div>
+                <div class="summary"><p>I enjoy <a href="http://www.goodreads.com/user/show/1066544">reading</a> and using my local libraries. My wife and I have four library cards between us - one each for the <a href="http://www.wpl.ca/">Waterloo Public Library</a>, one for the <a href="http://kpl.org/">Kitchener Public Library</a>, and one for the <a href="http://www.regionofwaterloo.canlib.ca/">Region of Waterloo Library</a>. Using our cards, we were able to find all kinds of …</p>
+                    <a class="btn btn-default btn-xs" href="https://blairconrad.com/2010/01/08/meet-libraryhippo/">more ...</a>
+                </div>
+            </article>
+            <hr/>
+
+            </div>
+            <div class="col-sm-3" id="sidebar">
+                <aside>
+<!-- Sidebar -->
+<section class="well well-sm">
+  <ul class="list-group list-group-flush">
+
+<!-- Sidebar/Social -->
+<li class="list-group-item">
+  <h4><i class="fa fa-home fa-lg"></i><span class="icon-label">Social</span></h4>
+  <ul class="list-group" id="social">
+    <li class="list-group-item"><a href="http://github.com/blairconrad"><i class="fa fa-github-square fa-lg"></i> Github</a></li>
+    <li class="list-group-item"><a href="http://twitter.com/hippopottoman"><i class="fa fa-twitter-square fa-lg"></i> Twitter</a></li>
+    <li class="list-group-item"><a href="https://www.goodreads.com/user/show/1066544-blair-conrad"><i class="fa fa-goodreads-square fa-lg"></i> Goodreads</a></li>
+  </ul>
+</li>
+<!-- End Sidebar/Social -->
+  </ul>
+</section>
+<!-- End Sidebar -->                </aside>
+            </div>
         </div>
     </div>
+    <!-- End Content Container -->
 
-    <div class="row-fluid">
-        <div class="span8 offset2">
-            <header>
-            <h1 id="recent-posts">Recent Posts <a id="allposts" href="https://blairconrad.com/archives.html">all posts</a></h1>
-            </header>
-        <div class="recent-posts">
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/">
-                    Automatically Sync nupkg and project.json Dependencies
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2017-02-21T00:00:00-05:00">2017-02-21</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2015/10/05/select-may-not-be-broken-but-its-bent/">
-                    Select May Not be Broken, But it's Bent
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2015-10-05T00:00:00-04:00">2015-10-05</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/">
-                    App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2015-01-05T00:00:00-05:00">2015-01-05</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/09/15/hasty-impressions-flake8/">
-                    Hasty Impressions: flake8
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-09-15T00:00:00-04:00">2014-09-15</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/08/29/making-a-duck-dog-using-fakeiteasys-callsbasemethods/">
-                    Making a Duck-Dog using FakeItEasy's CallsBaseMethod(s)
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-08-29T00:00:00-04:00">2014-08-29</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/">
-                    Automatically Printing Rake (or other Ruby) Variables
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-06-05T00:00:00-04:00">2014-06-05</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/05/05/debugging-a-pickle-of-a-stack-overflow-on-google-app-engine/">
-                    Debugging a Pickle of a Stack Overflow on Google App Engine
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-05-05T00:00:00-04:00">2014-05-05</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/">
-                    User-Sourced Calendar Feeds for Waterloo Yard Waste Pickup
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#miscellany-ref">Miscellany</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-04-16T00:00:00-04:00">2014-04-16</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2014/03/06/limit-fakeiteasy-extension-scanning-with-a-bootstrapper/">
-                    Limit FakeItEasy extension scanning with a bootstrapper
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2014-03-06T00:00:00-05:00">2014-03-06</time>
-                    </div>
-                </div>
-            </div>
-            <div itemscope class="recent-posts-article">
-                <a href="https://blairconrad.com/2013/07/08/better-formatter-auto-discovery-in-fakeiteasy-1.13.0/">
-                    Better formatter auto-discovery in FakeItEasy 1.13.0
-                </a>
-                <div class="recent-posts-posted">
-                    posted in
-                    <a href="https://blairconrad.com/categories.html#development-ref">Development</a>
-                    <div class="recent-posts-time">
-                        <time itemprop="dateCreated" datetime="2013-07-08T00:00:00-04:00">2013-07-08</time>
-                    </div>
-                </div>
-            </div>
-        </div>
-        </div>
-    </div>
-</div>
-                    </div>
-                    <div class="span1"></div>
-                </div>
-            </div>
-        </div>
 <footer>
+   <div class="container">
+      <hr>
+      <div class="row">
+         <div class="col-xs-10">&copy; 2017 Blair Conrad
+            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
+            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
+            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
+         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+      </div>
+   </div>
+</footer>
+    <script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
+
+    <!-- Include all compiled plugins (below), or include individual files as needed -->
+    <script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
+
+    <!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
+    <script src="https://blairconrad.com/theme/js/respond.min.js"></script>
 
 
 
 
-    <div id="fpowered">
-        Powered by: <a href="http://getpelican.com/" title="Pelican Home Page" target="_blank" rel="nofollow noopener noreferrer">Pelican</a>
-        Theme: <a href="https://elegant.oncrashreboot.com/" title="Theme Elegant Home Page" target="_blank" rel="nofollow noopener noreferrer">Elegant</a>
-    </div>
-</footer>        <script src="//code.jquery.com/jquery.min.js"></script>
-        <script src="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/js/bootstrap.min.js"></script>
-        <script>
-            function validateForm(query)
-            {
-                return (query.length > 0);
-            }
-        </script>
-    </body>
-    <!-- Theme: Elegant built for Pelican
-        License : MIT -->
+</body>
+
 </html>
