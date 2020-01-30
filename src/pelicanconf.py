@@ -113,7 +113,7 @@ PYGMENTS_STYLE = "github"
 # ABOUT_ME = "I'm Blair"
 DISPLAY_ARCHIVE_ON_SIDEBAR = True
 
-# HIDE_SIDEBAR = True
+HIDE_SIDEBAR = True
 # PADDED_SINGLE_COLUMN_STYLE = True
 
 MENUITEMS = [("Recipes", "/Recipes")]
