@@ -38,7 +38,7 @@ def build(c):
 @task
 def rebuild(c):
     """`build` with the delete switch"""
-    c.run("pelican -d -s {settings_base}".format(**CONFIG))
+    c.run("pelican -s {settings_base}".format(**CONFIG))
 
 
 @task
@@ -70,6 +70,22 @@ def reserve(c):
 
 
 @task
+def clean(c):
+    """Remove all generated output"""
+    import publishconf
+    import shutil
+
+    for f in os.listdir(".."):
+        if f in publishconf.OUTPUT_RETENTION:
+            continue
+        f = os.path.join("..", f)
+        if os.path.isdir(f):
+            shutil.rmtree(f)
+        else:
+            os.remove(f)
+
+
+@task(clean)
 def preview(c):
     """Build production version of site"""
     c.run("pelican -d -s {settings_publish}".format(**CONFIG))
