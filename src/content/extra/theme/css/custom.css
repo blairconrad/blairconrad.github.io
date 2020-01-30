@@ -22,7 +22,8 @@ h4,
 h5,
 h6,
 .navbar,
-#tipue_search_input {
+#tipue_search_input,
+.tipue_search_content_title {
     font-family: 'Oswald', 'Arial Narrow', Helvetica, sans-serif;
     font-weight: normal;
 }
@@ -49,8 +50,8 @@ code {
     line-height: 16px;
 } */
 
-a, .entry-content a, #sidebar a, a:focus, a:hover {
-    color: firebrick;
+a, .entry-content a, #sidebar a, a:focus, a:hover, .tipue_search_content_url a, .tipue_search_content_url a:hover {
+        color: firebrick;
     text-decoration: none;
     border-bottom: none;
 }
@@ -81,4 +82,3 @@ a, .entry-content a, #sidebar a, a:focus, a:hover {
 #sidebar .fa-tags:before {
     content: "\f03a";
 }
-
