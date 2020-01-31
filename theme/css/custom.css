@@ -1,17 +1,9 @@
 @import url('https://fonts.googleapis.com/css?family=Fira+Code');
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
 @import url('https://fonts.googleapis.com/css?family=Oswald');
 
-/* site title
-.site-name {
-    font-family: 'PT Sans', 'Calibri', 'Tahoma', 'Arial', 'Sans-Serif';
-}
-
-.article-content, div.recent-posts p, .tipue_search_content_text {
-    font: 1.2em/1.6em 'Source Sans Pro', Helvetica, Roboto, 'Calibri', 'Tahoma', 'Arial', 'Sans-Serif';
-    text-align: justify;
-} */
-
 body {
+    font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
     font-size: 16px;
 }
 
@@ -22,14 +14,11 @@ h4,
 h5,
 h6,
 .navbar,
-#tipue_search_input {
+#tipue_search_input,
+.tipue_search_content_title {
     font-family: 'Oswald', 'Arial Narrow', Helvetica, sans-serif;
     font-weight: normal;
 }
-
-/* .table-of-content .toc {
-    font-size: 1em;
-} */
 
 .highlight pre, code {
     font-family: 'Fira Code', monospace;
@@ -44,24 +33,24 @@ code {
     white-space: nowrap;
 }
 
-/* pre code, .highlight pre {
-    font-size: 12px;
-    line-height: 16px;
-} */
-
-a, .entry-content a, #sidebar a, a:focus, a:hover {
-    color: firebrick;
+a, a:hover, a:active, a:focus,
+footer p a, footer p  a:hover, footer p  a:active, footer p  a:focus {
+    color: #677DB7;
     text-decoration: none;
+    padding-bottom: 0px;
     border-bottom: none;
 }
 
-.post-info i.fa { 
-    margin-left: 1em;
-    margin-right: 0.25em;
+.entry-content a, .entry-content a:focus, .entry-content a:hover,
+.tipue_search_content_url a, .tipue_search_content_url a:hover {
+    color: #677DB7;
+    text-decoration: none;
+    padding-bottom: 0px;
+    border-bottom: 1px dotted #677db7;
 }
 
-.post-info i.fa:first-of-type { 
-    margin-left: 0em;
+.post-info i.fa {
+    margin-left: 0.75em;
     margin-right: 0.25em;
 }
 
@@ -82,3 +71,38 @@ a, .entry-content a, #sidebar a, a:focus, a:hover {
     content: "\f03a";
 }
 
+.post-info span {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+.post-info {
+    padding: 15px;
+}
+
+.entry-content .post-info {
+    padding: 0px;
+}
+
+.navbar {
+    background-color: #25274d;
+}
+
+.navbar-default .navbar-nav>.active>a, .navbar-default .navbar-nav>.active>a:focus, .navbar-default .navbar-nav>.active>a:hover {
+    color: #9CA3DB;
+    background-color: #464866;
+}
+
+ #tipue_search_input{
+    color: #9CA3DB;
+    background-color: #464866;
+ }
+
+ ::placeholder {
+    color: #aaabb8;
+}
+
+.navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a,
+.navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
+    color: #9CA3DB;
+}
