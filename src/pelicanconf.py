@@ -84,7 +84,12 @@ DIRECT_TEMPLATES = [
 ]
 RECIPES_SAVE_AS = "Recipes/index.html"
 
-DEFAULT_PAGINATION = False
+DEFAULT_PAGINATION = 10
+DEFAULT_ORPHANS = 3
+PAGINATION_PATTERNS = (
+    (1, "{url}", "{save_as}"),
+    (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
+)
 
 # Uncomment following line if you want document-relative URLs when developing
 RELATIVE_URLS = True
