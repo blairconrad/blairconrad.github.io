@@ -1,31 +1,13 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*- #
-from __future__ import unicode_literals
 
 import os
 
-AUTHOR = "Blair Conrad"
-SITENAME = "Blair Conrad"
-SITEURL = ""
-# LANDING_PAGE_TITLE = "Blair Conrad"
-
-PROJECTS = [
-    {
-        "name": "FakeItEasy - The easy mocking library for .NET",
-        "url": "https://fakeiteasy.github.io/",
-        "description": "A .Net dynamic fake framework for creating all types of fake objects, mocks, stubs etc.",
-    },
-    {
-        "name": "LibraryHippo",
-        "url": "http://libraryhippo.com/",
-        "description": "Monitor your family's library accounts at the: Waterloo Public Library, Kitchener Public Library, and Region of Waterloo Library",
-    },
-]
-
 PATH = "content"
 OUTPUT_PATH = "../_local_build"
-THEME = "themes/pelican-bootstrap3"
 
+SITENAME = "Blair Conrad"
+SITEURL = ""
 
 TIMEZONE = "America/Toronto"
 
@@ -33,8 +15,7 @@ DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
 PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["neighbors", "series", "tipue_search", "i18n_subsites"]
-JINJA_ENVIRONMENT = {"extensions": ["jinja2.ext.i18n"]}
+PLUGINS = ["series"]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -42,21 +23,6 @@ CATEGORY_FEED_ATOM = None
 TRANSLATION_FEED_ATOM = None
 AUTHOR_FEED_ATOM = None
 AUTHOR_FEED_RSS = None
-
-# # Blogroll
-# LINKS = (
-#     ("Pelican", "http://getpelican.com/"),
-#     ("Python.org", "http://python.org/"),
-#     ("Jinja2", "http://jinja.pocoo.org/"),
-#     ("You can modify those links in your config file", "#"),
-# )
-
-# Social widget
-SOCIAL = (
-    ("Github", "http://github.com/blairconrad"),
-    ("Twitter", "http://twitter.com/hippopottoman"),
-    ("Goodreads", "https://www.goodreads.com/user/show/1066544-blair-conrad"),
-)
 
 SLUGIFY_SOURCE = "title"
 ARTICLE_URL = "{date:%Y}/{date:%m}/{date:%d}/{slug}/"
@@ -71,19 +37,6 @@ SLUG_REGEX_SUBSTITUTIONS = [
 ]
 
 
-THEME_TEMPLATES_OVERRIDES = ["templates"]
-DIRECT_TEMPLATES = [
-    "index",
-    "tags",
-    "categories",
-    "authors",
-    "archives",
-    "search",
-    "404",
-    "Recipes",
-]
-RECIPES_SAVE_AS = "Recipes/index.html"
-
 DEFAULT_PAGINATION = 10
 DEFAULT_ORPHANS = 3
 PAGINATION_PATTERNS = (
@@ -91,36 +44,35 @@ PAGINATION_PATTERNS = (
     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
 )
 
-# Uncomment following line if you want document-relative URLs when developing
-RELATIVE_URLS = True
-
-
 DISPLAY_PAGES_ON_MENU = False
 
 STATIC_PATHS = ["images", "Recipes", "extra"]
 
 PAGE_PATHS = ["pages", "Recipes"]
-
 EXTRA_PATH_METADATA = {}
 for (path, directories, files) in os.walk(os.path.join("content", "extra")):
     for f in files:
         full_path = (path + "/" + f).replace("\\", "/")
         EXTRA_PATH_METADATA[full_path[8:]] = {"path": full_path[14:]}
 
+THEME_TEMPLATES_OVERRIDES = ["templates"]
 
-# BOOTSTRAP3
-DISPLAY_ARTICLE_INFO_ON_INDEX = True
-SHOW_ARTICLE_CATEGORY = True
-CUSTOM_CSS = "theme/css/custom.css"
-PYGMENTS_STYLE = "github"
-# BOOTSTRAP_NAVBAR_INVERSE = True
+THEME = "m.css/pelican-theme"
+DIRECT_TEMPLATES = ["index", "Recipes", "404"]
+RECIPES_SAVE_AS = "Recipes/index.html"
 
-# ABOUT_ME = "I'm Blair"
-DISPLAY_ARCHIVE_ON_SIDEBAR = True
+THEME_STATIC_DIR = "static"
 
-HIDE_SIDEBAR = True
-# PADDED_SINGLE_COLUMN_STYLE = True
+M_HIDE_ARTICLE_SUMMARY = True
 
-MENUITEMS = [("Recipes", "/Recipes")]
-DISPLAY_SERIES_ON_SIDEBAR = True
-SHOW_SERIES = True
+M_CSS_FILES = [
+    "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600",
+    "/static/m-dark.css",
+]
+M_THEME_COLOR = "#22272e"
+
+PLUGIN_PATHS += ["m.css/plugins"]
+PLUGINS += ["m.htmlsanity", "m.code", "m.components", "m.images"]
+
+
+M_LINKS_NAVBAR1 = [("Recipes", "Recipes/", "recipes", [])]
