@@ -2,10 +2,24 @@ main p {
     text-indent: 0;
 }
 
-/* a {
-    border-bottom-width: 1px;
-    border-bottom-color: var(--link-color);
-    border-bottom-style: dotted;
-    text-decoration: none;
+.article-metadata {
+    margin-bottom: 1em;
 }
- */
+
+.article-metadata i.fas {
+    margin-left: 0.75em;
+    margin-right: 0.25em;
+}
+
+.article-metadata span,
+.article-metadata details {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+
+:root {
+    /* Text properties */
+    --font: 'Source Sans Pro', sans-serif;
+    --code-font: 'Fira Code', 'Source Code Pro', monospace;
+}
