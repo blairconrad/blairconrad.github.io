@@ -1,129 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>Prime Time Programming, Part 1 - Blair Conrad</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/">
-
-        <meta name="author" content="Blair Conrad" />
-        <meta name="keywords" content="Development,Primes,Profiling,ProjectEuler,Python" />
-        <meta name="description" content="From time to time, I find myself caught up in the heady world of Project Euler. It&#39;s almost like playing Professor Layton or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces. If you look at the Project Euler problems for any length of time, you&#39;ll …" />
-
-        <meta property="og:site_name" content="Blair Conrad" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Prime Time Programming, Part 1"/>
-        <meta property="og:url" content="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/"/>
-        <meta property="og:description" content="From time to time, I find myself caught up in the heady world of Project Euler. It&#39;s almost like playing Professor Layton or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces. If you look at the Project Euler problems for any length of time, you&#39;ll …"/>
-        <meta property="article:published_time" content="2011-04-25" />
-            <meta property="article:section" content="Development" />
-            <meta property="article:tag" content="Development" />
-            <meta property="article:tag" content="Primes" />
-            <meta property="article:tag" content="Profiling" />
-            <meta property="article:tag" content="ProjectEuler" />
-            <meta property="article:tag" content="Python" />
-            <meta property="article:author" content="Blair Conrad" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="https://blairconrad.com/theme/css/pygments/github.css" rel="stylesheet">
-    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css"/>
-        <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad ATOM Feed"/>
-
-        <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad Development ATOM Feed"/>
+  <meta charset="UTF-8" />
+  <title>Prime Time Programming, Part 1 | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/custom.css" />
+  <link rel="canonical" href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Prime Time Programming, Part 1" />
+  <meta name="twitter:title" content="Prime Time Programming, Part 1" />
+  <meta property="og:url" content="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/" />
+  <meta property="og:description" content="From time to time, I find myself caught up in the heady world of Project Euler. It&#39;s almost like playing Professor Layton or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces. If you look at the Project Euler problems for any length of time, you&#39;ll …" />
+  <meta name="twitter:description" content="From time to time, I find myself caught up in the heady world of Project Euler. It&#39;s almost like playing Professor Layton or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces. If you look at the Project Euler problems for any length of time, you&#39;ll …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="https://blairconrad.com/" class="navbar-brand">
-Blair Conrad            </a>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href="/Recipes">Recipes</a></li>
-                        <li class="active">
-                            <a href="https://blairconrad.com/category/development.html">Development</a>
-                        </li>
-                        <li >
-                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="/search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/"
-                       rel="bookmark"
-                       title="Permalink to Prime Time Programming, Part 1">
-                        Prime Time Programming, Part 1
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span><i class="fa fa-calendar"></i><time datetime="2011-04-25T00:00:00-04:00">2011-04-25</time></span>
-    <span><i class="fa fa-folder"></i><a href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-
-
-<span><i class="fa fa-tags"></i>
-<a href="https://blairconrad.com/tag/development.html">Development</a>
-/
-<a href="https://blairconrad.com/tag/primes.html">Primes</a>
-/
-<a href="https://blairconrad.com/tag/profiling.html">Profiling</a>
-/
-<a href="https://blairconrad.com/tag/projecteuler.html">ProjectEuler</a>
-/
-<a href="https://blairconrad.com/tag/python.html">Python</a>
-</span>
-    
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>From time to time, I find myself caught up in the heady world of <a href="http://projecteuler.net/" title="Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.">Project Euler</a>. It's almost like playing <a href="http://professorlaytonds.com/">Professor Layton</a> or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces.</p>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2011/04/25/prime-time-programming-part-1/" rel="bookmark" title="Permalink to Prime Time Programming, Part 1">
+                  Prime Time Programming, Part 1
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2011-04-25T00:00:00-04:00">2011-04-25</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/development.html">Development</a>
+                  /
+                  <a href="https://blairconrad.com/tag/primes.html">Primes</a>
+                  /
+                  <a href="https://blairconrad.com/tag/profiling.html">Profiling</a>
+                  /
+                  <a href="https://blairconrad.com/tag/projecteuler.html">ProjectEuler</a>
+                  /
+                  <a href="https://blairconrad.com/tag/python.html">Python</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>From time to time, I find myself caught up in the heady world of <a href="http://projecteuler.net/" title="Project Euler is a series of challenging mathematical/computer programming problems that will require more than just mathematical insights to solve. Although mathematics will help you arrive at elegant and efficient methods, the use of a computer and programming skills will be required to solve most problems.">Project Euler</a>. It's almost like playing <a href="http://professorlaytonds.com/">Professor Layton</a> or some other puzzle-solving game - mathematical or programming brain teasers, served in bite-sized pieces.</p>
 <p>If you look at the Project Euler problems for any length of time, you'll notice common themes. One theme is <a href="http://en.wikipedia.org/wiki/Prime_number">prime numbers</a> - many problems can't be solved without generating varying quantities of primes. To that end, I'd written a prime generator to be shared between problem solutions. Over time, I added functionality and "optimized" the generator to improve the running time of my solutions. Everything was great, until I tried <a href="http://projecteuler.net/index.php?section=problems&id=315" title="Digital root clocks">Problem 315</a>, whose solution required a list of primes between 10<sup>7</sup> and 2&times;10<sup>7</sup>. My solution worked, but it ran really slowly - something like 12 minutes. Now, I'm not doing myself any favours by writing in Python and running on a 7-year-old laptop, but that's still too long.</p>
 <!--more-->
 
@@ -336,38 +280,22 @@ Trial division has a few things going for it:
 </ul>
 Ultimately, though, its downfall is that it takes a lot of work to verify that a large number is prime. Consider the largest prime number below 10<sup>7</sup>: 9999991. In order to verify that this is prime, we have to consider all prime factors less than &radic;9999991. There are 446 of these. That's 446 divisions, just to verify that one number is prime. </p>
 <p>We're unlikely to radically improve performance by continuing to tinker with trial division. It's time to throw the whole thing away again and try a new approach. Next time we'll do just that.</p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-    </div>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
 </div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2017 Blair Conrad
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
-   </div>
-</footer>
-<script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://blairconrad.com/theme/js/respond.min.js"></script>
-
-
-
-
+    </div>
+  </div>
+</nav></footer>
 </body>
 </html>

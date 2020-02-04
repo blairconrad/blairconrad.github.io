@@ -1,126 +1,71 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>Hasty impressions: Continuous testing using AutoTest.NET - Blair Conrad</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/">
-
-        <meta name="author" content="Blair Conrad" />
-        <meta name="keywords" content=".NET,AutoTest.Net,HastyImpressions,Testing" />
-        <meta name="description" content="Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I&#39;m a huge fan of continuous testing. I&#39;ve been using py.test to run my Python unit tests for years now, almost solely because …" />
-
-        <meta property="og:site_name" content="Blair Conrad" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Hasty impressions: Continuous testing using AutoTest.NET"/>
-        <meta property="og:url" content="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/"/>
-        <meta property="og:description" content="Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I&#39;m a huge fan of continuous testing. I&#39;ve been using py.test to run my Python unit tests for years now, almost solely because …"/>
-        <meta property="article:published_time" content="2010-11-12" />
-            <meta property="article:section" content="Development" />
-            <meta property="article:tag" content=".NET" />
-            <meta property="article:tag" content="AutoTest.Net" />
-            <meta property="article:tag" content="HastyImpressions" />
-            <meta property="article:tag" content="Testing" />
-            <meta property="article:author" content="Blair Conrad" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="https://blairconrad.com/theme/css/pygments/github.css" rel="stylesheet">
-    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css"/>
-        <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad ATOM Feed"/>
-
-        <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad Development ATOM Feed"/>
+  <meta charset="UTF-8" />
+  <title>Hasty impressions&#58; Continuous testing using AutoTest.NET | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/custom.css" />
+  <link rel="canonical" href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Hasty impressions&#58; Continuous testing using AutoTest.NET" />
+  <meta name="twitter:title" content="Hasty impressions&#58; Continuous testing using AutoTest.NET" />
+  <meta property="og:url" content="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/" />
+  <meta property="og:description" content="Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I&#39;m a huge fan of continuous testing. I&#39;ve been using py.test to run my Python unit tests for years now, almost solely because …" />
+  <meta name="twitter:description" content="Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I&#39;m a huge fan of continuous testing. I&#39;ve been using py.test to run my Python unit tests for years now, almost solely because …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="https://blairconrad.com/" class="navbar-brand">
-Blair Conrad            </a>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href="/Recipes">Recipes</a></li>
-                        <li class="active">
-                            <a href="https://blairconrad.com/category/development.html">Development</a>
-                        </li>
-                        <li >
-                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="/search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/"
-                       rel="bookmark"
-                       title="Permalink to Hasty impressions: Continuous testing using AutoTest.NET">
-                        Hasty impressions&#58; Continuous testing using AutoTest.NET
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span><i class="fa fa-calendar"></i><time datetime="2010-11-12T00:00:00-05:00">2010-11-12</time></span>
-    <span><i class="fa fa-folder"></i><a href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-
-
-<span><i class="fa fa-tags"></i>
-<a href="https://blairconrad.com/tag/.net.html">.NET</a>
-/
-<a href="https://blairconrad.com/tag/autotest.net.html">AutoTest.Net</a>
-/
-<a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
-/
-<a href="https://blairconrad.com/tag/testing.html">Testing</a>
-</span>
-    
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p><a href="http://abdullin.com/journal/2010/11/11/mighty-moose-smart-continuous-unit-tests-for-net-and-mono.html">Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET</a>, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I'm a huge fan of continuous testing. I've been using <a href="http://codespeak.net/py/dist/test/">py.test</a> to run my Python unit tests for years now, almost solely because <a href="http://codespeak.net/py/dist/test/features.html#looping-on-the-failing-test-set">it offers this feature</a>.</p>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2010/11/12/hasty-impressions-continuous-testing-using-autotest.net/" rel="bookmark" title="Permalink to Hasty impressions&#58; Continuous testing using AutoTest.NET">
+                  Hasty impressions&#58; Continuous testing using AutoTest.NET
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2010-11-12T00:00:00-05:00">2010-11-12</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/.net.html">.NET</a>
+                  /
+                  <a href="https://blairconrad.com/tag/autotest.net.html">AutoTest.Net</a>
+                  /
+                  <a href="https://blairconrad.com/tag/hastyimpressions.html">HastyImpressions</a>
+                  /
+                  <a href="https://blairconrad.com/tag/testing.html">Testing</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p><a href="http://abdullin.com/journal/2010/11/11/mighty-moose-smart-continuous-unit-tests-for-net-and-mono.html">Rinat Abdullin recently posted about Mighty Moose and AutoTest.NET</a>, two projects for continuous testing in the .NET/Mono space. My interest was immediately piqued, as I'm a huge fan of continuous testing. I've been using <a href="http://codespeak.net/py/dist/test/">py.test</a> to run my Python unit tests for years now, almost solely because <a href="http://codespeak.net/py/dist/test/features.html#looping-on-the-failing-test-set">it offers this feature</a>.</p>
 <p>I'm taking a look at <a href="https://github.com/acken/AutoTest.Net">AutoTest.Net</a> first. Mostly because it's free. If I'm going to use something at home, it won't be for-pay, and the Day Job has been notoriously slow at shelling out for developer tools.</p>
 <p><strong>Update</strong>: there was a bug that had been fixed on trunk, but not in the installer that I used. <a href="https://blairconrad.com/2010/11/14/autotest.net-updated-now-and-then-notices-broken-builds/">AutoTest.Net is better at detecting broken builds</a> than I report below. </p>
 <h2>Setting up AutoTest.NET</h2>
@@ -228,38 +173,22 @@ In addition to the usual changes to the output window, I saw some happy toast:</
 <p>Not now, and probably never at the Day Job. The inability to detect broken builds is pretty disappointing.
 Also, at work, I have <a href="http://www.jetbrains.com/resharper/features/unit_testing.html">ReSharper to integrate my unit tests</a>. I've bound "rerun the previous test set" to a key sequence, so it's just as easy for me to trigger as it is to save a file.</p>
 <p>At home? Maybe. If AutoTest.Net starts noticing when builds fail, then I probably will use it when I'm away from ReSharper and working in .NET. </p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-    </div>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
 </div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2017 Blair Conrad
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
-   </div>
-</footer>
-<script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://blairconrad.com/theme/js/respond.min.js"></script>
-
-
-
-
+    </div>
+  </div>
+</nav></footer>
 </body>
 </html>

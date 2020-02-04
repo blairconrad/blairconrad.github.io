@@ -1,123 +1,69 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>Automatically Printing Rake (or other Ruby) Variables - Blair Conrad</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/">
-
-        <meta name="author" content="Blair Conrad" />
-        <meta name="keywords" content="rake,ruby,local_variables" />
-        <meta name="description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …" />
-
-        <meta property="og:site_name" content="Blair Conrad" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Automatically Printing Rake (or other Ruby) Variables"/>
-        <meta property="og:url" content="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/"/>
-        <meta property="og:description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …"/>
-        <meta property="article:published_time" content="2014-06-05" />
-            <meta property="article:section" content="Development" />
-            <meta property="article:tag" content="rake" />
-            <meta property="article:tag" content="ruby" />
-            <meta property="article:tag" content="local_variables" />
-            <meta property="article:author" content="Blair Conrad" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="https://blairconrad.com/theme/css/pygments/github.css" rel="stylesheet">
-    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css"/>
-        <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad ATOM Feed"/>
-
-        <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad Development ATOM Feed"/>
+  <meta charset="UTF-8" />
+  <title>Automatically Printing Rake (or other Ruby) Variables | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/custom.css" />
+  <link rel="canonical" href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Automatically Printing Rake (or other Ruby) Variables" />
+  <meta name="twitter:title" content="Automatically Printing Rake (or other Ruby) Variables" />
+  <meta property="og:url" content="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/" />
+  <meta property="og:description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …" />
+  <meta name="twitter:description" content="The FakeItEasy rakefile contains a vars target (brainchild of Adam Ralph) that can be used to print out the local variables defined in the script. Mostly these are static variables, such as the path to the NUnit command, but some, such as the upcoming FakeItEasy version, are computed. Logging these …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="https://blairconrad.com/" class="navbar-brand">
-Blair Conrad            </a>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href="/Recipes">Recipes</a></li>
-                        <li class="active">
-                            <a href="https://blairconrad.com/category/development.html">Development</a>
-                        </li>
-                        <li >
-                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="/search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/"
-                       rel="bookmark"
-                       title="Permalink to Automatically Printing Rake (or other Ruby) Variables">
-                        Automatically Printing Rake (or other Ruby) Variables
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span><i class="fa fa-calendar"></i><time datetime="2014-06-05T00:00:00-04:00">2014-06-05</time></span>
-    <span><i class="fa fa-folder"></i><a href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-
-
-<span><i class="fa fa-tags"></i>
-<a href="https://blairconrad.com/tag/rake.html">rake</a>
-/
-<a href="https://blairconrad.com/tag/ruby.html">ruby</a>
-/
-<a href="https://blairconrad.com/tag/local_variables.html">local_variables</a>
-</span>
-    
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>The <a href="http://fakeiteasy.github.io/">FakeItEasy</a> rakefile contains a <code>vars</code> target
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2014/06/05/automatically-printing-rake-or-other-ruby-variables/" rel="bookmark" title="Permalink to Automatically Printing Rake (or other Ruby) Variables">
+                  Automatically Printing Rake (or other Ruby) Variables
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2014-06-05T00:00:00-04:00">2014-06-05</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/rake.html">rake</a>
+                  /
+                  <a href="https://blairconrad.com/tag/ruby.html">ruby</a>
+                  /
+                  <a href="https://blairconrad.com/tag/local_variables.html">local_variables</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>The <a href="http://fakeiteasy.github.io/">FakeItEasy</a> rakefile contains a <code>vars</code> target
 (brainchild of <a href="http://adamralph.com/">Adam Ralph</a>) that can be used to print out
 the local variables defined in the script. Mostly these are static
 variables, such as the path to the <a href="http://nunit.org/">NUnit</a> command, but some,
@@ -226,38 +172,22 @@ end</code></pre>
 </ol>
 <p>Best of all, now we can add rake variables willy-nilly, with nary a
 thought about printing them out. It just happens.</p>
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-    </div>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
 </div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2017 Blair Conrad
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
-   </div>
-</footer>
-<script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://blairconrad.com/theme/js/respond.min.js"></script>
-
-
-
-
+    </div>
+  </div>
+</nav></footer>
 </body>
 </html>
