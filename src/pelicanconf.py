@@ -66,10 +66,10 @@ THEME_STATIC_DIR = "static"
 M_HIDE_ARTICLE_SUMMARY = True
 
 M_CSS_FILES = [
-    "https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400i,600,600i%7CSource+Code+Pro:400,400i,600",
     "/static/m-dark.css",
-    "/static/custom.css",
+    "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600",
     "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css",
+    "/static/custom.css",
 ]
 
 M_THEME_COLOR = "#22272e"

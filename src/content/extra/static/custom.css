@@ -20,6 +20,6 @@ main p {
 
 :root {
     /* Text properties */
-    --font: 'Source Sans Pro', sans-serif;
-    --code-font: 'Fira Code', 'Source Code Pro', monospace;
+    --font: 'Open Sans', sans-serif;
+    --code-font: 'Fira Code', monospace;
 }
