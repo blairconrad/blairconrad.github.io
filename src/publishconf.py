@@ -12,7 +12,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 OUTPUT_PATH = ".."
-OUTPUT_RETENTION = [".git", ".gitignore", ".nojekyll", "src", "README.md"]
+OUTPUT_RETENTION = [".git", ".gitignore", ".gitmodules", ".nojekyll", "src", "README.md"]
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = "https://blairconrad.com"

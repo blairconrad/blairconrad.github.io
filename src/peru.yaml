@@ -19,12 +19,6 @@ imports:
     # revealmd: plugins/revealmd/
     # plugins|i18n_subsites: plugins/
     # themes|pelican-bootstrap3: themes/
-    m-css: m.css
-
-git module m-css:
-    url: https://github.com/mosra/m.css.git
-    rev: 6eefd92c2aa3e0a257503d31b1a469867dfff8b6
-    pick: [pelican-theme, plugins]
 
 # git module elegant:
 #     url: https://github.com/Pelican-Elegant/elegant.git
