@@ -1,124 +1,92 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>Best all-around .NET coverage tool - OpenCover - Blair Conrad</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/">
-
-        <meta name="author" content="Blair Conrad" />
-        <meta name="keywords" content=".NET,coverage,OpenCover" />
-        <meta name="description" content="This is the gala awards show, where my chosen coverage tool is announced. If you&#39;ve come this far, you&#39;ve probably already read the title, and it won&#39;t surprise you to learn that I&#39;ve chosen OpenCover. It offered the best fit for my requirements - the only areas where I found it …" />
-
-        <meta property="og:site_name" content="Blair Conrad" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="Best all-around .NET coverage tool - OpenCover"/>
-        <meta property="og:url" content="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/"/>
-        <meta property="og:description" content="This is the gala awards show, where my chosen coverage tool is announced. If you&#39;ve come this far, you&#39;ve probably already read the title, and it won&#39;t surprise you to learn that I&#39;ve chosen OpenCover. It offered the best fit for my requirements - the only areas where I found it …"/>
-        <meta property="article:published_time" content="2011-12-15" />
-            <meta property="article:section" content="Development" />
-            <meta property="article:tag" content=".NET" />
-            <meta property="article:tag" content="coverage" />
-            <meta property="article:tag" content="OpenCover" />
-            <meta property="article:author" content="Blair Conrad" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="https://blairconrad.com/theme/css/pygments/github.css" rel="stylesheet">
-    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css"/>
-        <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad ATOM Feed"/>
-
-        <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad Development ATOM Feed"/>
+  <meta charset="UTF-8" />
+  <title>Best all-around .NET coverage tool - OpenCover | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/custom.css" />
+  <link rel="canonical" href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Best all-around .NET coverage tool - OpenCover" />
+  <meta name="twitter:title" content="Best all-around .NET coverage tool - OpenCover" />
+  <meta property="og:url" content="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/" />
+  <meta property="og:description" content="This is the gala awards show, where my chosen coverage tool is announced. If you&#39;ve come this far, you&#39;ve probably already read the title, and it won&#39;t surprise you to learn that I&#39;ve chosen OpenCover. It offered the best fit for my requirements - the only areas where I found it …" />
+  <meta name="twitter:description" content="This is the gala awards show, where my chosen coverage tool is announced. If you&#39;ve come this far, you&#39;ve probably already read the title, and it won&#39;t surprise you to learn that I&#39;ve chosen OpenCover. It offered the best fit for my requirements - the only areas where I found it …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="https://blairconrad.com/" class="navbar-brand">
-Blair Conrad            </a>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href="/Recipes">Recipes</a></li>
-                        <li class="active">
-                            <a href="https://blairconrad.com/category/development.html">Development</a>
-                        </li>
-                        <li >
-                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="/search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/"
-                       rel="bookmark"
-                       title="Permalink to Best all-around .NET coverage tool - OpenCover">
-                        Best all-around .NET coverage tool - OpenCover
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span><i class="fa fa-calendar"></i><time datetime="2011-12-15T00:00:00-05:00">2011-12-15</time></span>
-    <span><i class="fa fa-folder"></i><a href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-
-
-<span><i class="fa fa-tags"></i>
-<a href="https://blairconrad.com/tag/.net.html">.NET</a>
-/
-<a href="https://blairconrad.com/tag/coverage.html">coverage</a>
-/
-<a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
-</span>
-    
-
-    <span><i class="fa fa-list"></i>Part 6 of .NET Coverage Tools</span>
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>This is the gala awards show, where my chosen coverage tool is announced. </p>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2011/12/15/best-all-around-.net-coverage-tool-opencover/" rel="bookmark" title="Permalink to Best all-around .NET coverage tool - OpenCover">
+                  Best all-around .NET coverage tool - OpenCover
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2011-12-15T00:00:00-05:00">2011-12-15</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/.net.html">.NET</a>
+                  /
+                  <a href="https://blairconrad.com/tag/coverage.html">coverage</a>
+                  /
+                  <a href="https://blairconrad.com/tag/opencover.html">OpenCover</a>
+                </span>
+              </div>
+            <aside class="m-block m-default">
+              <h3>Part 6 of the .NET Coverage Tools series:</h3>
+              <ol>
+                <li>
+                  <a href='https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/'>Can you cover me&#63; Looking for a .NET coverage tool</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/'>Hasty Impressions&#58; dotCover 1.1</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2011/08/05/hasty-impressions-partcover/'>Hasty Impressions&#58; PartCover</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2011/08/15/hasty-impressions-opencover/'>Hasty Impressions&#58; OpenCover</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2011/11/09/hasty-impressions-ncover/'>Hasty Impressions&#58; NCover</a>
+                </li>
+                <li>
+                  Best all-around .NET coverage tool - OpenCover (this article)
+                </li>
+              </ol>
+            </aside>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>This is the gala awards show, where my chosen coverage tool is announced. </p>
 <p>If you've come this far, you've probably already read the title, and it won't surprise you to learn that I've chosen <a href="https://github.com/sawilde/opencover">OpenCover</a>. It offered the best fit for my requirements - the only areas where I found it lacking were in the "nice to haves". Witness:
 <ul>
    <li>OpenCover is pretty easy to <strong>run from the command line</strong> - second only to NCover.</li>
@@ -143,49 +111,22 @@ for now.</p>
 <li>The time taken to execute our tests (there are over 5000, and many hit a database) increased from about 7 minutes to about 8. This is an acceptable degradation, since the test run isn't the bottleneck in our build process.</li>
 <li>The number of "Cannot instrument  as no PDB could be loaded" messages is daunting. I'm hoping that things will be improved once I get a build that contains a fix for <a href="https://github.com/sawilde/opencover/issues/40">issue 40</a>.</li>
 </ol></p>
-            </div>
-            <!-- /.entry-content -->
-<section class="well" id="related-posts">
-    <h4>Part 6 of the .NET Coverage Tools series</h4>
-       <h5>Previous articles</h5>
-       <ul>
-           <li><a href="https://blairconrad.com/2011/07/18/can-you-cover-me-looking-for-a-.net-coverage-tool/">Can you cover me&#63; Looking for a .NET coverage tool</a></li>
-           <li><a href="https://blairconrad.com/2011/07/29/hasty-impressions-dotcover-1.1/">Hasty Impressions&#58; dotCover 1.1</a></li>
-           <li><a href="https://blairconrad.com/2011/08/05/hasty-impressions-partcover/">Hasty Impressions&#58; PartCover</a></li>
-           <li><a href="https://blairconrad.com/2011/08/15/hasty-impressions-opencover/">Hasty Impressions&#58; OpenCover</a></li>
-           <li><a href="https://blairconrad.com/2011/11/09/hasty-impressions-ncover/">Hasty Impressions&#58; NCover</a></li>
-       </ul>
-</section>
-        </article>
-    </section>
-
-        </div>
-    </div>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
 </div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2017 Blair Conrad
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
-   </div>
-</footer>
-<script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://blairconrad.com/theme/js/respond.min.js"></script>
-
-
-
-
+    </div>
+  </div>
+</nav></footer>
 </body>
 </html>

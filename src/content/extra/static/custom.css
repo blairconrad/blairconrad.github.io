@@ -1,0 +1,60 @@
+main p {
+    text-indent: 0;
+    line-height: 150%;
+}
+
+.article-metadata {
+    margin-bottom: 1em;
+}
+
+.article-metadata i.fas {
+    margin-left: 0.75em;
+    margin-right: 0.25em;
+}
+
+.article-metadata span,
+.article-metadata details {
+    display: inline-block;
+    white-space: nowrap;
+}
+
+figure.m-figure figcaption,
+figure.m-code-figure figcaption,
+figure.m-console-figure figcaption {
+    margin-bottom: -0.5em;
+    font-size: 90%;
+}
+
+figure.m-code-figure figcaption,
+figure.m-console-figure figcaption {
+    margin-top: -0.75em;
+    font-weight: inherit;
+    font-family: 'Courier New', Courier, monospace;
+}
+
+code {
+    background-color: inherit;
+    border: 1px dotted var(--line-color);
+}
+
+a {
+    border-bottom: 1px dashed var(--link-color);
+    text-decoration: none;
+}
+
+nav a,
+article h1 a,
+article > header h1 a,
+article section > h2 a,
+article section > h3 a,
+article section > h4 a,
+article section > h5 a,
+article section > h6 a {
+    border-bottom: none;
+}
+
+:root {
+    /* Text properties */
+    --font: 'Open Sans', sans-serif;
+    --code-font: 'Fira Code', monospace;
+}

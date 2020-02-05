@@ -1,0 +1,17 @@
+      {% if article.series %}
+      <aside class="m-block m-default">
+        {% set text = SERIES_TEXT|default('Part %(index)s of the %(name)s series') %}
+        <h3>{{ text|format(index=article.series.index, name=article.series.name) }}:</h3>
+        <ol>
+          {% for part_article in article.series.all %}
+          <li>
+            {% if part_article == article %}
+            {{ part_article.title }} (this article)
+            {% else %}
+            <a href='{{ SITEURL }}/{{ part_article.url }}'>{{ part_article.title }}</a>
+            {% endif %}
+          </li>
+          {% endfor %}
+        </ol>
+      </aside>
+      {% endif %}

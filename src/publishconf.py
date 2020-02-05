@@ -28,3 +28,5 @@ DELETE_OUTPUT_DIRECTORY = True
 # DISQUS_SITENAME = ""
 # GOOGLE_ANALYTICS = ""
 
+M_CSS_FILES.remove("/static/m-dark.css")
+M_CSS_FILES.insert(0, "/static/m-dark.compiled.css")

@@ -1,129 +1,73 @@
 <!DOCTYPE html>
-<html lang="en" prefix="og: http://ogp.me/ns# fb: https://www.facebook.com/2008/fbml">
+<html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
-    <title>IE binds to id attributes, or “How I learned to love var” - Blair Conrad</title>
-    <!-- Using the latest rendering mode for IE -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-
-
-<link rel="canonical" href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/">
-
-        <meta name="author" content="Blair Conrad" />
-        <meta name="keywords" content="Ajax,Development,IE,JavaScript,LibraryHippo" />
-        <meta name="description" content="I recently converted the LibraryHippo “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. When using Firefox or Chrome, as …" />
-
-        <meta property="og:site_name" content="Blair Conrad" />
-        <meta property="og:type" content="article"/>
-        <meta property="og:title" content="IE binds to id attributes, or “How I learned to love var”"/>
-        <meta property="og:url" content="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/"/>
-        <meta property="og:description" content="I recently converted the LibraryHippo “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. When using Firefox or Chrome, as …"/>
-        <meta property="article:published_time" content="2010-03-07" />
-            <meta property="article:section" content="Development" />
-            <meta property="article:tag" content="Ajax" />
-            <meta property="article:tag" content="Development" />
-            <meta property="article:tag" content="IE" />
-            <meta property="article:tag" content="JavaScript" />
-            <meta property="article:tag" content="LibraryHippo" />
-            <meta property="article:author" content="Blair Conrad" />
-
-
-
-    <!-- Bootstrap -->
-        <link rel="stylesheet" href="https://blairconrad.com/theme/css/bootstrap.min.css" type="text/css"/>
-    <link href="https://blairconrad.com/theme/css/font-awesome.min.css" rel="stylesheet">
-
-    <link href="https://blairconrad.com/theme/css/pygments/github.css" rel="stylesheet">
-    <link href="https://blairconrad.com/theme/tipuesearch/tipuesearch.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://blairconrad.com/theme/css/style.css" type="text/css"/>
-        <link href="https://blairconrad.com/theme/css/custom.css" rel="stylesheet">
-
-        <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad ATOM Feed"/>
-
-        <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate"
-              title="Blair Conrad Development ATOM Feed"/>
+  <meta charset="UTF-8" />
+  <title>IE binds to id attributes, or “How I learned to love var” | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/custom.css" />
+  <link rel="canonical" href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="IE binds to id attributes, or “How I learned to love var”" />
+  <meta name="twitter:title" content="IE binds to id attributes, or “How I learned to love var”" />
+  <meta property="og:url" content="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/" />
+  <meta property="og:description" content="I recently converted the LibraryHippo “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. When using Firefox or Chrome, as …" />
+  <meta name="twitter:description" content="I recently converted the LibraryHippo “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. When using Firefox or Chrome, as …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
-
-<div class="navbar navbar-default navbar-fixed-top" role="navigation">
-    <div class="container">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="https://blairconrad.com/" class="navbar-brand">
-Blair Conrad            </a>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
         </div>
-        <div class="collapse navbar-collapse navbar-ex1-collapse">
-            <ul class="nav navbar-nav">
-                    <li><a href="/Recipes">Recipes</a></li>
-                        <li class="active">
-                            <a href="https://blairconrad.com/category/development.html">Development</a>
-                        </li>
-                        <li >
-                            <a href="https://blairconrad.com/category/miscellany.html">Miscellany</a>
-                        </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-              <li><span>
-                <form class="navbar-search" action="/search.html">
-                  <input type="text" class="search-query" placeholder="Search" name="q" id="tipue_search_input" required>
-                </form></span>
-              </li>
-            </ul>
-        </div>
-        <!-- /.navbar-collapse -->
+      </div>
     </div>
-</div> <!-- /.navbar -->
-
-<!-- Banner -->
-<!-- End Banner -->
-
-<!-- Content Container -->
-<div class="container">
-    <div class="row">
-        <div class="col-lg-12">
-    <section id="content">
-        <article>
-            <header class="page-header">
-                <h1>
-                    <a href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/"
-                       rel="bookmark"
-                       title="Permalink to IE binds to id attributes, or “How I learned to love var”">
-                        IE binds to id attributes, or “How I learned to love var”
-                    </a>
-                </h1>
-            </header>
-            <div class="entry-content">
-                <div class="panel">
-                    <div class="panel-body">
-<footer class="post-info">
-    <span><i class="fa fa-calendar"></i><time datetime="2010-03-07T00:00:00-05:00">2010-03-07</time></span>
-    <span><i class="fa fa-folder"></i><a href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-
-
-<span><i class="fa fa-tags"></i>
-<a href="https://blairconrad.com/tag/ajax.html">Ajax</a>
-/
-<a href="https://blairconrad.com/tag/development.html">Development</a>
-/
-<a href="https://blairconrad.com/tag/ie.html">IE</a>
-/
-<a href="https://blairconrad.com/tag/javascript.html">JavaScript</a>
-/
-<a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-</span>
-    
-
-</footer><!-- /.post-info -->                    </div>
-                </div>
-                <p>I recently converted the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. </p>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article>
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2010/03/07/ie-binds-to-id-attributes-or-how-i-learned-to-love-var/" rel="bookmark" title="Permalink to IE binds to id attributes, or “How I learned to love var”">
+                  IE binds to id attributes, or “How I learned to love var”
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2010-03-07T00:00:00-05:00">2010-03-07</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/ajax.html">Ajax</a>
+                  /
+                  <a href="https://blairconrad.com/tag/development.html">Development</a>
+                  /
+                  <a href="https://blairconrad.com/tag/ie.html">IE</a>
+                  /
+                  <a href="https://blairconrad.com/tag/javascript.html">JavaScript</a>
+                  /
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>I recently converted the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> “Family Status” page to use AJAX to fetch individual card statuses, instead of having the server aggregate all the statuses and send the complete summary back to the user. It was fairly straightforward, with one notable exception – Internet Explorer. </p>
 
 <p><p><a href="https://blairconrad.com/images/working_ajax.png"><img title="AJAX LibraryHippo" height="191" width="244" alt="AJAX LibraryHippo" src="https://blairconrad.com/images/working_ajax_thumb.png" align="right" border="0" /></a>When using Firefox or Chrome, as soon as the page loaded, the user would see a list of cards that LibraryHippo was checking, complete with <a href="http://en.wikipedia.org/wiki/Throbber">throbbers</a>. As results came in, the matching progress line would disappear and other tables would fill in, holding the results – books that have to go back, holds ready for pickup, etc. I don't mind admitting that I was a little proud of my first foray into AJAXy web programming.</p> 
 <p>The morning after I finished the update, a co-worker signed up. Unlike everyone else I knew, she used Internet Explorer. She hit the summary page and everything stalled. The progress list was populated, the throbbers were throbbing, and… that’s it. They just kept going. Oh, and a little indicator woke up in the status bar, saying that there was an error on the page: “<strong>Object doesn’t support this property or method</strong>”. The reported line numbers didn’t match my source file, but via judicious application of <code>alerts()</code>s, I was able to isolate the problem to a callback that’s executed on a successful card check to update a span that holds a row count:</p>
@@ -159,38 +103,22 @@ Blair Conrad            </a>
 </code></pre>
 
 <p>Now everything is working on the new page, and I've every confidence that <code>var</code> will help keep it so.
-            </div>
-            <!-- /.entry-content -->
-        </article>
-    </section>
-
-        </div>
-    </div>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article>
+  </div>
 </div>
-<!-- End Content Container -->
-
-<footer>
-   <div class="container">
-      <hr>
-      <div class="row">
-         <div class="col-xs-10">&copy; 2017 Blair Conrad
-            &middot; Powered by <a href="https://github.com/getpelican/pelican-themes/tree/master/pelican-bootstrap3" target="_blank">pelican-bootstrap3</a>,
-            <a href="http://docs.getpelican.com/" target="_blank">Pelican</a>,
-            <a href="http://getbootstrap.com" target="_blank">Bootstrap</a>         </div>
-         <div class="col-xs-2"><p class="pull-right"><i class="fa fa-arrow-up"></i> <a href="#">Back to top</a></p></div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
       </div>
-   </div>
-</footer>
-<script src="https://blairconrad.com/theme/js/jquery.min.js"></script>
-
-<!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="https://blairconrad.com/theme/js/bootstrap.min.js"></script>
-
-<!-- Enable responsive features in IE8 with Respond.js (https://github.com/scottjehl/Respond) -->
-<script src="https://blairconrad.com/theme/js/respond.min.js"></script>
-
-
-
-
+    </div>
+  </div>
+</nav></footer>
 </body>
 </html>

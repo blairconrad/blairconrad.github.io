@@ -1,50 +1,26 @@
+{% set page_slug = 'recipes' %}
 {% extends 'base.html' %}
 
 {% block title %}
-{{ super() }}
+All Recipes · {{ super() }}
 {% endblock title %}
 
-{% block meta_tags_in_head %}
-{{ super() }}
-{% from '_includes/_defaults.html' import LANDING_PAGE_TITLE with context %}
-{% if LANDING_PAGE_TITLE  %}
-<meta property="og:title" content="{{ LANDING_PAGE_TITLE|e }}" />
-<meta name="twitter:title" content="{{ LANDING_PAGE_TITLE|e }}">
-{% else %}
-<meta property="og:title" content="{{ SITENAME|striptags|e }}" />
-<meta name="twitter:title" content="{{ SITENAME|striptags|e }}">
-{% endif %}
-<meta property="og:url" content="{{ SITEURL }}" />
-{% from '_includes/_defaults.html' import SITE_DESCRIPTION with context %}
-{% if SITE_DESCRIPTION %}
-<meta property="og:description" content="{{SITE_DESCRIPTION|e}}" />
-<meta name="twitter:description" content="{{SITE_DESCRIPTION|e}}">
-{% endif %}
-<meta property="og:site_name" content="{{ SITENAME|striptags|e }}" />
-<meta property="og:article:author" content="{{ AUTHOR }}" />
-{% from '_includes/_defaults.html' import FEATURED_IMAGE with context %}
-{% if FEATURED_IMAGE %}
-<meta property="og:image" content="{{FEATURED_IMAGE}}" />
-<meta name="twitter:image" content="{{FEATURED_IMAGE}}">
-{% endif %}
-{% endblock meta_tags_in_head %}
+{% block main %}
+<div class="m-container">
+  <div class="m-row">
+    <div>
+      <article>
+        <header>
+          <h1>All Recipes</h1>
+        </header>
 
-{% block content %}
-<div class="row-fluid">
-    {% set css_class = 'span8 offset2' %}
-    <div class="row-fluid">
-        <div class="{{css_class}}">
-            <header>
-                <h1 id="all-recipes">All Recipes</h1>
-            </header>
-            <div>
-                <ul>
-                    {% for page in pages | selectattr('template', '==', 'recipe') | sort(attribute='title') %}
-                    <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</li>
-                    {% endfor %}
-                </ul>
-            </div>
-        </div>
+        <ul>
+            {% for page in pages | selectattr('template', '==', 'recipe') | sort(attribute='title') %}
+            <li><a href="{{ SITEURL }}/{{ page.url }}">{{ page.title }}</li>
+            {% endfor %}
+        </ul>
+      </article>
     </div>
+  </div>
 </div>
-{% endblock content %}
+{% endblock main %}

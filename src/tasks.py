@@ -94,6 +94,19 @@ def preview(c):
 @task
 def livereload(c):
     """Automatically reload browser tab upon file modification."""
+
+    # A custom watcher to workaround a bug in the livereload glob detection
+    # From https://github.com/lepture/python-livereload/issues/156
+    import glob
+    from livereload.watcher import Watcher
+
+    class CustomWatcher(Watcher):
+        def is_glob_changed(self, path, ignore=None):
+            for f in glob.glob(path, recursive=True):
+                if self.is_file_changed(f, ignore):
+                    return True
+            return False
+
     import asyncio
 
     asyncio.set_event_loop_policy(
@@ -102,7 +115,7 @@ def livereload(c):
     from livereload import Server
 
     build(c)
-    server = Server()
+    server = Server(watcher=CustomWatcher())
     # Watch the base settings file
     server.watch(CONFIG["settings_base"], lambda: build(c))
     # Watch content source files
