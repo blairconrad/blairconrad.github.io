@@ -29,4 +29,5 @@ DELETE_OUTPUT_DIRECTORY = True
 # GOOGLE_ANALYTICS = ""
 
 M_CSS_FILES.remove("/static/m-dark.css")
-M_CSS_FILES.insert(0, "/static/m-dark.compiled.css")
+M_CSS_FILES.remove("/static/custom.css")
+M_CSS_FILES.append("/static/site.css")
