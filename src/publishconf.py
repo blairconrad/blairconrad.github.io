@@ -12,7 +12,7 @@ sys.path.append(os.curdir)
 from pelicanconf import *
 
 OUTPUT_PATH = ".."
-OUTPUT_RETENTION = [".git", ".gitignore", ".nojekyll", "src", "README.md"]
+OUTPUT_RETENTION = [".git", ".gitignore", ".gitmodules", ".nojekyll", "src", "README.md"]
 
 # If your site is available via HTTPS, make sure SITEURL begins with https://
 SITEURL = "https://blairconrad.com"
@@ -29,4 +29,5 @@ DELETE_OUTPUT_DIRECTORY = True
 # GOOGLE_ANALYTICS = ""
 
 M_CSS_FILES.remove("/static/m-dark.css")
-M_CSS_FILES.insert(0, "/static/m-dark.compiled.css")
+M_CSS_FILES.remove("/static/custom.css")
+M_CSS_FILES.append("/static/site.css")
