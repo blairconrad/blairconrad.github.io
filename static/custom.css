@@ -37,6 +37,10 @@ code {
     border: 1px dotted var(--line-color);
 }
 
+pre > code {
+    border: inherit;
+}
+
 a {
     border-bottom: 1px dashed var(--link-color);
     text-decoration: none;

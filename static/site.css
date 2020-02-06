@@ -2599,6 +2599,9 @@ code {
     background-color: inherit;
     border: 1px dotted #405363;
 }
+pre > code {
+    border: inherit;
+}
 a {
     border-bottom: 1px dashed #5b9dd9;
     text-decoration: none;
