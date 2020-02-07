@@ -2616,3 +2616,14 @@ article section > h5 a,
 article section > h6 a {
     border-bottom: none;
 }
+body {
+    font-family: 'Open Sans', sans-serif;
+}
+pre, code {
+    font-family: 'Fira Code', monospace;
+}
+h1, h2, h3, h4, h5, h6 ,
+figure.m-figure figcaption, .m-code-figure figcaption, .m-console-figure figcaption,
+body > header > nav #m-navbar-brand, body > header > nav a#m-navbar-show, body > header > nav a#m-navbar-hide {
+    font-weight: normal;
+}
