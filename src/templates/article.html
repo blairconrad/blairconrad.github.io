@@ -112,7 +112,7 @@
     </footer>
   </article>
   {% else %}
-    <article>
+    <article class="m-col-m-12 m-nopadb">
       {% macro header() %}{% include "article_header.html" %}{% endmacro %}
       {{ header()|rtrim|indent(6) }}
       <div class="m-clearfix-l"></div>
@@ -131,6 +131,6 @@
         {% macro footer() %}{% include "article_footer.html" %}{% endmacro %}
         {{ footer()|rtrim|indent(8) }}
       </footer>
-    </article>
+    </article">
     {% endif %}
 {% endblock %}
