@@ -45,6 +45,7 @@ PAGINATION_PATTERNS = (
     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
 )
 
+WITH_FUTURE_DATES = False
 DISPLAY_PAGES_ON_MENU = False
 
 STATIC_PATHS = ["images", "Recipes", "extra"]
