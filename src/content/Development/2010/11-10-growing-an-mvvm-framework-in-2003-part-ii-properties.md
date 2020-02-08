@@ -8,11 +8,11 @@ tags: Development, Frameworks, MVVM
 
 <p>This is second post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.</p>
 
-* <a href="{filename}2010-10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers.md">Part I&mdash;Event Handlers</a>
+* <a href="{filename}../2010\/10-29-growing-an-mvvm-framework-in-2003-part-i-event-handlers.md">Part I&mdash;Event Handlers</a>
 * Part II&mdash;Properties
-* <a href="{filename}2010-11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux.md">Part III &mdash;Properties Redux
-* <a href="{filename}2010-11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests.md">Part IV&mdash;Unit Tests</a>
-* <a href="{filename}2011-02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets.md">Part V&mdash;Reflections and Regrets</a>
+* <a href="{filename}../2010\/11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux.md">Part III &mdash;Properties Redux
+* <a href="{filename}../2010\/11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests.md">Part IV&mdash;Unit Tests</a>
+* <a href="{filename}../2011\/02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets.md">Part V&mdash;Reflections and Regrets</a>
 
 Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code repository</a>.
 

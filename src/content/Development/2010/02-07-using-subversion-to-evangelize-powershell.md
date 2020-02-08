@@ -36,7 +36,7 @@ After running setup_powershell.bat, all a user has to do is start PowerShell and
 
 <h4 id="windowspowershell">Inside the WindowsPowerShell Directory</h4>
 The first item of note inside the WindowsPowerShellDirectory is the <b>Includes</b> directory, which is populated with `.ps1` files. Each `.ps1` file contains functions to be loaded into memory and made available for the user's session. 
-At startup, each of these .ps1 files are each dot-sourced (using the <a href="{filename}2010-01-29-expand-your-scope-you-can-dot-source-more-than-just-files.md">dot-source from a function trick I talked about last time</a>).
+At startup, each of these .ps1 files are each dot-sourced (using the <a href="{filename}../2010\/01-29-expand-your-scope-you-can-dot-source-more-than-just-files.md">dot-source from a function trick I talked about last time</a>).
 
 Next, the <b>Scripts</b> directory, which is added to the user's <b>$env:PATH</b>. Each of the .ps1 files in the directory contains a standalone script that a user might choose to execute as they work. We have a number of Day&nbsp;Job-specific scripts as well as some Subversion helpers and two meta-scripts, designed to make it easier to work with the PowerShell profile.
 

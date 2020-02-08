@@ -36,7 +36,7 @@ SLUG_REGEX_SUBSTITUTIONS = [
     (r"[-\s]+", "-"),  # reduce multiple whitespace or '-' to single '-'
 ]
 
-PATH_METADATA = r"(?P<category>[\w ]+)[\\/](?P<date>\d{4}-\d{2}-\d{2}).*"
+PATH_METADATA = r"(?P<category>[\w ]+)[\\/](?P<date>\d{4}[-/]\d{2}[-/]\d{2}).*"
 
 DEFAULT_PAGINATION = 10
 DEFAULT_ORPHANS = 3
