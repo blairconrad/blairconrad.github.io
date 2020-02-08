@@ -72,7 +72,7 @@ title: Salted Banoffee Tart
     <td>2 T rum</td>
   </tr>
   <tr>
-    <td>1 t  pure vanilla extract</td>
+    <td>1 t pure vanilla extract</td>
   </tr>
   <tr>
     <td>prepared <b>crust</b>, from above</td>
@@ -96,7 +96,7 @@ title: Salted Banoffee Tart
     <td rowspan="2" class="righthide">&nbsp;</td>
   </tr>
   <tr>
-    <td>&frac12;  t  pure vanilla extract</td>
+    <td>&frac12; t pure vanilla extract</td>
   </tr>
   <tr>
     <td>Toasted sliced almonds or chocolate shavings, for garnish</td>
@@ -107,7 +107,7 @@ title: Salted Banoffee Tart
 <h2>Make the Crust</h2>
 <ol>
   <li>Combine flour, sugar, and salt in a large bowl.</li>
-  <li>Cut in  butter until mixture has a rough, crumbly texture</li>
+  <li>Cut in butter until mixture has a rough, crumbly texture</li>
   <li>Whisk egg yolk, vinegar and 2 T water together</li>
   <li>Pour liquid into flour and combine.</li>
   <li>If dough does not come together into a ball, add additional 1 T
@@ -150,7 +150,7 @@ title: Salted Banoffee Tart
   <li>Toss sliced bananas gently with rum and 1 t vanilla.</li>
   <li>Spread bananas in a single layer over cooled tart shell.</li>
   <li>Spread toffee filling over bananas</li>
-  <li>Sprinkle toffee with 1 t  fleur de sel.</li>
+  <li>Sprinkle toffee with 1 t fleur de sel.</li>
   <li> Whip cream to medium peaks</li>
   <li>Stir in sugar and remaining &frac12; t vanilla.</li>
   <li>Spread cream overtop toffee filling</li>
@@ -160,8 +160,9 @@ title: Salted Banoffee Tart
 
 
 <p>Tart can be prepared up to a day in advance, and keeps for 2 days,
-  refrigerated. Although it kind of slumps once cut.</p>
-<p>Makes about 1 tart.</p>
+refrigerated. Although it kind of slumps once cut.</p> <p>Makes about 1
+tart.</p>
+
 <p class="confession">Shamelessly stolen from <a
-                                                 href="http://www.lcbo.com/lcbo-ear/RecipeController?language=EN&recipeType=1&action=recipe&recipeID=4404">LCBO's
-    Food &amp; Drink</a></p>
+href="https://www.lcbo.com/lcbo/recipe/salted-banoffee-tart/200906073#.Xj4H-b5KiHt">LCBO's
+Food &amp; Drink</a></p>
