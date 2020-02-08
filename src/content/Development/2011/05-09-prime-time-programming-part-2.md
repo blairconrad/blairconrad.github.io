@@ -4,7 +4,7 @@ title: Prime Time Programming, Part 2
 comments: true
 tags: Development, Primes, Profiling, ProjectEuler, Python
 ---
-<a href="{filename}2011-04-25-primes-part-1.md">Last time</a> I presented a truly horrible prime number generator I was using for <a href="http://projecteuler.net/">Project Euler</a> problems. Then I presented a revamped generator that used trial division. By adding various refinements to the generator, we saw the time required to generate primes less than 10<sup>7</sup> shrink from hours to 123 seconds. Today I'll describe a different approach that's even more effective.
+<a href="{filename}../2011\/04-25-primes-part-1.md">Last time</a> I presented a truly horrible prime number generator I was using for <a href="http://projecteuler.net/">Project Euler</a> problems. Then I presented a revamped generator that used trial division. By adding various refinements to the generator, we saw the time required to generate primes less than 10<sup>7</sup> shrink from hours to 123 seconds. Today I'll describe a different approach that's even more effective.
 
 <!--more-->
 

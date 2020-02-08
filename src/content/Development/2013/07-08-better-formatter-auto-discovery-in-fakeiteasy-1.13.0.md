@@ -6,7 +6,7 @@ tags: , .NET, FakeItEasy, Nancy
 ---
 
 A few weeks ago, I wrote about [the problems that FakeItEasy's
-assembly scanning <b>was causing</b>]({filename}2013-06-17-fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience.md) while it was looking for user-defined extensions. To recap,
+assembly scanning <b>was causing</b>]({filename}../2013/06-17-fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience.md) while it was looking for user-defined extensions. To recap,
 FakeItEasy was scanning all assemblies in the AppDomain and the
 working directory, looking for types that implemented
 `IArgumentValueFormatter`, `IDummyDefinition`, or

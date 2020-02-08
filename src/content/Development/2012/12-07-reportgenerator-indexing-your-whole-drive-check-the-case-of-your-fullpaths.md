@@ -12,7 +12,7 @@ anything newer, you should be good.]</em></p>
 
 Recently I was working on a project at the Day Job, using OpenCover
 1.7.1.0 and ReportGenerator 4.0.804 to report my test coverage, [as is
-my wont]({filename}2011-12-15-best-all-around-net-coverage-tool-opencover.md),
+my wont]({filename}../2011/12-15-best-all-around-net-coverage-tool-opencover.md),
 when the report generation started taking figuratively
 *forever*. <!--more--> Investigating, I saw something like
 

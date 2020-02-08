@@ -36,7 +36,7 @@ SLUG_REGEX_SUBSTITUTIONS = [
     (r"[-\s]+", "-"),  # reduce multiple whitespace or '-' to single '-'
 ]
 
-PATH_METADATA = r"(?P<category>[\w ]+)[\\/](?P<date>\d{4}-\d{2}-\d{2}).*"
+PATH_METADATA = r"(?P<category>[\w ]+)[\\/](?P<date>\d{4}[-/]\d{2}[-/]\d{2}).*"
 
 DEFAULT_PAGINATION = 10
 DEFAULT_ORPHANS = 3
@@ -45,6 +45,7 @@ PAGINATION_PATTERNS = (
     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
 )
 
+WITH_FUTURE_DATES = False
 DISPLAY_PAGES_ON_MENU = False
 
 STATIC_PATHS = ["images", "Recipes", "extra"]
