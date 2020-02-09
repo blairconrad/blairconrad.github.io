@@ -27,6 +27,8 @@ AUTHOR_FEED_RSS = None
 SLUGIFY_SOURCE = "title"
 ARTICLE_URL = "{date:%Y}/{date:%m}/{date:%d}/{slug}/"
 ARTICLE_SAVE_AS = "{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
+DRAFT_SAVE_AS = "drafts/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
+
 PAGE_URL = "pages/{slug}/"
 PAGE_SAVE_AS = "pages/{slug}/index.html"
 SLUG_REGEX_SUBSTITUTIONS = [
@@ -45,7 +47,6 @@ PAGINATION_PATTERNS = (
     (2, "{base_name}/page/{number}/", "{base_name}/page/{number}/index.html"),
 )
 
-WITH_FUTURE_DATES = False
 DISPLAY_PAGES_ON_MENU = False
 
 STATIC_PATHS = ["images", "Recipes", "extra"]
