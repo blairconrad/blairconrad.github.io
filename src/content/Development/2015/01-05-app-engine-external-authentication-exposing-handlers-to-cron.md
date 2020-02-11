@@ -12,20 +12,22 @@ about what happened next.
 
 LibraryHippo has a set of handlers that are accessed primarily via the
 [Cron][cron] and [Task Queue][task] mechanisms, but every once in a
-while need to be triggered ad hoc by a human administrator. Up 'til
+while need to be triggered ad hoc by a human administrator. Until
 now, these request handlers were protected from the rabble by
 [requiring administrator status via the application's app.yaml][requireadmin]. Unfortunately,
 externally-authenticated users have no special standing within App
 Engine, so this restriction had to be relaxed.
 
-My first thought was to remove the restriction from app.yaml and check
+My first thought was to remove the restriction from `app.yaml` and check
 for access in the handler like so:
 
-<pre><code class="python">if (users.is_current_user_admin() or
+```python
+if (users.is_current_user_admin() or
     self.is_external_user_admin()) # application code that understands the logged-in users
     # do stuff
 else:
-    self.abort(403)</code></pre>
+    self.abort(403)
+```
 
 Unfortunately, this fails miserably. When the handler is executed by a
 task or cron job, `users.is_current_user_admin` returns `False`.
@@ -45,17 +47,20 @@ explains how X-AppEngine-Cron is protected against spoofing, but I'm
 still uneasy.
 
 I ended up taking a different approach. I added two routes for the
-affected handlers. One route is in the old "admin" subdirectory
+affected handlers. One route is in the old `admin` subdirectory
 (subpath?) and the other in a new one for system commands,
-"system". The latter is secured in the app.yaml, just as before. Thus
+`system`. The latter is secured in the app.yaml, just as before. Thus
 I have:
 
-<pre><code class="yaml"># in app.yaml
+```yaml
+# in app.yaml
 - url: /system/.*
   script: libraryhippo.application
-  login: admin</code></pre>
+  login: admin
+```
 
-<pre><code class="python"># in the application's Python source
+```python
+# in the application's Python source
 handlers = [
     # other handlers
     ('/admin/notify/(.*)$', Notify),
@@ -68,10 +73,11 @@ handlers = [
         not request_path.startswith('/admin/'))
         # do stuff
     else:
-        self.abort(403)</code></pre>
+        self.abort(403)
+```
 
 Thus the handler is executed if the user has admin rights or the URL
-isn't locked down by virtue of being below '/admin/'. The '/system/'
+isn't locked down by virtue of being below `/admin/`. The `/system/`
 URLs are all assumed to be protected by the app.yaml setting.
 
 Perhaps this is technically no better than checking a header in the
