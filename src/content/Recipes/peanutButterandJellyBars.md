@@ -58,7 +58,7 @@ title: Peanut Butter and Jelly Bars
 1. Mix in peanut butter.
 1. Mix in eggs and vanilla.
 1. Mix flour mixture into peanut butter mixture until just incorporated.
-1. Spread &#x2154; of the dough into a greased and floured 9&Prime;&times13&Prime; pan.
+1. Spread &#x2154; of the dough into a greased and floured 9&Prime;&times;13&Prime; pan.
 1. Spread jam over the dough.
 1. Sprinkle small pieces of dough over jam, leaving some jam exposed.
 1. Sprinkle with peanuts.
