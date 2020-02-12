@@ -294,13 +294,14 @@ factor when scheduling jobs.
 Progress Report
 ===============
 
-Two of eight requirements have been met.
+Two of nine requirements have been met.
 
 .. csv-table::
     :class: m-table
 
     :label-success:`done`, web app hosting,
     :label-primary:`next`   , scheduled jobs,  :label-warning:`may only run in UTC`
+       , scraping library websites on users' behalf,
        , small persistent datastore,
        , social authentication,
     :label-success:`done`, sending e-mail,
