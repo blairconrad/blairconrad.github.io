@@ -1,4 +1,4 @@
-      {% if article.series %}
+      {% if article.series and article.series.name %}
       <aside class="m-block m-default">
         {% set text = SERIES_TEXT|default('Part %(index)s of the %(name)s series') %}
         <h3>{{ text|format(index=article.series.index, name=article.series.name) }}:</h3>
