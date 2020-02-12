@@ -42,7 +42,7 @@ pre > code {
 }
 
 a {
-    border-bottom: 1px dashed var(--link-color);
+    border-bottom: 1px solid #5b9dd980;
     text-decoration: none;
 }
 
