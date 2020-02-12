@@ -1,0 +1,276 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>Running Scheduled Tasks on Heroku | Blair Conrad</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/drafts/running-scheduled-tasks-on-heroku.html" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Running Scheduled Tasks on Heroku" />
+  <meta name="twitter:title" content="Running Scheduled Tasks on Heroku" />
+  <meta property="og:url" content="https://blairconrad.com/drafts/running-scheduled-tasks-on-heroku.html" />
+  <meta property="og:description" content="Having established that a Flask app running on Heroku can send e-mail, I turn my attention to having LibraryHippo do so periodically. The approach will be to change the e-mail-sending to be something that can more easily be triggered from the outside, and then triggering it from from time to …" />
+  <meta name="twitter:description" content="Having established that a Flask app running on Heroku can send e-mail, I turn my attention to having LibraryHippo do so periodically. The approach will be to change the e-mail-sending to be something that can more easily be triggered from the outside, and then triggering it from from time to …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/drafts/running-scheduled-tasks-on-heroku.html" rel="bookmark" title="Permalink to Running Scheduled Tasks on Heroku">
+                  Running Scheduled Tasks on Heroku
+                  <span class="m-label m-dim">draft</span>
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-03-19T00:00:00-04:00">2020-03-19</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                  /
+                  <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                  /
+                  <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                  /
+                  <a href="https://blairconrad.com/tag/cron.html">cron</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>Having established that a Flask app running on Heroku can send e-mail, I turn my
+attention to having LibraryHippo do so periodically. The approach will be to
+change the e-mail-sending to be something that can more easily be triggered from
+the outside, and then triggering it from from time to time.</p>
+<section id="making-a-custom-flask-command">
+<h2>Making a Custom Flask command</h2>
+<p>On Google App Engine, every action had to be run via the web interface, so they
+had to be secured by special credentials, which <a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/">could be a little tricky</a>.
+Being able to write the tasks essentially as scripts under Flask/Heroku removes
+a lot of complexity. These scripts are what Flask calls
+<a href="https://flask.palletsprojects.com/en/1.1.x/cli/#custom-commands">custom commands</a>;
+they can be invoked from outside the web application, but with all the context
+(such as the e-mail configuration set up last time) of the the full application.</p>
+<p>First, I created new <code>app/cli.py</code> file to hold the command:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kn">import</span> <span class="nn">time</span>
+
+<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">mail</span>
+<span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="kn">from</span> <span class="nn">flask_mail</span> <span class="kn">import</span> <span class="n">Message</span>
+
+
+<span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
+    <span class="nd">@app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;notify-all&quot;</span><span class="p">)</span>
+    <span class="k">def</span> <span class="nf">notify_all</span><span class="p">():</span>
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
+            <span class="s2">&quot;LibraryHippo starting notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair@blairconrad.com&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;starting notifications at </span><span class="si">{now}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{msg.body}</span><span class="s2">.&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
+
+        <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">300</span><span class="p">)</span>
+
+        <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
+
+        <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
+            <span class="s2">&quot;LibraryHippo ending notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair@blairconrad.com&quot;</span><span class="p">]</span>
+        <span class="p">)</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ending notifications at </span><span class="si">{now}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{msg.body}</span><span class="s2">.&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
+        <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></pre>
+<figcaption>app/cli.py</figcaption>
+</figure>
+<p>This was taken from the old <code>sendmail</code> web route, which I removed completely, and then updated to</p>
+<ol>
+<li>send two e-mails, just to make sure we could, and</li>
+<li>sleep for 5 minutes between e-mails, to verify that Heroku won't kill a longer-running task</li>
+</ol>
+<p>I called the task <code>notify-all</code>, since I'm simulating that action in the
+existing LibaryHippo: notifying all families of their library card status. The
+command can be invoked by running</p>
+<pre class="m-console m-code"><span class="n">flask</span> <span class="n">notify-all</span></pre>
+<p>and it performs exactly how you'd hope.</p>
+<p>Once the new version of the application is deployed using <code>inv deploy</code>, it's
+even possible to run the task <em>on a Heroku dyno</em> via</p>
+<figure class="m-console-figure">
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">run</span> <span class="n">flask</span> <span class="n">notify-all</span></pre>
+<pre class="m-nopad m-code">Running flask notify-all on ⬢ libraryhippo... up, run.2562 (Free)
+starting notifications at 2020-02-10T11:56:25.840194
+ending notifications at 2020-02-10T12:01:26.234036</pre>
+</figure>
+</section>
+<section id="scheduling-the-task">
+<h2>Scheduling the Task</h2>
+<p>There are a number of options for scheduling repeated tasks on Heroku, but a
+very simple (and free!) one is the
+<a href="https://devcenter.heroku.com/articles/scheduler">Heroku Scheduler</a> add-on. It
+hasn't the flexibility of other schedulers, supporting only daily, hourly, or
+10-minutely schedules. Still, LibraryHippo just needs to send e-mails once per
+day and check users' cards about that often, so it should do.</p>
+<p>Adding the scheduler is very easy:</p>
+<figure class="m-console-figure">
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">create</span> <span class="n">scheduler</span><span class="err">:</span><span class="n">standard</span></pre>
+<pre class="m-nopad m-code">Creating scheduler:standard on ⬢ libraryhippo... free
+To manage scheduled jobs run:
+heroku addons:open scheduler
+
+Created scheduler-curved-17868
+Use heroku addons:docs scheduler to view documentation</pre>
+</figure>
+<p>A short search didn't reveal a way to affect the schedule from the console, but
+it was easy enough to open the web-based configuration.</p>
+<figure class="m-console-figure">
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
+<img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/drafts/2020/03/19/running-scheduled-tasks-on-heroku/empty-scheduler-config.png" />
+</figure>
+<p>Adding a job is as simple as choosing &quot;Create job&quot;, selecting a time to run, and
+typing the command to execute, which in this case was <code>flask notify-all</code>.
+I chose to execute daily at 11:30 PM because as I typed, it was 11:26 PM UTC.</p>
+<figure class="m-figure">
+<img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/drafts/2020/03/19/running-scheduled-tasks-on-heroku/configure-job-for-2330.png" />
+<figcaption>Configuring a job to run daily at 11:30 PM</figcaption>
+</figure>
+<p>Now there's nothing to do but wait. In the meantime I opened up the LibraryHippo
+application's log view (at <a href="https://dashboard.heroku.com/apps/libraryhippo/logs">https://dashboard.heroku.com/apps/libraryhippo/logs</a>)
+and watched.</p>
+<p>Shortly after 6:30 PM local time, the log started updating, and I received my
+first e-mail, with further updates and a second e-mail about 5 minutes later.
+The log looked like this:</p>
+<figure class="m-figure">
+<img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/drafts/2020/03/19/running-scheduled-tasks-on-heroku/heroku-log.png" />
+<figcaption>Heroku log of scheduled e-mail task run</figcaption>
+</figure>
+<p>Note that there are some earlier entries from the manually-invoked test run I'd
+done at 2020-02-10T12:01:29, and also from the web worker that had been active
+from some earlier time and was shut down due to inactivity at 12:26:17.</p>
+<p>At 23:30:25, the <code>flask notify-all</code> worker starts up, running achieving an
+&quot;up&quot; state before logging (via the <code>print</code> statements in the code) the two
+e-mail messages that it sent, and finally transitioning to a &quot;complete&quot; state
+and shutting down at 23:35:28.</p>
+<p>And the e-mails arrived right on schedule:</p>
+<figure class="m-figure">
+<img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/drafts/2020/03/19/running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" />
+<figcaption>Scheduled e-mails arriving over 5 minutes</figcaption>
+</figure>
+</section>
+<section id="a-note-on-time-zones">
+<h2>A Note on Time Zones</h2>
+<p>As the documentation states, Heroku Scheduler jobs use a clock in the
+<a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time">UTC time zone</a>, but
+LibrayHippo's customers live in the
+<a href="https://en.wikipedia.org/wiki/Eastern_Time_Zone">Eastern Time Zone</a> (of the
+Americas), which is either 5 or 4 hours behind UTC, depending on whether
+daylight saving time is in effect. When I ran my test, I wanted the e-mails to
+be sent near 18:30 in my local time zone, and daylight saving time was not in
+effect, so I scheduled the job for 23:30 UTC.</p>
+<p>Configuring the jobs with an offset is not particularly onerous, but it does
+mean that once daylight saving time takes effect, users will see their e-mails
+start arriving an hour later in the day. This is annoying, but can be worked
+around in a variety of ways. I'll probably just configure the notification job
+to run at 10:00 UTC, so e-mails arrive near 5:00 local time in the winter and
+6:00 in the summer.</p>
+<p>Some alternatives to having the e-mail delivery time shift with the seasons are
+to pay for a more expensive and sophisticated scheduler, or to further
+workaround by having 2 scheduled jobs. One could run at 10:00 UTC and one at
+11:00 UTC. They could each check whether daylight saving time were active in the
+Eastern Time Zone, ensuring that only the proper job ran. But I'll leave that
+for later. Or never.</p>
+</section>
+<section id="progress">
+<h2>Progress</h2>
+<p>Three of nine requirements have been met.</p>
+<table class="m-table">
+<tbody>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>web app hosting</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>scheduled jobs</td>
+<td>run in UTC, requiring job start times be offset from local time</td>
+</tr>
+<tr><td><span class="m-label m-primary">next</span></td>
+<td>scraping library websites on users' behalf</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>small persistent datastore</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>social authentication</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>sending e-mail</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>nearly free</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>job queues</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>custom domain name</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

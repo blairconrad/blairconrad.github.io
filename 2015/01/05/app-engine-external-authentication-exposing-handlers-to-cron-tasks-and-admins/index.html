@@ -64,18 +64,20 @@ decided to update <a href="/tags/#LibraryHippo-ref">LibraryHippo</a> to authenti
 about what happened next.</p>
 <p>LibraryHippo has a set of handlers that are accessed primarily via the
 <a href="https://cloud.google.com/appengine/docs/python/config/cron">Cron</a> and <a href="https://cloud.google.com/appengine/docs/python/taskqueue/">Task Queue</a> mechanisms, but every once in a
-while need to be triggered ad hoc by a human administrator. Up 'til
+while need to be triggered ad hoc by a human administrator. Until
 now, these request handlers were protected from the rabble by
 <a href="https://cloud.google.com/appengine/docs/python/config/appconfig#Python_app_yaml_Requiring_login_or_administrator_status">requiring administrator status via the application's app.yaml</a>. Unfortunately,
 externally-authenticated users have no special standing within App
 Engine, so this restriction had to be relaxed.</p>
-<p>My first thought was to remove the restriction from app.yaml and check
+<p>My first thought was to remove the restriction from <code>app.yaml</code> and check
 for access in the handler like so:</p>
-<pre><code class="python">if (users.is_current_user_admin() or
-    self.is_external_user_admin()) # application code that understands the logged-in users
-    # do stuff
-else:
-    self.abort(403)</code></pre>
+<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">is_current_user_admin</span><span class="p">()</span> <span class="ow">or</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">is_external_user_admin</span><span class="p">())</span> <span class="c1"># application code that understands the logged-in users</span>
+    <span class="c1"># do stuff</span>
+<span class="k">else</span><span class="p">:</span>
+    <span class="bp">self</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
+</pre></div>
+
 
 <p>Unfortunately, this fails miserably. When the handler is executed by a
 task or cron job, <code>users.is_current_user_admin</code> returns <code>False</code>.</p>
@@ -92,32 +94,36 @@ is now recommending checking <code>X-AppEngine-Cron</code> when
 explains how X-AppEngine-Cron is protected against spoofing, but I'm
 still uneasy.</p>
 <p>I ended up taking a different approach. I added two routes for the
-affected handlers. One route is in the old "admin" subdirectory
+affected handlers. One route is in the old <code>admin</code> subdirectory
 (subpath?) and the other in a new one for system commands,
-"system". The latter is secured in the app.yaml, just as before. Thus
+<code>system</code>. The latter is secured in the app.yaml, just as before. Thus
 I have:</p>
-<pre><code class="yaml"># in app.yaml
-- url: /system/.*
-  script: libraryhippo.application
-  login: admin</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># in app.yaml</span>
+<span class="p p-Indicator">-</span> <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/system/.*</span>
+  <span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libraryhippo.application</span>
+  <span class="nt">login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
+</pre></div>
 
-<pre><code class="python"># in the application's Python source
-handlers = [
-    # other handlers
-    ('/admin/notify/(.*)$', Notify),
-    ('/system/notify/(.*)$', Notify),
-    ]
 
-# and later, in the Notify handler
-    request_path = urlparse.urlsplit(self.request.url).path
-    if (self.is_external_user_admin() or
-        not request_path.startswith('/admin/'))
-        # do stuff
-    else:
-        self.abort(403)</code></pre>
+<div class="highlight"><pre><span></span><span class="c1"># in the application&#39;s Python source</span>
+<span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="c1"># other handlers</span>
+    <span class="p">(</span><span class="s1">&#39;/admin/notify/(.*)$&#39;</span><span class="p">,</span> <span class="n">Notify</span><span class="p">),</span>
+    <span class="p">(</span><span class="s1">&#39;/system/notify/(.*)$&#39;</span><span class="p">,</span> <span class="n">Notify</span><span class="p">),</span>
+    <span class="p">]</span>
+
+<span class="c1"># and later, in the Notify handler</span>
+    <span class="n">request_path</span> <span class="o">=</span> <span class="n">urlparse</span><span class="o">.</span><span class="n">urlsplit</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">request</span><span class="o">.</span><span class="n">url</span><span class="p">)</span><span class="o">.</span><span class="n">path</span>
+    <span class="k">if</span> <span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">is_external_user_admin</span><span class="p">()</span> <span class="ow">or</span>
+        <span class="ow">not</span> <span class="n">request_path</span><span class="o">.</span><span class="n">startswith</span><span class="p">(</span><span class="s1">&#39;/admin/&#39;</span><span class="p">))</span>
+        <span class="c1"># do stuff</span>
+    <span class="k">else</span><span class="p">:</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
+</pre></div>
+
 
 <p>Thus the handler is executed if the user has admin rights or the URL
-isn't locked down by virtue of being below '/admin/'. The '/system/'
+isn't locked down by virtue of being below <code>/admin/</code>. The <code>/system/</code>
 URLs are all assumed to be protected by the app.yaml setting.</p>
 <p>Perhaps this is technically no better than checking a header in the
 request, but it works for me, at least until I see what happens with
