@@ -49,6 +49,7 @@ the platform that meets my needs, which are:
 1. sending e-mail
 1. free, or nearly so; as I said, this is a hobby project, and I'm not willing
    to dump several tens of dollars into it every month
+1. **Update 2020-02-11:** scraping library websites on users' behalf
 
 I've other requirements, but these aren't likely to be deal-breakers:
 

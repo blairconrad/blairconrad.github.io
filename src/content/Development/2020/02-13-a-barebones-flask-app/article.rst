@@ -10,12 +10,13 @@ order of importance and risk:
 
 1. web app hosting
 2. scheduled jobs
-3. a small (perhaps a few MB) persistent datastore
-4. authentication via social accounts
-5. sending e-mail
-6. free, or nearly so; as I said, this is a hobby project, and I'm not willing to dump several tens of dollars into it every month
-7. job queues
-8. custom domain name
+3. scraping library websites on users' behalf
+4. a small (perhaps a few MB) persistent datastore
+5. authentication via social accounts
+6. sending e-mail
+7. free, or nearly so; as I said, this is a hobby project, and I'm not willing to dump several tens of dollars into it every month
+8. job queues
+9. custom domain name
 
 Today I'll address the first of those: web app hosting. It's not particularly
 risky, but it's very important. I'll start with an essentially empty repository:
