@@ -291,8 +291,8 @@ time that GMail said it receive the message. I'm sending from UTC-5, and the
 Heroku server appears to be in UTC. It's not a problem for now, but may become a
 factor when scheduling jobs.
 
-Progress Report
-===============
+Progress
+========
 
 Two of nine requirements have been met.
 
