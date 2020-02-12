@@ -2603,7 +2603,7 @@ pre > code {
     border: inherit;
 }
 a {
-    border-bottom: 1px dashed #5b9dd9;
+    border-bottom: 1px solid #5b9dd980;
     text-decoration: none;
 }
 nav a,
