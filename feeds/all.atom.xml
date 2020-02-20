@@ -1,5 +1,193 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-02-06T00:00:00-05:00</updated><entry><title>LibraryHippo 2020 - Motivation and Plan</title><link href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="alternate"></link><published>2020-02-06T00:00:00-05:00</published><updated>2020-02-06T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-06:/2020/02/06/libraryhippo-2020-motivation-and-plan/</id><summary type="html">&lt;p&gt;For some years, I've run a hobby project, open to all, but mostly used by a few
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-02-20T00:00:00-05:00</updated><entry><title>A Bare-bones Flask App</title><link href="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" rel="alternate"></link><published>2020-02-20T00:00:00-05:00</published><updated>2020-02-20T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-20:/2020/02/20/a-bare-bones-flask-app/</id><summary type="html">&lt;p&gt;Last time I laid out the uncertainties that have to be explore before I want to
+try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
+order of importance and risk:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;web app hosting&lt;/li&gt;
+&lt;li&gt;scheduled jobs&lt;/li&gt;
+&lt;li&gt;scraping library websites on users' behalf&lt;/li&gt;
+&lt;li&gt;a small (perhaps a few MB …&lt;/li&gt;&lt;/ol&gt;</summary><content type="html">&lt;p&gt;Last time I laid out the uncertainties that have to be explore before I want to
+try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
+order of importance and risk:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;web app hosting&lt;/li&gt;
+&lt;li&gt;scheduled jobs&lt;/li&gt;
+&lt;li&gt;scraping library websites on users' behalf&lt;/li&gt;
+&lt;li&gt;a small (perhaps a few MB) persistent datastore&lt;/li&gt;
+&lt;li&gt;authentication via social accounts&lt;/li&gt;
+&lt;li&gt;sending e-mail&lt;/li&gt;
+&lt;li&gt;free, or nearly so; as I said, this is a hobby project, and I'm not willing to dump several tens of dollars into it every month&lt;/li&gt;
+&lt;li&gt;job queues&lt;/li&gt;
+&lt;li&gt;custom domain name&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Today I'll address the first of those: web app hosting. It's not particularly
+risky, but it's very important. I'll start with an essentially empty repository:
+just a license file, readme, and a &lt;code&gt;.gitattributes&lt;/code&gt; file.&lt;/p&gt;
+&lt;section id="requirements"&gt;
+&lt;h2&gt;Requirements&lt;/h2&gt;
+&lt;p&gt;As I type, Heroku
+&lt;a href="https://devcenter.heroku.com/changelog-items/1722"&gt;supports the Python 3.8.1 runtime&lt;/a&gt;,
+so I upgraded from 3.8.0 and then I created a virtual environment to work in,
+upgraded pip, and installed Flask.&lt;/p&gt;
+&lt;p&gt;Typically Flask will read some some values, such as the application file,
+secrets, or other configuration, from environment variables. I prefer to use
+&lt;a href="https://saurabh-kumar.com/python-dotenv/"&gt;python-dotenv&lt;/a&gt; and to save them in
+files (some committed, some not) for local use.&lt;/p&gt;
+&lt;p&gt;Finally, I install &lt;a href="https://www.pyinvoke.org/"&gt;Invoke&lt;/a&gt;, since I can never
+remember the syntax for the various tasks I have to do and tools I need to use
+to them, and I think it's a nicer system than &amp;quot;a dozen batch files&amp;quot; that
+accreted in the old LibraryHippo. Those should be all the dependencies I need
+for now, so I freeze a &lt;code&gt;requirements.txt&lt;/code&gt; file.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="n"&gt;3&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;8&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt; &lt;span class="n"&gt;venv&lt;/span&gt;
+&lt;span class="n"&gt;venv&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;Scripts&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;activate&lt;/span&gt;
+&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="p"&gt;-&lt;/span&gt;&lt;span class="n"&gt;-upgrade&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;python-dotenv&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;invoke&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;Out-File&lt;/span&gt; &lt;span class="n"&gt;-encoding&lt;/span&gt; &lt;span class="n"&gt;ascii&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="create-a-flask-application"&gt;
+&lt;h2&gt;Create a Flask application&lt;/h2&gt;
+&lt;p&gt;Now I'm ready to create an application! We need three files:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;routes&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/__init__.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;LibraryHippo 2020&amp;quot;&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;libraryhippo.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Typically, one would then set the &lt;code&gt;FLASK_APP&lt;/code&gt; environment variable to
+&lt;code&gt;libraryhippo.py&lt;/code&gt;, but I find that inelegant, and I don't really enjoy making
+sure it's set when I need it. Instead I'll set it in a &lt;code&gt;.flaskenv.py&lt;/code&gt; file:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="nv"&gt;FLASK_APP&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;libraryhippo.py&lt;/pre&gt;
+&lt;figcaption&gt;.flaskenv.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;I'll create a &lt;code&gt;run&lt;/code&gt; task in &lt;code&gt;tasks.py&lt;/code&gt; so I remember how to run the
+application, and then invoke it:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;invoke&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;task&lt;/span&gt;
+
+&lt;span class="nd"&gt;@task&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Run local version of the application&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;flask run&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;tasks.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;* Serving Flask app &amp;quot;libraryhippo.py&amp;quot;
+* Environment: production
+WARNING: This is a development server. Do not use it in a production deployment.
+Use a production WSGI server instead.
+* Debug mode: off
+* Running on http://127.0.0.1:5000/ (Press CTRL+C to quit)&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;p&gt;And voilà:&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of LibraryHippo running locally" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/local-libraryhippo.png" /&gt;
+&lt;figcaption&gt;LibraryHippo running locally&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;It's not especially pretty, and it doesn't do a thing, but it's a running app.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="deploy-to-heroku"&gt;
+&lt;h2&gt;Deploy to Heroku&lt;/h2&gt;
+&lt;p&gt;Before deploying I needed&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a Heroku account and&lt;/li&gt;
+&lt;li&gt;the Heroku &lt;abbr&gt;CLI&lt;/abbr&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I'd already signed up for a free account and installed the Heroku CLI while
+going through
+&lt;a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world"&gt;The Flask Mega-Tutorial&lt;/a&gt;,
+so I can move right ahead with the work necessary for this application.&lt;/p&gt;
+&lt;section id="create-a-heroku-application"&gt;
+&lt;h3&gt;Create a Heroku Application&lt;/h3&gt;
+&lt;p&gt;Heroku needs an application to associate with your code. Use the CLI to add an
+application with a unique name:&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;apps&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;libraryhippo&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;Creating ⬢ libraryhippo... done
+https://libraryhippo.herokuapp.com/ | https://git.heroku.com/libraryhippo.git&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;p&gt;Success! The last line of the output indicates the URL of the deployed
+application (it's boring right now, since it doesn't have the LibraryHippo code)
+and the URL of the git repository to push versions of LibraryHippo to.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="satisfy-heroku-s-requirements"&gt;
+&lt;h3&gt;Satisfy Heroku's Requirements&lt;/h3&gt;
+&lt;p&gt;Heroku needs a &lt;code&gt;Procfile&lt;/code&gt; to understand how to run an application. So far
+LibraryHippo's is simple:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;web: gunicorn libraryhippo:app&lt;/pre&gt;
+&lt;figcaption&gt;Procfile&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;This tells Heroku to use a web dyno to run the
+&lt;a href="https://gunicorn.org/"&gt;Gunicorn&lt;/a&gt; web server, which will host the LibraryHippo
+application. Gunicorn is required because the native Flask web server is not
+production-ready.&lt;/p&gt;
+&lt;p&gt;Of course, a Heroku web dyno doesn't come with Gunicorn installed, so it needs
+to be added to the requirements and frozen:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;gunicorn&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="nb"&gt;Out-File&lt;/span&gt; &lt;span class="n"&gt;-encoding&lt;/span&gt; &lt;span class="n"&gt;ascii&lt;/span&gt; &lt;span class="n"&gt;requirements&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;txt&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, Heroku needs to know which version of Python to use. It has its own
+defaults, but I prefer to know that my local environment is in sync with
+Heroku's, so add a &lt;code&gt;runtime.txt&lt;/code&gt; file to tell Heroku what I expect:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;python-3.8.1&lt;/pre&gt;
+&lt;figcaption&gt;runtime.txt&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="push-the-code-to-heroku"&gt;
+&lt;h3&gt;Push the code to Heroku&lt;/h3&gt;
+&lt;p&gt;I'd been committing my code to a local git repository as I went, so
+&lt;code&gt;heroku apps:create&lt;/code&gt; automatcially added a new remote called &amp;quot;heroku&amp;quot; for me;&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;remote&lt;/span&gt; &lt;span class="n"&gt;-v&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;heroku  https://git.heroku.com/libraryhippo.git (fetch)
+heroku  https://git.heroku.com/libraryhippo.git (push)
+origin  git@github.com:blairconrad/LibraryHippo.git (fetch)
+origin  git@github.com:blairconrad/LibraryHippo.git (push)&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;p&gt;If I hadn't had git set up already, I could do so now and add the remote
+manually.&lt;/p&gt;
+&lt;p&gt;Pushing to Heroku was to have been anticlimactic, but I kept messing up the
+syntax of the git command. Heroku serves apps from the &lt;code&gt;master&lt;/code&gt; branch, and
+I'm working in &lt;code&gt;lh2020&lt;/code&gt;. The command that I thought meant &amp;quot;push lh2020 to
+heroku as master&amp;quot; actually just pushed lh2020 &lt;em&gt;and&lt;/em&gt; master, but the latter has
+the code for the existing application, not the new Flask one. To save myself
+from making this mistake again, I added a task:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="nd"&gt;@task&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;deploy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="sd"&gt;&amp;quot;&amp;quot;&amp;quot;Deploy the application to Heroku&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;c&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;git push heroku lh2020:master&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;tasks.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;And now the new LibraryHippo is running on Heroku.&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of LibraryHippo running on Heroku" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/heroku-libraryhippo.png" /&gt;
+&lt;figcaption&gt;LibraryHippo running on Heroku&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="flask"></category><category term="LibraryHippo"></category><category term="heroku"></category></entry><entry><title>LibraryHippo 2020 - Motivation and Plan</title><link href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="alternate"></link><published>2020-02-06T00:00:00-05:00</published><updated>2020-02-06T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-06:/2020/02/06/libraryhippo-2020-motivation-and-plan/</id><summary type="html">&lt;p&gt;For some years, I've run a hobby project, open to all, but mostly used by a few
 of my friends and family, called &lt;a href="http://libraryhippo.com/"&gt;LibraryHippo&lt;/a&gt;. I
 find it useful, and for a long time, it was a joy to work on.&lt;/p&gt;
 &lt;p&gt;Lately, the project's not much fun. I've had the urge …&lt;/p&gt;</summary><content type="html">&lt;p&gt;For some years, I've run a hobby project, open to all, but mostly used by a few
