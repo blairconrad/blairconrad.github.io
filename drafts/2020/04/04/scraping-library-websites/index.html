@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>Scraping Library Websites | Blair Conrad</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/drafts/scraping-library-websites.html" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Scraping Library Websites" />
+  <meta name="twitter:title" content="Scraping Library Websites" />
+  <meta property="og:url" content="https://blairconrad.com/drafts/scraping-library-websites.html" />
+  <meta property="og:description" content="Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it&#39;s time to provide it with meaningful content to send, by having it scrape a library&#39;s website. This should be relatively straightforward, but there&#39;s some risk as it&#39;s not an operation covered in The Flask Mega-Tutorial. The production application …" />
+  <meta name="twitter:description" content="Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it&#39;s time to provide it with meaningful content to send, by having it scrape a library&#39;s website. This should be relatively straightforward, but there&#39;s some risk as it&#39;s not an operation covered in The Flask Mega-Tutorial. The production application …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/drafts/scraping-library-websites.html" rel="bookmark" title="Permalink to Scraping Library Websites">
+                  Scraping Library Websites
+                  <span class="m-label m-dim">draft</span>
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-04-04T00:00:00-04:00">2020-04-04</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                  /
+                  <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                  /
+                  <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                  /
+                  <a href="https://blairconrad.com/tag/requests.html">requests</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
+to provide it with meaningful content to send, by having it scrape a library's
+website. This should be relatively straightforward, but there's some risk as
+it's not an operation covered in
+<a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">The Flask Mega-Tutorial</a>.</p>
+<p>The production application gathers information from libraries using a
+combination of App Engine's custom
+<a href="https://cloud.google.com/appengine/docs/standard/python/issue-requests">URL Fetch service</a>,
+an older version of the
+<a href="https://www.crummy.com/software/BeautifulSoup/">Beautiful Soup</a> HTML parser
+(which had to be copied into the application source), and some glue that I
+wrote. Today I'll try to replicate that using modern, commodity components.</p>
+<section id="gathering-requirements">
+<h2>Gathering requirements</h2>
+<p>I've heard that the <a href="https://requests.readthedocs.io/en/master/">Requests</a>
+library is a feature-rich and popular library for sending HTTP requests. Knowing
+no more than that, I'll try it. Beautiful Soup has worked very well for me in
+the past, but has had a number of significant releases since the version I've
+used, so I'll try the latest, 4.8.2 as I write.</p>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
+<span class="n">pip</span> <span class="n">install</span> <span class="n">BeautifulSoup4</span>
+<span class="n">inv</span> <span class="n">freeze</span></pre>
+</section>
+<section id="library-credential-management">
+<h2>Library Credential Management</h2>
+<p>Library websites don't allow unfettered access to their patrons' records, thank
+goodness, so it'll be necessary to use at least one patron's credentials during
+the &quot;scraping&quot; test. I don't want to embed my credentials in the application
+source code, so they have to be stored somewhere else. Had I already integrated
+a permanent datastore and implement user management, the credentials would be
+tied to the LibraryHippo user's account, but for now I'll read them from
+environment variables that I'll save in the <code>secrets</code> file established in
+<a href="https://blairconrad.com/drafts/sending-email-from-heroku.html">Sending Email from Heroku</a>.</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="c1"># …</span>
+<span class="n">PATRON_NAME</span><span class="o">=</span><span class="n">Blair</span> <span class="n">Conrad</span>
+<span class="n">CARD_NUMBER</span><span class="o">=</span><span class="mi">123456789</span>
+<span class="n">PIN</span><span class="o">=</span><span class="mi">9876</span></pre>
+<figcaption>secrets</figcaption>
+</figure>
+<p>with the corresponding change to the <code>Config</code>.</p>
+</section>
+<section id="implementation">
+<h2>Implementation</h2>
+<p>When a patron wants to check their library card status at the Waterloo Public
+Library, they have to visit the login page and provide their credentials, after
+which they are taken to a summary page that basically just show the number of
+checkouts and held items, with links to complete lists of their checkouts and
+holds. That's 4 pages visited, and possibly some hidden redirects, plus one if
+they manually logout. I planned to have the automated components follow the same
+path.</p>
+<section id="login">
+<h3>Login</h3>
+<p>My initial thought was that LibraryHippo could login directly, just by posting
+credentials to the website, but it failed miserably. The reason: hidden fields.
+The login page looks like it has 4 inputs, counting the &quot;Submit&quot; button as an
+input:</p>
+<figure class="m-figure">
+<img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-login-form.png" />
+<figcaption>Waterloo Public Library patron login form</figcaption>
+</figure>
+<p>But there are actually 6. The four we see and two hidden ones, called <code>lt</code> and <code>_eventId</code>:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;15&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;code&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;code&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;20&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;pin&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;pin&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;64&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;30&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Log In&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;loginSubmit&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;35&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;lt&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;_cB2859561-37E4-542A-1165-9B73858A095A_k57C7CE2E-6774-24D9-E8F6-3A54E706F248&quot;</span> <span class="p">/&gt;</span>
+<span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;hidden&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;_eventId&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="p">/&gt;</span></pre>
+<figcaption>input fields for the WPL login form</figcaption>
+</figure>
+<p>When I submit the form without them, the login fails. The <code>lt</code> field's value
+is different every time I visit the login page, so I assume the server is using
+it as a session identifier or some such. The only way to have a successful login
+is to harvest that value from the login page. So the card-checking flow must be:</p>
+<ol>
+<li>request the login page</li>
+<li>find the hidden form fields</li>
+<li>submit the login form, including the configured credentials as well as the
+hidden field values</li>
+<li>read the response and find the links to the checkouts and holds pages</li>
+<li>request the checkouts page and read the results</li>
+<li>request the holds page and read the results</li>
+<li>request the logout page, to logout</li>
+</ol>
+<p>The first 3 steps are covered by the <code>login</code> method on my new <code>WPL</code> class:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Session</span>
+
+<span class="k">class</span> <span class="nc">WPL</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">login_url</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">return</span> <span class="p">(</span>
+            <span class="s2">&quot;https://books.kpl.org/iii/cas/login?service=&quot;</span>
+            <span class="o">+</span> <span class="s2">&quot;https://books.kpl.org/patroninfo~S3/j_acegi_cas_security_check&amp;lang=eng&amp;scope=3&quot;</span>
+        <span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">check_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+        <span class="n">summary_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">)</span>
+        <span class="c1"># …</span>
+
+    <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
+        <span class="n">initial_login_page_view</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_url</span><span class="p">())</span>
+        <span class="n">login_page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">initial_login_page_view</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+        <span class="n">form_fields</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_form_fields</span><span class="p">(</span><span class="n">login_page</span><span class="p">)</span>
+        <span class="n">form_fields</span><span class="o">.</span><span class="n">update</span><span class="p">({</span><span class="s2">&quot;name&quot;</span><span class="p">:</span> <span class="n">patron</span><span class="p">,</span> <span class="s2">&quot;code&quot;</span><span class="p">:</span> <span class="n">number</span><span class="p">,</span> <span class="s2">&quot;pin&quot;</span><span class="p">:</span> <span class="n">pin</span><span class="p">})</span>
+
+        <span class="n">login_response</span> <span class="o">=</span> <span class="n">session</span><span class="o">.</span><span class="n">post</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">login_url</span><span class="p">(),</span> <span class="n">form_fields</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">login_response</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">get_form_fields</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">page</span><span class="p">):</span>
+        <span class="n">form_fields</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">input_field</span> <span class="ow">in</span> <span class="n">page</span><span class="o">.</span><span class="n">find_all</span><span class="p">(</span><span class="s2">&quot;input&quot;</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">input_field</span><span class="p">[</span><span class="s2">&quot;type&quot;</span><span class="p">]</span> <span class="o">==</span> <span class="s2">&quot;submit&quot;</span><span class="p">:</span>
+                <span class="n">form_fields</span><span class="p">[</span><span class="s2">&quot;submit&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">input_field</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">form_fields</span><span class="p">[</span><span class="n">input_field</span><span class="p">[</span><span class="s2">&quot;name&quot;</span><span class="p">]]</span> <span class="o">=</span> <span class="n">input_field</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;value&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">form_fields</span></pre>
+<figcaption>app/libraries/wpl.py</figcaption>
+</figure>
+<p>Starting from the top, there are a few things to note:</p>
+<ol>
+<li>I import key classes from Beautiful soup (<code>bs4</code>) and the Requests library</li>
+<li>The login URL is hard-coded here. You have to start somewhere.</li>
+<li>I'm passing <code>patron</code>, <code>number</code>, and <code>pin</code> into the <code>check_card</code>
+method, which is the principal entry point into this class</li>
+<li><code>check_card</code> immediately creates a <code>requests.Session</code> object to
+communicate with the outside world. It's possible to call methods like
+<code>get</code> and <code>post</code> directly on the <code>requests</code> module, but the <a href="https://requests.readthedocs.io/en/master/user/advanced/#session-objects">Session
+class</a>
+provides session management by tracking cookies, pools connections, and can
+persist parameters across requests. Use of the <code>Session</code> class is the key
+to having the library website grant access on subsequent requests. Under
+Google App Engine, I had to write request decorators to handle the cookies
+and session management</li>
+<li><code>login</code> first requests the login page as discussed, and parses it using
+Beautiful Soup before passing to <code>get_form_fields</code> to find all
+the hidden and special (e.g. &quot;submit&quot;) fields to ensure the right values are
+posted. Not how easy the <code>find_all</code> method makes it to locate all the input fields.</li>
+<li><code>login</code> then fills in values specific to this card: patron name, card
+number (&quot;code&quot;) and PIN, before <code>post</code>ing the result and returning it to
+<code>check_card</code> for future processing</li>
+</ol>
+</section>
+<section id="finding-the-checkouts-and-holds-pages">
+<h3>Finding the checkouts and holds pages</h3>
+<p>Once a user logs into the WPL, they see a summary page that contains rather a
+lot of personal information that they probably don't care to see every day, as
+well as some links that would allow them to update their account and, most
+importantly, a link to their holds and one to their checkouts, right at the
+bottom of the box above the &quot;Log Out&quot; button.</p>
+<figure class="m-figure">
+<img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-patron-summary.png" />
+<figcaption>Waterloo Public Library patron summary</figcaption>
+</figure>
+<p>It's those last two that we'll be going after. Unfortunately, the links aren't
+clearly marked with an ID or even a class:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patNameAddress&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>CONRAD, BLAIR<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  123 FAKE STREET<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  WATERLOO ON<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  132-456-7890<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  EXP DATE:10-11-2020<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/patroninfo~S3/12345678/holds&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_self&quot;</span><span class="p">&gt;</span>22 requests (holds).<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">div</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/patroninfo~S3/12345678/items&quot;</span> <span class="na">target</span><span class="o">=</span><span class="s">&quot;_self&quot;</span><span class="p">&gt;</span>5 Items currently checked out<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span></pre>
+<figcaption>input fields for the WPL login form</figcaption>
+</figure>
+<p>The URLs vary from patron to patron, so we can't hard-code them. I'll cheat a
+little and look for links that end in &quot;/holds&quot; or &quot;/items&quot;:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">import</span> <span class="nn">urllib.parse</span>
+
+<span class="c1"># …</span>
+
+<span class="k">class</span> <span class="nc">WPL</span><span class="p">:</span>
+    <span class="k">def</span> <span class="nf">check_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
+        <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
+        <span class="n">summary_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">)</span>
+
+        <span class="n">holds_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urljoin</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">login_url</span><span class="p">(),</span>
+            <span class="n">summary_page</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;/holds$&quot;</span><span class="p">))[</span><span class="s2">&quot;href&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+        <span class="n">items_url</span> <span class="o">=</span> <span class="n">urllib</span><span class="o">.</span><span class="n">parse</span><span class="o">.</span><span class="n">urljoin</span><span class="p">(</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">login_url</span><span class="p">(),</span>
+            <span class="n">summary_page</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="s2">&quot;a&quot;</span><span class="p">,</span> <span class="n">href</span><span class="o">=</span><span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="s2">&quot;/items$&quot;</span><span class="p">))[</span><span class="s2">&quot;href&quot;</span><span class="p">],</span>
+        <span class="p">)</span>
+
+        <span class="c1"># …</span></pre>
+<figcaption>app/libraries/wpl.py</figcaption>
+</figure>
+<p>Beautiful Soup looks on the summary page for <code>&lt;a&gt;</code> tags whose <code>href</code> match
+the supplied regular expressions (&quot;ends with /holds&quot; or &quot;ends with /items&quot;) and
+returns the results. Indexing by <code>&quot;href&quot;</code> returns that attribute's value.
+Since the URLs were relative, I join them to the original login URL to getd
+absolute URLs.</p>
+</section>
+<section id="loading-the-holds">
+<h3>Loading the Holds</h3>
+<p>The hold page repeats the same personal information from the summary page, and then lists all the patron's holds in a table.</p>
+<figure class="m-figure">
+<img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl_holds.png" />
+<figcaption>The holds page</figcaption>
+</figure>
+<p>And the HTML behind the table starts like this:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">colspan</span><span class="o">=</span><span class="s">&quot;6&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;items_count&quot;</span><span class="p">&gt;</span>22 HOLDS<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> CANCEL <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> TITLE <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> STATUS <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span>PICKUP LOCATION<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> CANCEL IF NOT FILLED BY <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> FREEZE <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+  <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncEntry on_ice&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncMark&quot;</span> <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;cancelb2677337x00&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;cancelb2677337x00&quot;</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;cancelb2677337x00&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/record=b2677337~S3&quot;</span><span class="p">&gt;</span>
+          <span class="p">&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitleMain&quot;</span><span class="p">&gt;</span>Blood heir / Amélie Wen Zhao<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">br</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncStatus&quot;</span><span class="p">&gt;</span> 2 of 2 holds <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncPickup&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncPickupLabel&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;locb2677337x00&quot;</span><span class="p">&gt;</span>Pickup Location<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">select</span> <span class="na">name</span><span class="o">=</span><span class="s">locb2677337x00</span> <span class="na">id</span><span class="o">=</span><span class="s">locb2677337x00</span> <span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;mn+++&quot;</span> <span class="p">&gt;</span>Central Library-KPL<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;ch+++&quot;</span> <span class="p">&gt;</span>Country Hills Library-KPL<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;fh+++&quot;</span> <span class="p">&gt;</span>Forest Heights Library-KPL<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;gr+++&quot;</span> <span class="p">&gt;</span>Grand River Stanley Pk Lib-KPL<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;pp+++&quot;</span> <span class="p">&gt;</span>Pioneer Park Library-KPL<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;w++++&quot;</span> <span class="p">&gt;</span>WPL Main Library<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;wm   &quot;</span> <span class="na">selected</span><span class="o">=</span><span class="s">&quot;selected&quot;</span><span class="p">&gt;</span>WPL McCormick Branch<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">option</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;ww+++&quot;</span> <span class="p">&gt;</span>WPL John M. Harper Branch<span class="p">&lt;/</span><span class="nt">option</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">select</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncCancel&quot;</span><span class="p">&gt;</span>09-17-20<span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncFreeze&quot;</span> <span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncFreezeLabel&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;freezeb2677337x00&quot;</span> <span class="p">&gt;</span>Freeze<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
+      <span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;freezeb2677337x00&quot;</span> <span class="na">checked</span> <span class="p">/&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span></pre>
+</figure>
+<p>Each significant cell in the table has a <code>class</code> indicator that can be used to
+interpret the contents. Note that since the table is actually part of a form,
+where the patron can choose to cancel, freeze, or change the pickup location of
+an item, some <code>td</code> elements contain input controls, slightly complicating the
+parsing. Still, it's not that difficult to extract the information:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="k">def</span> <span class="nf">get_holds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">holds_url</span><span class="p">):</span>
+    <span class="n">holds</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">holds_page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">holds_url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
+
+    <span class="n">holds_table</span> <span class="o">=</span> <span class="n">holds_page</span><span class="o">.</span><span class="n">find</span><span class="p">(</span><span class="s2">&quot;table&quot;</span><span class="p">,</span> <span class="n">class_</span><span class="o">=</span><span class="s2">&quot;patFunc&quot;</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">hold_row</span> <span class="ow">in</span> <span class="n">holds_table</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+        <span class="k">if</span> <span class="n">hold_row</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;tr&quot;</span> <span class="ow">or</span> <span class="s2">&quot;patFuncEntry&quot;</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">hold_row</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">]:</span>
+            <span class="k">continue</span>
+
+        <span class="n">hold</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">hold_cell</span> <span class="ow">in</span> <span class="n">hold_row</span><span class="o">.</span><span class="n">children</span><span class="p">:</span>
+            <span class="k">if</span> <span class="n">hold_cell</span><span class="o">.</span><span class="n">name</span> <span class="o">!=</span> <span class="s2">&quot;td&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="n">cell_class</span> <span class="o">=</span> <span class="n">hold_cell</span><span class="p">[</span><span class="s2">&quot;class&quot;</span><span class="p">][</span><span class="mi">0</span><span class="p">]</span>
+            <span class="n">cell_name</span> <span class="o">=</span> <span class="n">cell_class</span><span class="o">.</span><span class="n">replace</span><span class="p">(</span><span class="s2">&quot;patFunc&quot;</span><span class="p">,</span> <span class="s2">&quot;&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">cell_name</span> <span class="o">==</span> <span class="s2">&quot;Mark&quot;</span><span class="p">:</span>
+                <span class="k">continue</span>
+            <span class="k">if</span> <span class="n">cell_name</span> <span class="o">==</span> <span class="s2">&quot;Pickup&quot;</span><span class="p">:</span>
+                <span class="n">hold</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span> <span class="o">=</span> <span class="n">hold_cell</span><span class="o">.</span><span class="n">find</span><span class="p">(</span>
+                    <span class="s2">&quot;option&quot;</span><span class="p">,</span> <span class="n">selected</span><span class="o">=</span><span class="s2">&quot;selected&quot;</span>
+                <span class="p">)</span><span class="o">.</span><span class="n">string</span>
+            <span class="k">elif</span> <span class="n">cell_name</span> <span class="o">==</span> <span class="s2">&quot;Freeze&quot;</span><span class="p">:</span>
+                <span class="n">hold</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;checked&quot;</span> <span class="ow">in</span> <span class="n">hold_cell</span><span class="o">.</span><span class="n">input</span><span class="o">.</span><span class="n">attrs</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="c1"># logger.info(&quot;cell &quot; + cell_name)</span>
+                <span class="n">hold</span><span class="p">[</span><span class="n">cell_name</span><span class="p">]</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">hold_cell</span><span class="o">.</span><span class="n">strings</span><span class="p">)</span>
+        <span class="n">holds</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hold</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">holds</span>
+
+<span class="c1"># …</span>
+
+<span class="k">def</span> <span class="nf">check_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
+    <span class="c1"># …</span>
+    <span class="n">result</span> <span class="o">=</span> <span class="s2">&quot;&lt;h1&gt;Holds&lt;/h1&gt;&quot;</span>
+    <span class="k">for</span> <span class="n">hold</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">get_holds</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">holds_url</span><span class="p">):</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;&lt;dl&gt;&quot;</span>
+        <span class="k">for</span> <span class="n">k</span><span class="p">,</span> <span class="n">v</span> <span class="ow">in</span> <span class="n">hold</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">result</span> <span class="o">+=</span> <span class="sa">f</span><span class="s2">&quot;&lt;dt&gt;</span><span class="si">{k}</span><span class="s2">&lt;/dt&gt;&lt;dd&gt;</span><span class="si">{v}</span><span class="s2">&lt;/dd&gt;&quot;</span>
+        <span class="n">result</span> <span class="o">+=</span> <span class="s2">&quot;&lt;/dl&gt;&lt;hr&gt;&quot;</span>
+
+    <span class="k">return</span> <span class="n">result</span></pre>
+<figcaption>app/libraries/wpl.py</figcaption>
+</figure>
+<p>I load the page, find the table, and iterate over rows with the <code>patFunEntry</code>
+class, extracting values to shove in a hold object, which is just a dictionary.
+the default action is to store the contents of the <code>td</code>, but the &quot;Mark&quot; column
+is just used to cancel holds, and conveys no information, so I drop it. The
+&quot;Pickup&quot; column always contains a number of selections, so I'm carful to grab
+the <code>option</code> element that is &quot;selected&quot;. Finally the &quot;Freeze&quot; column is
+effectively a boolean: if the <code>input</code> has a &quot;checked&quot; attribute, the hold is
+frozen.</p>
+<p>Back in <code>check_card</code>, I just loop over the holds, printing a <code>dl</code> for each
+one, listing the attributes. It's not pretty, and would be better as a Jinja
+template, but it's good enough for a proof of concept.</p>
+<figure class="m-figure">
+<img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/check-card-holds-local.png" />
+<figcaption>Checked holds at Waterloo Public Library</figcaption>
+</figure>
+</section>
+<section id="loading-the-checkouts">
+<h3>Loading the Checkouts</h3>
+<p>Parsing the Checkouts was to have been the same as parsing the holds, so I was
+going to omit it, but that plan fell through when I found that the checkouts
+page's HTML is malformed in a way that defeated the <code>html.parser</code> library.
+Some <code>tr</code> tags aren't closed in the table:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">colspan</span><span class="o">=</span><span class="s">&quot;5&quot;</span>  <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>5 ITEMS CHECKED OUT<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
+
+<span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> RENEW <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> TITLE <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> BARCODE <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> STATUS <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">th</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncHeaders&quot;</span><span class="p">&gt;</span> CALL NUMBER <span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
+<span class="c">&lt;!-- NO CLOSING TR --&gt;</span>
+<span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncEntry&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncMark&quot;</span><span class="p">&gt;&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;checkbox&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;renew0&quot;</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;renew0&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;i3879884&quot;</span> <span class="p">/&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;&lt;</span><span class="nt">label</span> <span class="na">for</span><span class="o">=</span><span class="s">&quot;renew0&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;/record=b2529260~S3&quot;</span><span class="p">&gt;&lt;</span><span class="nt">span</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitleMain&quot;</span><span class="p">&gt;</span>Banff, Jasper <span class="err">&amp;</span> Glacier National Parks<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">label</span><span class="p">&gt;&lt;</span><span class="nt">br</span> <span class="p">/&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncBarcode&quot;</span><span class="p">&gt;</span> 33420013067559 <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncStatus&quot;</span><span class="p">&gt;</span> DUE 03-02-20  <span class="p">&lt;</span><span class="nt">span</span>  <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncRenewCount&quot;</span><span class="p">&gt;</span>Renewed 1 time<span class="p">&lt;/</span><span class="nt">span</span><span class="p">&gt;&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">td</span> <span class="na">style</span><span class="o">=</span><span class="s">&quot;text-align:left&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncCallNo&quot;</span><span class="p">&gt;</span> 917.1233204 Ban  <span class="p">&lt;/</span><span class="nt">td</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span></pre>
+<figcaption>Checkouts table at Waterloo Public Library</figcaption>
+</figure>
+<p>As a result, Beautiful Soupo saw only the &quot;patFuncTitle&quot; and &quot;patFuncHeaders&quot;
+rows. The workaround is to install the <a href="https://lxml.de/">lxml</a> XML and HTML
+parser and have BeautifulSoup use it:</p>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">lxml</span>
+<span class="n">inv</span> <span class="n">freeze</span></pre>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="k">def</span> <span class="nf">get_checkouts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">checkouts_url</span><span class="p">):</span>
+    <span class="n">checkouts</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">checkouts_page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">checkouts_url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
+    <span class="c1"># fairly boring parsing hereafter</span></pre>
+<figcaption>app/libraries/wpl.py</figcaption>
+</figure>
+</section>
+</section>
+<section id="deploying-to-heroku">
+<h2>Deploying to Heroku</h2>
+<p>Deploying is straightforward. I use my fancy <code>inv deploy</code> command and set the new secret environment variables:</p>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="s2">&quot;PATRON_NAME=Blair Conrad&quot;</span>
+<span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">CARD_NUMBER</span><span class="p">=</span><span class="n">123456789</span>
+<span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">PIN</span><span class="p">=</span><span class="n">9876</span></pre>
+<p>And voila:</p>
+<figure class="m-figure">
+<img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-hold-and-checkout-heroku.png" />
+<figcaption>Card check results on Heroku</figcaption>
+</figure>
+</section>
+<section id="progress">
+<h2>Progress</h2>
+<p>Four of nine requirements have been met!</p>
+<table class="m-table">
+<tbody>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>web app hosting</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>scheduled jobs (run in UTC)</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>scraping library websites on users' behalf</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-primary">next</span></td>
+<td>small persistent datastore</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>social authentication</td>
+<td></td>
+</tr>
+<tr><td><span class="m-label m-success">done</span></td>
+<td>sending e-mail</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>nearly free</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>job queues</td>
+<td></td>
+</tr>
+<tr><td></td>
+<td>custom domain name</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
