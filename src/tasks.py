@@ -89,12 +89,6 @@ def clean(c):
 def preview(c):
     """Build production version of site"""
     c.run("pelican -d -s {settings_publish}".format(**CONFIG))
-    try:
-        original_path = os.path.abspath(os.curdir)
-        os.chdir("../static")
-        c.run("..\src\m.css\css\postprocess.py -o site.css m-dark.css custom.css")
-    finally:
-        os.chdir(original_path)
 
 
 @task
