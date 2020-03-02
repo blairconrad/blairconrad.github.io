@@ -1,3 +1,6 @@
+@import url('https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600');
+@import url('https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css');
+
 main p {
     text-indent: 0;
     line-height: 150%;
@@ -34,7 +37,7 @@ figure.m-console-figure figcaption {
 
 code {
     background-color: inherit;
-    border: 1px dotted var(--line-color);
+    border: 1px dotted #405363;
 }
 
 pre > code {

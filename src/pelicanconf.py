@@ -70,9 +70,7 @@ M_HIDE_ARTICLE_SUMMARY = True
 
 M_CSS_FILES = [
     "/static/m-dark.css",
-    "https://fonts.googleapis.com/css?family=Open+Sans:400,400i,600,600i%7CFira+Code:400,400i,600",
-    "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.0/css/all.min.css",
-    "/static/custom.css",
+    "/static/site.css",
 ]
 
 M_THEME_COLOR = "#22272e"

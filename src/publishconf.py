@@ -32,11 +32,7 @@ DELETE_OUTPUT_DIRECTORY = True
 
 WITH_FUTURE_DATES = False
 
-# Following items are often useful when publishing
-
-# DISQUS_SITENAME = ""
-# GOOGLE_ANALYTICS = ""
-
-M_CSS_FILES.remove("/static/m-dark.css")
-M_CSS_FILES.remove("/static/custom.css")
-M_CSS_FILES.append("/static/site.css")
+M_CSS_FILES = [
+    "/static/m-dark.compiled.css",
+    "/static/site.css",
+]
