@@ -8,7 +8,7 @@ tags: .NET, AutoTest.Net, HastyImpressions, Testing
 
 I'm taking a look at <a href="https://github.com/acken/AutoTest.Net">AutoTest.Net</a> first. Mostly because it's free. If I'm going to use something at home, it won't be for-pay, and the Day Job has been notoriously slow at shelling out for developer tools.
 
-<strong>Update</strong>: there was a bug that had been fixed on trunk, but not in the installer that I used. <a href="{filename}../2010\/11-14-autotest-net-updated-now-and-then-notices-broken-builds.md">AutoTest.Net is better at detecting broken builds</a> than I report below. 
+<strong>Update</strong>: there was a bug that had been fixed on trunk, but not in the installer that I used. <a href="{filename}../2010/11-14-autotest-net-updated-now-and-then-notices-broken-builds.md">AutoTest.Net is better at detecting broken builds</a> than I report below. 
 
 <h2>Setting up AutoTest.NET</h2>
 Download and installation were straightforward. I opted to use the Windows installer package, <a href="https://github.com/downloads/acken/AutoTest.Net/AutoTest.Net-v1.0.1beta%20(Windows%20Installer).zip">AutoTest.Net-v1.0.1beta (Windows Installer).zip</a>. I just unzipped, ran the MSI, let it install both VS&nbsp;2008 and VS&nbsp;2010 Add-Ins (the other components are required, it seems), and that was that.

@@ -10,10 +10,10 @@ tags: Development, Frameworks, MVVM
 This is one post in a series on my experiences starting to grow an MVVM Framework in .NET 1.1.
 
 * Part I&mdash;Event Handlers
-* <a href="{filename}../2010\/11-10-growing-an-mvvm-framework-in-2003-part-ii-properties.md">Part II&mdash;Properties</a>
-* <a href="{filename}../2010\/11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux.md">Part III &mdash;Properties Redux
-* <a href="{filename}../2010\/11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests.md">Part IV&mdash;Unit Tests</a>
-* <a href="{filename}../2011\/02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets.md">Part V&mdash;Reflections and Regrets</a>
+* <a href="{filename}../2010/11-10-growing-an-mvvm-framework-in-2003-part-ii-properties.md">Part II&mdash;Properties</a>
+* <a href="{filename}../2010/11-21-growing-an-mvvm-framework-in-2003-part-iii-properties-redux.md">Part III &mdash;Properties Redux
+* <a href="{filename}../2010/11-30-growing-an-mvvm-framework-in-2003-part-iv-unit-tests.md">Part IV&mdash;Unit Tests</a>
+* <a href="{filename}../2011/02-15-growing-an-mvvm-framework-in-2003-part-v-reflections-and-regrets.md">Part V&mdash;Reflections and Regrets</a>
 
 Full source code can be found in my <a href="http://code.google.com/p/blairconrad/source/browse/#svn/trunk/BlogExamples/2010-10-mvvm-.net1.1/BookFinder">Google Code repository</a>.
 
@@ -21,7 +21,7 @@ Full source code can be found in my <a href="http://code.google.com/p/blairconra
 
 At the Day Job I usually work on web services, but I recently had the opportunity to write a customer-facing tool that had a GUI.
 
-Previously, I <a href="{filename}../2010\/04-02-watch-even-if-youre-not-building-an-mvvm-app.md">expressed my excitement over the Rob Eisenberg  "Build Your Own MVVM framework" talk</a>. Ever since, I've been dying to try my hand at an MVVM application. I wanted to create an application that
+Previously, I <a href="{filename}../2010/04-02-watch-even-if-youre-not-building-an-mvvm-app.md">expressed my excitement over the Rob Eisenberg  "Build Your Own MVVM framework" talk</a>. Ever since, I've been dying to try my hand at an MVVM application. I wanted to create an application that
 
 * had testable logic, even in the GUI layer,
 * had no "codebehind" in the view, and
@@ -129,4 +129,4 @@ The name comparison ignores case, which wasn't necessary to hook up method handl
     return null;
 }</code></pre>
 <h2>What's next?</h2>
-After wiring the event handlers, the ViewModelBase binds to the View's interesting properties. <a href="{filename}../2010\/11-10-growing-an-mvvm-framework-in-2003-part-ii-properties.md">Details to follow</a>.
+After wiring the event handlers, the ViewModelBase binds to the View's interesting properties. <a href="{filename}../2010/11-10-growing-an-mvvm-framework-in-2003-part-ii-properties.md">Details to follow</a>.

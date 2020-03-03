@@ -38,7 +38,7 @@ Over the years, I've become accustomed to using WYSIWYG tools to create written 
 </ul>
 so I was really happy to find yUML - even though the syntax takes a little getting used to, it makes it easy to generate diagrams with a minimum of fuss.
 
-One wrinkle I've had using tools like Balsamiq and yUML is going back to modify diagrams after I've saved them off as a PNG. The last time I posted a Balsamiq PNG, I resorted to <a href="{filename}../2010\/02-07-using-subversion-to-evangelize-powershell.md#getting_started">embedding the text that represented the diagram in the post comments</a>. Actually, don't bother clicking that link - I'm sure I had the source saved in the post as an HTML comment, but I don't see it there, not even in edit mode.
+One wrinkle I've had using tools like Balsamiq and yUML is going back to modify diagrams after I've saved them off as a PNG. The last time I posted a Balsamiq PNG, I resorted to <a href="{filename}../2010/02-07-using-subversion-to-evangelize-powershell.md#getting_started">embedding the text that represented the diagram in the post comments</a>. Actually, don't bother clicking that link - I'm sure I had the source saved in the post as an HTML comment, but I don't see it there, not even in edit mode.
 
 I've unwittingly demonstrated a point I was trying to make - many of these design tools don't allow you to save the "source" of the diagram, and it could be lost. This isn't a disaster for simple diagrams like the one above, but it could be very inconvenient for larger ones. Another problem is that typing out the code, pasting it into the conversion tool (in yUML's case a web page), and converting it and saving the result can become tedious as you make many adjustments.
 
