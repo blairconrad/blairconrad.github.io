@@ -88,7 +88,7 @@ def clean(c):
 @task(clean)
 def preview(c):
     """Build production version of site"""
-    c.run("pelican -d -s {settings_publish}".format(**CONFIG))
+    c.run("pelican -d -s {settings_publish}".format(**CONFIG), warn=True)
 
 
 @task
@@ -149,16 +149,45 @@ def livereload(c):
 
 
 @task
-def publish(c):
-    """Publish to production via rsync"""
-    c.run("pelican -s {settings_publish}".format(**CONFIG))
-    c.run(
-        'rsync --delete --exclude ".DS_Store" -pthrvz -c '
-        '-e "ssh -p {ssh_port}" '
-        "{} {ssh_user}@{ssh_host}:{ssh_path}".format(
-            CONFIG["deploy_path"].rstrip("/") + "/", **CONFIG
-        )
+def publish(c, token=""):
+    """Publish today's draft, if any"""
+    if not token:
+        raise Exception("No GITHUB_TOKEN supplied")
+
+    github_actor = os.environ.get("GITHUB_ACTOR")
+    if not github_actor:
+        raise Exception("No GITHUB_ACTOR supplied")
+
+    repository = os.environ.get("GITHUB_REPOSITORY")
+    if not repository:
+        raise Exception("No REPOSITORY supplied")
+
+    now = datetime.datetime.utcnow()
+    today_path = os.path.join(
+        "..", "drafts", now.strftime("%Y"), now.strftime("%m"), now.strftime("%d")
     )
+
+    print(f"Looking for draft at {today_path}.")
+    if not os.path.exists(today_path):
+        print("No draft found. Exiting.")
+        return
+
+    update_theme_and_plugins(c)
+    preview(c)
+
+    now_slug = now.strftime("%Y-%m-%d")
+
+    c.run('git config --local user.email "blair@blairconrad.com"', warn=True)
+    c.run('git config --local user.name "Blair Conrad"', warn=True)
+    c.run(f"git checkout -b publish-{now_slug}", warn=True)
+    c.run("git add -A ..", warn=True)
+    c.run(f'git commit -m "Publish article from {now_slug}"', warn=True)
+    c.run("git checkout master", warn=True)
+    c.run(f"git merge --no-ff publish-{now_slug}", warn=True)
+
+    remote_repo = f"https://{github_actor}:{token}@github.com/{repository}.git"
+    print(f"remote_repo = {remote_repo}")
+    c.run(f"git push {remote_repo} HEAD:master")
 
 
 @task
