@@ -1,8 +1,8 @@
 ---
 layout: post
-title: ReportGenerator indexing your whole drive? Check the case of your fullPaths.
+title: ReportGenerator indexing your whole drive? Check the case of your fullPaths
 comments: yes
-tags: , coverage, OpenCover, ReportGenerator
+tags: coverage, OpenCover, ReportGenerator
 ---
 
 <p><em><strong>[Update on 2013-06-22:</strong> I should've
