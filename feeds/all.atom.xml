@@ -1,5 +1,198 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-03-05T00:00:00-05:00</updated><entry><title>Sending Email from Heroku</title><link href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" rel="alternate"></link><published>2020-03-05T00:00:00-05:00</published><updated>2020-03-05T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-05:/2020/03/05/sending-email-from-heroku/</id><summary type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-03-19T00:00:00-04:00</updated><entry><title>Running Scheduled Tasks on Heroku</title><link href="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" rel="alternate"></link><published>2020-03-19T00:00:00-04:00</published><updated>2020-03-19T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-19:/2020/03/19/running-scheduled-tasks-on-heroku/</id><summary type="html">&lt;p&gt;Having established that a Flask app running on Heroku can send e-mail, I turn my
+attention to having LibraryHippo do so periodically. The approach will be to
+change the e-mail-sending to be something that can more easily be triggered from
+the outside, and then triggering it from from time to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Having established that a Flask app running on Heroku can send e-mail, I turn my
+attention to having LibraryHippo do so periodically. The approach will be to
+change the e-mail-sending to be something that can more easily be triggered from
+the outside, and then triggering it from from time to time.&lt;/p&gt;
+&lt;section id="making-a-custom-flask-command"&gt;
+&lt;h2&gt;Making a Custom Flask command&lt;/h2&gt;
+&lt;p&gt;On Google App Engine, every action had to be run via the web interface, so they
+had to be secured by special credentials, which &lt;a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/"&gt;could be a little tricky&lt;/a&gt;.
+Being able to write the tasks essentially as scripts under Flask/Heroku removes
+a lot of complexity. These scripts are what Flask calls
+&lt;a href="https://flask.palletsprojects.com/en/1.1.x/cli/#custom-commands"&gt;custom commands&lt;/a&gt;;
+they can be invoked from outside the web application, but with all the context
+(such as the e-mail configuration set up last time) of the the full application.&lt;/p&gt;
+&lt;p&gt;First, I created new &lt;code&gt;app/cli.py&lt;/code&gt; file to hold the command:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;time&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;datetime&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_mail&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Message&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;notify-all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;notify_all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;now&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isoformat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;LibraryHippo starting notifications&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recipients&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;blair@blairconrad.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;starting notifications at &lt;/span&gt;&lt;span class="si"&gt;{now}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Test mail from LibraryHippo&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{msg.body}&lt;/span&gt;&lt;span class="s2"&gt;.&amp;quot;&lt;/span&gt;
+
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;time&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;sleep&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;300&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;now&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isoformat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;LibraryHippo ending notifications&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recipients&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;blair@blairconrad.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;ending notifications at &lt;/span&gt;&lt;span class="si"&gt;{now}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Test mail from LibraryHippo&amp;lt;/h1&amp;gt;&amp;lt;p&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{msg.body}&lt;/span&gt;&lt;span class="s2"&gt;.&amp;quot;&lt;/span&gt;
+
+        &lt;span class="nb"&gt;print&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/cli.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;This was taken from the old &lt;code&gt;sendmail&lt;/code&gt; web route, which I removed completely, and then updated to&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;send two e-mails, just to make sure we could, and&lt;/li&gt;
+&lt;li&gt;sleep for 5 minutes between e-mails, to verify that Heroku won't kill a longer-running task&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;I called the task &lt;code&gt;notify-all&lt;/code&gt;, since I'm simulating that action in the
+existing LibaryHippo: notifying all families of their library card status. The
+command can be invoked by running&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;notify-all&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;and it performs exactly how you'd hope.&lt;/p&gt;
+&lt;p&gt;Once the new version of the application is deployed using &lt;code&gt;inv deploy&lt;/code&gt;, it's
+even possible to run the task &lt;em&gt;on a Heroku dyno&lt;/em&gt; via&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;notify-all&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;Running flask notify-all on ⬢ libraryhippo... up, run.2562 (Free)
+starting notifications at 2020-02-10T11:56:25.840194
+ending notifications at 2020-02-10T12:01:26.234036&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="scheduling-the-task"&gt;
+&lt;h2&gt;Scheduling the Task&lt;/h2&gt;
+&lt;p&gt;There are a number of options for scheduling repeated tasks on Heroku, but a
+very simple (and free!) one is the
+&lt;a href="https://devcenter.heroku.com/articles/scheduler"&gt;Heroku Scheduler&lt;/a&gt; add-on. It
+hasn't the flexibility of other schedulers, supporting only daily, hourly, or
+10-minutely schedules. Still, LibraryHippo just needs to send e-mails once per
+day and check users' cards about that often, so it should do.&lt;/p&gt;
+&lt;p&gt;Adding the scheduler is very easy:&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;addons&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;create&lt;/span&gt; &lt;span class="n"&gt;scheduler&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;standard&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;Creating scheduler:standard on ⬢ libraryhippo... free
+To manage scheduled jobs run:
+heroku addons:open scheduler
+
+Created scheduler-curved-17868
+Use heroku addons:docs scheduler to view documentation&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;p&gt;A short search didn't reveal a way to affect the schedule from the console, but
+it was easy enough to open the web-based configuration.&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;addons&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;scheduler&lt;/span&gt;&lt;/pre&gt;
+&lt;img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/empty-scheduler-config.png" /&gt;
+&lt;/figure&gt;
+&lt;p&gt;Adding a job is as simple as choosing &amp;quot;Create job&amp;quot;, selecting a time to run, and
+typing the command to execute, which in this case was &lt;code&gt;flask notify-all&lt;/code&gt;.
+I chose to execute daily at 11:30 PM because as I typed, it was 11:26 PM UTC.&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/configure-job-for-2330.png" /&gt;
+&lt;figcaption&gt;Configuring a job to run daily at 11:30 PM&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Now there's nothing to do but wait. In the meantime I opened up the LibraryHippo
+application's log view (at &lt;a href="https://dashboard.heroku.com/apps/libraryhippo/logs"&gt;https://dashboard.heroku.com/apps/libraryhippo/logs&lt;/a&gt;)
+and watched.&lt;/p&gt;
+&lt;p&gt;Shortly after 6:30 PM local time, the log started updating, and I received my
+first e-mail, with further updates and a second e-mail about 5 minutes later.
+The log looked like this:&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/heroku-log.png" /&gt;
+&lt;figcaption&gt;Heroku log of scheduled e-mail task run&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Note that there are some earlier entries from the manually-invoked test run I'd
+done at 2020-02-10T12:01:29, and also from the web worker that had been active
+from some earlier time and was shut down due to inactivity at 12:26:17.&lt;/p&gt;
+&lt;p&gt;At 23:30:25, the &lt;code&gt;flask notify-all&lt;/code&gt; worker starts up, running achieving an
+&amp;quot;up&amp;quot; state before logging (via the &lt;code&gt;print&lt;/code&gt; statements in the code) the two
+e-mail messages that it sent, and finally transitioning to a &amp;quot;complete&amp;quot; state
+and shutting down at 23:35:28.&lt;/p&gt;
+&lt;p&gt;And the e-mails arrived right on schedule:&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" /&gt;
+&lt;figcaption&gt;Scheduled e-mails arriving over 5 minutes&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="a-note-on-time-zones"&gt;
+&lt;h2&gt;A Note on Time Zones&lt;/h2&gt;
+&lt;p&gt;As the documentation states, Heroku Scheduler jobs use a clock in the
+&lt;a href="https://en.wikipedia.org/wiki/Coordinated_Universal_Time"&gt;UTC time zone&lt;/a&gt;, but
+LibrayHippo's customers live in the
+&lt;a href="https://en.wikipedia.org/wiki/Eastern_Time_Zone"&gt;Eastern Time Zone&lt;/a&gt; (of the
+Americas), which is either 5 or 4 hours behind UTC, depending on whether
+daylight saving time is in effect. When I ran my test, I wanted the e-mails to
+be sent near 18:30 in my local time zone, and daylight saving time was not in
+effect, so I scheduled the job for 23:30 UTC.&lt;/p&gt;
+&lt;p&gt;Configuring the jobs with an offset is not particularly onerous, but it does
+mean that once daylight saving time takes effect, users will see their e-mails
+start arriving an hour later in the day. This is annoying, but can be worked
+around in a variety of ways. I'll probably just configure the notification job
+to run at 10:00 UTC, so e-mails arrive near 5:00 local time in the winter and
+6:00 in the summer.&lt;/p&gt;
+&lt;p&gt;Some alternatives to having the e-mail delivery time shift with the seasons are
+to pay for a more expensive and sophisticated scheduler, or to further
+workaround by having 2 scheduled jobs. One could run at 10:00 UTC and one at
+11:00 UTC. They could each check whether daylight saving time were active in the
+Eastern Time Zone, ensuring that only the proper job ran. But I'll leave that
+for later. Or never.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="progress"&gt;
+&lt;h2&gt;Progress&lt;/h2&gt;
+&lt;p&gt;Three of nine requirements have been met.&lt;/p&gt;
+&lt;table class="m-table"&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;web app hosting&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scheduled jobs&lt;/td&gt;
+&lt;td&gt;run in UTC, requiring job start times be offset from local time&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-primary"&gt;next&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scraping library websites on users' behalf&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;small persistent datastore&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;social authentication&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;sending e-mail&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;nearly free&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;job queues&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;custom domain name&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="cron"></category></entry><entry><title>Sending Email from Heroku</title><link href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" rel="alternate"></link><published>2020-03-05T00:00:00-05:00</published><updated>2020-03-05T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-05:/2020/03/05/sending-email-from-heroku/</id><summary type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
 requirement is having a scheduled job for LibraryHippo to check families' status
 and notify them. However rather than trying to satisfy that requirement, this
 time I'm going to try to set up email sending, mostly because it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
