@@ -48,7 +48,7 @@
               </a></h1>
               <div class="article-metadata">
                 <span><i class="fas fa-calendar"></i><time
-                    datetime="2020-04-04T00:00:00-04:00">2020-04-04</time></span>
+                    datetime="2020-04-09T00:00:00-04:00">2020-04-09</time></span>
                 <span><i class="fas fa-folder"></i><a
                     href="https://blairconrad.com/category/development.html"></i>Development</a></span>
                 <span><i class="fas fa-tags"></i>
@@ -122,7 +122,7 @@ credentials to the website, but it failed miserably. The reason: hidden fields.
 The login page looks like it has 4 inputs, counting the &quot;Submit&quot; button as an
 input:</p>
 <figure class="m-figure">
-<img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-login-form.png" />
+<img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/drafts/2020/04/09/scraping-library-websites/wpl-login-form.png" />
 <figcaption>Waterloo Public Library patron login form</figcaption>
 </figure>
 <p>But there are actually 6. The four we see and two hidden ones, called <code>lt</code> and <code>_eventId</code>:</p>
@@ -219,7 +219,7 @@ well as some links that would allow them to update their account and, most
 importantly, a link to their holds and one to their checkouts, right at the
 bottom of the box above the &quot;Log Out&quot; button.</p>
 <figure class="m-figure">
-<img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-patron-summary.png" />
+<img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/drafts/2020/04/09/scraping-library-websites/wpl-patron-summary.png" />
 <figcaption>Waterloo Public Library patron summary</figcaption>
 </figure>
 <p>It's those last two that we'll be going after. Unfortunately, the links aren't
@@ -278,7 +278,7 @@ absolute URLs.</p>
 <h3>Loading the Holds</h3>
 <p>The hold page repeats the same personal information from the summary page, and then lists all the patron's holds in a table.</p>
 <figure class="m-figure">
-<img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl_holds.png" />
+<img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/drafts/2020/04/09/scraping-library-websites/wpl_holds.png" />
 <figcaption>The holds page</figcaption>
 </figure>
 <p>And the HTML behind the table starts like this:</p>
@@ -398,7 +398,7 @@ frozen.</p>
 one, listing the attributes. It's not pretty, and would be better as a Jinja
 template, but it's good enough for a proof of concept.</p>
 <figure class="m-figure">
-<img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/check-card-holds-local.png" />
+<img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/drafts/2020/04/09/scraping-library-websites/check-card-holds-local.png" />
 <figcaption>Checked holds at Waterloo Public Library</figcaption>
 </figure>
 </section>
@@ -452,7 +452,7 @@ parser and have BeautifulSoup use it:</p>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">PIN</span><span class="p">=</span><span class="n">9876</span></pre>
 <p>And voila:</p>
 <figure class="m-figure">
-<img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/drafts/2020/04/04/scraping-library-websites/wpl-hold-and-checkout-heroku.png" />
+<img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/drafts/2020/04/09/scraping-library-websites/wpl-hold-and-checkout-heroku.png" />
 <figcaption>Card check results on Heroku</figcaption>
 </figure>
 </section>
