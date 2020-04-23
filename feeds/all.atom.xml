@@ -1,5 +1,355 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-04-09T00:00:00-04:00</updated><entry><title>Scraping Library Websites</title><link href="https://blairconrad.com/2020/04/09/scraping-library-websites/" rel="alternate"></link><published>2020-04-09T00:00:00-04:00</published><updated>2020-04-09T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-09:/2020/04/09/scraping-library-websites/</id><summary type="html">&lt;p&gt;Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-04-23T00:00:00-04:00</updated><entry><title>A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+scrape the Waterloo Public Library's website. All it needs is a datastore to tie
+these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
+&lt;section id="move-rendering-out-of-library"&gt;
+&lt;h2&gt;Move rendering out of library&lt;/h2&gt;
+&lt;p&gt;Last time, the &lt;code&gt;WPL.check_card&lt;/code&gt; method scraped a …&lt;/p&gt;&lt;/section&gt;</summary><content type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+scrape the Waterloo Public Library's website. All it needs is a datastore to tie
+these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
+&lt;section id="move-rendering-out-of-library"&gt;
+&lt;h2&gt;Move rendering out of library&lt;/h2&gt;
+&lt;p&gt;Last time, the &lt;code&gt;WPL.check_card&lt;/code&gt; method scraped a patron's holds and checkouts,
+and rendered them as HTML for display to the user. It would be better to have
+the library build a data structure, which can be stored for later use or
+rendered by the web app.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check_card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;patron&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pin&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;session&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Session&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;summary_page&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;patron&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pin&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;holds_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urljoin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login_url&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+        &lt;span class="n"&gt;summary_page&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/holds$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;checkouts_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;urllib&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;parse&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;urljoin&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login_url&lt;/span&gt;&lt;span class="p"&gt;(),&lt;/span&gt;
+        &lt;span class="n"&gt;summary_page&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;find&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;a&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;href&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;re&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;compile&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/items$&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;href&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;holds&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_holds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;holds_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;checkouts&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get_checkouts&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;checkouts_url&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;holds&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;checkouts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;checkouts&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/libraries/wpl.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;&amp;quot;Data structure&amp;quot; is maybe too fancy a term for &amp;quot;dictionary with two values&amp;quot;, but
+it's a start.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/check&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;card_check_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WPL&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PATRON_NAME&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;CARD_NUMBER&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;PIN&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Holds&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hold&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;card_check_result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;dl&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;hold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;dt&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{k}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dt&amp;gt;&amp;lt;dd&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{v}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dd&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/dl&amp;gt;&amp;lt;hr&amp;gt;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Checkouts&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;card_check_result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkouts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;dl&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+            &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;dt&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{k}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dt&amp;gt;&amp;lt;dd&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{v}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dd&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/dl&amp;gt;&amp;lt;hr&amp;gt;&amp;quot;&lt;/span&gt;
+
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="create-a-local-database"&gt;
+&lt;h2&gt;Create a local database&lt;/h2&gt;
+&lt;p&gt;Flask doesn't come with a database of its own, like some web frameworks, but
+there's an extension,
+&lt;a href="https://flask-sqlalchemy.palletsprojects.com/en/2.x/"&gt;Flask-SQLAlchemy&lt;/a&gt;, that
+helps it work with the &lt;a href="https://www.sqlalchemy.org/"&gt;SQLAlchemy&lt;/a&gt; Object
+Relational Mapper. These will let LibraryHippo interact with databases both
+locally and on Heroku. It's good practice to track changes to the database
+schema using &lt;a href="https://github.com/miguelgrinberg/flask-migrate"&gt;Flask-Migrate&lt;/a&gt;,
+so I'll install that as well.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Flask-SQLAlchemy&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Flask-Migrate&lt;/span&gt;
+&lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Flask needs some configuration settings to access the database.
+&lt;code&gt;SQLALCHEMY_DATABASE_URI&lt;/code&gt; describes how the application can contact the
+database. In this case, there's a reasonable default, a local SQLite instance.
+The &lt;code&gt;SQLALCHEMY_TRACK_MODIFICATIONS&lt;/code&gt; setting will keep the database from
+signalling the application whenever the database content changes.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;object&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="c1"&gt;# …&lt;/span&gt;
+    &lt;span class="c1"&gt;# Remove PATRON_NAME, CARD_NUMBER, and PIN, as they&amp;#39;ll move to the database&lt;/span&gt;
+
+    &lt;span class="n"&gt;SQLALCHEMY_DATABASE_URI&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;DATABASE_URL&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;sqlite:///&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;path&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;join&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;basedir&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;app.db&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;SQLALCHEMY_TRACK_MODIFICATIONS&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="kc"&gt;False&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;config.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Then the application needs to be taught about the database and migration facilities:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="c1"&gt;# …&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_migrate&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Migrate&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_sqlalchemy&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;SQLAlchemy&lt;/span&gt;
+
+&lt;span class="c1"&gt;# …&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Flask&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="vm"&gt;__name__&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;from_object&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;mail&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Mail&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;SQLAlchemy&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;migrate&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Migrate&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;routes&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/__init__.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="add-a-card"&gt;
+&lt;h2&gt;Add a Card&lt;/h2&gt;
+&lt;p&gt;The application now has the ability to talk to the database, but there's no
+schema defined. Let's add a model and insert a record.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;primary_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;patron_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;32&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;pin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;16&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+    &lt;span class="n"&gt;last_state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Text&lt;/span&gt;&lt;span class="p"&gt;())&lt;/span&gt;
+
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="fm"&gt;__repr__&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="bp"&gt;self&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;Patron &lt;/span&gt;&lt;span class="si"&gt;{self.patron_name}&lt;/span&gt;&lt;span class="s2"&gt;&amp;gt;&amp;quot;&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/__init__.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Every model gets an &lt;code&gt;id&lt;/code&gt;, for convenience, and the next 3 fields will be
+familiar from the previous article—they identify the card and control access to
+the library card state. The last field, &lt;code&gt;last_state&lt;/code&gt;, will be used to record
+the last-checked card state. It'll hold a JSON-formatted version of the
+dictionary that appears above.&lt;/p&gt;
+&lt;section id="initialize-the-database"&gt;
+&lt;h3&gt;Initialize the database&lt;/h3&gt;
+&lt;p&gt;Now initialize a schemaless database, add the first migration script for the
+&lt;code&gt;Card&lt;/code&gt; model, and actually upgrade the database schema:&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="n"&gt;init&lt;/span&gt;
+&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="n"&gt;migrate&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Add Card model&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;Creating directory D:\Sandbox\LibraryHippo\migrations ...  done
+Creating directory D:\Sandbox\LibraryHippo\migrations\versions ...  done
+Generating D:\Sandbox\LibraryHippo\migrations\alembic.ini ...  done
+Generating D:\Sandbox\LibraryHippo\migrations\env.py ...  done
+Generating D:\Sandbox\LibraryHippo\migrations\README ...  done
+Generating D:\Sandbox\LibraryHippo\migrations\script.py.mako ...  done
+Please edit configuration/connection/logging settings in &amp;#39;D:\\Sandbox\\LibraryHippo\\migrations\\alembic.ini&amp;#39; before proceeding.
+
+Generating D:\Sandbox\LibraryHippo\migrations\versions\b2fc8df2f32f_add_card_model.py ...  done&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="insert-a-card-into-the-database"&gt;
+&lt;h3&gt;Insert a card into the database&lt;/h3&gt;
+&lt;p&gt;Normally cards would be added to the database by the users, via a fancy form. For now, the &lt;code&gt;flask shell&lt;/code&gt; will do.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;
+&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;v3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;8.1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;b293b6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dec&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="mi"&gt;2019&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;39&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;MSC&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1916&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;bit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Intel&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;win32&lt;/span&gt;
+&lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;production&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Instance&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;\&lt;span class="n"&gt;Sandbox&lt;/span&gt;\&lt;span class="n"&gt;LibraryHippo&lt;/span&gt;\&lt;span class="n"&gt;instance&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patron_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Blair Conrad&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;123456789&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;9876&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Patron&lt;/span&gt; &lt;span class="n"&gt;Blair&lt;/span&gt; &lt;span class="n"&gt;Conrad&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="load-the-card-from-the-database-and-store-the-check-results"&gt;
+&lt;h2&gt;Load the card from the database and store the check results&lt;/h2&gt;
+&lt;p&gt;The &lt;code&gt;Config&lt;/code&gt; class no longer has the hard-coded patron name, card number, and
+PIN values added last time, so the &lt;code&gt;check&lt;/code&gt; route must load them from the
+database and save the result back onto the card:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="c1"&gt;# …&lt;/span&gt;
+&lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="nn"&gt;json&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;
+
+&lt;span class="c1"&gt;# …&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/check&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;check&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# a hack - we know there&amp;#39;s only 1 card for now&lt;/span&gt;
+    &lt;span class="n"&gt;card_check_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WPL&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;dumps&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card_check_result&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="c1"&gt;# rendering code…&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;The stored result can be seen by querying the database via &lt;code&gt;flask shell&lt;/code&gt;:&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;
+&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;tags&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;v3&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mf"&gt;8.1&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="n"&gt;b293b6&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dec&lt;/span&gt; &lt;span class="mi"&gt;18&lt;/span&gt; &lt;span class="mi"&gt;2019&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;39&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;24&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;MSC&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1916&lt;/span&gt; &lt;span class="mi"&gt;32&lt;/span&gt; &lt;span class="n"&gt;bit&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Intel&lt;/span&gt;&lt;span class="p"&gt;)]&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;win32&lt;/span&gt;
+&lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;production&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Instance&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;D&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;\&lt;span class="n"&gt;Sandbox&lt;/span&gt;\&lt;span class="n"&gt;LibraryHippo&lt;/span&gt;\&lt;span class="n"&gt;instance&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_state&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;&lt;span class="s1"&gt;&amp;#39;{&amp;quot;holds&amp;quot;: [{&amp;quot;Title&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;nBlood heir / Am&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;u00e9lie Wen Zhao&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&amp;quot;, &amp;quot;Status&amp;quot;: &amp;quot; 2 of 2 holds &amp;quot;, &amp;quot;Pickup&amp;quot;: &amp;quot;WPL McCormick Branch&amp;quot;, &amp;quot;Cancel&amp;quot;: &amp;quot;09-17-20&amp;quot;, &amp;quot;Freeze&amp;quot;: true}, {&amp;quot;Title&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;nEducated : a memoir / Tara Westover&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&amp;quot;, &amp;quot;Status&amp;quot;: &amp;quot; 1 of 2 holds &amp;quot;, &amp;quot;Pickup&amp;quot;: &amp;quot;WPL McCormick Branch&amp;quot;, &amp;quot;Cancel&amp;quot;: &amp;quot;09-28-20&amp;quot;, &amp;quot;Freeze&amp;quot;: true}, {&amp;quot;Title&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;nCoders : the making of a new tribe and the remaking of the world / Clive Thompson&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&amp;quot;, &amp;quot;Status&amp;quot;: &amp;quot; 1 of 1 holds &amp;quot;, &amp;quot;Pickup&amp;quot;: &amp;quot;WPL McCormick Branch&amp;quot;, &amp;quot;Cancel&amp;quot;: &amp;quot;10-16-20&amp;quot;, &amp;quot;Freeze&amp;quot;: true}, {&amp;quot;Title&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;nBecoming Superman : my journey from poverty to Hollywood : with stops along the way at murder, mayhem, movie stars, cults, slums, sociopaths, and war crimes / J. Michael Straczynski ; introduction by Neil Gaiman&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&amp;quot;, &amp;quot;Status&amp;quot;: &amp;quot; 1 of 1 holds &amp;quot;, &amp;quot;Pickup&amp;quot;: &amp;quot;WPL McCormick Branch&amp;quot;, &amp;quot;Cancel&amp;quot;: &amp;quot;11-02-20&amp;quot;, &amp;quot;Freeze&amp;quot;: true}, {&amp;quot;Title&amp;quot;: &amp;quot;&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;nBatman : Creature of the Night / illustrated by John Paul Leon.&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&lt;/span&gt;&lt;span class="se"&gt;\\&lt;/span&gt;&lt;span class="s1"&gt;n&amp;quot;, &amp;quot;Status&amp;quot;: &amp;quot; 4 of 6 holds &amp;quot;, &amp;quot;Pickup&amp;quot;: &amp;quot;WPL McCormick Branch&amp;quot;, &amp;quot;Cancel&amp;quot;: &amp;quot;11-06-2&lt;/span&gt;&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="use-the-stored-card-check-result-to-send-e-mail"&gt;
+&lt;h2&gt;Use the stored card check result to send e-mail&lt;/h2&gt;
+&lt;p&gt;Now that the database contains the result of the last card status check, it's
+relatively straightforward to include that text in the notification e-mails. All
+that's required is to load the card record, deserialize the saved state using
+&lt;code&gt;json.loads&lt;/code&gt;, and build the HTML:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="c1"&gt;# …&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;
+
+&lt;span class="c1"&gt;# …&lt;/span&gt;
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;register&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;cli&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;command&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;notify-all&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;notify_all&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+        &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;models&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;  &lt;span class="c1"&gt;# a hack - we know there&amp;#39;s only 1 card for now&lt;/span&gt;
+        &lt;span class="n"&gt;last_card_state&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;json&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;loads&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;last_state&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Holds&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;hold&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;last_card_state&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+            &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;dl&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;hold&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+                &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;dt&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{k}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dt&amp;gt;&amp;lt;dd&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{v}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dd&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/dl&amp;gt;&amp;lt;hr&amp;gt;&amp;quot;&lt;/span&gt;
+
+        &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;h1&amp;gt;Checkouts&amp;lt;/h1&amp;gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;last_card_state&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;checkouts&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]:&lt;/span&gt;
+            &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;dl&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="k"&gt;for&lt;/span&gt; &lt;span class="n"&gt;k&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;v&lt;/span&gt; &lt;span class="ow"&gt;in&lt;/span&gt; &lt;span class="n"&gt;checkout&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;items&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+                &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;dt&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{k}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dt&amp;gt;&amp;lt;dd&amp;gt;&lt;/span&gt;&lt;span class="si"&gt;{v}&lt;/span&gt;&lt;span class="s2"&gt;&amp;lt;/dd&amp;gt;&amp;quot;&lt;/span&gt;
+            &lt;span class="n"&gt;html_body&lt;/span&gt; &lt;span class="o"&gt;+=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;&amp;lt;/dl&amp;gt;&amp;lt;hr&amp;gt;&amp;quot;&lt;/span&gt;
+
+        &lt;span class="n"&gt;now&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;datetime&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;now&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;isoformat&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+        &lt;span class="n"&gt;msg&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Message&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="s2"&gt;&amp;quot;LibraryHippo starting notifications&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;recipients&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;blair@blairconrad.com&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;body&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="sa"&gt;f&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;starting notifications at &lt;/span&gt;&lt;span class="si"&gt;{now}&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;
+        &lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;html&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;html_body&lt;/span&gt;
+
+        &lt;span class="n"&gt;mail&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;send&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;msg&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+        &lt;span class="c1"&gt;# …&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/cli.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="deploy-to-heroku"&gt;
+&lt;h2&gt;Deploy to Heroku&lt;/h2&gt;
+&lt;p&gt;There's nothing left to do but try this out on Heroku. It shouldn't be too much work.&lt;/p&gt;
+&lt;section id="add-and-configure-a-database-plugin"&gt;
+&lt;h3&gt;Add and configure a database plugin&lt;/h3&gt;
+&lt;p&gt;Heroku has a free hobby-tier PostgreSQL addon that you can add on right from the command line:&lt;/p&gt;
+&lt;figure class="m-console-figure"&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;addons&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt; &lt;span class="n"&gt;heroku-postgresql&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;hobby-dev&lt;/span&gt;&lt;/pre&gt;
+&lt;pre class="m-nopad m-code"&gt;Creating heroku-postgresql:hobby-dev on ⬢ libraryhippo... free
+Database has been created and is available
+! This database is empty. If upgrading, you can transfer
+! data from another database with pg:copy
+Created ·················· as DATABASE_URL
+Use heroku addons:docs heroku-postgresql to view documentation&lt;/pre&gt;
+&lt;/figure&gt;
+&lt;p&gt;The addon sets the &lt;code&gt;DATABASE_URL&lt;/code&gt; environment variable, which
+is the one that the &lt;code&gt;Config.SQLALCHEMY_TRACK_MODIFICATIONS&lt;/code&gt; attribute is
+populated from.&lt;/p&gt;
+&lt;p&gt;SQLAlchemy needs a bonus &lt;code&gt;psycopg2&lt;/code&gt; package to connect to the database, and
+there's no harm in having it installed when I'm testing locally, so I'll just
+add it to &lt;code&gt;requirements.txt&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;psycopg2&lt;/span&gt;
+&lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Finally, the application startup should perform the database migration, to react
+to any new model changes. This requires an extra command before starting gunicorn:&lt;/p&gt;
+&lt;pre class="m-code"&gt;web: flask db upgrade; gunicorn libraryhippo:app&lt;/pre&gt;
+&lt;p&gt;And the only thing left to do is deploy.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="store-a-library-card"&gt;
+&lt;h3&gt;Store a library card&lt;/h3&gt;
+&lt;p&gt;I'll store the library card to the PostgreSQL database just as with the local
+sqlite instance. The only difference is that instead of running &lt;code&gt;flask shell&lt;/code&gt;
+directly, I use Heroku's facility to run a one-off command via &lt;code&gt;heroku run&lt;/code&gt;:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt;
+&lt;span class="n"&gt;Running&lt;/span&gt; &lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;shell&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="err"&gt;⬢&lt;/span&gt; &lt;span class="n"&gt;libraryhippo&lt;/span&gt;&lt;span class="o"&gt;...&lt;/span&gt; &lt;span class="n"&gt;up&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;run&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;4950&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;Free&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="n"&gt;Python&lt;/span&gt; &lt;span class="mf"&gt;3.8&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;default&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;Dec&lt;/span&gt; &lt;span class="mi"&gt;23&lt;/span&gt; &lt;span class="mi"&gt;2019&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="mi"&gt;04&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;19&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;&lt;span class="mi"&gt;22&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;GCC&lt;/span&gt; &lt;span class="mf"&gt;7.4&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="n"&gt;on&lt;/span&gt; &lt;span class="n"&gt;linux&lt;/span&gt;
+&lt;span class="n"&gt;App&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="n"&gt;production&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+&lt;span class="n"&gt;Instance&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;/&lt;/span&gt;&lt;span class="n"&gt;instance&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;patron_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Blair Conrad&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;number&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;123456789&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;pin&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;9876&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="o"&gt;&amp;gt;&amp;gt;&amp;gt;&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;all&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="o"&gt;&amp;lt;&lt;/span&gt;&lt;span class="n"&gt;Patron&lt;/span&gt; &lt;span class="n"&gt;Blair&lt;/span&gt; &lt;span class="n"&gt;Conrad&lt;/span&gt;&lt;span class="o"&gt;&amp;gt;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;With that done, there was no need to keep the old environment variables that encoded my library credentials, so I removed them:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;unset&lt;/span&gt; &lt;span class="n"&gt;PATRON_NAME&lt;/span&gt; &lt;span class="n"&gt;CARD_NUMBER&lt;/span&gt; &lt;span class="n"&gt;PIN&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="wait-for-the-e-mail"&gt;
+&lt;h3&gt;Wait for the e-mail&lt;/h3&gt;
+&lt;p&gt;And that's it. I did visit &lt;code&gt;/check&lt;/code&gt; on the website to ensure there was a
+cached card status, and there was nothing else to do but wait until 18:30 local
+time to see everything work together. Sure enough, the task woke up, read the
+stored data, and used it in the e-mail:&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of notification e-mail sent from Heroku using stored card status" src="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/heroku-notification-using-stored-status.png" /&gt;
+&lt;figcaption&gt;Notification e-mail sent from Heroku using stored card status&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="progress"&gt;
+&lt;h2&gt;Progress&lt;/h2&gt;
+&lt;p&gt;Five of nine requirements have been met!&lt;/p&gt;
+&lt;table class="m-table"&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;web app hosting&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scheduled jobs (run in UTC)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scraping library websites on users' behalf&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;small persistent datastore&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-primary"&gt;next&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;social authentication&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;sending e-mail&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;nearly free&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;job queues&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;custom domain name&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="database"></category></entry><entry><title>Scraping Library Websites</title><link href="https://blairconrad.com/2020/04/09/scraping-library-websites/" rel="alternate"></link><published>2020-04-09T00:00:00-04:00</published><updated>2020-04-09T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-09:/2020/04/09/scraping-library-websites/</id><summary type="html">&lt;p&gt;Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
 to provide it with meaningful content to send, by having it scrape a library's
 website. This should be relatively straightforward, but there's some risk as
 it's not an operation covered in
