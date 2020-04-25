@@ -391,7 +391,7 @@ Six of nine requirements have been met!
     :label-success:`done`, scheduled jobs (run in UTC)
     :label-success:`done`, scraping library websites on users' behalf,
     :label-success:`done`, small persistent datastore,
-    :label-primary:`done`, social authentication,
+    :label-success:`done`, social authentication,
     :label-success:`done`, sending e-mail,
        , nearly free,
        , job queues,
