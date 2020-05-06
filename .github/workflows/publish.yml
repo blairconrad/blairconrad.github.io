@@ -26,4 +26,4 @@ jobs:
         git config --local user.email "blair@blairconrad.com"
         git config --local user.name "Blair Conrad [bot]"
         git add .
-        git diff --name-only --exit-code || { git commit -m "Publish article on $(date --iso-8601=date)"; git push; }
+        git diff --cached --name-only --exit-code || { git commit -m "Publish article on $(date --iso-8601=date)"; git push; }
