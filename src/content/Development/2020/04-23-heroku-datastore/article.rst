@@ -3,6 +3,10 @@ A Small Heroku Datastore
 
 :tags: LibraryHippo, flask, heroku, database
 :series: LibraryHippo 2020
+:summary:
+    Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+    scrape the Waterloo Public Library's website. All it needs is a datastore to tie
+    these concepts together into a decoupled "push card status to patrons" pipeline.
 
 Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
 scrape the Waterloo Public Library's website. All it needs is a datastore to tie
