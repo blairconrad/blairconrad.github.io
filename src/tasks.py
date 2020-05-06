@@ -172,7 +172,6 @@ def publish(c, token=""):
         print("No draft found. Exiting.")
         return
 
-    update_theme_and_plugins(c)
     preview(c)
 
     now_slug = now.strftime("%Y-%m-%d")
@@ -199,9 +198,3 @@ def gh_pages(c):
         "-m {commit_message} "
         "{deploy_path} -p".format(**CONFIG)
     )
-
-
-@task
-def update_theme_and_plugins(c):
-    """Use peru to update the theme and plugins"""
-    c.run("peru sync")

@@ -14,8 +14,7 @@ TIMEZONE = "America/Toronto"
 DEFAULT_LANG = "en"
 DEFAULT_DATE_FORMAT = "%Y-%m-%d"
 
-PLUGIN_PATHS = ["plugins"]
-PLUGINS = ["series"]
+PLUGINS = ["pelican.plugins.series"]
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -75,7 +74,7 @@ M_CSS_FILES = [
 
 M_THEME_COLOR = "#22272e"
 
-PLUGIN_PATHS += ["m.css/plugins"]
+PLUGIN_PATHS = ["m.css/plugins"]
 PLUGINS += ["m.htmlsanity", "m.code", "m.components", "m.images"]
 
 
