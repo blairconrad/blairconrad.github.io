@@ -1,9 +1,7 @@
 /_local_build/
-/docs/
-/src/plugins/
+/drafts/
 /src/themes/
 /src/venv/
 
 __pycache__/
-.peru/
 .pytest_cache/
