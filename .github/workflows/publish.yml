@@ -15,9 +15,16 @@ jobs:
     - uses: actions/setup-python@v1
       with:
         python-version: '3.8'
-    - name: publish
+    - name: build site
       run: |
         cd src
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        inv publish --token ${{ secrets.GITHUB_TOKEN }}
+        inv preview
+    - name: publish changes
+      run: |
+        git config --local user.email "blair@blairconrad.com"
+        git config --local user.name "Blair Conrad [bot]"
+        git add .
+        git commit -m "Publish article'
+        git push
