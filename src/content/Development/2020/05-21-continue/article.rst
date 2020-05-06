@@ -3,11 +3,19 @@ Recap and decision
 
 :tags: LibraryHippo, flask
 :series: LibraryHippo 2020
-  
+
 In each of last six articles I've satisfied one of the high-risk requirements I
 had for moving LibraryHippo to the Flask framework, with the goal of hosting it
-on Heroku. This leaves three "softer" requirements unaddressed, which I'll do
+on Heroku. This leaves three "softer" requirements open, which I'll address
 here.
+
+(Aside: It feels a little weird working on this conversion while my local
+libraries (and many others across the world) are closed due to the 2019–2020
+coronavirus pandemic. I'm unable to take books out or put them on hold for
+testing purposes, and it's not clear when the libraries will reopen. And maybe
+I'll be reluctant to borrow library materials for a while after they do open.
+Still, I'm hopeful that the libraries will return to normal, and in the meantime
+this is a fun project, so I might as well continue the series.)
 
 Remaining requirements
 ======================
@@ -41,7 +49,7 @@ looks like it'll continue to meet my needs.
 Next steps
 ==========
 
-I feel good about meeting my requirements, so I'm going continue converting the
+I feel good about meeting my requirements, so I'm going to continue converting the
 application. Part of this will be fleshing out the skeleton that's there now;
 for example, the library site scraping is nowhere near as robust as the current
 LibraryHippo, and the site looks *terrible*. The remaining work will be adding
@@ -50,6 +58,7 @@ the features and underpinnings that are missing, such as:
 * family management
 * card management
 * automated tests on the backend
+* migrating users from the old application
 
 Some of these steps may warrant a blog post, and some might not. We'll see how
 it goes.
