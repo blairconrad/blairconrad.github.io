@@ -2,9 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-04-23T00:00:00-04:00</updated><entry><title>A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
 scrape the Waterloo Public Library's website. All it needs is a datastore to tie
 these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
-&lt;section id="move-rendering-out-of-library"&gt;
-&lt;h2&gt;Move rendering out of library&lt;/h2&gt;
-&lt;p&gt;Last time, the &lt;code&gt;WPL.check_card&lt;/code&gt; method scraped a …&lt;/p&gt;&lt;/section&gt;</summary><content type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+</summary><content type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
 scrape the Waterloo Public Library's website. All it needs is a datastore to tie
 these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
 &lt;section id="move-rendering-out-of-library"&gt;
