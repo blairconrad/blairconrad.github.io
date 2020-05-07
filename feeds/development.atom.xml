@@ -1,5 +1,359 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-04-23T00:00:00-04:00</updated><entry><title>A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-07T00:00:00-04:00</updated><entry><title>Social Login</title><link href="https://blairconrad.com/2020/05/07/social-login/" rel="alternate"></link><published>2020-05-07T00:00:00-04:00</published><updated>2020-05-07T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-07:/2020/05/07/social-login/</id><summary type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
+hole is that it treats every visitor the same. We need to be able to distinguish
+one user from the next and to retain information about them between visits, such
+as which family they belong to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
+hole is that it treats every visitor the same. We need to be able to distinguish
+one user from the next and to retain information about them between visits, such
+as which family they belong to.&lt;/p&gt;
+&lt;p&gt;Rather than have users create new login identities and passwords (and worry
+about securely storing those passwords), I'm going to use social logins. The old
+LibraryHippo application supported login via a Google account, and I'll do the
+same here, while leaving the door open to add other vectors in the future.&lt;/p&gt;
+&lt;section id="new-requirements"&gt;
+&lt;h2&gt;New Requirements&lt;/h2&gt;
+&lt;p&gt;We'll need new software to perform the authentication and user management. The
+&lt;a href="https://flask-login.readthedocs.io/en/latest/"&gt;Flask-Login&lt;/a&gt; package adds
+support for storing user objects and managing their sessions, and
+&lt;a href="https://authomatic.github.io/authomatic/"&gt;Authomatic&lt;/a&gt; simplifies
+authentication via OAuth2 providers such as Google (and many more). Install them
+both:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Flask-Login&lt;/span&gt;
+&lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Authomatic&lt;/span&gt;
+&lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="register-with-google"&gt;
+&lt;h2&gt;Register with Google&lt;/h2&gt;
+&lt;p&gt;Google requires applications using it as an OAuth provider to register and
+obtain credentials which must be presented when authenticating users. I visit
+the
+&lt;a href="https://console.developers.google.com/apis/dashboard"&gt;APIs &amp;amp; Services Dashboard&lt;/a&gt;,
+create a new project, and add a new Web application OAuth Client ID. I added 3
+Authorised redirect URIs, which are the URIs that lead to the Flask route that
+will handle login. Authomatic sends its current URI to Google when
+authenticating, and Google redirects back to the URI (with an additional token)
+after authenticating the user. As a security measure, Google will only redirect
+back to known URIs.&lt;/p&gt;
+&lt;p&gt;I added&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href="http://localhost:5000/login/google/"&gt;http://localhost:5000/login/google/&lt;/a&gt; (for testing locally)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://libraryhippo.herokuapp.com/login/google/"&gt;https://libraryhippo.herokuapp.com/login/google/&lt;/a&gt; (for when I deploy to Heroku), and&lt;/li&gt;
+&lt;li&gt;&lt;a href="http://libraryhippo.com/login/google/"&gt;http://libraryhippo.com/login/google/&lt;/a&gt; (for when I eventually point the domain name to Heroku)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;and was rewarded with a &lt;em&gt;Client ID&lt;/em&gt; and a &lt;em&gt;Client secret&lt;/em&gt;, which are needed by Authomatic.&lt;/p&gt;
+&lt;p&gt;I also configured the OAuth consent screen, which controls what users see when
+they are redirected to Google. I added an application name and Application logo.
+Since we only need to identify a user, I left the scopes limited to the minimum:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;email&lt;/li&gt;
+&lt;li&gt;profile, and&lt;/li&gt;
+&lt;li&gt;openid&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;I don't have an Application Privacy Policy link, so left it blank. This seems to
+prevent me from &amp;quot;verifying&amp;quot; the application. So far it hasn't been an issue for
+testing, but I'll keep an eye on it.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="new-configuration"&gt;
+&lt;h2&gt;New Configuration&lt;/h2&gt;
+&lt;p&gt;Authomatic knows a lot about its underlying providers, but still needs to be
+told about the Client ID and Client secret obtained above. I'll add those to the
+&lt;code&gt;secrets&lt;/code&gt; file.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="err"&gt;…&lt;/span&gt;
+&lt;span class="n"&gt;OAUTH_GOOGLE_CLIENT_ID&lt;/span&gt;&lt;span class="o"&gt;=********.&lt;/span&gt;&lt;span class="n"&gt;apps&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;googleusercontent&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;
+&lt;span class="n"&gt;OAUTH_GOOGLE_CLIENT_SECRET&lt;/span&gt;&lt;span class="o"&gt;=********&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;secrets&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Of course these need to be provided to the application through the &lt;code&gt;Config&lt;/code&gt; class:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authomatic.providers&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;oauth2&lt;/span&gt;
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="n"&gt;OAUTH&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="s2"&gt;&amp;quot;google&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;class_&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;oauth2&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Google&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;consumer_key&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;OAUTH_GOOGLE_CLIENT_ID&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;consumer_secret&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;OAUTH_GOOGLE_CLIENT_SECRET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;scope&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;profile&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;email&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;],&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;os&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;environ&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;SECRET_KEY&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt; &lt;span class="ow"&gt;or&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;MeF+3?N&amp;#39;,Nmsn39v]&amp;quot;&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;config.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;This will tell Authomatic that there's a provider named &amp;quot;google&amp;quot; that is a
+Google provider, and what the consumer ID and secret are. The &amp;quot;scope&amp;quot; entry in
+the dictionary controls what Authomatic asks for from Google. If I don't specify
+this, it won't load the user's email.&lt;/p&gt;
+&lt;p&gt;The other new entry, &lt;code&gt;SECRET_KEY&lt;/code&gt;, is a
+&lt;a href="https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY"&gt;Flask concept&lt;/a&gt;
+that's used to sign its session cookie. It should be treated as a secret; the
+default value is just supplied to make local testing easier.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="the-user-model"&gt;
+&lt;h2&gt;The User Model&lt;/h2&gt;
+&lt;p&gt;Flask-Login will persist to any backing store, but the database makes the most
+sense for LibraryHippo. The new &lt;code&gt;User&lt;/code&gt; model will store the details of the
+users that have been registered (by logging in):&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_login&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;LoginManager&lt;/span&gt;
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="n"&gt;login_manager&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;LoginManager&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;__init__.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;login_manager&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_login&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;UserMixin&lt;/span&gt;
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="k"&gt;class&lt;/span&gt; &lt;span class="nc"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;UserMixin&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Model&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="nb"&gt;id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Integer&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;primary_key&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;social_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nullable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;unique&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;nickname&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nullable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;email&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;Column&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;String&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;64&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt; &lt;span class="n"&gt;nullable&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;False&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+
+&lt;span class="nd"&gt;@login_manager&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user_loader&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;load_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;int&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="nb"&gt;id&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/models.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;The &lt;code&gt;load_user&lt;/code&gt; function is registered as the Flask-Login &amp;quot;user_loader&amp;quot;.
+Flask-Login will ensure that there's information in the session that can
+identify the active user and will use the function to load the rest of the user
+information from the database.&lt;/p&gt;
+&lt;p&gt;Of course the new model has to be added via SQLAlchemy:&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="n"&gt;migrate&lt;/span&gt; &lt;span class="n"&gt;-m&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Add User model&amp;quot;&lt;/span&gt;
+&lt;span class="n"&gt;flask&lt;/span&gt; &lt;span class="n"&gt;db&lt;/span&gt; &lt;span class="n"&gt;upgrade&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="the-main-event-log-a-user-in"&gt;
+&lt;h2&gt;The main event - log a user in&lt;/h2&gt;
+&lt;p&gt;The above has been prepatory work to allow LibraryHippo to authenticate a user
+via Google, log them into Flask, and save a user record to the database.&lt;/p&gt;
+&lt;p&gt;First, I add an &lt;code&gt;Authomatic&lt;/code&gt; instance to &lt;cite&gt;app&lt;/cite&gt;, initializing it with the OAuth
+configuration and secret key I set up earlier:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;logging.config&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;dictConfig&lt;/span&gt;
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="n"&gt;authomatic&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Authomatic&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;OAUTH&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;secret&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Config&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/__init__.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Now add the login route, which will contain a segment for the Google provider:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;make_response&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;url_for&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_login&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;login_user&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;authomatic.adapters&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;WerkzeugAdapter&lt;/span&gt;
+
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;authomatic&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;
+
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/login/&amp;lt;provider&amp;gt;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;methods&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;GET&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;POST&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;])&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;provider&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;is_anonymous&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+    &lt;span class="n"&gt;response&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_response&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;authomatic&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;login&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="n"&gt;WerkzeugAdapter&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;request&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+        &lt;span class="n"&gt;provider_name&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;provider&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;session_saver&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="k"&gt;lambda&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;save_session&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;&lt;span class="p"&gt;),&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;response&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;update&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+        &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+            &lt;span class="n"&gt;flash&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Authentication failed.&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;logger&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;Authentication failed: &lt;/span&gt;&lt;span class="si"&gt;%s&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;error&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+            &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;
+
+        &lt;span class="n"&gt;social_id&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;provider&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;:&amp;quot;&lt;/span&gt; &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;id&lt;/span&gt;
+        &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;query&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;filter_by&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;social_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;social_id&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;first&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;user&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;User&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+            &lt;span class="n"&gt;social_id&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;social_id&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;nickname&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;name&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;email&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;result&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;email&lt;/span&gt;
+        &lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;add&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+        &lt;span class="n"&gt;db&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;session&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;commit&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="n"&gt;login_user&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;user&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;remember&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="kc"&gt;True&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;There's a lot going on here. The gist is that if the current user is logged in,
+the &lt;code&gt;login&lt;/code&gt; route just redirects to the main page; there's no need to login if
+someone's already logged in.&lt;/p&gt;
+&lt;p&gt;Otherwise, Authomatic attempts to log the user in, via the &lt;code&gt;WerkzeugAdapter&lt;/code&gt;,
+which lets it manipulate the HTTP request and response to direct the flow of the
+application. It's given the current Flask session as well as a callback it can
+use to save the session. Once that succeeds, the user is &amp;quot;updated&amp;quot; to fill in
+extra information such as their name and e-mail address.&lt;/p&gt;
+&lt;p&gt;Then the method attempts to load the user from the database, looking them up by
+combining the provider name and the ID assigned by the provider. If no record
+exists, one is created and saved back to the database for the future. Finally,
+the user is logged into Flask.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="logging-out"&gt;
+&lt;h2&gt;Logging out&lt;/h2&gt;
+&lt;p&gt;Once users are logged in, they might want to log out, maybe so another user can
+check their library cards. This is much easier than the login process. Again, I
+add a new route:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask_login&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;logout_user&lt;/span&gt;
+
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="n"&gt;app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/logout&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+ &lt;span class="n"&gt;logout&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="n"&gt;current_user&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;is_anonymous&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt;
+        &lt;span class="n"&gt;logout_user&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;redirect&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;url_for&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;))&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;It just calls Flask's &lt;code&gt;logout_user&lt;/code&gt; if the user isn't logged in. Then they're
+redirected to the main page.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="add-login-logout-links"&gt;
+&lt;h2&gt;Add login/logout links&lt;/h2&gt;
+&lt;p&gt;Users will need a way to initiate the login process, or to log out if they're
+already logged in, and these links should be available from every page, so I'll
+replace my ad hoc page generation with templates that will centralize those
+functions.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="x"&gt;&amp;lt;!DOCTYPE html&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;&amp;lt;html&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;head&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;title&amp;gt;LibraryHippo&amp;lt;/title&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;/head&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;body&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;nav&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;if&lt;/span&gt; &lt;span class="nv"&gt;current_user.is_anonymous&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;a href=&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;url_for&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;login&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;,&lt;/span&gt; &lt;span class="nv"&gt;provider&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;google&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;quot;&amp;gt;Login&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;else&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &amp;lt;a href=&amp;quot;&lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;url_for&lt;/span&gt;&lt;span class="o"&gt;(&lt;/span&gt;&lt;span class="s1"&gt;&amp;#39;logout&amp;#39;&lt;/span&gt;&lt;span class="o"&gt;)&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;quot;&amp;gt;Logout &lt;/span&gt;&lt;span class="cp"&gt;{{&lt;/span&gt; &lt;span class="nv"&gt;current_user.nickname&lt;/span&gt; &lt;span class="cp"&gt;}}&lt;/span&gt;&lt;span class="x"&gt;&amp;lt;/a&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endif&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;        &lt;/span&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;    &amp;lt;/body&amp;gt;&lt;/span&gt;
+&lt;span class="x"&gt;&amp;lt;/html&amp;gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/templates/base.jinja&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;The &lt;code&gt;base.jinja&lt;/code&gt; template sets up common elements to all the pages of the
+application. Here it checks to see if the user is logged in. If not, it includes
+a link to the login route, and if so, a link to the logout route. The logout
+link includes the user's nickname, mostly to make it easier for me to test.
+The main page has not much to add, so its template is very plain for now:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;extends&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;base.jinja&amp;quot;&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;block&lt;/span&gt; &lt;span class="nv"&gt;body&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;
+&lt;span class="x"&gt;&amp;lt;h1&amp;gt;LibraryHippo 2020&amp;lt;/h1&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;{%&lt;/span&gt; &lt;span class="k"&gt;endblock&lt;/span&gt; &lt;span class="cp"&gt;%}&lt;/span&gt;&lt;span class="x"&gt;&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/templates/index.jinja&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Then the index route is updated to use the template:&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;flask&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;render_template&lt;/span&gt;
+
+&lt;span class="err"&gt;…&lt;/span&gt;
+
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="nd"&gt;@app&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;route&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;/index&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;index&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;render_template&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;index.jinja&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;app/routes.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="how-s-it-look"&gt;
+&lt;h2&gt;How's it look?&lt;/h2&gt;
+&lt;p&gt;From a not-logged-in account, I visit my local LibraryHippo instance:&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of LibraryHippo when the user is not logged in" src="https://blairconrad.com/2020/05/07/social-login/lh-not-logged-in.png" /&gt;
+&lt;figcaption&gt;LibraryHippo when the user is not logged in&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;The new &amp;quot;Login&amp;quot; navigation link appears. When I click it, I'm taken to a
+Google-hosted page where I can select the account I want to use. This screen
+will vary depending on whether I'm already logged into Google, and with how many
+accounts. Note that it indicates what Google account-specific information will
+be shared with LibraryHippo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;name&lt;/li&gt;
+&lt;li&gt;email address&lt;/li&gt;
+&lt;li&gt;language preference (which LibraryHippo doesn't use), and&lt;/li&gt;
+&lt;li&gt;profile picture (which LibraryHippo doesn't use)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of Google asking the user to choose an account to use for login" src="https://blairconrad.com/2020/05/07/social-login/lh-google-choose-account.png" /&gt;
+&lt;figcaption&gt;Google asking the user to choose an account to use for login&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;And finally once I'm logged in, the &amp;quot;Login&amp;quot; link becomes a &amp;quot;Logout&amp;quot; link,
+including my name, which was harvested from Google.&lt;/p&gt;
+&lt;figure class="m-figure"&gt;
+&lt;img alt="screenshot of LibraryHippo when the user is logged in" src="https://blairconrad.com/2020/05/07/social-login/lh-logged-in.png" /&gt;
+&lt;figcaption&gt;LibraryHippo when the user is logged in&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;/section&gt;
+&lt;section id="deploying-to-heroku"&gt;
+&lt;h2&gt;Deploying to Heroku&lt;/h2&gt;
+&lt;p&gt;There almost nothing to this. I already added the Heroku-specific URL to the
+Google configuration, so I just have to generate a &lt;code&gt;SECRET_KEY&lt;/code&gt; and set
+it and the &lt;code&gt;OAUTH_GOOGLE_CLIENT_*&lt;/code&gt; values from earlier.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;OAUTH_GOOGLE_CLIENT_ID&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="err"&gt;…&lt;/span&gt;
+&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;OAUTH_GOOGLE_CLIENT_SECRET&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="err"&gt;…&lt;/span&gt;
+&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;SECRET_KEY&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="err"&gt;…&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="progress"&gt;
+&lt;h2&gt;Progress&lt;/h2&gt;
+&lt;p&gt;Six of nine requirements have been met!&lt;/p&gt;
+&lt;table class="m-table"&gt;
+&lt;tbody&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;web app hosting&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scheduled jobs (run in UTC)&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;scraping library websites on users' behalf&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;small persistent datastore&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;social authentication&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;span class="m-label m-success"&gt;done&lt;/span&gt;&lt;/td&gt;
+&lt;td&gt;sending e-mail&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;nearly free&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;job queues&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;&lt;td&gt;&lt;/td&gt;
+&lt;td&gt;custom domain name&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="login"></category><category term="authomatic"></category></entry><entry><title>A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
 scrape the Waterloo Public Library's website. All it needs is a datastore to tie
 these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and

@@ -2,19 +2,22 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>Blair Conrad</title>
+  <title>Social Login | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
-  <link rel="next" href="https://blairconrad.com/page/2/" />
+  <link rel="canonical" href="https://blairconrad.com/2020/05/07/social-login/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
   <meta property="og:site_name" content="Blair Conrad" />
-  <meta property="og:title" content="Blair Conrad" />
-  <meta name="twitter:title" content="Blair Conrad" />
-  <meta property="og:url" content="https://blairconrad.com/" />
+  <meta property="og:title" content="Social Login" />
+  <meta name="twitter:title" content="Social Login" />
+  <meta property="og:url" content="https://blairconrad.com/2020/05/07/social-login/" />
+  <meta property="og:description" content="I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping hole is that it treats every visitor the same. We need to be able to distinguish one user from the next and to retain information about them between visits, such as which family they belong to …" />
+  <meta name="twitter:description" content="I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping hole is that it treats every visitor the same. We need to be able to distinguish one user from the next and to retain information about them between visits, such as which family they belong to …" />
   <meta name="twitter:card" content="summary" />
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
 </head>
 <body>
 <header><nav id="navigation">
@@ -36,56 +39,55 @@
 <main>
 <div class="m-container">
   <div class="m-row">
-    <div class="m-col-m-12">
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/05/07/social-login/" rel="bookmark" title="Permalink to Social Login">
-                    Social Login
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-05-07T00:00:00-04:00">2020-05-07</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/login.html">login</a>
-                    /
-                    <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
-                  </span>
-                </div>
-              <aside class="m-block m-default">
-                <h3>Part 7 of the LibraryHippo 2020 series:</h3>
-                <ol>
-                  <li>
-                    <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/03/05/sending-email-from-heroku/'>Sending Email from Heroku</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/04/09/scraping-library-websites/'>Scraping Library Websites</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
-                  </li>
-                  <li>
-                    Social Login (this article)
-                  </li>
-                </ol>
-              </aside>
-        </header>
-        <div class="m-clearfix-l"></div>
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2020/05/07/social-login/" rel="bookmark" title="Permalink to Social Login">
+                  Social Login
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-05-07T00:00:00-04:00">2020-05-07</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                  /
+                  <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                  /
+                  <a href="https://blairconrad.com/tag/login.html">login</a>
+                  /
+                  <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
+                </span>
+              </div>
+            <aside class="m-block m-default">
+              <h3>Part 7 of the LibraryHippo 2020 series:</h3>
+              <ol>
+                <li>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/03/05/sending-email-from-heroku/'>Sending Email from Heroku</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/04/09/scraping-library-websites/'>Scraping Library Websites</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                </li>
+                <li>
+                  Social Login (this article)
+                </li>
+              </ol>
+            </aside>
+      </header>
+      <div class="m-clearfix-l"></div>
 <!-- content -->
 <p>I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
 hole is that it treats every visitor the same. We need to be able to distinguish
@@ -439,286 +441,10 @@ it and the <code>OAUTH_GOOGLE_CLIENT_*</code> values from earlier.</p>
 </table>
 </section>
 <!-- /content -->
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="bookmark" title="Permalink to A Small Heroku Datastore">
-                    A Small Heroku Datastore
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-04-23T00:00:00-04:00">2020-04-23</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                    /
-                    <a href="https://blairconrad.com/tag/database.html">database</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 6 of LibraryHippo 2020</span>
-                </div>
-            <p>Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
-          scrape the Waterloo Public Library's website. All it needs is a datastore to tie
-          these concepts together into a decoupled &quot;push card status to patrons&quot; pipeline.</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/04/09/scraping-library-websites/" rel="bookmark" title="Permalink to Scraping Library Websites">
-                    Scraping Library Websites
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-04-09T00:00:00-04:00">2020-04-09</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                    /
-                    <a href="https://blairconrad.com/tag/requests.html">requests</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 5 of LibraryHippo 2020</span>
-                </div>
-            <p>Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
-          to provide it with meaningful content to send, by having it scrape a library's
-          website. This should be relatively straightforward, but there's some risk as
-          it's not an operation covered in
-          <a href="https://blog.miguelgrinberg.com/post/the-flask-mega-tutorial-part-i-hello-world">The Flask Mega-Tutorial</a>.</p>
-          <p>The production application …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" rel="bookmark" title="Permalink to Running Scheduled Tasks on Heroku">
-                    Running Scheduled Tasks on Heroku
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-03-19T00:00:00-04:00">2020-03-19</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                    /
-                    <a href="https://blairconrad.com/tag/cron.html">cron</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 4 of LibraryHippo 2020</span>
-                </div>
-            <p>Having established that a Flask app running on Heroku can send e-mail, I turn my
-          attention to having LibraryHippo do so periodically. The approach will be to
-          change the e-mail-sending to be something that can more easily be triggered from
-          the outside, and then triggering it from from time to …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" rel="bookmark" title="Permalink to Sending Email from Heroku">
-                    Sending Email from Heroku
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-03-05T00:00:00-05:00">2020-03-05</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                    /
-                    <a href="https://blairconrad.com/tag/email.html">email</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 3 of LibraryHippo 2020</span>
-                </div>
-            <p>After getting a do-nothing web app running on Heroku, I think the riskiest
-          requirement is having a scheduled job for LibraryHippo to check families' status
-          and notify them. However rather than trying to satisfy that requirement, this
-          time I'm going to try to set up email sending, mostly because it …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" rel="bookmark" title="Permalink to A Bare-bones Flask App">
-                    A Bare-bones Flask App
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-02-20T00:00:00-05:00">2020-02-20</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 2 of LibraryHippo 2020</span>
-                </div>
-            <p>Last time I laid out the uncertainties that have to be explore before I want to
-          try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
-          order of importance and risk:</p>
-          <ol>
-          <li>web app hosting</li>
-          <li>scheduled jobs</li>
-          <li>scraping library websites on users' behalf</li>
-          <li>a small (perhaps a few MB …</li></ol>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Motivation and Plan">
-                    LibraryHippo 2020 - Motivation and Plan
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-02-06T00:00:00-05:00">2020-02-06</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
-                    /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 1 of LibraryHippo 2020</span>
-                </div>
-            <p>For some years, I've run a hobby project, open to all, but mostly used by a few
-          of my friends and family, called <a href="http://libraryhippo.com/">LibraryHippo</a>. I
-          find it useful, and for a long time, it was a joy to work on.</p>
-          <p>Lately, the project's not much fun. I've had the urge …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/" rel="bookmark" title="Permalink to Automatically Sync nupkg and project.json Dependencies">
-                    Automatically Sync nupkg and project.json Dependencies
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2017-02-21T00:00:00-05:00">2017-02-21</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/.net.html">.NET</a>
-                  </span>
-                </div>
-            <p>Recently while working on an open source .NET project,
-          I forgot to update the <code>.nuspec</code> after changing a package
-          dependency in my <code>project.json</code>. Of course the resulting nupkg
-          contained the wrong dependency. Fortunately, the package
-          wasn't published in that state, but I didn't want to risk such a thing …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2015/10/05/select-may-not-be-broken-but-its-bent/" rel="bookmark" title="Permalink to Select May Not be Broken, But it's Bent">
-                    Select May Not be Broken, But it's Bent
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2015-10-05T00:00:00-04:00">2015-10-05</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/.net.html">.NET</a>
-                  </span>
-                </div>
-            <p>Earlier this week at the day job I ran into an interesting problem
-          working with a <a href="https://msdn.microsoft.com/en-us/library/system.data.datatable(v=vs.100).aspx">DataTable</a>.  A view that's supposed to show
-          a subset of the table's rows showed nothing. I dropped into the
-          debugger and became even more confused.</p>
-          <p>Visually inspecting the DataTable showed that there was a …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/" rel="bookmark" title="Permalink to App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins">
-                    App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2015-01-05T00:00:00-05:00">2015-01-05</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
-                  </span>
-                </div>
-            <p>Since Google is <a href="https://developers.google.com/accounts/docs/OpenID2">deprecating OpenID 2.0 support</a>, I
-          decided to update <a href="/tags/#LibraryHippo-ref">LibraryHippo</a> to authenticate via
-          <a href="http://oauth.net/">OAuth 2.0</a>, which is a story in itself, but I'm here to talk
-          about what happened next.</p>
-          <p>LibraryHippo has a set of handlers that are accessed primarily via the
-          <a href="https://cloud.google.com/appengine/docs/python/config/cron">Cron</a> and <a href="https://cloud.google.com/appengine/docs/python/taskqueue/">Task Queue …</a></p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <div class="m-article-pagination">page 1 | <a href="https://blairconrad.com/page/2/">older articles &raquo;</a></div>
-    </div>
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article">
   </div>
 </div>
 </main>
