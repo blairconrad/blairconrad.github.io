@@ -1,5 +1,5 @@
-Sending Email from Heroku
-#########################
+LibraryHippo 2020 - Sending Email from Heroku
+#############################################
 
 :tags: LibraryHippo, flask, heroku, email
 :series: LibraryHippo 2020

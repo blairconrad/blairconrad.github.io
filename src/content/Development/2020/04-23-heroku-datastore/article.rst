@@ -1,5 +1,5 @@
-A Small Heroku Datastore
-########################
+LibraryHippo 2020 - A Small Heroku Datastore
+############################################
 
 :tags: LibraryHippo, flask, heroku, database
 :series: LibraryHippo 2020

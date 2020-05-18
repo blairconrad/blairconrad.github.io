@@ -1,5 +1,5 @@
-Social Login
-############
+LibraryHippo 2020 - Social Login
+################################
 
 :tags: LibraryHippo, flask, login, authomatic
 :series: LibraryHippo 2020
