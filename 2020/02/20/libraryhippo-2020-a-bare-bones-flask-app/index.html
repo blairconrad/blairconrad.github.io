@@ -2,18 +2,18 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>A Bare-bones Flask App | Blair Conrad</title>
+  <title>LibraryHippo 2020 - A Bare-bones Flask App | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
-  <link rel="canonical" href="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" />
+  <link rel="canonical" href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
   <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
   <meta property="og:site_name" content="Blair Conrad" />
-  <meta property="og:title" content="A Bare-bones Flask App" />
-  <meta name="twitter:title" content="A Bare-bones Flask App" />
-  <meta property="og:url" content="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" />
+  <meta property="og:title" content="LibraryHippo 2020 - A Bare-bones Flask App" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - A Bare-bones Flask App" />
+  <meta property="og:url" content="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" />
   <meta property="og:description" content="Last time I laid out the uncertainties that have to be explore before I want to try hosting LibraryHippo on Heroku. Here they are again, roughly in descending order of importance and risk: web app hosting scheduled jobs scraping library websites on users&#39; behalf a small (perhaps a few MB …" />
   <meta name="twitter:description" content="Last time I laid out the uncertainties that have to be explore before I want to try hosting LibraryHippo on Heroku. Here they are again, roughly in descending order of importance and risk: web app hosting scheduled jobs scraping library websites on users&#39; behalf a small (perhaps a few MB …" />
   <meta name="twitter:card" content="summary" />
@@ -42,8 +42,8 @@
     <article class="m-col-m-12 m-nopadb">
       
       <header>
-          <h1><a href="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" rel="bookmark" title="Permalink to A Bare-bones Flask App">
-                  A Bare-bones Flask App
+          <h1><a href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" rel="bookmark" title="Permalink to LibraryHippo 2020 - A Bare-bones Flask App">
+                  LibraryHippo 2020 - A Bare-bones Flask App
               </a></h1>
               <div class="article-metadata">
                 <span><i class="fas fa-calendar"></i><time
@@ -62,25 +62,25 @@
               <h3>Part 2 of the LibraryHippo 2020 series:</h3>
               <ol>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                 </li>
                 <li>
                   A Bare-bones Flask App (this article)
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/05/sending-email-from-heroku/'>Sending Email from Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/09/scraping-library-websites/'>Scraping Library Websites</a>
+                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/05/07/social-login/'>Social Login</a>
+                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
                 </li>
               </ol>
             </aside>
@@ -180,7 +180,7 @@ Use a production WSGI server instead.
 </figure>
 <p>And voilà:</p>
 <figure class="m-figure">
-<img alt="screenshot of LibraryHippo running locally" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/local-libraryhippo.png" />
+<img alt="screenshot of LibraryHippo running locally" src="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/local-libraryhippo.png" />
 <figcaption>LibraryHippo running locally</figcaption>
 </figure>
 <p>It's not especially pretty, and it doesn't do a thing, but it's a running app.</p>
@@ -263,7 +263,7 @@ from making this mistake again, I added a task:</p>
 </figure>
 <p>And now the new LibraryHippo is running on Heroku.</p>
 <figure class="m-figure">
-<img alt="screenshot of LibraryHippo running on Heroku" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/heroku-libraryhippo.png" />
+<img alt="screenshot of LibraryHippo running on Heroku" src="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/heroku-libraryhippo.png" />
 <figcaption>LibraryHippo running on Heroku</figcaption>
 </figure>
 </section>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-07T00:00:00-04:00</updated><entry><title>Social Login</title><link href="https://blairconrad.com/2020/05/07/social-login/" rel="alternate"></link><published>2020-05-07T00:00:00-04:00</published><updated>2020-05-07T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-07:/2020/05/07/social-login/</id><summary type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-07T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Social Login</title><link href="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/" rel="alternate"></link><published>2020-05-07T00:00:00-04:00</published><updated>2020-05-07T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-07:/2020/05/07/libraryhippo-2020-social-login/</id><summary type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
 hole is that it treats every visitor the same. We need to be able to distinguish
 one user from the next and to retain information about them between visits, such
 as which family they belong to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
@@ -275,7 +275,7 @@ The main page has not much to add, so its template is very plain for now:&lt;/p&
 &lt;h2&gt;How's it look?&lt;/h2&gt;
 &lt;p&gt;From a not-logged-in account, I visit my local LibraryHippo instance:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo when the user is not logged in" src="https://blairconrad.com/2020/05/07/social-login/lh-not-logged-in.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo when the user is not logged in" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-not-logged-in.png" /&gt;
 &lt;figcaption&gt;LibraryHippo when the user is not logged in&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;The new &amp;quot;Login&amp;quot; navigation link appears. When I click it, I'm taken to a
@@ -290,13 +290,13 @@ be shared with LibraryHippo:&lt;/p&gt;
 &lt;li&gt;profile picture (which LibraryHippo doesn't use)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of Google asking the user to choose an account to use for login" src="https://blairconrad.com/2020/05/07/social-login/lh-google-choose-account.png" /&gt;
+&lt;img alt="screenshot of Google asking the user to choose an account to use for login" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-google-choose-account.png" /&gt;
 &lt;figcaption&gt;Google asking the user to choose an account to use for login&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;And finally once I'm logged in, the &amp;quot;Login&amp;quot; link becomes a &amp;quot;Logout&amp;quot; link,
 including my name, which was harvested from Google.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo when the user is logged in" src="https://blairconrad.com/2020/05/07/social-login/lh-logged-in.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo when the user is logged in" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-logged-in.png" /&gt;
 &lt;figcaption&gt;LibraryHippo when the user is logged in&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -353,7 +353,7 @@ it and the &lt;code&gt;OAUTH_GOOGLE_CLIENT_*&lt;/code&gt; values from earlier.&l
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/section&gt;
-</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="login"></category><category term="authomatic"></category></entry><entry><title>A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="login"></category><category term="authomatic"></category></entry><entry><title>LibraryHippo 2020 - A Small Heroku Datastore</title><link href="https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/" rel="alternate"></link><published>2020-04-23T00:00:00-04:00</published><updated>2020-04-23T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-23:/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/</id><summary type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
 scrape the Waterloo Public Library's website. All it needs is a datastore to tie
 these concepts together into a decoupled &amp;quot;push card status to patrons&amp;quot; pipeline.&lt;/p&gt;
 </summary><content type="html">&lt;p&gt;Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
@@ -652,7 +652,7 @@ cached card status, and there was nothing else to do but wait until 18:30 local
 time to see everything work together. Sure enough, the task woke up, read the
 stored data, and used it in the e-mail:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of notification e-mail sent from Heroku using stored card status" src="https://blairconrad.com/2020/04/23/a-small-heroku-datastore/heroku-notification-using-stored-status.png" /&gt;
+&lt;img alt="screenshot of notification e-mail sent from Heroku using stored card status" src="https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/heroku-notification-using-stored-status.png" /&gt;
 &lt;figcaption&gt;Notification e-mail sent from Heroku using stored card status&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -701,7 +701,7 @@ stored data, and used it in the e-mail:&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/section&gt;
-</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="database"></category></entry><entry><title>Scraping Library Websites</title><link href="https://blairconrad.com/2020/04/09/scraping-library-websites/" rel="alternate"></link><published>2020-04-09T00:00:00-04:00</published><updated>2020-04-09T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-09:/2020/04/09/scraping-library-websites/</id><summary type="html">&lt;p&gt;Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="database"></category></entry><entry><title>LibraryHippo 2020 - Scraping Library Websites</title><link href="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/" rel="alternate"></link><published>2020-04-09T00:00:00-04:00</published><updated>2020-04-09T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-04-09:/2020/04/09/libraryhippo-2020-scraping-library-websites/</id><summary type="html">&lt;p&gt;Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
 to provide it with meaningful content to send, by having it scrape a library's
 website. This should be relatively straightforward, but there's some risk as
 it's not an operation covered in
@@ -738,7 +738,7 @@ source code, so they have to be stored somewhere else. Had I already integrated
 a permanent datastore and implement user management, the credentials would be
 tied to the LibraryHippo user's account, but for now I'll read them from
 environment variables that I'll save in the &lt;code&gt;secrets&lt;/code&gt; file established in
-&lt;a href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/"&gt;Sending Email from Heroku&lt;/a&gt;.&lt;/p&gt;
+&lt;a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/"&gt;Sending Email from Heroku&lt;/a&gt;.&lt;/p&gt;
 &lt;figure class="m-code-figure"&gt;
 &lt;pre class="m-code"&gt;&lt;span class="c1"&gt;# …&lt;/span&gt;
 &lt;span class="n"&gt;PATRON_NAME&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="n"&gt;Blair&lt;/span&gt; &lt;span class="n"&gt;Conrad&lt;/span&gt;
@@ -764,7 +764,7 @@ credentials to the website, but it failed miserably. The reason: hidden fields.
 The login page looks like it has 4 inputs, counting the &amp;quot;Submit&amp;quot; button as an
 input:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-login-form.png" /&gt;
+&lt;img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-login-form.png" /&gt;
 &lt;figcaption&gt;Waterloo Public Library patron login form&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;But there are actually 6. The four we see and two hidden ones, called &lt;code&gt;lt&lt;/code&gt; and &lt;code&gt;_eventId&lt;/code&gt;:&lt;/p&gt;
@@ -861,7 +861,7 @@ well as some links that would allow them to update their account and, most
 importantly, a link to their holds and one to their checkouts, right at the
 bottom of the box above the &amp;quot;Log Out&amp;quot; button.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-patron-summary.png" /&gt;
+&lt;img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-patron-summary.png" /&gt;
 &lt;figcaption&gt;Waterloo Public Library patron summary&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;It's those last two that we'll be going after. Unfortunately, the links aren't
@@ -920,7 +920,7 @@ absolute URLs.&lt;/p&gt;
 &lt;h3&gt;Loading the Holds&lt;/h3&gt;
 &lt;p&gt;The hold page repeats the same personal information from the summary page, and then lists all the patron's holds in a table.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl_holds.png" /&gt;
+&lt;img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl_holds.png" /&gt;
 &lt;figcaption&gt;The holds page&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;And the HTML behind the table starts like this:&lt;/p&gt;
@@ -1040,7 +1040,7 @@ frozen.&lt;/p&gt;
 one, listing the attributes. It's not pretty, and would be better as a Jinja
 template, but it's good enough for a proof of concept.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/2020/04/09/scraping-library-websites/check-card-holds-local.png" /&gt;
+&lt;img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/check-card-holds-local.png" /&gt;
 &lt;figcaption&gt;Checked holds at Waterloo Public Library&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -1094,7 +1094,7 @@ parser and have BeautifulSoup use it:&lt;/p&gt;
 &lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;config&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="nb"&gt;set &lt;/span&gt;&lt;span class="n"&gt;PIN&lt;/span&gt;&lt;span class="p"&gt;=&lt;/span&gt;&lt;span class="n"&gt;9876&lt;/span&gt;&lt;/pre&gt;
 &lt;p&gt;And voila:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-hold-and-checkout-heroku.png" /&gt;
+&lt;img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-hold-and-checkout-heroku.png" /&gt;
 &lt;figcaption&gt;Card check results on Heroku&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -1142,7 +1142,7 @@ parser and have BeautifulSoup use it:&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/section&gt;
-</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="requests"></category></entry><entry><title>Running Scheduled Tasks on Heroku</title><link href="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" rel="alternate"></link><published>2020-03-19T00:00:00-04:00</published><updated>2020-03-19T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-19:/2020/03/19/running-scheduled-tasks-on-heroku/</id><summary type="html">&lt;p&gt;Having established that a Flask app running on Heroku can send e-mail, I turn my
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="requests"></category></entry><entry><title>LibraryHippo 2020 - Running Scheduled Tasks on Heroku</title><link href="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/" rel="alternate"></link><published>2020-03-19T00:00:00-04:00</published><updated>2020-03-19T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-19:/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/</id><summary type="html">&lt;p&gt;Having established that a Flask app running on Heroku can send e-mail, I turn my
 attention to having LibraryHippo do so periodically. The approach will be to
 change the e-mail-sending to be something that can more easily be triggered from
 the outside, and then triggering it from from time to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Having established that a Flask app running on Heroku can send e-mail, I turn my
@@ -1236,13 +1236,13 @@ Use heroku addons:docs scheduler to view documentation&lt;/pre&gt;
 it was easy enough to open the web-based configuration.&lt;/p&gt;
 &lt;figure class="m-console-figure"&gt;
 &lt;pre class="m-console m-code"&gt;&lt;span class="n"&gt;heroku&lt;/span&gt; &lt;span class="n"&gt;addons&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="n"&gt;open&lt;/span&gt; &lt;span class="n"&gt;scheduler&lt;/span&gt;&lt;/pre&gt;
-&lt;img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/empty-scheduler-config.png" /&gt;
+&lt;img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/empty-scheduler-config.png" /&gt;
 &lt;/figure&gt;
 &lt;p&gt;Adding a job is as simple as choosing &amp;quot;Create job&amp;quot;, selecting a time to run, and
 typing the command to execute, which in this case was &lt;code&gt;flask notify-all&lt;/code&gt;.
 I chose to execute daily at 11:30 PM because as I typed, it was 11:26 PM UTC.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/configure-job-for-2330.png" /&gt;
+&lt;img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/configure-job-for-2330.png" /&gt;
 &lt;figcaption&gt;Configuring a job to run daily at 11:30 PM&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Now there's nothing to do but wait. In the meantime I opened up the LibraryHippo
@@ -1252,7 +1252,7 @@ and watched.&lt;/p&gt;
 first e-mail, with further updates and a second e-mail about 5 minutes later.
 The log looked like this:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/heroku-log.png" /&gt;
+&lt;img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/heroku-log.png" /&gt;
 &lt;figcaption&gt;Heroku log of scheduled e-mail task run&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Note that there are some earlier entries from the manually-invoked test run I'd
@@ -1264,7 +1264,7 @@ e-mail messages that it sent, and finally transitioning to a &amp;quot;complete&
 and shutting down at 23:35:28.&lt;/p&gt;
 &lt;p&gt;And the e-mails arrived right on schedule:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" /&gt;
+&lt;img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" /&gt;
 &lt;figcaption&gt;Scheduled e-mails arriving over 5 minutes&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -1335,7 +1335,7 @@ for later. Or never.&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/section&gt;
-</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="cron"></category></entry><entry><title>Sending Email from Heroku</title><link href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" rel="alternate"></link><published>2020-03-05T00:00:00-05:00</published><updated>2020-03-05T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-05:/2020/03/05/sending-email-from-heroku/</id><summary type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="cron"></category></entry><entry><title>LibraryHippo 2020 - Sending Email from Heroku</title><link href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" rel="alternate"></link><published>2020-03-05T00:00:00-05:00</published><updated>2020-03-05T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-03-05:/2020/03/05/libraryhippo-2020-sending-email-from-heroku/</id><summary type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
 requirement is having a scheduled job for LibraryHippo to check families' status
 and notify them. However rather than trying to satisfy that requirement, this
 time I'm going to try to set up email sending, mostly because it …&lt;/p&gt;</summary><content type="html">&lt;p&gt;After getting a do-nothing web app running on Heroku, I think the riskiest
@@ -1494,11 +1494,11 @@ Use a production WSGI server instead.
 127.0.0.1 - - [07/Feb/2020 06:08:38] &amp;quot;GET /sendmail HTTP/1.1&amp;quot; 200 -&lt;/pre&gt;
 &lt;/figure&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo having sent mail locally" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/local-sendmail.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo having sent mail locally" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/local-sendmail.png" /&gt;
 &lt;figcaption&gt;LibraryHippo having sent mail locally&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of email received from local LibraryHippo" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/local-received-mail.png" /&gt;
+&lt;img alt="screenshot of email received from local LibraryHippo" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/local-received-mail.png" /&gt;
 &lt;figcaption&gt;Email received from local LibraryHippo&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;
@@ -1545,11 +1545,11 @@ To https://git.heroku.com/libraryhippo.git
 3f0598d..ddf4728  lh2020 -&amp;gt; master&lt;/pre&gt;
 &lt;/figure&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo having sent mail from Heroku" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/heroku-sendmail.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo having sent mail from Heroku" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/heroku-sendmail.png" /&gt;
 &lt;figcaption&gt;LibraryHippo having sent mail from Heroku&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of email received from LibraryHippo on Heroku" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/heroku-received-mail.png" /&gt;
+&lt;img alt="screenshot of email received from LibraryHippo on Heroku" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/heroku-received-mail.png" /&gt;
 &lt;figcaption&gt;Email received from LibraryHippo on Heroku&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Note the time discrepancy between the time that LibraryHippo reported and the
@@ -1601,7 +1601,7 @@ factor when scheduling jobs.&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;/section&gt;
-</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="email"></category></entry><entry><title>A Bare-bones Flask App</title><link href="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/" rel="alternate"></link><published>2020-02-20T00:00:00-05:00</published><updated>2020-02-20T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-20:/2020/02/20/a-bare-bones-flask-app/</id><summary type="html">&lt;p&gt;Last time I laid out the uncertainties that have to be explore before I want to
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category><category term="heroku"></category><category term="email"></category></entry><entry><title>LibraryHippo 2020 - A Bare-bones Flask App</title><link href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" rel="alternate"></link><published>2020-02-20T00:00:00-05:00</published><updated>2020-02-20T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-02-20:/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/</id><summary type="html">&lt;p&gt;Last time I laid out the uncertainties that have to be explore before I want to
 try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
 order of importance and risk:&lt;/p&gt;
 &lt;ol&gt;
@@ -1701,7 +1701,7 @@ Use a production WSGI server instead.
 &lt;/figure&gt;
 &lt;p&gt;And voilà:&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo running locally" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/local-libraryhippo.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo running locally" src="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/local-libraryhippo.png" /&gt;
 &lt;figcaption&gt;LibraryHippo running locally&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;It's not especially pretty, and it doesn't do a thing, but it's a running app.&lt;/p&gt;
@@ -1784,7 +1784,7 @@ from making this mistake again, I added a task:&lt;/p&gt;
 &lt;/figure&gt;
 &lt;p&gt;And now the new LibraryHippo is running on Heroku.&lt;/p&gt;
 &lt;figure class="m-figure"&gt;
-&lt;img alt="screenshot of LibraryHippo running on Heroku" src="https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/heroku-libraryhippo.png" /&gt;
+&lt;img alt="screenshot of LibraryHippo running on Heroku" src="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/heroku-libraryhippo.png" /&gt;
 &lt;figcaption&gt;LibraryHippo running on Heroku&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;/section&gt;

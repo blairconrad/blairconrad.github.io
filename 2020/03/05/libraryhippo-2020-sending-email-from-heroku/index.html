@@ -2,18 +2,18 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>Sending Email from Heroku | Blair Conrad</title>
+  <title>LibraryHippo 2020 - Sending Email from Heroku | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
-  <link rel="canonical" href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" />
+  <link rel="canonical" href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
   <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
   <meta property="og:site_name" content="Blair Conrad" />
-  <meta property="og:title" content="Sending Email from Heroku" />
-  <meta name="twitter:title" content="Sending Email from Heroku" />
-  <meta property="og:url" content="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" />
+  <meta property="og:title" content="LibraryHippo 2020 - Sending Email from Heroku" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - Sending Email from Heroku" />
+  <meta property="og:url" content="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" />
   <meta property="og:description" content="After getting a do-nothing web app running on Heroku, I think the riskiest requirement is having a scheduled job for LibraryHippo to check families&#39; status and notify them. However rather than trying to satisfy that requirement, this time I&#39;m going to try to set up email sending, mostly because it …" />
   <meta name="twitter:description" content="After getting a do-nothing web app running on Heroku, I think the riskiest requirement is having a scheduled job for LibraryHippo to check families&#39; status and notify them. However rather than trying to satisfy that requirement, this time I&#39;m going to try to set up email sending, mostly because it …" />
   <meta name="twitter:card" content="summary" />
@@ -42,8 +42,8 @@
     <article class="m-col-m-12 m-nopadb">
       
       <header>
-          <h1><a href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/" rel="bookmark" title="Permalink to Sending Email from Heroku">
-                  Sending Email from Heroku
+          <h1><a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Sending Email from Heroku">
+                  LibraryHippo 2020 - Sending Email from Heroku
               </a></h1>
               <div class="article-metadata">
                 <span><i class="fas fa-calendar"></i><time
@@ -64,25 +64,25 @@
               <h3>Part 3 of the LibraryHippo 2020 series:</h3>
               <ol>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
+                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
                 </li>
                 <li>
                   Sending Email from Heroku (this article)
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/09/scraping-library-websites/'>Scraping Library Websites</a>
+                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/05/07/social-login/'>Social Login</a>
+                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
                 </li>
               </ol>
             </aside>
@@ -245,11 +245,11 @@ Use a production WSGI server instead.
 127.0.0.1 - - [07/Feb/2020 06:08:38] &quot;GET /sendmail HTTP/1.1&quot; 200 -</pre>
 </figure>
 <figure class="m-figure">
-<img alt="screenshot of LibraryHippo having sent mail locally" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/local-sendmail.png" />
+<img alt="screenshot of LibraryHippo having sent mail locally" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/local-sendmail.png" />
 <figcaption>LibraryHippo having sent mail locally</figcaption>
 </figure>
 <figure class="m-figure">
-<img alt="screenshot of email received from local LibraryHippo" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/local-received-mail.png" />
+<img alt="screenshot of email received from local LibraryHippo" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/local-received-mail.png" />
 <figcaption>Email received from local LibraryHippo</figcaption>
 </figure>
 </section>
@@ -296,11 +296,11 @@ To https://git.heroku.com/libraryhippo.git
 3f0598d..ddf4728  lh2020 -&gt; master</pre>
 </figure>
 <figure class="m-figure">
-<img alt="screenshot of LibraryHippo having sent mail from Heroku" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/heroku-sendmail.png" />
+<img alt="screenshot of LibraryHippo having sent mail from Heroku" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/heroku-sendmail.png" />
 <figcaption>LibraryHippo having sent mail from Heroku</figcaption>
 </figure>
 <figure class="m-figure">
-<img alt="screenshot of email received from LibraryHippo on Heroku" src="https://blairconrad.com/2020/03/05/sending-email-from-heroku/heroku-received-mail.png" />
+<img alt="screenshot of email received from LibraryHippo on Heroku" src="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/heroku-received-mail.png" />
 <figcaption>Email received from LibraryHippo on Heroku</figcaption>
 </figure>
 <p>Note the time discrepancy between the time that LibraryHippo reported and the

@@ -2,18 +2,18 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>Scraping Library Websites | Blair Conrad</title>
+  <title>LibraryHippo 2020 - Scraping Library Websites | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
-  <link rel="canonical" href="https://blairconrad.com/2020/04/09/scraping-library-websites/" />
+  <link rel="canonical" href="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
   <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
   <meta property="og:site_name" content="Blair Conrad" />
-  <meta property="og:title" content="Scraping Library Websites" />
-  <meta name="twitter:title" content="Scraping Library Websites" />
-  <meta property="og:url" content="https://blairconrad.com/2020/04/09/scraping-library-websites/" />
+  <meta property="og:title" content="LibraryHippo 2020 - Scraping Library Websites" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - Scraping Library Websites" />
+  <meta property="og:url" content="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/" />
   <meta property="og:description" content="Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it&#39;s time to provide it with meaningful content to send, by having it scrape a library&#39;s website. This should be relatively straightforward, but there&#39;s some risk as it&#39;s not an operation covered in The Flask Mega-Tutorial. The production application …" />
   <meta name="twitter:description" content="Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it&#39;s time to provide it with meaningful content to send, by having it scrape a library&#39;s website. This should be relatively straightforward, but there&#39;s some risk as it&#39;s not an operation covered in The Flask Mega-Tutorial. The production application …" />
   <meta name="twitter:card" content="summary" />
@@ -42,8 +42,8 @@
     <article class="m-col-m-12 m-nopadb">
       
       <header>
-          <h1><a href="https://blairconrad.com/2020/04/09/scraping-library-websites/" rel="bookmark" title="Permalink to Scraping Library Websites">
-                  Scraping Library Websites
+          <h1><a href="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Scraping Library Websites">
+                  LibraryHippo 2020 - Scraping Library Websites
               </a></h1>
               <div class="article-metadata">
                 <span><i class="fas fa-calendar"></i><time
@@ -64,25 +64,25 @@
               <h3>Part 5 of the LibraryHippo 2020 series:</h3>
               <ol>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
+                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/05/sending-email-from-heroku/'>Sending Email from Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
                 </li>
                 <li>
                   Scraping Library Websites (this article)
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/05/07/social-login/'>Social Login</a>
+                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
                 </li>
               </ol>
             </aside>
@@ -121,7 +121,7 @@ source code, so they have to be stored somewhere else. Had I already integrated
 a permanent datastore and implement user management, the credentials would be
 tied to the LibraryHippo user's account, but for now I'll read them from
 environment variables that I'll save in the <code>secrets</code> file established in
-<a href="https://blairconrad.com/2020/03/05/sending-email-from-heroku/">Sending Email from Heroku</a>.</p>
+<a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/">Sending Email from Heroku</a>.</p>
 <figure class="m-code-figure">
 <pre class="m-code"><span class="c1"># …</span>
 <span class="n">PATRON_NAME</span><span class="o">=</span><span class="n">Blair</span> <span class="n">Conrad</span>
@@ -147,7 +147,7 @@ credentials to the website, but it failed miserably. The reason: hidden fields.
 The login page looks like it has 4 inputs, counting the &quot;Submit&quot; button as an
 input:</p>
 <figure class="m-figure">
-<img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-login-form.png" />
+<img alt="screenshot of Waterloo Public Library patron login form showing 3 text fields and a submit button" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-login-form.png" />
 <figcaption>Waterloo Public Library patron login form</figcaption>
 </figure>
 <p>But there are actually 6. The four we see and two hidden ones, called <code>lt</code> and <code>_eventId</code>:</p>
@@ -244,7 +244,7 @@ well as some links that would allow them to update their account and, most
 importantly, a link to their holds and one to their checkouts, right at the
 bottom of the box above the &quot;Log Out&quot; button.</p>
 <figure class="m-figure">
-<img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-patron-summary.png" />
+<img alt="screenshot of Waterloo Public Library patron summary" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-patron-summary.png" />
 <figcaption>Waterloo Public Library patron summary</figcaption>
 </figure>
 <p>It's those last two that we'll be going after. Unfortunately, the links aren't
@@ -303,7 +303,7 @@ absolute URLs.</p>
 <h3>Loading the Holds</h3>
 <p>The hold page repeats the same personal information from the summary page, and then lists all the patron's holds in a table.</p>
 <figure class="m-figure">
-<img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl_holds.png" />
+<img alt="screenshot of the holds page, showing several held items" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl_holds.png" />
 <figcaption>The holds page</figcaption>
 </figure>
 <p>And the HTML behind the table starts like this:</p>
@@ -423,7 +423,7 @@ frozen.</p>
 one, listing the attributes. It's not pretty, and would be better as a Jinja
 template, but it's good enough for a proof of concept.</p>
 <figure class="m-figure">
-<img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/2020/04/09/scraping-library-websites/check-card-holds-local.png" />
+<img alt="screenshot of checked holds at Waterloo Public LibraryHippo" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/check-card-holds-local.png" />
 <figcaption>Checked holds at Waterloo Public Library</figcaption>
 </figure>
 </section>
@@ -477,7 +477,7 @@ parser and have BeautifulSoup use it:</p>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">PIN</span><span class="p">=</span><span class="n">9876</span></pre>
 <p>And voila:</p>
 <figure class="m-figure">
-<img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/2020/04/09/scraping-library-websites/wpl-hold-and-checkout-heroku.png" />
+<img alt="screenshot of card check results on Heroku" src="https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/wpl-hold-and-checkout-heroku.png" />
 <figcaption>Card check results on Heroku</figcaption>
 </figure>
 </section>

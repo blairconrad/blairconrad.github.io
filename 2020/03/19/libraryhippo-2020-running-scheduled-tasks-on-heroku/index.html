@@ -2,18 +2,18 @@
 <html lang="en" prefix="og: http://ogp.me/ns#">
 <head>
   <meta charset="UTF-8" />
-  <title>Running Scheduled Tasks on Heroku | Blair Conrad</title>
+  <title>LibraryHippo 2020 - Running Scheduled Tasks on Heroku | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
-  <link rel="canonical" href="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" />
+  <link rel="canonical" href="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
   <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#22272e" />
   <meta property="og:site_name" content="Blair Conrad" />
-  <meta property="og:title" content="Running Scheduled Tasks on Heroku" />
-  <meta name="twitter:title" content="Running Scheduled Tasks on Heroku" />
-  <meta property="og:url" content="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" />
+  <meta property="og:title" content="LibraryHippo 2020 - Running Scheduled Tasks on Heroku" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - Running Scheduled Tasks on Heroku" />
+  <meta property="og:url" content="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/" />
   <meta property="og:description" content="Having established that a Flask app running on Heroku can send e-mail, I turn my attention to having LibraryHippo do so periodically. The approach will be to change the e-mail-sending to be something that can more easily be triggered from the outside, and then triggering it from from time to …" />
   <meta name="twitter:description" content="Having established that a Flask app running on Heroku can send e-mail, I turn my attention to having LibraryHippo do so periodically. The approach will be to change the e-mail-sending to be something that can more easily be triggered from the outside, and then triggering it from from time to …" />
   <meta name="twitter:card" content="summary" />
@@ -42,8 +42,8 @@
     <article class="m-col-m-12 m-nopadb">
       
       <header>
-          <h1><a href="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/" rel="bookmark" title="Permalink to Running Scheduled Tasks on Heroku">
-                  Running Scheduled Tasks on Heroku
+          <h1><a href="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Running Scheduled Tasks on Heroku">
+                  LibraryHippo 2020 - Running Scheduled Tasks on Heroku
               </a></h1>
               <div class="article-metadata">
                 <span><i class="fas fa-calendar"></i><time
@@ -64,25 +64,25 @@
               <h3>Part 4 of the LibraryHippo 2020 series:</h3>
               <ol>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>LibraryHippo 2020 - Motivation and Plan</a>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/02/20/a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
+                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/03/05/sending-email-from-heroku/'>Sending Email from Heroku</a>
+                  <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
                 </li>
                 <li>
                   Running Scheduled Tasks on Heroku (this article)
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/09/scraping-library-websites/'>Scraping Library Websites</a>
+                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/04/23/a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
                 </li>
                 <li>
-                  <a href='https://blairconrad.com/2020/05/07/social-login/'>Social Login</a>
+                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
                 </li>
               </ol>
             </aside>
@@ -180,13 +180,13 @@ Use heroku addons:docs scheduler to view documentation</pre>
 it was easy enough to open the web-based configuration.</p>
 <figure class="m-console-figure">
 <pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
-<img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/empty-scheduler-config.png" />
+<img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/empty-scheduler-config.png" />
 </figure>
 <p>Adding a job is as simple as choosing &quot;Create job&quot;, selecting a time to run, and
 typing the command to execute, which in this case was <code>flask notify-all</code>.
 I chose to execute daily at 11:30 PM because as I typed, it was 11:26 PM UTC.</p>
 <figure class="m-figure">
-<img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/configure-job-for-2330.png" />
+<img alt="Screenshot of configuring a job to run daily at 11:30 PM" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/configure-job-for-2330.png" />
 <figcaption>Configuring a job to run daily at 11:30 PM</figcaption>
 </figure>
 <p>Now there's nothing to do but wait. In the meantime I opened up the LibraryHippo
@@ -196,7 +196,7 @@ and watched.</p>
 first e-mail, with further updates and a second e-mail about 5 minutes later.
 The log looked like this:</p>
 <figure class="m-figure">
-<img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/heroku-log.png" />
+<img alt="Screenshot of Heroku log of scheduled e-mail task run" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/heroku-log.png" />
 <figcaption>Heroku log of scheduled e-mail task run</figcaption>
 </figure>
 <p>Note that there are some earlier entries from the manually-invoked test run I'd
@@ -208,7 +208,7 @@ e-mail messages that it sent, and finally transitioning to a &quot;complete&quot
 and shutting down at 23:35:28.</p>
 <p>And the e-mails arrived right on schedule:</p>
 <figure class="m-figure">
-<img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/2020/03/19/running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" />
+<img alt="Screenshot of scheduled e-mails" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/e-mails-sent-from-scheduled-job.png" />
 <figcaption>Scheduled e-mails arriving over 5 minutes</figcaption>
 </figure>
 </section>
