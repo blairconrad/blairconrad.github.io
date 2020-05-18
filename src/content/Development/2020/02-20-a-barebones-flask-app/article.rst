@@ -1,5 +1,5 @@
-A Bare-bones Flask App
-######################
+LibraryHippo 2020 - A Bare-bones Flask App
+##########################################
 
 :tags: flask, LibraryHippo, heroku
 :series: LibraryHippo 2020

@@ -1,5 +1,5 @@
-Running Scheduled Tasks on Heroku
-#################################
+LibraryHippo 2020 - Running Scheduled Tasks on Heroku
+#####################################################
 
 :tags: LibraryHippo, flask, heroku, cron
 :series: LibraryHippo 2020
