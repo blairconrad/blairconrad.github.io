@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>LibraryHippo 2020 - Recap and decision | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="LibraryHippo 2020 - Recap and decision" />
+  <meta name="twitter:title" content="LibraryHippo 2020 - Recap and decision" />
+  <meta property="og:url" content="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" />
+  <meta property="og:description" content="In each of last six articles I&#39;ve satisfied one of the high-risk requirements I had for moving LibraryHippo to the Flask framework, with the goal of hosting it on Heroku. This leaves three &#34;softer&#34; requirements open, which I&#39;ll address here. (Aside: It feels a little weird working on this conversion …" />
+  <meta name="twitter:description" content="In each of last six articles I&#39;ve satisfied one of the high-risk requirements I had for moving LibraryHippo to the Flask framework, with the goal of hosting it on Heroku. This leaves three &#34;softer&#34; requirements open, which I&#39;ll address here. (Aside: It feels a little weird working on this conversion …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Recap and decision">
+                  LibraryHippo 2020 - Recap and decision
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-05-21T00:00:00-04:00">2020-05-21</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                  /
+                  <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                </span>
+              </div>
+            <aside class="m-block m-default">
+              <h3>Part 8 of the LibraryHippo 2020 series:</h3>
+              <ol>
+                <li>
+                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
+                </li>
+                <li>
+                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
+                </li>
+                <li>
+                  Recap and decision (this article)
+                </li>
+              </ol>
+            </aside>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>In each of last six articles I've satisfied one of the high-risk requirements I
+had for moving LibraryHippo to the Flask framework, with the goal of hosting it
+on Heroku. This leaves three &quot;softer&quot; requirements open, which I'll address
+here.</p>
+<p>(Aside: It feels a little weird working on this conversion while my local
+libraries (and many others across the world) are closed due to the 2019–2020
+coronavirus pandemic. I'm unable to take books out or put them on hold for
+testing purposes, and it's not clear when the libraries will reopen. And maybe
+I'll be reluctant to borrow library materials for a while after they do open.
+Still, I'm hopeful that the libraries will return to normal, and in the meantime
+this is a fun project, so I might as well continue the series.)</p>
+<section id="remaining-requirements">
+<h2>Remaining requirements</h2>
+<section id="custom-domains">
+<h3>Custom domains</h3>
+<p>All levels of Heroku plans support custom domain names. They don't offer free
+SSL , but LibraryHippo's been getting along well enough without SSL to this
+point, so I might as well continue. And it looks like
+<a href="https://www.cloudflare.com/en-ca/ssl/">Cloudflare</a> offers SSL for free, so
+that may be an option in the future.</p>
+</section>
+<section id="job-queues">
+<h3>Job queues</h3>
+<p>I'd used job queues on Google App Engine because each job's execution time was
+capped at 30 seconds or so. It wasn't always possible to check even all the
+cards for a single family in that time, so each card check was queued
+separately. I've simulated a long-running job on Heroku with no problem, so the
+job queue probably isn't necessary.</p>
+</section>
+<section id="cheap-hosting">
+<h3>Cheap hosting</h3>
+<p>I don't intend to make any money with LibraryHippo, and while I enjoy it, I
+don't want to pour hundreds (or even several tens) of dollars into it every
+year. Everything I've tried so far has been done on a Heroku free dyno, and it
+looks like it'll continue to meet my needs.</p>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next steps</h2>
+<p>I feel good about meeting my requirements, so I'm going to continue converting the
+application. Part of this will be fleshing out the skeleton that's there now;
+for example, the library site scraping is nowhere near as robust as the current
+LibraryHippo, and the site looks <em>terrible</em>. The remaining work will be adding
+the features and underpinnings that are missing, such as:</p>
+<ul>
+<li>family management</li>
+<li>card management</li>
+<li>automated tests on the backend</li>
+<li>migrating users from the old application</li>
+</ul>
+<p>Some of these steps may warrant a blog post, and some might not. We'll see how
+it goes.</p>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

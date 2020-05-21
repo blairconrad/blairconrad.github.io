@@ -40,26 +40,22 @@
       <article>
         
         <header>
-            <h1><a href="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Social Login">
-                    LibraryHippo 2020 - Social Login
+            <h1><a href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Recap and decision">
+                    LibraryHippo 2020 - Recap and decision
                 </a></h1>
                 <div class="article-metadata">
                   <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-05-07T00:00:00-04:00">2020-05-07</time></span>
+                      datetime="2020-05-21T00:00:00-04:00">2020-05-21</time></span>
                   <span><i class="fas fa-folder"></i><a
                       href="https://blairconrad.com/category/development.html"></i>Development</a></span>
                   <span><i class="fas fa-tags"></i>
                     <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
                     /
                     <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
-                    <a href="https://blairconrad.com/tag/login.html">login</a>
-                    /
-                    <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
                   </span>
                 </div>
               <aside class="m-block m-default">
-                <h3>Part 7 of the LibraryHippo 2020 series:</h3>
+                <h3>Part 8 of the LibraryHippo 2020 series:</h3>
                 <ol>
                   <li>
                     <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
@@ -80,368 +76,105 @@
                     <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
                   </li>
                   <li>
-                    Social Login (this article)
+                    <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
+                  </li>
+                  <li>
+                    Recap and decision (this article)
                   </li>
                 </ol>
               </aside>
         </header>
         <div class="m-clearfix-l"></div>
 <!-- content -->
-<p>I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
-hole is that it treats every visitor the same. We need to be able to distinguish
-one user from the next and to retain information about them between visits, such
-as which family they belong to.</p>
-<p>Rather than have users create new login identities and passwords (and worry
-about securely storing those passwords), I'm going to use social logins. The old
-LibraryHippo application supported login via a Google account, and I'll do the
-same here, while leaving the door open to add other vectors in the future.</p>
-<section id="new-requirements">
-<h2>New Requirements</h2>
-<p>We'll need new software to perform the authentication and user management. The
-<a href="https://flask-login.readthedocs.io/en/latest/">Flask-Login</a> package adds
-support for storing user objects and managing their sessions, and
-<a href="https://authomatic.github.io/authomatic/">Authomatic</a> simplifies
-authentication via OAuth2 providers such as Google (and many more). Install them
-both:</p>
-<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-Login</span>
-<span class="n">pip</span> <span class="n">install</span> <span class="n">Authomatic</span>
-<span class="n">inv</span> <span class="n">freeze</span></pre>
+<p>In each of last six articles I've satisfied one of the high-risk requirements I
+had for moving LibraryHippo to the Flask framework, with the goal of hosting it
+on Heroku. This leaves three &quot;softer&quot; requirements open, which I'll address
+here.</p>
+<p>(Aside: It feels a little weird working on this conversion while my local
+libraries (and many others across the world) are closed due to the 2019–2020
+coronavirus pandemic. I'm unable to take books out or put them on hold for
+testing purposes, and it's not clear when the libraries will reopen. And maybe
+I'll be reluctant to borrow library materials for a while after they do open.
+Still, I'm hopeful that the libraries will return to normal, and in the meantime
+this is a fun project, so I might as well continue the series.)</p>
+<section id="remaining-requirements">
+<h2>Remaining requirements</h2>
+<section id="custom-domains">
+<h3>Custom domains</h3>
+<p>All levels of Heroku plans support custom domain names. They don't offer free
+SSL , but LibraryHippo's been getting along well enough without SSL to this
+point, so I might as well continue. And it looks like
+<a href="https://www.cloudflare.com/en-ca/ssl/">Cloudflare</a> offers SSL for free, so
+that may be an option in the future.</p>
 </section>
-<section id="register-with-google">
-<h2>Register with Google</h2>
-<p>Google requires applications using it as an OAuth provider to register and
-obtain credentials which must be presented when authenticating users. I visit
-the
-<a href="https://console.developers.google.com/apis/dashboard">APIs &amp; Services Dashboard</a>,
-create a new project, and add a new Web application OAuth Client ID. I added 3
-Authorised redirect URIs, which are the URIs that lead to the Flask route that
-will handle login. Authomatic sends its current URI to Google when
-authenticating, and Google redirects back to the URI (with an additional token)
-after authenticating the user. As a security measure, Google will only redirect
-back to known URIs.</p>
-<p>I added</p>
+<section id="job-queues">
+<h3>Job queues</h3>
+<p>I'd used job queues on Google App Engine because each job's execution time was
+capped at 30 seconds or so. It wasn't always possible to check even all the
+cards for a single family in that time, so each card check was queued
+separately. I've simulated a long-running job on Heroku with no problem, so the
+job queue probably isn't necessary.</p>
+</section>
+<section id="cheap-hosting">
+<h3>Cheap hosting</h3>
+<p>I don't intend to make any money with LibraryHippo, and while I enjoy it, I
+don't want to pour hundreds (or even several tens) of dollars into it every
+year. Everything I've tried so far has been done on a Heroku free dyno, and it
+looks like it'll continue to meet my needs.</p>
+</section>
+</section>
+<section id="next-steps">
+<h2>Next steps</h2>
+<p>I feel good about meeting my requirements, so I'm going to continue converting the
+application. Part of this will be fleshing out the skeleton that's there now;
+for example, the library site scraping is nowhere near as robust as the current
+LibraryHippo, and the site looks <em>terrible</em>. The remaining work will be adding
+the features and underpinnings that are missing, such as:</p>
 <ul>
-<li><a href="http://localhost:5000/login/google/">http://localhost:5000/login/google/</a> (for testing locally)</li>
-<li><a href="https://libraryhippo.herokuapp.com/login/google/">https://libraryhippo.herokuapp.com/login/google/</a> (for when I deploy to Heroku), and</li>
-<li><a href="http://libraryhippo.com/login/google/">http://libraryhippo.com/login/google/</a> (for when I eventually point the domain name to Heroku)</li>
+<li>family management</li>
+<li>card management</li>
+<li>automated tests on the backend</li>
+<li>migrating users from the old application</li>
 </ul>
-<p>and was rewarded with a <em>Client ID</em> and a <em>Client secret</em>, which are needed by Authomatic.</p>
-<p>I also configured the OAuth consent screen, which controls what users see when
-they are redirected to Google. I added an application name and Application logo.
-Since we only need to identify a user, I left the scopes limited to the minimum:</p>
-<ul>
-<li>email</li>
-<li>profile, and</li>
-<li>openid</li>
-</ul>
-<p>I don't have an Application Privacy Policy link, so left it blank. This seems to
-prevent me from &quot;verifying&quot; the application. So far it hasn't been an issue for
-testing, but I'll keep an eye on it.</p>
-</section>
-<section id="new-configuration">
-<h2>New Configuration</h2>
-<p>Authomatic knows a lot about its underlying providers, but still needs to be
-told about the Client ID and Client secret obtained above. I'll add those to the
-<code>secrets</code> file.</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="err">…</span>
-<span class="n">OAUTH_GOOGLE_CLIENT_ID</span><span class="o">=********.</span><span class="n">apps</span><span class="o">.</span><span class="n">googleusercontent</span><span class="o">.</span><span class="n">com</span>
-<span class="n">OAUTH_GOOGLE_CLIENT_SECRET</span><span class="o">=********</span></pre>
-<figcaption>secrets</figcaption>
-</figure>
-<p>Of course these need to be provided to the application through the <code>Config</code> class:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">oauth2</span>
-<span class="err">…</span>
-
-<span class="n">OAUTH</span> <span class="o">=</span> <span class="p">{</span>
-    <span class="s2">&quot;google&quot;</span><span class="p">:</span> <span class="p">{</span>
-        <span class="s2">&quot;class_&quot;</span><span class="p">:</span> <span class="n">oauth2</span><span class="o">.</span><span class="n">Google</span><span class="p">,</span>
-        <span class="s2">&quot;consumer_key&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OAUTH_GOOGLE_CLIENT_ID&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;consumer_secret&quot;</span><span class="p">:</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;OAUTH_GOOGLE_CLIENT_SECRET&quot;</span><span class="p">),</span>
-        <span class="s2">&quot;scope&quot;</span><span class="p">:</span> <span class="p">[</span><span class="s2">&quot;profile&quot;</span><span class="p">,</span> <span class="s2">&quot;email&quot;</span><span class="p">],</span>
-    <span class="p">}</span>
-<span class="p">}</span>
-
-<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;MeF+3?N&#39;,Nmsn39v]&quot;</span></pre>
-<figcaption>config.py</figcaption>
-</figure>
-<p>This will tell Authomatic that there's a provider named &quot;google&quot; that is a
-Google provider, and what the consumer ID and secret are. The &quot;scope&quot; entry in
-the dictionary controls what Authomatic asks for from Google. If I don't specify
-this, it won't load the user's email.</p>
-<p>The other new entry, <code>SECRET_KEY</code>, is a
-<a href="https://flask.palletsprojects.com/en/1.1.x/config/#SECRET_KEY">Flask concept</a>
-that's used to sign its session cookie. It should be treated as a secret; the
-default value is just supplied to make local testing easier.</p>
-</section>
-<section id="the-user-model">
-<h2>The User Model</h2>
-<p>Flask-Login will persist to any backing store, but the database makes the most
-sense for LibraryHippo. The new <code>User</code> model will store the details of the
-users that have been registered (by logging in):</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">LoginManager</span>
-<span class="err">…</span>
-
-<span class="n">login_manager</span> <span class="o">=</span> <span class="n">LoginManager</span><span class="p">(</span><span class="n">app</span><span class="p">)</span></pre>
-<figcaption>__init__.py</figcaption>
-</figure>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">login_manager</span>
-<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">UserMixin</span>
-<span class="err">…</span>
-
-<span class="k">class</span> <span class="nc">User</span><span class="p">(</span><span class="n">UserMixin</span><span class="p">,</span> <span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
-    <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">social_id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span> <span class="n">unique</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="n">nickname</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-    <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
-
-
-<span class="nd">@login_manager</span><span class="o">.</span><span class="n">user_loader</span>
-<span class="k">def</span> <span class="nf">load_user</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
-    <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span></pre>
-<figcaption>app/models.py</figcaption>
-</figure>
-<p>The <code>load_user</code> function is registered as the Flask-Login &quot;user_loader&quot;.
-Flask-Login will ensure that there's information in the session that can
-identify the active user and will use the function to load the rest of the user
-information from the database.</p>
-<p>Of course the new model has to be added via SQLAlchemy:</p>
-<pre class="m-console m-code"><span class="n">flask</span> <span class="n">db</span> <span class="n">migrate</span> <span class="n">-m</span> <span class="s2">&quot;Add User model&quot;</span>
-<span class="n">flask</span> <span class="n">db</span> <span class="n">upgrade</span></pre>
-</section>
-<section id="the-main-event-log-a-user-in">
-<h2>The main event - log a user in</h2>
-<p>The above has been prepatory work to allow LibraryHippo to authenticate a user
-via Google, log them into Flask, and save a user record to the database.</p>
-<p>First, I add an <code>Authomatic</code> instance to <cite>app</cite>, initializing it with the OAuth
-configuration and secret key I set up earlier:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">logging.config</span> <span class="kn">import</span> <span class="n">dictConfig</span>
-<span class="err">…</span>
-
-<span class="n">authomatic</span> <span class="o">=</span> <span class="n">Authomatic</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">Config</span><span class="o">.</span><span class="n">OAUTH</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="n">Config</span><span class="o">.</span><span class="n">SECRET_KEY</span><span class="p">)</span></pre>
-<figcaption>app/__init__.py</figcaption>
-</figure>
-<p>Now add the login route, which will contain a segment for the Google provider:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">flash</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_for</span>
-<span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span><span class="p">,</span> <span class="n">login_user</span>
-<span class="kn">from</span> <span class="nn">authomatic.adapters</span> <span class="kn">import</span> <span class="n">WerkzeugAdapter</span>
-
-<span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">authomatic</span>
-<span class="kn">from</span> <span class="nn">app.models</span> <span class="n">User</span>
-
-<span class="err">…</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login/&lt;provider&gt;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
-<span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">provider</span><span class="p">):</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">))</span>
-
-    <span class="n">response</span> <span class="o">=</span> <span class="n">make_response</span><span class="p">()</span>
-    <span class="n">result</span> <span class="o">=</span> <span class="n">authomatic</span><span class="o">.</span><span class="n">login</span><span class="p">(</span>
-        <span class="n">WerkzeugAdapter</span><span class="p">(</span><span class="n">request</span><span class="p">,</span> <span class="n">response</span><span class="p">),</span>
-        <span class="n">provider_name</span><span class="o">=</span><span class="n">provider</span><span class="p">,</span>
-        <span class="n">session</span><span class="o">=</span><span class="n">session</span><span class="p">,</span>
-        <span class="n">session_saver</span><span class="o">=</span><span class="k">lambda</span><span class="p">:</span> <span class="n">app</span><span class="o">.</span><span class="n">save_session</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">response</span><span class="p">),</span>
-    <span class="p">)</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">result</span><span class="p">:</span>
-        <span class="k">return</span> <span class="n">response</span>
-
-    <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="p">:</span>
-        <span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">update</span><span class="p">()</span>
-        <span class="k">if</span> <span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
-            <span class="n">flash</span><span class="p">(</span><span class="s2">&quot;Authentication failed.&quot;</span><span class="p">)</span>
-            <span class="n">app</span><span class="o">.</span><span class="n">logger</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s2">&quot;Authentication failed: </span><span class="si">%s</span><span class="s2">&quot;</span><span class="p">,</span> <span class="n">result</span><span class="o">.</span><span class="n">error</span><span class="p">)</span>
-            <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">))</span>
-
-        <span class="n">social_id</span> <span class="o">=</span> <span class="n">provider</span> <span class="o">+</span> <span class="s2">&quot;:&quot;</span> <span class="o">+</span> <span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">id</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">filter_by</span><span class="p">(</span><span class="n">social_id</span><span class="o">=</span><span class="n">social_id</span><span class="p">)</span><span class="o">.</span><span class="n">first</span><span class="p">()</span>
-
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">user</span><span class="p">:</span>
-        <span class="n">user</span> <span class="o">=</span> <span class="n">User</span><span class="p">(</span>
-            <span class="n">social_id</span><span class="o">=</span><span class="n">social_id</span><span class="p">,</span> <span class="n">nickname</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">name</span><span class="p">,</span> <span class="n">email</span><span class="o">=</span><span class="n">result</span><span class="o">.</span><span class="n">user</span><span class="o">.</span><span class="n">email</span>
-        <span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">add</span><span class="p">(</span><span class="n">user</span><span class="p">)</span>
-        <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
-
-    <span class="n">login_user</span><span class="p">(</span><span class="n">user</span><span class="p">,</span> <span class="n">remember</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">))</span></pre>
-<figcaption>app/routes.py</figcaption>
-</figure>
-<p>There's a lot going on here. The gist is that if the current user is logged in,
-the <code>login</code> route just redirects to the main page; there's no need to login if
-someone's already logged in.</p>
-<p>Otherwise, Authomatic attempts to log the user in, via the <code>WerkzeugAdapter</code>,
-which lets it manipulate the HTTP request and response to direct the flow of the
-application. It's given the current Flask session as well as a callback it can
-use to save the session. Once that succeeds, the user is &quot;updated&quot; to fill in
-extra information such as their name and e-mail address.</p>
-<p>Then the method attempts to load the user from the database, looking them up by
-combining the provider name and the ID assigned by the provider. If no record
-exists, one is created and saved back to the database for the future. Finally,
-the user is logged into Flask.</p>
-</section>
-<section id="logging-out">
-<h2>Logging out</h2>
-<p>Once users are logged in, they might want to log out, maybe so another user can
-check their library cards. This is much easier than the login process. Again, I
-add a new route:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">logout_user</span>
-
-<span class="err">…</span>
-
-<span class="n">app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/logout&quot;</span><span class="p">)</span>
- <span class="n">logout</span><span class="p">():</span>
-    <span class="k">if</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">:</span>
-        <span class="n">logout_user</span><span class="p">()</span>
-    <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">))</span></pre>
-<figcaption>app/routes.py</figcaption>
-</figure>
-<p>It just calls Flask's <code>logout_user</code> if the user isn't logged in. Then they're
-redirected to the main page.</p>
-</section>
-<section id="add-login-logout-links">
-<h2>Add login/logout links</h2>
-<p>Users will need a way to initiate the login process, or to log out if they're
-already logged in, and these links should be available from every page, so I'll
-replace my ad hoc page generation with templates that will centralize those
-functions.</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="x">&lt;!DOCTYPE html&gt;</span>
-<span class="x">&lt;html&gt;</span>
-<span class="x">    &lt;head&gt;</span>
-<span class="x">        &lt;title&gt;LibraryHippo&lt;/title&gt;</span>
-<span class="x">    &lt;/head&gt;</span>
-<span class="x">    &lt;body&gt;</span>
-<span class="x">        &lt;nav&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_anonymous</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;login&#39;</span><span class="o">,</span> <span class="nv">provider</span><span class="o">=</span><span class="s1">&#39;google&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Login&lt;/a&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;logout&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Logout </span><span class="cp">{{</span> <span class="nv">current_user.nickname</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">    &lt;/body&gt;</span>
-<span class="x">&lt;/html&gt;</span></pre>
-<figcaption>app/templates/base.jinja</figcaption>
-</figure>
-<p>The <code>base.jinja</code> template sets up common elements to all the pages of the
-application. Here it checks to see if the user is logged in. If not, it includes
-a link to the login route, and if so, a link to the logout route. The logout
-link includes the user's nickname, mostly to make it easier for me to test.
-The main page has not much to add, so its template is very plain for now:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.jinja&quot;</span> <span class="cp">%}</span><span class="x"></span>
-
-<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">&lt;h1&gt;LibraryHippo 2020&lt;/h1&gt;</span>
-<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span></pre>
-<figcaption>app/templates/index.jinja</figcaption>
-</figure>
-<p>Then the index route is updated to use the template:</p>
-<figure class="m-code-figure">
-<pre class="m-code"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
-
-<span class="err">…</span>
-
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/index&quot;</span><span class="p">)</span>
-<span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
-    <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.jinja&quot;</span><span class="p">)</span></pre>
-<figcaption>app/routes.py</figcaption>
-</figure>
-</section>
-<section id="how-s-it-look">
-<h2>How's it look?</h2>
-<p>From a not-logged-in account, I visit my local LibraryHippo instance:</p>
-<figure class="m-figure">
-<img alt="screenshot of LibraryHippo when the user is not logged in" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-not-logged-in.png" />
-<figcaption>LibraryHippo when the user is not logged in</figcaption>
-</figure>
-<p>The new &quot;Login&quot; navigation link appears. When I click it, I'm taken to a
-Google-hosted page where I can select the account I want to use. This screen
-will vary depending on whether I'm already logged into Google, and with how many
-accounts. Note that it indicates what Google account-specific information will
-be shared with LibraryHippo:</p>
-<ul>
-<li>name</li>
-<li>email address</li>
-<li>language preference (which LibraryHippo doesn't use), and</li>
-<li>profile picture (which LibraryHippo doesn't use)</li>
-</ul>
-<figure class="m-figure">
-<img alt="screenshot of Google asking the user to choose an account to use for login" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-google-choose-account.png" />
-<figcaption>Google asking the user to choose an account to use for login</figcaption>
-</figure>
-<p>And finally once I'm logged in, the &quot;Login&quot; link becomes a &quot;Logout&quot; link,
-including my name, which was harvested from Google.</p>
-<figure class="m-figure">
-<img alt="screenshot of LibraryHippo when the user is logged in" src="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/lh-logged-in.png" />
-<figcaption>LibraryHippo when the user is logged in</figcaption>
-</figure>
-</section>
-<section id="deploying-to-heroku">
-<h2>Deploying to Heroku</h2>
-<p>There almost nothing to this. I already added the Heroku-specific URL to the
-Google configuration, so I just have to generate a <code>SECRET_KEY</code> and set
-it and the <code>OAUTH_GOOGLE_CLIENT_*</code> values from earlier.</p>
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">OAUTH_GOOGLE_CLIENT_ID</span><span class="p">=</span><span class="err">…</span>
-<span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">OAUTH_GOOGLE_CLIENT_SECRET</span><span class="p">=</span><span class="err">…</span>
-<span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">SECRET_KEY</span><span class="p">=</span><span class="err">…</span></pre>
-</section>
-<section id="progress">
-<h2>Progress</h2>
-<p>Six of nine requirements have been met!</p>
-<table class="m-table">
-<tbody>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>web app hosting</td>
-<td></td>
-</tr>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>scheduled jobs (run in UTC)</td>
-<td></td>
-</tr>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>scraping library websites on users' behalf</td>
-<td></td>
-</tr>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>small persistent datastore</td>
-<td></td>
-</tr>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>social authentication</td>
-<td></td>
-</tr>
-<tr><td><span class="m-label m-success">done</span></td>
-<td>sending e-mail</td>
-<td></td>
-</tr>
-<tr><td></td>
-<td>nearly free</td>
-<td></td>
-</tr>
-<tr><td></td>
-<td>job queues</td>
-<td></td>
-</tr>
-<tr><td></td>
-<td>custom domain name</td>
-<td></td>
-</tr>
-</tbody>
-</table>
+<p>Some of these steps may warrant a blog post, and some might not. We'll see how
+it goes.</p>
 </section>
 <!-- /content -->
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
         </footer>
+      </article>
+      <article>
+        
+        <header>
+            <h1><a href="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Social Login">
+                    LibraryHippo 2020 - Social Login
+                </a></h1>
+                <div class="article-metadata">
+                  <span><i class="fas fa-calendar"></i><time
+                      datetime="2020-05-07T00:00:00-04:00">2020-05-07</time></span>
+                  <span><i class="fas fa-folder"></i><a
+                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                  <span><i class="fas fa-tags"></i>
+                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                    /
+                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                    /
+                    <a href="https://blairconrad.com/tag/login.html">login</a>
+                    /
+                    <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
+                  </span>
+                  <span><i class="fas fa-list"></i>Part 7 of LibraryHippo 2020</span>
+                </div>
+            <p>I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
+          hole is that it treats every visitor the same. We need to be able to distinguish
+          one user from the next and to retain information about them between visits, such
+          as which family they belong to …</p>
+        </header>
+        <footer>
+          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+        </footer>
+        <div class="m-clearfix-l"></div>
       </article>
       <article>
         
@@ -684,33 +417,6 @@ it and the <code>OAUTH_GOOGLE_CLIENT_*</code> values from earlier.</p>
           a subset of the table's rows showed nothing. I dropped into the
           debugger and became even more confused.</p>
           <p>Visually inspecting the DataTable showed that there was a …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2015/01/05/app-engine-external-authentication-exposing-handlers-to-cron-tasks-and-admins/" rel="bookmark" title="Permalink to App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins">
-                    App Engine + External Authentication: Exposing Handlers to Cron, Tasks, and Admins
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2015-01-05T00:00:00-05:00">2015-01-05</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
-                  </span>
-                </div>
-            <p>Since Google is <a href="https://developers.google.com/accounts/docs/OpenID2">deprecating OpenID 2.0 support</a>, I
-          decided to update <a href="/tags/#LibraryHippo-ref">LibraryHippo</a> to authenticate via
-          <a href="http://oauth.net/">OAuth 2.0</a>, which is a story in itself, but I'm here to talk
-          about what happened next.</p>
-          <p>LibraryHippo has a set of handlers that are accessed primarily via the
-          <a href="https://cloud.google.com/appengine/docs/python/config/cron">Cron</a> and <a href="https://cloud.google.com/appengine/docs/python/taskqueue/">Task Queue …</a></p>
         </header>
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>

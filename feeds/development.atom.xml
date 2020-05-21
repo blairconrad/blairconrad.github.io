@@ -1,5 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-07T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Social Login</title><link href="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/" rel="alternate"></link><published>2020-05-07T00:00:00-04:00</published><updated>2020-05-07T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-07:/2020/05/07/libraryhippo-2020-social-login/</id><summary type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-21T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Recap and decision</title><link href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="alternate"></link><published>2020-05-21T00:00:00-04:00</published><updated>2020-05-21T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-21:/2020/05/21/libraryhippo-2020-recap-and-decision/</id><summary type="html">&lt;p&gt;In each of last six articles I've satisfied one of the high-risk requirements I
+had for moving LibraryHippo to the Flask framework, with the goal of hosting it
+on Heroku. This leaves three &amp;quot;softer&amp;quot; requirements open, which I'll address
+here.&lt;/p&gt;
+&lt;p&gt;(Aside: It feels a little weird working on this conversion …&lt;/p&gt;</summary><content type="html">&lt;p&gt;In each of last six articles I've satisfied one of the high-risk requirements I
+had for moving LibraryHippo to the Flask framework, with the goal of hosting it
+on Heroku. This leaves three &amp;quot;softer&amp;quot; requirements open, which I'll address
+here.&lt;/p&gt;
+&lt;p&gt;(Aside: It feels a little weird working on this conversion while my local
+libraries (and many others across the world) are closed due to the 2019–2020
+coronavirus pandemic. I'm unable to take books out or put them on hold for
+testing purposes, and it's not clear when the libraries will reopen. And maybe
+I'll be reluctant to borrow library materials for a while after they do open.
+Still, I'm hopeful that the libraries will return to normal, and in the meantime
+this is a fun project, so I might as well continue the series.)&lt;/p&gt;
+&lt;section id="remaining-requirements"&gt;
+&lt;h2&gt;Remaining requirements&lt;/h2&gt;
+&lt;section id="custom-domains"&gt;
+&lt;h3&gt;Custom domains&lt;/h3&gt;
+&lt;p&gt;All levels of Heroku plans support custom domain names. They don't offer free
+SSL , but LibraryHippo's been getting along well enough without SSL to this
+point, so I might as well continue. And it looks like
+&lt;a href="https://www.cloudflare.com/en-ca/ssl/"&gt;Cloudflare&lt;/a&gt; offers SSL for free, so
+that may be an option in the future.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="job-queues"&gt;
+&lt;h3&gt;Job queues&lt;/h3&gt;
+&lt;p&gt;I'd used job queues on Google App Engine because each job's execution time was
+capped at 30 seconds or so. It wasn't always possible to check even all the
+cards for a single family in that time, so each card check was queued
+separately. I've simulated a long-running job on Heroku with no problem, so the
+job queue probably isn't necessary.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="cheap-hosting"&gt;
+&lt;h3&gt;Cheap hosting&lt;/h3&gt;
+&lt;p&gt;I don't intend to make any money with LibraryHippo, and while I enjoy it, I
+don't want to pour hundreds (or even several tens) of dollars into it every
+year. Everything I've tried so far has been done on a Heroku free dyno, and it
+looks like it'll continue to meet my needs.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="next-steps"&gt;
+&lt;h2&gt;Next steps&lt;/h2&gt;
+&lt;p&gt;I feel good about meeting my requirements, so I'm going to continue converting the
+application. Part of this will be fleshing out the skeleton that's there now;
+for example, the library site scraping is nowhere near as robust as the current
+LibraryHippo, and the site looks &lt;em&gt;terrible&lt;/em&gt;. The remaining work will be adding
+the features and underpinnings that are missing, such as:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;family management&lt;/li&gt;
+&lt;li&gt;card management&lt;/li&gt;
+&lt;li&gt;automated tests on the backend&lt;/li&gt;
+&lt;li&gt;migrating users from the old application&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Some of these steps may warrant a blog post, and some might not. We'll see how
+it goes.&lt;/p&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="flask"></category></entry><entry><title>LibraryHippo 2020 - Social Login</title><link href="https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/" rel="alternate"></link><published>2020-05-07T00:00:00-04:00</published><updated>2020-05-07T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-07:/2020/05/07/libraryhippo-2020-social-login/</id><summary type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
 hole is that it treats every visitor the same. We need to be able to distinguish
 one user from the next and to retain information about them between visits, such
 as which family they belong to …&lt;/p&gt;</summary><content type="html">&lt;p&gt;I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
