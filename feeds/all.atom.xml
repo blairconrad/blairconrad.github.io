@@ -93,9 +93,9 @@ after authenticating the user. As a security measure, Google will only redirect
 back to known URIs.&lt;/p&gt;
 &lt;p&gt;I added&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href="http://localhost:5000/login/google/"&gt;http://localhost:5000/login/google/&lt;/a&gt; (for testing locally)&lt;/li&gt;
-&lt;li&gt;&lt;a href="https://libraryhippo.herokuapp.com/login/google/"&gt;https://libraryhippo.herokuapp.com/login/google/&lt;/a&gt; (for when I deploy to Heroku), and&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://libraryhippo.com/login/google/"&gt;http://libraryhippo.com/login/google/&lt;/a&gt; (for when I eventually point the domain name to Heroku)&lt;/li&gt;
+&lt;li&gt;&lt;a class="m-link-wrap" href="http://localhost:5000/login/google/"&gt;http://localhost:5000/login/google/&lt;/a&gt; (for testing locally)&lt;/li&gt;
+&lt;li&gt;&lt;a class="m-link-wrap" href="https://libraryhippo.herokuapp.com/login/google/"&gt;https://libraryhippo.herokuapp.com/login/google/&lt;/a&gt; (for when I deploy to Heroku), and&lt;/li&gt;
+&lt;li&gt;&lt;a class="m-link-wrap" href="http://libraryhippo.com/login/google/"&gt;http://libraryhippo.com/login/google/&lt;/a&gt; (for when I eventually point the domain name to Heroku)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;and was rewarded with a &lt;em&gt;Client ID&lt;/em&gt; and a &lt;em&gt;Client secret&lt;/em&gt;, which are needed by Authomatic.&lt;/p&gt;
 &lt;p&gt;I also configured the OAuth consent screen, which controls what users see when
@@ -1303,7 +1303,7 @@ I chose to execute daily at 11:30 PM because as I typed, it was 11:26 PM UTC.&lt
 &lt;figcaption&gt;Configuring a job to run daily at 11:30 PM&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Now there's nothing to do but wait. In the meantime I opened up the LibraryHippo
-application's log view (at &lt;a href="https://dashboard.heroku.com/apps/libraryhippo/logs"&gt;https://dashboard.heroku.com/apps/libraryhippo/logs&lt;/a&gt;)
+application's log view (at &lt;a class="m-link-wrap" href="https://dashboard.heroku.com/apps/libraryhippo/logs"&gt;https://dashboard.heroku.com/apps/libraryhippo/logs&lt;/a&gt;)
 and watched.&lt;/p&gt;
 &lt;p&gt;Shortly after 6:30 PM local time, the log started updating, and I received my
 first e-mail, with further updates and a second e-mail about 5 minutes later.
