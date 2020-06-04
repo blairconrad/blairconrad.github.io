@@ -1,5 +1,70 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-05-21T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Recap and decision</title><link href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="alternate"></link><published>2020-05-21T00:00:00-04:00</published><updated>2020-05-21T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-21:/2020/05/21/libraryhippo-2020-recap-and-decision/</id><summary type="html">&lt;p&gt;In each of last six articles I've satisfied one of the high-risk requirements I
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad - Development</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/development.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-06-04T00:00:00-04:00</updated><entry><title>Why I Teach Git Using Only the Command Line</title><link href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" rel="alternate"></link><published>2020-06-04T00:00:00-04:00</published><updated>2020-06-04T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-04:/2020/06/04/why-i-teach-git-using-only-the-command-line/</id><summary type="html">&lt;p&gt;At the Day Job, we're about to transition something like 150 Subversion repos to
+a single git monorepo. Part of my contribution will be training several tens of
+git-unaware developers in my office on the basics of working with git.&lt;/p&gt;
+&lt;p&gt;I was chatting about training approaches with my counterpart in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At the Day Job, we're about to transition something like 150 Subversion repos to
+a single git monorepo. Part of my contribution will be training several tens of
+git-unaware developers in my office on the basics of working with git.&lt;/p&gt;
+&lt;p&gt;I was chatting about training approaches with my counterpart in another office
+(which already has a higher level of git experience) and he mentioned that his
+local colleagues are committed (sorry) to using Tortoise SVN and similar tools,
+and he wondered how I was going to handle GUI vs. CLI training.&lt;/p&gt;
+&lt;p&gt;I figured I'd have to address that question a few times in the coming weeks, so
+I decided to write it down here.&lt;/p&gt;
+&lt;section id="all-command-line"&gt;
+&lt;h2&gt;All Command Line&lt;/h2&gt;
+&lt;p&gt;As the title of this article hints, the answer to my colleague's question is
+that I plan on handling GUI training by not doing any at all. I anticipate this
+will be less than popular with my trainees, many of whom I know love their File
+Explorer extensions for interfacing with Subversion. However, I have three
+reasons for potentially disappointing them.&lt;/p&gt;
+&lt;section id="too-many-guis-to-choose-from"&gt;
+&lt;h3&gt;Too many GUIs to choose from&lt;/h3&gt;
+&lt;p&gt;First, if I did use a GUI tool to train the users, which one? Off the top of my
+head, I can think of &lt;a href="https://tortoisegit.org/"&gt;TortoiseGit&lt;/a&gt;,
+&lt;a href="https://www.sourcetreeapp.com/"&gt;SourceTree&lt;/a&gt;,
+&lt;a href="https://www.gitkraken.com/"&gt;GitKraken&lt;/a&gt;, &lt;a href="https://git-fork.com/"&gt;fork&lt;/a&gt;, and
+systems embedded into the three popular editors in the office: Visual Studio
+Code, Eclipse, and IntelliJ. The time required to develop and execute a plan for
+even half of these is prohibitive, and picking just one isn't going to
+appease near everyone.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="lack-of-tool-knowledge"&gt;
+&lt;h3&gt;Lack of tool knowledge&lt;/h3&gt;
+&lt;p&gt;Even if I did choose one or two GUI tools to focus on, hoping that I'd cover an
+overlapping subset that would make most people happy, I'd have to learn how to
+use the tools. It's been quite a while since I used a GUI tool (I enjoyed
+GitKraken for a while, mostly because it's so pretty), and I'd need at least a
+refresher, and potentially to completely retrain myself. I've never touched the
+source control integration in Visual Studio Code, for example, despite using
+that editor &lt;em&gt;right now&lt;/em&gt;, with an intent to add this file to git.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="guis-lack-transparency"&gt;
+&lt;h3&gt;GUIs lack transparency&lt;/h3&gt;
+&lt;p&gt;Finally, I've seen people use GUI git tools when they get started working with
+git. I watched me do it. I don't think it helps. Having a pretty graphical view
+of the commits is enjoyable, and being able to pick a few popular actions from a
+menu helps the novice accomplish simple tasks, but after that the GUI becomes a
+barrier to learning.&lt;/p&gt;
+&lt;p&gt;A number of the GUI tools handle housekeeping tasks, such as fetching from
+remotes, for users. Or they perform so many background operations per explicit
+action that the user takes, that they introduce confusion. I've several times
+been called to my (smaller, informally introduced to git) team members' desks
+and been asked what happened to their commit graph. Poring over the
+incomprehensible snarl, I ask &amp;quot;what did you do?&amp;quot;. They either point at some
+confusingly-named action in a menu or say they picked some option from the menu,
+they don't remember which.&lt;/p&gt;
+&lt;p&gt;By having developers actually type commands to fetch updates, switch branches,
+commit, and rebase (and to constantly &lt;code&gt;git log --graph --decorate --all&lt;/code&gt; after
+each repository-modifying command), I'm hoping it will force them to think about
+their actions and to develop a sense of how the git graphs change. Ideally they
+will know what commands to execute to perform a particular task, or be able to
+determine compensating actions to repair mistakes.&lt;/p&gt;
+&lt;p&gt;Or if things go horribly wrong, at least I'll be able to have them scroll up
+through their command history to answer &amp;quot;what did you &lt;em&gt;do&lt;/em&gt;?&amp;quot;.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="git"></category></entry><entry><title>LibraryHippo 2020 - Recap and decision</title><link href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="alternate"></link><published>2020-05-21T00:00:00-04:00</published><updated>2020-05-21T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-05-21:/2020/05/21/libraryhippo-2020-recap-and-decision/</id><summary type="html">&lt;p&gt;In each of last six articles I've satisfied one of the high-risk requirements I
 had for moving LibraryHippo to the Flask framework, with the goal of hosting it
 on Heroku. This leaves three &amp;quot;softer&amp;quot; requirements open, which I'll address
 here.&lt;/p&gt;

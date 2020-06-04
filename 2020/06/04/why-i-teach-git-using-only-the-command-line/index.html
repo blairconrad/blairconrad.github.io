@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>Why I Teach Git Using Only the Command Line | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Why I Teach Git Using Only the Command Line" />
+  <meta name="twitter:title" content="Why I Teach Git Using Only the Command Line" />
+  <meta property="og:url" content="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" />
+  <meta property="og:description" content="At the Day Job, we&#39;re about to transition something like 150 Subversion repos to a single git monorepo. Part of my contribution will be training several tens of git-unaware developers in my office on the basics of working with git. I was chatting about training approaches with my counterpart in …" />
+  <meta name="twitter:description" content="At the Day Job, we&#39;re about to transition something like 150 Subversion repos to a single git monorepo. Part of my contribution will be training several tens of git-unaware developers in my office on the basics of working with git. I was chatting about training approaches with my counterpart in …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" rel="bookmark" title="Permalink to Why I Teach Git Using Only the Command Line">
+                  Why I Teach Git Using Only the Command Line
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2020-06-04T00:00:00-04:00">2020-06-04</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/git.html">git</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>At the Day Job, we're about to transition something like 150 Subversion repos to
+a single git monorepo. Part of my contribution will be training several tens of
+git-unaware developers in my office on the basics of working with git.</p>
+<p>I was chatting about training approaches with my counterpart in another office
+(which already has a higher level of git experience) and he mentioned that his
+local colleagues are committed (sorry) to using Tortoise SVN and similar tools,
+and he wondered how I was going to handle GUI vs. CLI training.</p>
+<p>I figured I'd have to address that question a few times in the coming weeks, so
+I decided to write it down here.</p>
+<section id="all-command-line">
+<h2>All Command Line</h2>
+<p>As the title of this article hints, the answer to my colleague's question is
+that I plan on handling GUI training by not doing any at all. I anticipate this
+will be less than popular with my trainees, many of whom I know love their File
+Explorer extensions for interfacing with Subversion. However, I have three
+reasons for potentially disappointing them.</p>
+<section id="too-many-guis-to-choose-from">
+<h3>Too many GUIs to choose from</h3>
+<p>First, if I did use a GUI tool to train the users, which one? Off the top of my
+head, I can think of <a href="https://tortoisegit.org/">TortoiseGit</a>,
+<a href="https://www.sourcetreeapp.com/">SourceTree</a>,
+<a href="https://www.gitkraken.com/">GitKraken</a>, <a href="https://git-fork.com/">fork</a>, and
+systems embedded into the three popular editors in the office: Visual Studio
+Code, Eclipse, and IntelliJ. The time required to develop and execute a plan for
+even half of these is prohibitive, and picking just one isn't going to
+appease near everyone.</p>
+</section>
+<section id="lack-of-tool-knowledge">
+<h3>Lack of tool knowledge</h3>
+<p>Even if I did choose one or two GUI tools to focus on, hoping that I'd cover an
+overlapping subset that would make most people happy, I'd have to learn how to
+use the tools. It's been quite a while since I used a GUI tool (I enjoyed
+GitKraken for a while, mostly because it's so pretty), and I'd need at least a
+refresher, and potentially to completely retrain myself. I've never touched the
+source control integration in Visual Studio Code, for example, despite using
+that editor <em>right now</em>, with an intent to add this file to git.</p>
+</section>
+<section id="guis-lack-transparency">
+<h3>GUIs lack transparency</h3>
+<p>Finally, I've seen people use GUI git tools when they get started working with
+git. I watched me do it. I don't think it helps. Having a pretty graphical view
+of the commits is enjoyable, and being able to pick a few popular actions from a
+menu helps the novice accomplish simple tasks, but after that the GUI becomes a
+barrier to learning.</p>
+<p>A number of the GUI tools handle housekeeping tasks, such as fetching from
+remotes, for users. Or they perform so many background operations per explicit
+action that the user takes, that they introduce confusion. I've several times
+been called to my (smaller, informally introduced to git) team members' desks
+and been asked what happened to their commit graph. Poring over the
+incomprehensible snarl, I ask &quot;what did you do?&quot;. They either point at some
+confusingly-named action in a menu or say they picked some option from the menu,
+they don't remember which.</p>
+<p>By having developers actually type commands to fetch updates, switch branches,
+commit, and rebase (and to constantly <code>git log --graph --decorate --all</code> after
+each repository-modifying command), I'm hoping it will force them to think about
+their actions and to develop a sense of how the git graphs change. Ideally they
+will know what commands to execute to perform a particular task, or be able to
+determine compensating actions to repair mistakes.</p>
+<p>Or if things go horribly wrong, at least I'll be able to have them scroll up
+through their command history to answer &quot;what did you <em>do</em>?&quot;.</p>
+</section>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+
+
+        <script src="https://utteranc.es/client.js"
+            repo="blairconrad/blairconrad.github.io"
+            issue-term="pathname"
+            theme="photon-dark"
+            crossorigin="anonymous"
+            async>
+        </script>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

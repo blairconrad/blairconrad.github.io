@@ -40,6 +40,91 @@
       <article>
         
         <header>
+            <h1><a href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" rel="bookmark" title="Permalink to Why I Teach Git Using Only the Command Line">
+                    Why I Teach Git Using Only the Command Line
+                </a></h1>
+                <div class="article-metadata">
+                  <span><i class="fas fa-calendar"></i><time
+                      datetime="2020-06-04T00:00:00-04:00">2020-06-04</time></span>
+                  <span><i class="fas fa-folder"></i><a
+                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                  <span><i class="fas fa-tags"></i>
+                    <a href="https://blairconrad.com/tag/git.html">git</a>
+                  </span>
+                </div>
+        </header>
+        <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>At the Day Job, we're about to transition something like 150 Subversion repos to
+a single git monorepo. Part of my contribution will be training several tens of
+git-unaware developers in my office on the basics of working with git.</p>
+<p>I was chatting about training approaches with my counterpart in another office
+(which already has a higher level of git experience) and he mentioned that his
+local colleagues are committed (sorry) to using Tortoise SVN and similar tools,
+and he wondered how I was going to handle GUI vs. CLI training.</p>
+<p>I figured I'd have to address that question a few times in the coming weeks, so
+I decided to write it down here.</p>
+<section id="all-command-line">
+<h2>All Command Line</h2>
+<p>As the title of this article hints, the answer to my colleague's question is
+that I plan on handling GUI training by not doing any at all. I anticipate this
+will be less than popular with my trainees, many of whom I know love their File
+Explorer extensions for interfacing with Subversion. However, I have three
+reasons for potentially disappointing them.</p>
+<section id="too-many-guis-to-choose-from">
+<h3>Too many GUIs to choose from</h3>
+<p>First, if I did use a GUI tool to train the users, which one? Off the top of my
+head, I can think of <a href="https://tortoisegit.org/">TortoiseGit</a>,
+<a href="https://www.sourcetreeapp.com/">SourceTree</a>,
+<a href="https://www.gitkraken.com/">GitKraken</a>, <a href="https://git-fork.com/">fork</a>, and
+systems embedded into the three popular editors in the office: Visual Studio
+Code, Eclipse, and IntelliJ. The time required to develop and execute a plan for
+even half of these is prohibitive, and picking just one isn't going to
+appease near everyone.</p>
+</section>
+<section id="lack-of-tool-knowledge">
+<h3>Lack of tool knowledge</h3>
+<p>Even if I did choose one or two GUI tools to focus on, hoping that I'd cover an
+overlapping subset that would make most people happy, I'd have to learn how to
+use the tools. It's been quite a while since I used a GUI tool (I enjoyed
+GitKraken for a while, mostly because it's so pretty), and I'd need at least a
+refresher, and potentially to completely retrain myself. I've never touched the
+source control integration in Visual Studio Code, for example, despite using
+that editor <em>right now</em>, with an intent to add this file to git.</p>
+</section>
+<section id="guis-lack-transparency">
+<h3>GUIs lack transparency</h3>
+<p>Finally, I've seen people use GUI git tools when they get started working with
+git. I watched me do it. I don't think it helps. Having a pretty graphical view
+of the commits is enjoyable, and being able to pick a few popular actions from a
+menu helps the novice accomplish simple tasks, but after that the GUI becomes a
+barrier to learning.</p>
+<p>A number of the GUI tools handle housekeeping tasks, such as fetching from
+remotes, for users. Or they perform so many background operations per explicit
+action that the user takes, that they introduce confusion. I've several times
+been called to my (smaller, informally introduced to git) team members' desks
+and been asked what happened to their commit graph. Poring over the
+incomprehensible snarl, I ask &quot;what did you do?&quot;. They either point at some
+confusingly-named action in a menu or say they picked some option from the menu,
+they don't remember which.</p>
+<p>By having developers actually type commands to fetch updates, switch branches,
+commit, and rebase (and to constantly <code>git log --graph --decorate --all</code> after
+each repository-modifying command), I'm hoping it will force them to think about
+their actions and to develop a sense of how the git graphs change. Ideally they
+will know what commands to execute to perform a particular task, or be able to
+determine compensating actions to repair mistakes.</p>
+<p>Or if things go horribly wrong, at least I'll be able to have them scroll up
+through their command history to answer &quot;what did you <em>do</em>?&quot;.</p>
+</section>
+</section>
+<!-- /content -->
+        <footer>
+          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+        </footer>
+      </article>
+      <article>
+        
+        <header>
             <h1><a href="https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Recap and decision">
                     LibraryHippo 2020 - Recap and decision
                 </a></h1>
@@ -53,96 +138,18 @@
                     /
                     <a href="https://blairconrad.com/tag/flask.html">flask</a>
                   </span>
+                  <span><i class="fas fa-list"></i>Part 8 of LibraryHippo 2020</span>
                 </div>
-              <aside class="m-block m-default">
-                <h3>Part 8 of the LibraryHippo 2020 series:</h3>
-                <ol>
-                  <li>
-                    <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
-                  </li>
-                  <li>
-                    <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
-                  </li>
-                  <li>
-                    Recap and decision (this article)
-                  </li>
-                </ol>
-              </aside>
+            <p>In each of last six articles I've satisfied one of the high-risk requirements I
+          had for moving LibraryHippo to the Flask framework, with the goal of hosting it
+          on Heroku. This leaves three &quot;softer&quot; requirements open, which I'll address
+          here.</p>
+          <p>(Aside: It feels a little weird working on this conversion …</p>
         </header>
-        <div class="m-clearfix-l"></div>
-<!-- content -->
-<p>In each of last six articles I've satisfied one of the high-risk requirements I
-had for moving LibraryHippo to the Flask framework, with the goal of hosting it
-on Heroku. This leaves three &quot;softer&quot; requirements open, which I'll address
-here.</p>
-<p>(Aside: It feels a little weird working on this conversion while my local
-libraries (and many others across the world) are closed due to the 2019–2020
-coronavirus pandemic. I'm unable to take books out or put them on hold for
-testing purposes, and it's not clear when the libraries will reopen. And maybe
-I'll be reluctant to borrow library materials for a while after they do open.
-Still, I'm hopeful that the libraries will return to normal, and in the meantime
-this is a fun project, so I might as well continue the series.)</p>
-<section id="remaining-requirements">
-<h2>Remaining requirements</h2>
-<section id="custom-domains">
-<h3>Custom domains</h3>
-<p>All levels of Heroku plans support custom domain names. They don't offer free
-SSL , but LibraryHippo's been getting along well enough without SSL to this
-point, so I might as well continue. And it looks like
-<a href="https://www.cloudflare.com/en-ca/ssl/">Cloudflare</a> offers SSL for free, so
-that may be an option in the future.</p>
-</section>
-<section id="job-queues">
-<h3>Job queues</h3>
-<p>I'd used job queues on Google App Engine because each job's execution time was
-capped at 30 seconds or so. It wasn't always possible to check even all the
-cards for a single family in that time, so each card check was queued
-separately. I've simulated a long-running job on Heroku with no problem, so the
-job queue probably isn't necessary.</p>
-</section>
-<section id="cheap-hosting">
-<h3>Cheap hosting</h3>
-<p>I don't intend to make any money with LibraryHippo, and while I enjoy it, I
-don't want to pour hundreds (or even several tens) of dollars into it every
-year. Everything I've tried so far has been done on a Heroku free dyno, and it
-looks like it'll continue to meet my needs.</p>
-</section>
-</section>
-<section id="next-steps">
-<h2>Next steps</h2>
-<p>I feel good about meeting my requirements, so I'm going to continue converting the
-application. Part of this will be fleshing out the skeleton that's there now;
-for example, the library site scraping is nowhere near as robust as the current
-LibraryHippo, and the site looks <em>terrible</em>. The remaining work will be adding
-the features and underpinnings that are missing, such as:</p>
-<ul>
-<li>family management</li>
-<li>card management</li>
-<li>automated tests on the backend</li>
-<li>migrating users from the old application</li>
-</ul>
-<p>Some of these steps may warrant a blog post, and some might not. We'll see how
-it goes.</p>
-</section>
-<!-- /content -->
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
         </footer>
+        <div class="m-clearfix-l"></div>
       </article>
       <article>
         
@@ -391,32 +398,6 @@ it goes.</p>
           dependency in my <code>project.json</code>. Of course the resulting nupkg
           contained the wrong dependency. Fortunately, the package
           wasn't published in that state, but I didn't want to risk such a thing …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2015/10/05/select-may-not-be-broken-but-its-bent/" rel="bookmark" title="Permalink to Select May Not be Broken, But it's Bent">
-                    Select May Not be Broken, But it's Bent
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2015-10-05T00:00:00-04:00">2015-10-05</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/.net.html">.NET</a>
-                  </span>
-                </div>
-            <p>Earlier this week at the day job I ran into an interesting problem
-          working with a <a href="https://msdn.microsoft.com/en-us/library/system.data.datatable(v=vs.100).aspx">DataTable</a>.  A view that's supposed to show
-          a subset of the table's rows showed nothing. I dropped into the
-          debugger and became even more confused.</p>
-          <p>Visually inspecting the DataTable showed that there was a …</p>
         </header>
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
