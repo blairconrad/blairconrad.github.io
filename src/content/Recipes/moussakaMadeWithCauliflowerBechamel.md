@@ -10,7 +10,7 @@ title: Moussaka Made with Cauliflower Bechamel
   <td>place on oiled baking sheet; brush with olive oil;<br/>sprinkle with salt and pepper</td>
   <td>bake 15 minutes at 450&deg;</td>
   <td class="righthide">&nbsp;</td>
-  <td rowspan="23">layer:<br/>all potatoes,<br/>&frac12; eggplant,<br/>all the meat,<br/>&frac12; eggplant,<br/>all the bechamel</td>
+  <td rowspan="23">layer in a very large pan (maybe a rectangular roasting pan):<br/>all potatoes,<br/>&frac12; eggplant,<br/>all the meat,<br/>&frac12; eggplant,<br/>all the bechamel</td>
   <td rowspan="23">Bake at 350&deg;F, uncovered, for about 45 minutes</td>
 </tr>
 <tr>
@@ -92,26 +92,35 @@ title: Moussaka Made with Cauliflower Bechamel
 </table>
 
 1. Slice eggplant &frac14;&ndash;&frac12;&Prime; thick, as evenly as possible
-1. Lay eggplant slices in a colander and sprinkle generously with salt. Let sit for about 30 minutes
+1. Lay eggplant slices in a colander and sprinkle generously with salt. Let sit
+   for about 30 minutes
 1. Slice potatoes about &frac14;&Prime; thick
 1. Lay the potatoes on an oiled baking sheet in a single layer
 1. Brush lightly with olive oil, then sprinkle with salt and pepper
 1. Bake for about 15 minutes, until cooked. Set aside.
 1. Rinse the eggplant under cool water. Pat dry with a towel.
-1. Layer the eggplant on an oiled baking sheet, then brush them with olive oil and sprinkle with salt and pepper
+1. Layer the eggplant on an oiled baking sheet, then brush them with olive oil
+   and sprinkle with salt and pepper
 1. Bake for about 15 minutes, until soft and lightly golden
-1. Chop the cauliflower and steam in the chicken broth until cooked through, 15&ndash;20 minutes
-1. Blend cauliflower (and any remaining broth from the pot), coconut milk, nutmeg, ghee, salt, and pepper until smooth. Taste and adjust seasonings
+1. Chop the cauliflower and steam in the chicken broth until cooked through,
+   15&ndash;20 minutes
+1. Blend cauliflower (and any remaining broth from the pot), coconut milk,
+   nutmeg, ghee, salt, and pepper until smooth. Taste and adjust seasonings
 1. Blend in egg. Set aside.
 1. Fry onion, parsley, and garlic over medium-high heat for 1–2 minutes
 1. Add all meat, tomatoes, and remaining seasonings.
-1. Cook for about 10 minutes, stirring every so often, until meat is no longer pink
+1. Cook for about 10 minutes, stirring every so often, until meat is no longer
+   pink
 1. Taste and adjust flavors as desired
-1. Grease a large (at least 9&Prime;&times;13&Prime;) baking dish
-1. Layer all the potatoes along the bottom, spreading out as much as possible, but don't worry if you have to overlap
+1. Grease a large (bigger than 9&Prime;&times;13&Prime;&mdash;maybe a
+   rectangular roaster) pan
+1. Layer all the potatoes along the bottom, spreading out as much as possible,
+   but don't worry if you have to overlap
 1. Top with half the eggplant slices
 1. Top with the meat mixture
 1. Top with the remaining eggplant slices
 1. Pour the bechamel over the top
 1. Bake at 350&deg;F, uncovered, for about 45 minutes, until the top is golden
-<p class="confession">Lightly adapted from <a href="http://www.honeygheeandme.com/2016/01/moussaka-made-with-cauliflower-bechamel-but-youd-never-even-know-it-paleo-whole30-delicious/">Honey, Ghee, & Me</a></p>
+   <p class="confession">Lightly adapted from <a
+   href="http://www.honeygheeandme.com/2016/01/moussaka-made-with-cauliflower-bechamel-but-youd-never-even-know-it-paleo-whole30-delicious/">Honey,
+   Ghee, & Me</a></p>
