@@ -1,0 +1,8 @@
+[1m============================= test session starts =============================[0m
+platform win32 -- Python 3.8.1, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: D:\Sandbox\LibraryHippo
+collected 1 item
+
+tests\unit\test_wpl.py [32m.[0m[32m                                                 [100%][0m
+
+[32m============================== [32m[1m1 passed[0m[32m in 2.20s[0m[32m ==============================[0m
