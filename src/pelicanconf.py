@@ -79,3 +79,9 @@ PLUGINS += ["m.htmlsanity", "m.code", "m.components", "m.images"]
 
 
 M_LINKS_NAVBAR1 = [("Recipes", "Recipes/", "recipes", [])]
+
+M_BLOG_NAME = SITENAME
+M_BLOG_URL = SITEURL
+
+M_SOCIAL_TWITTER_SITE = "@Hippopottoman"
+M_SOCIAL_TWITTER_SITE_ID = 14181635
