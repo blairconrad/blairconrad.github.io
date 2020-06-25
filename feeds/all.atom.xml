@@ -1,5 +1,148 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-06-04T00:00:00-04:00</updated><entry><title>Why I Teach Git Using Only the Command Line</title><link href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" rel="alternate"></link><published>2020-06-04T00:00:00-04:00</published><updated>2020-06-04T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-04:/2020/06/04/why-i-teach-git-using-only-the-command-line/</id><summary type="html">&lt;p&gt;At the Day Job, we're about to transition something like 150 Subversion repos to
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-06-25T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Unit Tests</title><link href="https://blairconrad.com/2020/06/25/libraryhippo-2020-unit-tests/" rel="alternate"></link><published>2020-06-25T00:00:00-04:00</published><updated>2020-06-25T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-25:/2020/06/25/libraryhippo-2020-unit-tests/</id><summary type="html">&lt;p&gt;Now that I've completed all my
+&lt;a href="http://www.extremeprogramming.org/rules/spike.html"&gt;spikes&lt;/a&gt; and decided to
+move forward, I'd like to add a little more rigour to the project. Original
+LibraryHippo had a comprehensive suite of unit tests and I'll port them over
+(and perhaps augment them with integration tests). Today I'll add the first unit …&lt;/p&gt;</summary><content type="html">&lt;p&gt;Now that I've completed all my
+&lt;a href="http://www.extremeprogramming.org/rules/spike.html"&gt;spikes&lt;/a&gt; and decided to
+move forward, I'd like to add a little more rigour to the project. Original
+LibraryHippo had a comprehensive suite of unit tests and I'll port them over
+(and perhaps augment them with integration tests). Today I'll add the first unit
+test to the project, then port over a bunch more when you're not looking!&lt;/p&gt;
+&lt;section id="prerequisites"&gt;
+&lt;h2&gt;Prerequisites&lt;/h2&gt;
+&lt;p&gt;The first thing we need is a test-running package. My favourite is
+&lt;a href="https://docs.pytest.org/en/latest/"&gt;pytest&lt;/a&gt;.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;pytest&lt;/span&gt;
+&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Now I need a place to put the tests. I'll broadly be following the structure
+from Patrick Kennedy's
+&lt;a href="https://www.patricksoftwareblog.com/testing-a-flask-application-using-pytest/"&gt;Testing a Flask Application using pytest&lt;/a&gt;,
+although most of it won't be needed today, so I'll just make the &lt;code&gt;tests\unit&lt;/code&gt;
+structure, including empty &lt;code&gt;__init__.py&lt;/code&gt; files so my imports work.&lt;/p&gt;
+&lt;pre class="m-console m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tests&amp;#39;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="s1"&gt;&amp;#39;tests\unit&amp;#39;&lt;/span&gt; &lt;span class="p"&gt;|&lt;/span&gt; &lt;span class="k"&gt;ForEach&lt;/span&gt;&lt;span class="n"&gt;-Object&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+    &lt;span class="nb"&gt;New-Item&lt;/span&gt; &lt;span class="n"&gt;-Type&lt;/span&gt; &lt;span class="n"&gt;File&lt;/span&gt; &lt;span class="nv"&gt;$_&lt;/span&gt;&lt;span class="p"&gt;\&lt;/span&gt;&lt;span class="n"&gt;__init__&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;py&lt;/span&gt; &lt;span class="n"&gt;-Force&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="first-test"&gt;
+&lt;h2&gt;First test&lt;/h2&gt;
+&lt;p&gt;Next, I write a simple unit test for the &lt;code&gt;WPL&lt;/code&gt; class, to make sure it correctly reads the items I have on hold.&lt;/p&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.libraries.wpl&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;WPL&lt;/span&gt;
+&lt;span class="kn"&gt;from&lt;/span&gt; &lt;span class="nn"&gt;app.models&lt;/span&gt; &lt;span class="kn"&gt;import&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_check_card_finds_holds&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_card&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="n"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WPL&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;check_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;check_result&lt;/span&gt; &lt;span class="ow"&gt;is&lt;/span&gt; &lt;span class="ow"&gt;not&lt;/span&gt; &lt;span class="kc"&gt;None&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;check_result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+
+
+&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;make_card&lt;/span&gt;&lt;span class="p"&gt;():&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;Card&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;patron_name&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blair Conrad&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;number&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;123456789&amp;quot;&lt;/span&gt;
+    &lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;pin&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;9876&amp;quot;&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="n"&gt;card&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;tests/unit/test_wpl.py&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;Run it using &lt;code&gt;pytest&lt;/code&gt;, and success!&lt;/p&gt;
+&lt;pre class="m-console"&gt;&lt;span class="g g-AnsiBrightDefault"&gt;&amp;zwnj;============================= test session starts =============================&lt;/span&gt;
+platform win32 -- Python 3.8.1, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
+rootdir: D:\Sandbox\LibraryHippo
+collected 1 item
+
+tests\unit\test_wpl.py &lt;span class="g g-AnsiGreen"&gt;&amp;zwnj;.                                                 [100%]&lt;/span&gt;
+
+&lt;span class="g g-AnsiGreen"&gt;&amp;zwnj;============================== &lt;/span&gt;&lt;span class="g g-AnsiBrightGreen"&gt;&amp;zwnj;1 passed&lt;/span&gt;&lt;span class="g g-AnsiGreen"&gt;&amp;zwnj; in 2.20s ==============================&lt;/span&gt;&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="isolate-tests-from-the-library-website"&gt;
+&lt;h2&gt;Isolate tests from the library website&lt;/h2&gt;
+&lt;p&gt;That test shows that the code is doing something, but it's dependent on
+responses from the Waterloo Public Library website. If I don't have any holds,
+or the site is down, my test will fail. I'll use
+&lt;a href="https://requests-mock.readthedocs.io/en/latest/"&gt;requests-mock&lt;/a&gt; to fake out
+interactions with the library system.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;requests-mock&lt;/span&gt;
+&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+&lt;p&gt;I'd never used requests-mock before, and it was incredibly easy. It provides a
+pytest fixture on which I can set expectations for the requests module. Within
+minutes, I'd used the &lt;code&gt;mock_requests&lt;/code&gt; fixture to configure fake results for&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;getting the login page&lt;/li&gt;
+&lt;li&gt;posting the login page&lt;/li&gt;
+&lt;li&gt;getting the holds page&lt;/li&gt;
+&lt;li&gt;getting the checkouts page&lt;/li&gt;
+&lt;/ol&gt;
+&lt;figure class="m-code-figure"&gt;
+&lt;pre class="m-code"&gt;&lt;span class="k"&gt;def&lt;/span&gt; &lt;span class="nf"&gt;test_check_card_finds_holds&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;requests_mock&lt;/span&gt;&lt;span class="p"&gt;):&lt;/span&gt;
+    &lt;span class="n"&gt;login_url&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;https://books.kpl.org/iii/cas/login?service=&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;https://books.kpl.org/patroninfo~S3/&amp;quot;&lt;/span&gt;
+        &lt;span class="o"&gt;+&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;j_acegi_cas_security_check&amp;amp;lang=eng&amp;amp;scope=3&amp;quot;&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;requests_mock&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;login_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+    &lt;span class="n"&gt;requests_mock&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;post&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;login_url&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;lt;a href=&amp;#39;/holds&amp;#39;&amp;gt;holds&amp;lt;/a&amp;gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;requests_mock&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;get&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;/holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="n"&gt;text&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;lt;table class=&amp;quot;patFunc&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;lt;tr class=&amp;quot;patFuncHeaders&amp;quot;&amp;gt;&amp;lt;th&amp;gt; TITLE &amp;lt;/th&amp;gt;&amp;lt;th&amp;gt;STATUS&amp;lt;/th&amp;gt;&amp;lt;/tr&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;lt;tr class=&amp;quot;patFuncEntry&amp;quot;&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;                &amp;lt;td class=&amp;quot;patFuncTitle&amp;quot;&amp;gt;Blood heir / Amélie Wen Zhao&amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;                &amp;lt;td class=&amp;quot;patFuncStatus&amp;quot;&amp;gt; 9 of 83 holds &amp;lt;/td&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;lt;/tr&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;lt;/table&amp;gt;&lt;/span&gt;
+&lt;span class="s2"&gt;            &amp;quot;&amp;quot;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="n"&gt;card&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;make_card&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+
+    &lt;span class="n"&gt;target&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;WPL&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt;
+    &lt;span class="n"&gt;check_result&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;target&lt;/span&gt;&lt;span class="o"&gt;.&lt;/span&gt;&lt;span class="n"&gt;check_card&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="n"&gt;card&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;
+
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;check_result&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;check_result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt;
+    &lt;span class="k"&gt;assert&lt;/span&gt; &lt;span class="n"&gt;check_result&lt;/span&gt;&lt;span class="p"&gt;[&lt;/span&gt;&lt;span class="s2"&gt;&amp;quot;holds&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;][&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;]&lt;/span&gt; &lt;span class="o"&gt;==&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Status&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot; 9 of 83 holds &amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+        &lt;span class="s2"&gt;&amp;quot;Title&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;:&lt;/span&gt; &lt;span class="s2"&gt;&amp;quot;Blood heir / Amélie Wen Zhao&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt;
+    &lt;span class="p"&gt;}&lt;/span&gt;&lt;/pre&gt;
+&lt;figcaption&gt;tests/unit/test_wpl.ca&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;p&gt;This passes just as in its previous iteration, even after I made the test more
+specific. Since I control the &amp;quot;response from the library&amp;quot;, I can expect a
+particular held item to be present. In the future, this will allow me to easily
+verify that holds with different statuses, such as &amp;quot;in transit&amp;quot; or &amp;quot;missing&amp;quot; are
+reported properly.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="a-note-on-mocking-styles"&gt;
+&lt;h2&gt;A note on mocking styles&lt;/h2&gt;
+&lt;p&gt;As a maintainer of the
+&lt;a href="https://fakeiteasy.github.io/"&gt;third most popular and first best .NET mocking framework&lt;/a&gt;,
+I have opinions on mocking practices. For one, I generally advise against
+&lt;a href="https://www.geeksforgeeks.org/monkey-patching-in-python-dynamic-behavior/"&gt;monkey patching&lt;/a&gt;
+or anything else that seems like magic. I've worked in environments where these
+effects were abused, and tests became very difficult to debug.&lt;/p&gt;
+&lt;p&gt;The new test relies on a magically-provided &lt;code&gt;requests_mock&lt;/code&gt; object, and
+actions on that object affect the functioning of the &lt;code&gt;requests&lt;/code&gt; module. This
+gave me pause. Ultimately, I decided to go with it, for two reasons. First, the
+&lt;a href="https://docs.pytest.org/en/latest/fixture.html"&gt;pytest fixtures&lt;/a&gt; have
+well-known behaviour and should undo the &lt;code&gt;requests_mock&lt;/code&gt;'s changes after every
+test function. Second, the actual monkey patching is too convenient to not try.
+I toyed with the idea of adding a fixture that created a new session, had
+requests-mock intercept only that, and then pass both those objects to each
+test, and it just seemed like too much work for the benefit. Hopefully, as sole
+maintainer on LibraryHippo, I'll be able to keep a handle on the magic mocking.
+If not, I can always fall back to a more explicit style.&lt;/p&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="LibraryHippo"></category><category term="requests-mock"></category><category term="testing"></category></entry><entry><title>Why I Teach Git Using Only the Command Line</title><link href="https://blairconrad.com/2020/06/04/why-i-teach-git-using-only-the-command-line/" rel="alternate"></link><published>2020-06-04T00:00:00-04:00</published><updated>2020-06-04T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-04:/2020/06/04/why-i-teach-git-using-only-the-command-line/</id><summary type="html">&lt;p&gt;At the Day Job, we're about to transition something like 150 Subversion repos to
 a single git monorepo. Part of my contribution will be training several tens of
 git-unaware developers in my office on the basics of working with git.&lt;/p&gt;
 &lt;p&gt;I was chatting about training approaches with my counterpart in …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At the Day Job, we're about to transition something like 150 Subversion repos to
