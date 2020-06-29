@@ -28,7 +28,7 @@ title: Triple Coconut Cream Pie
     <td>&frac14; t kosher salt</td>
   </tr>
   <tr>
-    <td>&frac12; c plus 2 T (125 g) granulated sugar</td>
+    <td>&frac12; c (100 g) granulated sugar</td>
   </tr>
   <tr>
     <td>1 vanilla bean<sup><a href="#note">&dagger;</a></sup></td>
@@ -141,7 +141,7 @@ Makes one pie.
     <td rowspan="3">whip it</td>
   </tr>
   <tr>
-    <td>2 T granulated sugar</td>
+    <td>1 T granulated sugar</td>
   </tr>
   <tr>
     <td>1 t vanilla extract</td>
