@@ -42,7 +42,7 @@ title: Yorkshire Pudding
   <li>Sift in flour in three stages, each time whisking until flour
     disappears before adding more</li>
   <li>Let rest for 30 minutes&ndash;3 hours</li>
-  <li>When the roast is done, spoon out 3&nbsp;t&nbsp;fat</li>
+  <li>When the roast is done, spoon out 3&nbsp;T&nbsp;fat</li>
   <li>Turn oven to 450&deg;F</li>
   <li>Stir 1&nbsp;T&nbsp; of the fat into the batter</li>
   <li>Add &frac12;&nbsp;t&nbsp;fat to each of 12 muffin cups</li>
