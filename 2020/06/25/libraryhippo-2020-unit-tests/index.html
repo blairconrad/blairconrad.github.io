@@ -143,14 +143,14 @@ structure, including empty <code>__init__.py</code> files so my imports work.</p
 <figcaption>tests/unit/test_wpl.py</figcaption>
 </figure>
 <p>Run it using <code>pytest</code>, and success!</p>
-<pre class="m-console"><span class="g g-AnsiBrightDefault">&zwnj;============================= test session starts =============================</span>
+<pre class="m-console"><span class="g g-AnsiBrightDefault">============================= test session starts =============================</span>
 platform win32 -- Python 3.8.1, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
 rootdir: D:\Sandbox\LibraryHippo
 collected 1 item
 
-tests\unit\test_wpl.py <span class="g g-AnsiGreen">&zwnj;.                                                 [100%]</span>
+tests\unit\test_wpl.py <span class="g g-AnsiGreen">.                                                 [100%]</span>
 
-<span class="g g-AnsiGreen">&zwnj;============================== </span><span class="g g-AnsiBrightGreen">&zwnj;1 passed</span><span class="g g-AnsiGreen">&zwnj; in 2.20s ==============================</span></pre>
+<span class="g g-AnsiGreen">============================== </span><span class="g g-AnsiBrightGreen">1 passed</span><span class="g g-AnsiGreen"> in 2.20s ==============================</span></pre>
 </section>
 <section id="isolate-tests-from-the-library-website">
 <h2>Isolate tests from the library website</h2>
@@ -159,9 +159,8 @@ responses from the Waterloo Public Library website. If I don't have any holds,
 or the site is down, my test will fail. I'll use
 <a href="https://requests-mock.readthedocs.io/en/latest/">requests-mock</a> to fake out
 interactions with the library system.</p>
-<div class="highlight"><pre><span></span><span class="err">❯</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">requests-mock</span>
-<span class="err">❯</span> <span class="n">inv</span> <span class="n">freeze</span>
-</pre></div>
+<pre class="m-code"><span class="err">❯</span> <span class="n">pip</span> <span class="n">install</span> <span class="n">requests-mock</span>
+<span class="err">❯</span> <span class="n">inv</span> <span class="n">freeze</span></pre>
 <p>I'd never used requests-mock before, and it was incredibly easy. It provides a
 pytest fixture on which I can set expectations for the requests module. Within
 minutes, I'd used the <code>mock_requests</code> fixture to configure fake results for</p>

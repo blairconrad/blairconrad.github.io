@@ -51,14 +51,14 @@ structure, including empty &lt;code&gt;__init__.py&lt;/code&gt; files so my impo
 &lt;figcaption&gt;tests/unit/test_wpl.py&lt;/figcaption&gt;
 &lt;/figure&gt;
 &lt;p&gt;Run it using &lt;code&gt;pytest&lt;/code&gt;, and success!&lt;/p&gt;
-&lt;pre class="m-console"&gt;&lt;span class="g g-AnsiBrightDefault"&gt;&amp;zwnj;============================= test session starts =============================&lt;/span&gt;
+&lt;pre class="m-console"&gt;&lt;span class="g g-AnsiBrightDefault"&gt;============================= test session starts =============================&lt;/span&gt;
 platform win32 -- Python 3.8.1, pytest-5.4.2, py-1.8.1, pluggy-0.13.1
 rootdir: D:\Sandbox\LibraryHippo
 collected 1 item
 
-tests\unit\test_wpl.py &lt;span class="g g-AnsiGreen"&gt;&amp;zwnj;.                                                 [100%]&lt;/span&gt;
+tests\unit\test_wpl.py &lt;span class="g g-AnsiGreen"&gt;.                                                 [100%]&lt;/span&gt;
 
-&lt;span class="g g-AnsiGreen"&gt;&amp;zwnj;============================== &lt;/span&gt;&lt;span class="g g-AnsiBrightGreen"&gt;&amp;zwnj;1 passed&lt;/span&gt;&lt;span class="g g-AnsiGreen"&gt;&amp;zwnj; in 2.20s ==============================&lt;/span&gt;&lt;/pre&gt;
+&lt;span class="g g-AnsiGreen"&gt;============================== &lt;/span&gt;&lt;span class="g g-AnsiBrightGreen"&gt;1 passed&lt;/span&gt;&lt;span class="g g-AnsiGreen"&gt; in 2.20s ==============================&lt;/span&gt;&lt;/pre&gt;
 &lt;/section&gt;
 &lt;section id="isolate-tests-from-the-library-website"&gt;
 &lt;h2&gt;Isolate tests from the library website&lt;/h2&gt;
@@ -67,9 +67,8 @@ responses from the Waterloo Public Library website. If I don't have any holds,
 or the site is down, my test will fail. I'll use
 &lt;a href="https://requests-mock.readthedocs.io/en/latest/"&gt;requests-mock&lt;/a&gt; to fake out
 interactions with the library system.&lt;/p&gt;
-&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span&gt;&lt;/span&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;requests-mock&lt;/span&gt;
-&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;
-&lt;/pre&gt;&lt;/div&gt;
+&lt;pre class="m-code"&gt;&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;pip&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;requests-mock&lt;/span&gt;
+&lt;span class="err"&gt;❯&lt;/span&gt; &lt;span class="n"&gt;inv&lt;/span&gt; &lt;span class="n"&gt;freeze&lt;/span&gt;&lt;/pre&gt;
 &lt;p&gt;I'd never used requests-mock before, and it was incredibly easy. It provides a
 pytest fixture on which I can set expectations for the requests module. Within
 minutes, I'd used the &lt;code&gt;mock_requests&lt;/code&gt; fixture to configure fake results for&lt;/p&gt;

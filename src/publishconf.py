@@ -14,6 +14,7 @@ from pelicanconf import *
 OUTPUT_PATH = ".."
 OUTPUT_RETENTION = [
     ".git",
+    ".gitattributes",
     ".github",
     ".gitignore",
     ".gitmodules",
