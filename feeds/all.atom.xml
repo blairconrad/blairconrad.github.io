@@ -1,5 +1,238 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-06-25T00:00:00-04:00</updated><entry><title>LibraryHippo 2020 - Unit Tests</title><link href="https://blairconrad.com/2020/06/25/libraryhippo-2020-unit-tests/" rel="alternate"></link><published>2020-06-25T00:00:00-04:00</published><updated>2020-06-25T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-25:/2020/06/25/libraryhippo-2020-unit-tests/</id><summary type="html">&lt;p&gt;Now that I've completed all my
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Blair Conrad</title><link href="https://blairconrad.com/" rel="alternate"></link><link href="https://blairconrad.com/feeds/all.atom.xml" rel="self"></link><id>https://blairconrad.com/</id><updated>2020-11-23T00:00:00-05:00</updated><entry><title>How Untested Changes Block Merges to Master: a Guide for Non-Developers</title><link href="https://blairconrad.com/2020/11/23/how-untested-changes-block-merges-to-master-a-guide-for-non-developers/" rel="alternate"></link><published>2020-11-23T00:00:00-05:00</published><updated>2020-11-23T00:00:00-05:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-11-23:/2020/11/23/how-untested-changes-block-merges-to-master-a-guide-for-non-developers/</id><summary type="html">&lt;p&gt;At the Day Job, I work on a product that over two dozen development teams
+contribute to. To provide some level of stability on the branch that we release
+from (called &amp;quot;master&amp;quot;), each team has their own development branch and we merge
+from the team branches to the master branch …&lt;/p&gt;</summary><content type="html">&lt;p&gt;At the Day Job, I work on a product that over two dozen development teams
+contribute to. To provide some level of stability on the branch that we release
+from (called &amp;quot;master&amp;quot;), each team has their own development branch and we merge
+from the team branches to the master branch only after&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;a suite of automated feature and regression tests pass, and&lt;/li&gt;
+&lt;li&gt;new features are manually tested&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Ideally, the new features (or bugfixes) would be tested quickly and in the order
+that they were added to the team branch, but this doesn't always happen. Some
+issues take a very long time to test and the developers race ahead, and
+sometimes issues fail. In these situations, some changes that have met the above
+conditions must wait to be merged to the master branch.&lt;/p&gt;
+&lt;p&gt;Often non-developer teammates and servant leaders ask me &lt;em&gt;why&lt;/em&gt; a tested issue is
+blocked by an untested (or failed!) issue. This is my attempt to explain why.
+Hopefully it's accessible to those without previous git knowledge.&lt;/p&gt;
+&lt;section id="git-a-collection-of-changes"&gt;
+&lt;h2&gt;Git: a Collection of Changes&lt;/h2&gt;
+&lt;p&gt;Git, like any version control system, exists to track the evolution of a body
+information (often a codebase). It does so by keeping track of changes that
+happen over time. Each change (or &amp;quot;commit&amp;quot; as they are called in git) can
+include one or more file additions, deletions, or modifications. Once commits
+are added to the master or team branch, they cannot be removed or changed;
+they're permanent.&lt;/p&gt;
+&lt;p&gt;Here's a very simple representation of a collection of git commits. Letters
+represent individual commits, and the arrows indicate pointers from commits to
+the preceding commit (or &amp;quot;parent&amp;quot;):&lt;/p&gt;
+&lt;pre&gt;A &amp;lt;-- B &amp;lt;-- C &amp;lt;-- D&lt;/pre&gt;
+&lt;p&gt;In this diagram, time moves to the right, so A was the first change, B next (and
+it knows about its parent A), and so on, to the most recent commit, D.&lt;/p&gt;
+&lt;p&gt;Sometimes the arrowheads can clutter the graph, so I'll omit them in subsequent
+diagrams. In all cases, time will move the right, so to figure out the full
+state of a branch, you start at the right-hand side and follow the lines to the
+left. Given this convention, the above diagram would look like this:&lt;/p&gt;
+&lt;pre&gt;A --- B --- C --- D&lt;/pre&gt;
+&lt;/section&gt;
+&lt;section id="merging-between-branches"&gt;
+&lt;h2&gt;Merging between branches&lt;/h2&gt;
+&lt;p&gt;Let's add a second branch and label them, to model the system I deal with at
+work&lt;/p&gt;
+&lt;pre class="m-console"&gt;                       &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S&lt;/span&gt;
+
+&lt;span style="color: #00ffff"&gt;       &lt;/span&gt;&lt;span style="color: #ffff00"&gt;A --- B --- C --- D&lt;/span&gt;
+&lt;span style="color: #ffff00"&gt;                          team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Here we see the master branch with commits P, Q, R, and S (the latest) and the
+team branch with A, B, C, and D. Each of the commits I mentioned exist only in
+their own branch. In particular, this means that the commits in the team branch
+will not be built into our product and make it to our customers, since we build
+and ship from the master branch.&lt;/p&gt;
+&lt;p&gt;We incorporate the team-level changes in the team branch via a git &amp;quot;merge&amp;quot;,
+which sounds very fancy, but it's just another commit. A merge commit melds
+divergent histories by having two parents. Once the merge commit is added to a
+branch any commits that are reachable by following the links from that commit
+back to the left are &amp;quot;part of&amp;quot; the branch:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                             &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S --- T&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                           /&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;        &lt;/span&gt;&lt;span style="color: #00ff00"&gt;A --- B --- C --- D&lt;/span&gt;
+&lt;span style="color: #00ff00"&gt;                           &lt;/span&gt;&lt;span style="color: #ffff00"&gt;team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Here we've merged the team branch into the master branch by creating a new merge
+commit called T on the master branch. Now all of the work we've done on the
+master branch and on the team branch has been consolidated into the master
+branch, so the next time we build the product, we'll get all the benefits.&lt;/p&gt;
+&lt;p&gt;You don't always have to merge the last commit of a branch into another branch.
+Suppose we had some bonus commits on the team branch that we just didn't want to
+merge into the master branch yet for whatever reason. We could do this:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                             &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S --- T&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                           /&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;        &lt;/span&gt;&lt;span style="color: #00ff00"&gt;A --- B --- C --- D &lt;/span&gt;&lt;span style="color: #ffff00"&gt;--- E --- F&lt;/span&gt;
+&lt;span style="color: #ffff00"&gt;                                       team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Then&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A, B, C, D, P, Q, R, S, and T are all part of the master branch, and&lt;/li&gt;
+&lt;li&gt;A, B, C, D, E, and F are part of the team branch, but&lt;/li&gt;
+&lt;li&gt;E and F are not (yet) part of the master branch.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Even though we can pick essentially any commit to merge into the master branch,
+what we can't do is omit that commit's ancestors. If we merge a commit D as
+above, we always take C, B, and A, because we can reach those commits by
+following the parent links to the left from D.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="blocking-commits"&gt;
+&lt;h2&gt;Blocking commits&lt;/h2&gt;
+&lt;p&gt;Up till now we've not really been looking at the worthiness of particular
+commits when deciding what to merge. Suppose&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;we have 4 commits in master and 4 in the team branch&lt;/li&gt;
+&lt;li&gt;the team branch passed all automated tests,&lt;/li&gt;
+&lt;li&gt;the issues addressed by the first, second, and fourth team commits have been manually tested&lt;/li&gt;
+&lt;li&gt;but the issue addressed by the third team commit has not yet been tested.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;We'll represent the commits that has not yet been manually tested with a
+lowercase letter to show that it's not &amp;quot;done&amp;quot;:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                       &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S&lt;/span&gt;
+
+&lt;span style="color: #00ffff"&gt;       &lt;/span&gt;&lt;span style="color: #ffff00"&gt;A --- B &lt;/span&gt;&lt;span style="color: #808000"&gt;--- c --- &lt;/span&gt;&lt;span style="color: #ffff00"&gt;D&lt;/span&gt;
+&lt;span style="color: #ffff00"&gt;                          team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Under our rules, A, B, and D are considered complete and worthy of merging, but
+c is not. Maybe it's fine, but we don't know yet, and we promised not to merge c
+into the master branch until it's known to be good.&lt;/p&gt;
+&lt;p&gt;There's no way to merge D into the master branch given our rules. We could merge
+A and B like so:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                             &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S --- T&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                           /&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                    &lt;/span&gt;&lt;span style="color: #00ff00"&gt;A --- B &lt;/span&gt;&lt;span style="color: #808000"&gt;--- c --- &lt;/span&gt;&lt;span style="color: #ffff00"&gt;D&lt;/span&gt;
+&lt;span style="color: #ffff00"&gt;                                       team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;(or similarly just A). But if we want to merge D in, we'd end up getting c, B,
+and A as well. It would look like this:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                             &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S --- T&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                           /&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;        &lt;/span&gt;&lt;span style="color: #00ff00"&gt;A --- B &lt;/span&gt;&lt;span style="color: #800000"&gt;--- c --- &lt;/span&gt;&lt;span style="color: #00ff00"&gt;D&lt;/span&gt;
+&lt;span style="color: #00ff00"&gt;                           &lt;/span&gt;&lt;span style="color: #ffff00"&gt;team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;And that violates our rules: c has not yet met all its merging conditions, but
+it's been merged into the master branch. We can start at the latest commit in
+the master branch (T) and follow the lower parent link to the left (and down) to
+D, and then follow its link to c. We've risked polluting the master branch with
+an unproven change.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="how-to-unblock-the-branch"&gt;
+&lt;h2&gt;How to Unblock the Branch&lt;/h2&gt;
+&lt;p&gt;Ultimately we want to merge all of our proven work from the team branch into the
+master branch. How do we do that?&lt;/p&gt;
+&lt;section id="focus-on-the-blocking-commit-and-wait"&gt;
+&lt;h3&gt;Focus on the blocking commit and wait&lt;/h3&gt;
+&lt;p&gt;This is the approach we take most often. The commit called c hasn't been tested
+above, but it will be sometime. When we notice that we have blocked commits, as
+a team we can concentrate on completing the testing for the blocking commits.
+Once they are found to be good, they're no longer blockers and we can merge them
+or any other subsequent commits, so long as all of those have been found worthy.
+This is the strategy we take most often.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="revert-the-offending-commit"&gt;
+&lt;h3&gt;Revert the offending commit&lt;/h3&gt;
+&lt;p&gt;If the blocking commit is expected to take a very long time to test, we can
+&amp;quot;revert&amp;quot; it. This is different from removing the commit (remember, once a commit
+is added to a branch, you can't remove it). Reverting involves adding &lt;em&gt;another&lt;/em&gt;
+commit to the branch. The new commit undoes the original change. Here's what that
+looks like:&lt;/p&gt;
+&lt;pre class="m-console"&gt;                       &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;    P --- Q --- R --- S&lt;/span&gt;
+
+&lt;span style="color: #00ffff"&gt;       &lt;/span&gt;&lt;span style="color: #ffff00"&gt;A --- B &lt;/span&gt;&lt;span style="color: #808000"&gt;--- c --- &lt;/span&gt;&lt;span style="color: #ffff00"&gt;D &lt;/span&gt;&lt;span style="color: #808000"&gt;--- !c&lt;/span&gt;
+&lt;span style="color: #808000"&gt;                                 &lt;/span&gt;&lt;span style="color: #ffff00"&gt;team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;Here &amp;quot;!c&amp;quot; represents a sort of anti-c that has the opposite of the changes
+contained in c.&lt;/p&gt;
+&lt;p&gt;Once this is done, it's as if the team branch has only A, B, and D in it. But
+there are some caveats:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;crafting and adding !c takes some development time, and time to run the
+automated tests to ensure that the team branch is still in good shape&lt;/li&gt;
+&lt;li&gt;sometimes the commits between c and !c will build upon work in c. This means
+that&lt;ul&gt;
+&lt;li&gt;!c is harder to make, and&lt;/li&gt;
+&lt;li&gt;making !c runs the risk of compromising the work done in D (or other
+intervening commits—there could be more than one). Depending on the
+entanglement, it may even be necessary to manually retest the issue
+addressed by D&lt;/li&gt;
+&lt;li&gt;eventually we'll need to redo the work for c and test it then, perhaps
+running into the same problem we had this time&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;If we decide that reverting and merging are still worth it given all those
+caveats, eventually we'll end up with&lt;/p&gt;
+&lt;pre class="m-console"&gt;                                   &lt;span style="color: #00ffff"&gt;master&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;          P --- Q --- R --- S --- T&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;                                 /&lt;/span&gt;
+&lt;span style="color: #00ffff"&gt;       &lt;/span&gt;&lt;span style="color: #00ff00"&gt;A --- B &lt;/span&gt;&lt;span style="color: #008000"&gt;--- c --- &lt;/span&gt;&lt;span style="color: #00ff00"&gt;D &lt;/span&gt;&lt;span style="color: #008000"&gt;--- !c&lt;/span&gt;
+&lt;span style="color: #008000"&gt;                                 &lt;/span&gt;&lt;span style="color: #ffff00"&gt;team&lt;/span&gt;&lt;/pre&gt;
+&lt;p&gt;While this approach is possible, it has significant downsides, and so we are
+loath to use it when &amp;quot;focus and wait&amp;quot; is a viable option.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+&lt;section id="how-to-avoid-the-problem"&gt;
+&lt;h2&gt;How to Avoid the Problem&lt;/h2&gt;
+&lt;p&gt;The problem of blocking commits is generally caused by a mismatch in the time it
+takes for us to develop a change and that taken to test it. Our product's build
+times and even automated testing times are quite long, so we'll naturally have
+some mismatch, even if someone is available to perform manual testing
+immediately after the change is in a team branch build. But there are ways to
+reduce this gap or mitigate its effects. The ideas presented below are neither
+comprehensive nor independent. In the coming months we could pursue more than
+one of them, or think of something else.&lt;/p&gt;
+&lt;section id="more-reliable-automated-testing"&gt;
+&lt;h3&gt;More (reliable) automated testing&lt;/h3&gt;
+&lt;p&gt;Our ratio of automated to manual testing isn't great. Some portions of the
+product have good automated tests and we have high confidence in them, but more
+areas have lower coverage and therefore confidence. If developers and testers
+were better at working together to establish what kinds of automated tests
+should be written in conjunction with a bugfix or new feature, and if those
+tests reliably produced consistent results, this might&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;slow down development&lt;/li&gt;
+&lt;li&gt;considerably shorten the manual testing phase&lt;/li&gt;
+&lt;li&gt;increase the likelihood that any manual testing phase will pass&lt;/li&gt;
+&lt;li&gt;provide lasting value in the form of automatically-run regression tests&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/section&gt;
+&lt;section id="better-planning-and-coordination"&gt;
+&lt;h3&gt;Better planning and coordination&lt;/h3&gt;
+&lt;p&gt;Sometimes developers and testers fail to talk before an issue is developed, so
+the change is added to the team branch when no testers are ready to test it, and
+it languishes. Maybe certain issues require special hardware or complex
+configuration, so the tester prefers to test B and D consecutively, deferring c
+for a while, but the developer was unaware (or just didn't consider it).&lt;/p&gt;
+&lt;p&gt;If there were more and better intra-team planning, a change could be developed
+just in time for it to be manually tested, reducing the time it sits in the team
+branch, waiting for other issues to be cleared.&lt;/p&gt;
+&lt;/section&gt;
+&lt;section id="manual-testing-before-the-team-branch"&gt;
+&lt;h3&gt;Manual testing before the team branch&lt;/h3&gt;
+&lt;p&gt;I didn't discuss topic branches above, but they are a third type of branch where
+developers do their low-level work. They feed into the team branches. In theory,
+we could build packages from those branches and do the manual testing on them.
+Then once the issue has passed, the topic branch's contents could be added to
+the team branch. We'd only be waiting for the automated tests to run to clear
+the branch, and this is generally quicker than manual testing (and can be done
+overnight).&lt;/p&gt;
+&lt;p&gt;The downside to this approach is that it requires heavier weight automated
+processes to be run on the topic branches (of which there are more than team
+branches) and we're already resource-constrained. In addition, it means staging
+more clusters for the manual testers to work on, again requiring more hardware
+and time.&lt;/p&gt;
+&lt;/section&gt;
+&lt;/section&gt;
+</content><category term="Development"></category><category term="git"></category></entry><entry><title>LibraryHippo 2020 - Unit Tests</title><link href="https://blairconrad.com/2020/06/25/libraryhippo-2020-unit-tests/" rel="alternate"></link><published>2020-06-25T00:00:00-04:00</published><updated>2020-06-25T00:00:00-04:00</updated><author><name></name></author><id>tag:blairconrad.com,2020-06-25:/2020/06/25/libraryhippo-2020-unit-tests/</id><summary type="html">&lt;p&gt;Now that I've completed all my
 &lt;a href="http://www.extremeprogramming.org/rules/spike.html"&gt;spikes&lt;/a&gt; and decided to
 move forward, I'd like to add a little more rigour to the project. Original
 LibraryHippo had a comprehensive suite of unit tests and I'll port them over
