@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>MakeItEasy: Making SUTs with Minimal Fuss | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="canonical" href="https://blairconrad.com/2021/03/12/makeiteasy-making-suts-with-minimal-fuss/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta name="twitter:site" content="@Hippopottoman" />
+  <meta name="twitter:site:id" content="14181635" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="MakeItEasy: Making SUTs with Minimal Fuss" />
+  <meta name="twitter:title" content="MakeItEasy: Making SUTs with Minimal Fuss" />
+  <meta property="og:url" content="https://blairconrad.com/2021/03/12/makeiteasy-making-suts-with-minimal-fuss/" />
+  <meta property="og:description" content="Recently a FakeItEasy user came to our Gitter channel asking about easier ways to create their systems under test and the Fakes that those systems depend on. They referenced the old UnderTest and Fake attributes that FakeItEasy used to provide for this purpose, but which had been removed when FakeItEasy …" />
+  <meta name="twitter:description" content="Recently a FakeItEasy user came to our Gitter channel asking about easier ways to create their systems under test and the Fakes that those systems depend on. They referenced the old UnderTest and Fake attributes that FakeItEasy used to provide for this purpose, but which had been removed when FakeItEasy …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2021/03/12/makeiteasy-making-suts-with-minimal-fuss/" rel="bookmark" title="Permalink to MakeItEasy: Making SUTs with Minimal Fuss">
+                  MakeItEasy: Making SUTs with Minimal Fuss
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2021-03-12T00:00:00-05:00">2021-03-12</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/makeiteasy.html">MakeItEasy</a>
+                  /
+                  <a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+                  /
+                  <a href="https://blairconrad.com/tag/testing.html">testing</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>Recently a <a href="https://fakeiteasy.github.io/">FakeItEasy</a> user came to our Gitter
+channel asking about easier ways to create their
+<a href="http://xunitpatterns.com/SUT.html">systems under test</a> and the Fakes that
+those systems depend on. They referenced the old <code>UnderTest</code> and <code>Fake</code>
+attributes that FakeItEasy
+<a href="https://thomaslevesque.com/2016/01/17/automatically-inject-fakes-in-test-fixture-with-fakeiteasy/">used to provide</a>
+for this purpose, but which had been removed when FakeItEasy 5.0.0 was released.</p>
+<p>There are some existing libraries that provide this functionality, or something
+like it, such as</p>
+<ul>
+<li><a href="https://github.com/AutoFixture/AutoFixture">AutoFixture.AutoFakeItEasy</a>,</li>
+<li><a href="https://autofaccn.readthedocs.io/en/latest/integration/fakeiteasy.html">Autofac.Extras.FakeItEasy</a>, and</li>
+<li><a href="https://jamiehumphries.github.io/FakeItEasy.Auto/">FakeItEasy.Auto</a></li>
+</ul>
+<p>but I thought there was room for improvement. The first two pull along
+additional libraries with them, either for complete test data generation or for
+generalized dependency injection. This isn't a problem (and may be a feature) if
+you're already using those libraries, but could be overwhelming if you're not.
+FakeItEasy.Auto has a nice light interface, but appears to be abandoned and only
+supports .NET Framework 4.5.</p>
+<p>So my FakeItEasy co-conspirator <a href="https://thomaslevesque.com/">Thomas Levesque</a>
+and I chatted about how to design a simple interface to create the system under
+test. We (or if I'm being honest, mostly he) arrived at an API that</p>
+<ol>
+<li>doesn't require the user to specify any arguments that they don't care about</li>
+<li>doesn't require fields or properties on the test fixture, or use of any attributes</li>
+<li>allows users to provide any values to the SUT's constructor</li>
+<li>makes it easy to retrieve (and later configure) Faked collaborators</li>
+</ol>
+<img alt="MakeItEasy Logo" class="m-image" src="https://blairconrad.com/2021/03/12/makeiteasy-making-suts-with-minimal-fuss/makeiteasy-logo.png" />
+<section id="creating-a-system-under-test-using-makeiteasy">
+<h2>Creating a System Under Test using MakeItEasy</h2>
+<p><a href="https://github.com/blairconrad/MakeItEasy">MakeItEasy</a> is an attempt to
+fulfill the requirements laid out above. The <code>Make</code> class is its single entry
+point and allows you to create your system under test:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="n">import</span> <span class="n">MakeItEasy</span><span class="p">;</span>
+
+<span class="c1">// ...</span>
+
+<span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">FromDefaults</span><span class="p">();</span></pre>
+<figcaption>The simplest way to create your system under test</figcaption>
+</figure>
+<p>That's it. If <code>VeryNeedySystem</code> has a public constructor whose arguments can
+be made from FakeItEasy Dummies, MakeItEasy will make it for you.
+It doesn't matter if the constructor has 1 parameter or 14.</p>
+</section>
+<section id="making-and-using-fake-collaborators">
+<h2>Making and Using Fake collaborators</h2>
+<p>The example above looks great, but more often you'll want to access the Fake
+object(s) that the SUT will be using. Then you can configure them, or maybe
+interrogate them after the system under test has been exercised. This is also
+very easy:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+    <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span>
+
+<span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).Returns(1);</span>
+<span class="c1">// exercise systemUnderTest</span>
+<span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).MustHaveHappened();</span></pre>
+<figcaption>Create a system under test and access a Fake collaborator</figcaption>
+</figure>
+<p>Currently MakeItEasy supports up to 8 <code>out</code> parameters, which will be
+populated with Fakes and passed as constructor arguments to the system under
+test.</p>
+<p>You can even call <code>Make</code> from a setup method and initialize fields, if you
+prefer not to use local variables for the collaborators.</p>
+</section>
+<section id="supplying-arbitrary-constructor-arguments">
+<h2>Supplying Arbitrary Constructor arguments</h2>
+<p>Maybe the system under test's constructor requires some non-Fake additional
+parameters. MakeItEasy will usually populate these with Dummies, but if you have
+a particular value you want to supply, you can do that:</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+    <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span></pre>
+<figcaption>Create a system under test using supplied arguments</figcaption>
+</figure>
+<p>You can supply up to 8 constructor arguments.</p>
+</section>
+<section id="advanced-usage">
+<h2>&quot;Advanced&quot; Usage</h2>
+<p>You can request Fake collaborators and supply arguments at the same time, of course.</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+    <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span>
+    <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span></pre>
+<figcaption>Create a system under test specifying an argument and accessing a Fake collaborator</figcaption>
+</figure>
+<p>As before, you can supply up to 8 arguments and request up to 8 collaborators back.</p>
+<p>MakeItEasy doesn't provide a way to customize the Fake before it's passed to the
+constructor of the system under test. If you need this behaviour, you can always
+create the Fake &quot;by hand&quot;, configure it, and then pass it in. Or maybe you want
+to share a Fake between systems under test. All this is supported, even in
+combination.</p>
+<figure class="m-code-figure">
+<pre class="m-code"><span class="kt">var</span> <span class="n">oneSystemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+    <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span>
+
+<span class="c1">// configure the fakeCollaborator somehow</span>
+
+<span class="kt">var</span> <span class="n">anotherSystemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">An</span><span class="p">&lt;</span><span class="n">OtherKindOfSystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+    <span class="n">fakeCollaborator</span><span class="p">);</span></pre>
+<figcaption>Share Fakes between classes under test</figcaption>
+</figure>
+</section>
+<section id="what-next">
+<h2>What Next?</h2>
+<p>If you're interested in trying MakeItEasy, get <a href="https://www.nuget.org/packages/MakeItEasy/">the latest release from NuGet</a>. Tell me what you think. What
+works for you? What doesn't? Chat here or
+<a href="https://github.com/blairconrad/MakeItEasy/issues">raise an issue</a>.</p>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+
+
+        <script src="https://utteranc.es/client.js"
+            repo="blairconrad/blairconrad.github.io"
+            issue-term="pathname"
+            theme="photon-dark"
+            crossorigin="anonymous"
+            async>
+        </script>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>
