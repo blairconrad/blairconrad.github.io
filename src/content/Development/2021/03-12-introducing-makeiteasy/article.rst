@@ -2,7 +2,6 @@ MakeItEasy: Making SUTs with Minimal Fuss
 #########################################
 
 :tags: MakeItEasy, FakeItEasy, testing
-:cover: https://raw.githubusercontent.com/blairconrad/MakeItEasy/main/assets/social-preview.png
 
 Recently a `FakeItEasy <https://fakeiteasy.github.io/>`_ user came to our Gitter
 channel asking about easier ways to create their
