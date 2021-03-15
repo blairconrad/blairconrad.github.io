@@ -73,6 +73,7 @@ M_HIDE_ARTICLE_SUMMARY = True
 
 M_CSS_FILES = [
     "/static/m-dark.css",
+    "/static/pygments-wombat.css",
     "/static/site.css",
 ]
 
