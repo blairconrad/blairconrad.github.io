@@ -3,6 +3,9 @@ MakeItEasy: Making SUTs with Minimal Fuss
 
 :tags: MakeItEasy, FakeItEasy, testing
 :cover: {static}/images/makeiteasy-social-preview.png
+:summary:
+    Introducing a new library that enables friction-free creation of systems
+    under test, with autowired FakeItEasy Fakes.
 
 Recently a `FakeItEasy <https://fakeiteasy.github.io/>`_ user came to our Gitter
 channel asking about easier ways to create their
