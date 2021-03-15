@@ -62,8 +62,10 @@ for (path, directories, files) in os.walk(os.path.join("content", "extra")):
 THEME_TEMPLATES_OVERRIDES = ["templates"]
 
 THEME = "m.css/pelican-theme"
-DIRECT_TEMPLATES = ["index", "Recipes", "404"]
+DIRECT_TEMPLATES = ["index", "Recipes", "404", "categories", "tags"]
 RECIPES_SAVE_AS = "Recipes/index.html"
+CATEGORIES_SAVE_AS = "Categories/index.html"
+TAGS_SAVE_AS = "Tags/index.html"
 
 THEME_STATIC_DIR = "static"
 
@@ -80,7 +82,10 @@ PLUGIN_PATHS = ["m.css/plugins"]
 PLUGINS += ["m.htmlsanity", "m.code", "m.components", "m.images"]
 
 
-M_LINKS_NAVBAR1 = [("Recipes", "Recipes/", "recipes", [])]
+M_LINKS_NAVBAR1 = [
+    ("Tags", "Tags/", "tags", []),
+    ("Recipes", "Recipes/", "recipes", []),
+]
 
 M_BLOG_NAME = SITENAME
 M_BLOG_URL = SITEURL

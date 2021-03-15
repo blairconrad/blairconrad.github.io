@@ -1,0 +1,26 @@
+{% set page_slug = 'categories' %}
+{% extends 'base.html' %}
+
+{% block title %}
+Categories · {{ super() }}
+{% endblock title %}
+
+{% block main %}
+<div class="m-container">
+    <div class="m-row">
+        <div>
+            <article>
+                <header>
+                    <h1>Categories</h1>
+                </header>
+
+                <ul>
+                    {% for category, articles in categories | sort(case_sensitive=False) %}
+                    <li><a href="{{ SITEURL }}/{{ category.url }}">{{ category }}</li>
+                    {% endfor %}
+                </ul>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock main %}
