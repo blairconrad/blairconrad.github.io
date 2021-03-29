@@ -4,22 +4,45 @@
 #
 #    pip-compile
 #
-beautifulsoup4==4.8.2     # via -r requirements.in
-blinker==1.4              # via pelican
-docutils==0.16            # via pelican
-feedgenerator==1.9        # via pelican
-invoke==1.4.0             # via -r requirements.in
-jinja2==2.10.3            # via pelican
-markdown==3.1.1           # via pelican
-markupsafe==1.1.1         # via jinja2
-pelican-series-plugin==1.0.2  # via -r requirements.in
-pelican[markdown]==4.2.0  # via -r requirements.in, pelican-series-plugin
-pygments==2.5.2           # via pelican
-python-dateutil==2.8.1    # via pelican
-pytz==2019.3              # via feedgenerator, pelican
-six==1.13.0               # via feedgenerator, pelican, python-dateutil
-soupsieve==1.9.5          # via beautifulsoup4
-unidecode==1.1.1          # via pelican
+beautifulsoup4==4.8.2
+    # via -r requirements.in
+blinker==1.4
+    # via pelican
+docutils==0.16
+    # via pelican
+feedgenerator==1.9
+    # via pelican
+invoke==1.4.0
+    # via -r requirements.in
+jinja2==2.10.3
+    # via pelican
+markdown==3.1.1
+    # via pelican
+markupsafe==1.1.1
+    # via jinja2
+pelican-series-plugin==1.0.2
+    # via -r requirements.in
+pelican[markdown]==4.2.0
+    # via
+    #   -r requirements.in
+    #   pelican-series-plugin
+pygments==2.7.4
+    # via pelican
+python-dateutil==2.8.1
+    # via pelican
+pytz==2019.3
+    # via
+    #   feedgenerator
+    #   pelican
+six==1.13.0
+    # via
+    #   feedgenerator
+    #   pelican
+    #   python-dateutil
+soupsieve==1.9.5
+    # via beautifulsoup4
+unidecode==1.1.1
+    # via pelican
 
 # The following packages are considered to be unsafe in a requirements file:
 # setuptools
