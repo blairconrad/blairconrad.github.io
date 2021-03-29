@@ -73,7 +73,6 @@
 <!-- content -->
 <p>I'm a fan of Test-driven development, and automated testing in general. As such, I’ve been trying ensure that the <a href="http://code.google.com/p/libraryhippo/">LibraryHippo</a> code has an adequate set of automated tests before deploying new versions.</p>
 <h2>Importing Google App Engine Modules</h2>
-
 <p>Unfortunately, testing code that relies on the <a title="Google App Engine" href="http://code.google.com/appengine/">Google App Engine</a> SDK is a little tricky, as I found when working with one of the LibraryHippo entities. There’s an entity called a Card, which extends <code>db.Model</code> and represents a user's library card.</p>
 <p>The Card definition is not entirely unlike this:</p>
 <pre><code class="python">class Card(db.Model):
@@ -109,7 +108,7 @@ E ImportError: No module named yaml
 <p>Not so good. Fortunately, it’s not that hard to find out what needs to be done in order to make the imports work:</p>
 <pre><code class="python">import sys
 import dev_appserver
-sys.path = dev_appserver.EXTRA_PATHS + sys.path
+sys.path = dev_appserver.EXTRA_PATHS + sys.path 
 
 from card import Card
 
@@ -125,7 +124,7 @@ def test_card_blank_pin_is_invalid():
 <p>However, I recently found a need to use <a href="http://code.google.com/appengine/docs/python/memcache/">Memcache</a> to store partially-calculated results and decided (like everyone else) to write a memoizing decorator to do the job. There’s enough logic in my memoizer that I felt it needed an automated test. I tried this:</p>
 <pre><code class="python">import sys
 import dev_appserver
-sys.path = dev_appserver.EXTRA_PATHS + sys.path
+sys.path = dev_appserver.EXTRA_PATHS + sys.path 
 
 from google.appengine.api import memcache
 from gael.memcache import *

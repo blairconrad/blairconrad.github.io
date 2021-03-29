@@ -63,16 +63,13 @@
                 </span>
               </div>
             <aside class="m-block m-default">
-              <h3>Part 4 of the LibraryHippo 2020 series:</h3>
+              <h3>Part 3 of the LibraryHippo 2020 series:</h3>
               <ol>
                 <li>
                   <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                 </li>
                 <li>
                   <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
                 </li>
                 <li>
                   Running Scheduled Tasks on Heroku (this article)
@@ -88,9 +85,6 @@
                 </li>
                 <li>
                   <a href='https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/'>Recap and decision</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/06/25/libraryhippo-2020-unit-tests/'>Unit Tests</a>
                 </li>
               </ol>
             </aside>
@@ -112,7 +106,7 @@ they can be invoked from outside the web application, but with all the context
 (such as the e-mail configuration set up last time) of the the full application.</p>
 <p>First, I created new <code>app/cli.py</code> file to hold the command:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kn">import</span> <span class="nn">time</span>
+<pre class="code python"><span class="kn">import</span> <span class="nn">time</span>
 
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">mail</span>
 <span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
@@ -120,15 +114,15 @@ they can be invoked from outside the web application, but with all the context
 
 
 <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
-    <span class="nd">@app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;notify-all&quot;</span><span class="p">)</span>
+    <span class="nd">&#64;app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;notify-all&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">notify_all</span><span class="p">():</span>
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 
         <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
-            <span class="s2">&quot;LibraryHippo starting notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair@blairconrad.com&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;LibraryHippo starting notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair&#64;blairconrad.com&quot;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;starting notifications at </span><span class="si">{now}</span><span class="s2">&quot;</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{msg.body}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;starting notifications at </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="si">}</span><span class="s2">.&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
         <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span>
@@ -138,10 +132,10 @@ they can be invoked from outside the web application, but with all the context
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 
         <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
-            <span class="s2">&quot;LibraryHippo ending notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair@blairconrad.com&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;LibraryHippo ending notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair&#64;blairconrad.com&quot;</span><span class="p">]</span>
         <span class="p">)</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ending notifications at </span><span class="si">{now}</span><span class="s2">&quot;</span>
-        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{msg.body}</span><span class="s2">.&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;ending notifications at </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
+        <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;&lt;h1&gt;Test mail from LibraryHippo&lt;/h1&gt;&lt;p&gt;</span><span class="si">{</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="si">}</span><span class="s2">.&quot;</span>
 
         <span class="nb">print</span><span class="p">(</span><span class="n">msg</span><span class="o">.</span><span class="n">body</span><span class="p">)</span>
         <span class="n">mail</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">msg</span><span class="p">)</span></pre>
@@ -155,13 +149,13 @@ they can be invoked from outside the web application, but with all the context
 <p>I called the task <code>notify-all</code>, since I'm simulating that action in the
 existing LibaryHippo: notifying all families of their library card status. The
 command can be invoked by running</p>
-<pre class="m-console m-code"><span class="n">flask</span> <span class="n">notify-all</span></pre>
+<pre class="code powershell m-console"><span class="n">flask</span> <span class="n">notify-all</span></pre>
 <p>and it performs exactly how you'd hope.</p>
 <p>Once the new version of the application is deployed using <code>inv deploy</code>, it's
 even possible to run the task <em>on a Heroku dyno</em> via</p>
 <figure class="m-console-figure">
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">run</span> <span class="n">flask</span> <span class="n">notify-all</span></pre>
-<pre class="m-nopad m-code">Running flask notify-all on ⬢ libraryhippo... up, run.2562 (Free)
+<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">run</span> <span class="n">flask</span> <span class="n">notify-all</span></pre>
+<pre class="code text m-nopad">Running flask notify-all on ⬢ libraryhippo... up, run.2562 (Free)
 starting notifications at 2020-02-10T11:56:25.840194
 ending notifications at 2020-02-10T12:01:26.234036</pre>
 </figure>
@@ -176,8 +170,8 @@ hasn't the flexibility of other schedulers, supporting only daily, hourly, or
 day and check users' cards about that often, so it should do.</p>
 <p>Adding the scheduler is very easy:</p>
 <figure class="m-console-figure">
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">create</span> <span class="n">scheduler</span><span class="err">:</span><span class="n">standard</span></pre>
-<pre class="m-nopad m-code">Creating scheduler:standard on ⬢ libraryhippo... free
+<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">create</span> <span class="n">scheduler</span><span class="err">:</span><span class="n">standard</span></pre>
+<pre class="code text m-nopad">Creating scheduler:standard on ⬢ libraryhippo... free
 To manage scheduled jobs run:
 heroku addons:open scheduler
 
@@ -187,7 +181,7 @@ Use heroku addons:docs scheduler to view documentation</pre>
 <p>A short search didn't reveal a way to affect the schedule from the console, but
 it was easy enough to open the web-based configuration.</p>
 <figure class="m-console-figure">
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
+<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
 <img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/empty-scheduler-config.png" />
 </figure>
 <p>Adding a job is as simple as choosing &quot;Create job&quot;, selecting a time to run, and

@@ -72,13 +72,12 @@ externally-authenticated users have no special standing within App
 Engine, so this restriction had to be relaxed.</p>
 <p>My first thought was to remove the restriction from <code>app.yaml</code> and check
 for access in the handler like so:</p>
-<div class="highlight"><pre><span></span><span class="k">if</span> <span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">is_current_user_admin</span><span class="p">()</span> <span class="ow">or</span>
+<div class="highlight"><pre><span></span><code><span class="k">if</span> <span class="p">(</span><span class="n">users</span><span class="o">.</span><span class="n">is_current_user_admin</span><span class="p">()</span> <span class="ow">or</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">is_external_user_admin</span><span class="p">())</span> <span class="c1"># application code that understands the logged-in users</span>
     <span class="c1"># do stuff</span>
 <span class="k">else</span><span class="p">:</span>
     <span class="bp">self</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Unfortunately, this fails miserably. When the handler is executed by a
 task or cron job, <code>users.is_current_user_admin</code> returns <code>False</code>.</p>
@@ -99,14 +98,13 @@ affected handlers. One route is in the old <code>admin</code> subdirectory
 (subpath?) and the other in a new one for system commands,
 <code>system</code>. The latter is secured in the app.yaml, just as before. Thus
 I have:</p>
-<div class="highlight"><pre><span></span><span class="c1"># in app.yaml</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># in app.yaml</span>
 <span class="p p-Indicator">-</span> <span class="nt">url</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/system/.*</span>
   <span class="nt">script</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">libraryhippo.application</span>
   <span class="nt">login</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">admin</span>
-</pre></div>
+</code></pre></div>
 
-
-<div class="highlight"><pre><span></span><span class="c1"># in the application&#39;s Python source</span>
+<div class="highlight"><pre><span></span><code><span class="c1"># in the application&#39;s Python source</span>
 <span class="n">handlers</span> <span class="o">=</span> <span class="p">[</span>
     <span class="c1"># other handlers</span>
     <span class="p">(</span><span class="s1">&#39;/admin/notify/(.*)$&#39;</span><span class="p">,</span> <span class="n">Notify</span><span class="p">),</span>
@@ -120,8 +118,7 @@ I have:</p>
         <span class="c1"># do stuff</span>
     <span class="k">else</span><span class="p">:</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">abort</span><span class="p">(</span><span class="mi">403</span><span class="p">)</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>Thus the handler is executed if the user has admin rights or the URL
 isn't locked down by virtue of being below <code>/admin/</code>. The <code>/system/</code>

@@ -97,10 +97,10 @@ test. We (or if I'm being honest, mostly he) arrived at an API that</p>
 fulfill the requirements laid out above. The <code>Make</code> class is its single entry
 point and allows you to create your system under test:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="n">import</span> <span class="n">MakeItEasy</span><span class="p">;</span>
+<pre class="code c#"><span class="n">import</span> <span class="n">MakeItEasy</span><span class="p">;</span>
 
-<span class="c1">// ...</span>
-
+<span class="c1">// ...
+</span>
 <span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">FromDefaults</span><span class="p">();</span></pre>
 <figcaption>The simplest way to create your system under test</figcaption>
 </figure>
@@ -115,12 +115,12 @@ object(s) that the SUT will be using. Then you can configure them, or maybe
 interrogate them after the system under test has been exercised. This is also
 very easy:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+<pre class="code c#"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
     <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span>
 
-<span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).Returns(1);</span>
-<span class="c1">// exercise systemUnderTest</span>
-<span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).MustHaveHappened();</span></pre>
+<span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).Returns(1);
+// exercise systemUnderTest
+// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).MustHaveHappened();</span></pre>
 <figcaption>Create a system under test and access a Fake collaborator</figcaption>
 </figure>
 <p>Currently MakeItEasy supports up to 8 <code>out</code> parameters, which will be
@@ -135,7 +135,7 @@ prefer not to use local variables for the collaborators.</p>
 parameters. MakeItEasy will usually populate these with Dummies, but if you have
 a particular value you want to supply, you can do that:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+<pre class="code c#"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
     <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span></pre>
 <figcaption>Create a system under test using supplied arguments</figcaption>
 </figure>
@@ -145,7 +145,7 @@ a particular value you want to supply, you can do that:</p>
 <h2>&quot;Advanced&quot; Usage</h2>
 <p>You can request Fake collaborators and supply arguments at the same time, of course.</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+<pre class="code c#"><span class="kt">var</span> <span class="n">systemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
     <span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span>
     <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span></pre>
 <figcaption>Create a system under test specifying an argument and accessing a Fake collaborator</figcaption>
@@ -157,11 +157,11 @@ create the Fake &quot;by hand&quot;, configure it, and then pass it in. Or maybe
 to share a Fake between systems under test. All this is supported, even in
 combination.</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span> <span class="n">oneSystemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
+<pre class="code c#"><span class="kt">var</span> <span class="n">oneSystemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
     <span class="k">out</span> <span class="n">ICollaborator</span> <span class="n">fakeCollaborator</span><span class="p">);</span>
 
-<span class="c1">// configure the fakeCollaborator somehow</span>
-
+<span class="c1">// configure the fakeCollaborator somehow
+</span>
 <span class="kt">var</span> <span class="n">anotherSystemUnderTest</span> <span class="p">=</span> <span class="n">Make</span><span class="p">.</span><span class="n">An</span><span class="p">&lt;</span><span class="n">OtherKindOfSystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span>
     <span class="n">fakeCollaborator</span><span class="p">);</span></pre>
 <figcaption>Share Fakes between classes under test</figcaption>
@@ -177,62 +177,6 @@ works for you? What doesn't? Chat here or
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
         </footer>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/11/23/how-untested-changes-block-merges-to-master-a-guide-for-non-developers/" rel="bookmark" title="Permalink to How Untested Changes Block Merges to Master: a Guide for Non-Developers">
-                    How Untested Changes Block Merges to Master: a Guide for Non-Developers
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-11-23T00:00:00-05:00">2020-11-23</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/git.html">git</a>
-                  </span>
-                </div>
-            <p>At the Day Job, I work on a product that over two dozen development teams
-          contribute to. To provide some level of stability on the branch that we release
-          from (called &quot;master&quot;), each team has their own development branch and we merge
-          from the team branches to the master branch …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2020/06/25/libraryhippo-2020-unit-tests/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Unit Tests">
-                    LibraryHippo 2020 - Unit Tests
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-06-25T00:00:00-04:00">2020-06-25</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/requests-mock.html">requests-mock</a>
-                    /
-                    <a href="https://blairconrad.com/tag/testing.html">testing</a>
-                  </span>
-                  <span><i class="fas fa-list"></i>Part 9 of LibraryHippo 2020</span>
-                </div>
-            <p>Now that I've completed all my
-          <a href="http://www.extremeprogramming.org/rules/spike.html">spikes</a> and decided to
-          move forward, I'd like to add a little more rigour to the project. Original
-          LibraryHippo had a comprehensive suite of unit tests and I'll port them over
-          (and perhaps augment them with integration tests). Today I'll add the first unit …</p>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
       </article>
       <article>
         
@@ -275,7 +219,7 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/flask.html">flask</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 8 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 7 of LibraryHippo 2020</span>
                 </div>
             <p>In each of last six articles I've satisfied one of the high-risk requirements I
           had for moving LibraryHippo to the Flask framework, with the goal of hosting it
@@ -308,7 +252,7 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 7 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 6 of LibraryHippo 2020</span>
                 </div>
             <p>I now have a functioning skeleton of a shadow LibraryHippo site. The last gaping
           hole is that it treats every visitor the same. We need to be able to distinguish
@@ -340,7 +284,7 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/database.html">database</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 6 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 5 of LibraryHippo 2020</span>
                 </div>
             <p>Now the Heroku-hosted LibraryHippo can perform periodic tasks, send e-mails, and
           scrape the Waterloo Public Library's website. All it needs is a datastore to tie
@@ -371,7 +315,7 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/requests.html">requests</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 5 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 4 of LibraryHippo 2020</span>
                 </div>
             <p>Now that the toy LibraryHippo on Heroku is sending periodic e-mails, it's time
           to provide it with meaningful content to send, by having it scrape a library's
@@ -405,7 +349,7 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/cron.html">cron</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 4 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 3 of LibraryHippo 2020</span>
                 </div>
             <p>Having established that a Flask app running on Heroku can send e-mail, I turn my
           attention to having LibraryHippo do so periodically. The approach will be to
@@ -420,12 +364,46 @@ works for you? What doesn't? Chat here or
       <article>
         
         <header>
-            <h1><a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Sending Email from Heroku">
-                    LibraryHippo 2020 - Sending Email from Heroku
+            <h1><a href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" rel="bookmark" title="Permalink to LibraryHippo 2020 - A Bare-bones Flask App">
+                    LibraryHippo 2020 - A Bare-bones Flask App
                 </a></h1>
                 <div class="article-metadata">
                   <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-03-05T00:00:00-05:00">2020-03-05</time></span>
+                      datetime="2020-02-20T00:00:00-05:00">2020-02-20</time></span>
+                  <span><i class="fas fa-folder"></i><a
+                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                  <span><i class="fas fa-tags"></i>
+                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                    /
+                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                    /
+                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                  </span>
+                  <span><i class="fas fa-list"></i>Part 2 of LibraryHippo 2020</span>
+                </div>
+            <p>Last time I laid out the uncertainties that have to be explore before I want to
+          try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
+          order of importance and risk:</p>
+          <ol>
+          <li>web app hosting</li>
+          <li>scheduled jobs</li>
+          <li>scraping library websites on users' behalf</li>
+          <li>a small (perhaps a few MB …</li></ol>
+        </header>
+        <footer>
+          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+        </footer>
+        <div class="m-clearfix-l"></div>
+      </article>
+      <article>
+        
+        <header>
+            <h1><a href="https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Motivation and Plan">
+                    LibraryHippo 2020 - Motivation and Plan
+                </a></h1>
+                <div class="article-metadata">
+                  <span><i class="fas fa-calendar"></i><time
+                      datetime="2020-02-06T00:00:00-05:00">2020-02-06</time></span>
                   <span><i class="fas fa-folder"></i><a
                       href="https://blairconrad.com/category/development.html"></i>Development</a></span>
                   <span><i class="fas fa-tags"></i>
@@ -433,16 +411,42 @@ works for you? What doesn't? Chat here or
                     /
                     <a href="https://blairconrad.com/tag/flask.html">flask</a>
                     /
-                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                    <a href="https://blairconrad.com/tag/appengine.html">AppEngine</a>
                     /
-                    <a href="https://blairconrad.com/tag/email.html">email</a>
+                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
                   </span>
-                  <span><i class="fas fa-list"></i>Part 3 of LibraryHippo 2020</span>
+                  <span><i class="fas fa-list"></i>Part 1 of LibraryHippo 2020</span>
                 </div>
-            <p>After getting a do-nothing web app running on Heroku, I think the riskiest
-          requirement is having a scheduled job for LibraryHippo to check families' status
-          and notify them. However rather than trying to satisfy that requirement, this
-          time I'm going to try to set up email sending, mostly because it …</p>
+            <p>For some years, I've run a hobby project, open to all, but mostly used by a few
+          of my friends and family, called <a href="http://libraryhippo.com/">LibraryHippo</a>. I
+          find it useful, and for a long time, it was a joy to work on.</p>
+          <p>Lately, the project's not much fun. I've had the urge …</p>
+        </header>
+        <footer>
+          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+        </footer>
+        <div class="m-clearfix-l"></div>
+      </article>
+      <article>
+        
+        <header>
+            <h1><a href="https://blairconrad.com/2017/02/21/automatically-sync-nupkg-and-project.json-dependencies/" rel="bookmark" title="Permalink to Automatically Sync nupkg and project.json Dependencies">
+                    Automatically Sync nupkg and project.json Dependencies
+                </a></h1>
+                <div class="article-metadata">
+                  <span><i class="fas fa-calendar"></i><time
+                      datetime="2017-02-21T00:00:00-05:00">2017-02-21</time></span>
+                  <span><i class="fas fa-folder"></i><a
+                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                  <span><i class="fas fa-tags"></i>
+                    <a href="https://blairconrad.com/tag/.net.html">.NET</a>
+                  </span>
+                </div>
+            <p>Recently while working on an open source .NET project,
+          I forgot to update the <code>.nuspec</code> after changing a package
+          dependency in my <code>project.json</code>. Of course the resulting nupkg
+          contained the wrong dependency. Fortunately, the package
+          wasn't published in that state, but I didn't want to risk such a thing …</p>
         </header>
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>

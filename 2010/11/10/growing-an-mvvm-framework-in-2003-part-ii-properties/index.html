@@ -79,7 +79,7 @@ Full source code can be found in my <a href="http://code.google.com/p/blairconra
 
 <p>Last time, I introduced a tiny Windows Forms application and described my efforts to make a small MVVM framework for it. At the end of that post, we'd seen one way to use convention to bind View events to ViewModel event handlers.</p>
 <p>Today I'll talk about properties. It's all very well to have a click on the "Find" button trigger the FindClick method on the ViewModel, but it's useless unless we know <em>what to look for</em>. I needed a way to pass the <code>Title.Text</code> value to the ViewModel so it could use it for the search.
- Then the FindClick method I showed last time would work:
+ Then the FindClick method I showed last time would work:</p>
 <pre><code class="csharp">public void FindClick(object sender, EventArgs e)
 {
     ICollection books = bookDepository.Find(TitleText);
@@ -88,95 +88,94 @@ Full source code can be found in my <a href="http://code.google.com/p/blairconra
     {
         BookListItems.Add(book);
     }
-}</code></pre></p>
-<h2>A Failed Attempt</h2>
+}</code></pre>
 
+<h2>A Failed Attempt</h2>
 <p>First I tried using Windows Forms binding, with lamentable results. I wish I'd saved the intermediate steps, as I was probably doing something wrong and could've solicited help. Still, whether it was due to a lack of experience on my part, or a flaw in the system, the bindings just wouldn't work. I could bind bools and strings, but lists were right out. </p>
 <h2>A Proxy for Properties</h2>
-
 <p>I decided to rely on the storage objects that came with the View elements. This meant the ViewModel needed some way to proxy the properties on the View. Then a get or a set on the ViewModel object would flow right through, reading or writing the View's values.
-Here's what I came up with:
+Here's what I came up with:</p>
 <pre><code class="csharp">public class BoundProperty: Property
 {
     private object obj;
-    private PropertyInfo propertyInfo;</p>
-<div class="highlight"><pre><span></span><span class="k">public</span> <span class="n">BoundProperty</span><span class="p">(</span><span class="k">object</span> <span class="n">obj</span><span class="p">,</span> <span class="n">PropertyInfo</span> <span class="n">property</span><span class="p">)</span>
-<span class="err">{</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">obj</span> <span class="o">=</span> <span class="n">obj</span><span class="p">;</span>
-    <span class="n">this</span><span class="p">.</span><span class="n">propertyInfo</span> <span class="o">=</span> <span class="n">property</span><span class="p">;</span>
-<span class="err">}</span>
+    private PropertyInfo propertyInfo;
 
-<span class="k">public</span> <span class="n">override</span> <span class="k">object</span> <span class="n">Value</span>
-<span class="err">{</span>
-    <span class="k">get</span> <span class="err">{</span> <span class="k">return</span> <span class="n">propertyInfo</span><span class="p">.</span><span class="n">GetValue</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span> <span class="err">}</span>
-    <span class="k">set</span> <span class="err">{</span> <span class="n">propertyInfo</span><span class="p">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">obj</span><span class="p">,</span> <span class="n">value</span><span class="p">,</span> <span class="k">null</span><span class="p">);</span> <span class="err">}</span>
-<span class="err">}</span>
-</pre></div>
+    public BoundProperty(object obj, PropertyInfo property)
+    {
+        this.obj = obj;
+        this.propertyInfo = property;
+    }
 
-
-<p>}</code></pre>
-Ignore the <code>Property</code> base class for a bit. An instances <code>p</code> of type <code>BoundProperty</code> can be used to get and set values on the proxied object <code>obj</code> like so:
+    public override object Value
+    {
+        get { return propertyInfo.GetValue(obj, null); }
+        set { propertyInfo.SetValue(obj, value, null); }
+    }
+}</code></pre>
+<p>Ignore the <code>Property</code> base class for a bit. An instances <code>p</code> of type <code>BoundProperty</code> can be used to get and set values on the proxied object <code>obj</code> like so:</p>
 <pre><code class="csharp">p.Value = valueA;
-object valueB = p.Value;</code></pre></p>
-<p>Not incredibly thrilling, but one can work with it. Using the <code>.Value</code> in order to access the value was a little cumbersome, so I added a little syntactic sugar in the Property base class:
+object valueB = p.Value;</code></pre>
+
+<p>Not incredibly thrilling, but one can work with it. Using the <code>.Value</code> in order to access the value was a little cumbersome, so I added a little syntactic sugar in the Property base class:</p>
 <pre><code class="csharp">public abstract class Property
 {
-    public abstract object Value { get; set; }</p>
-<div class="highlight"><pre><span></span><span class="k">public</span> <span class="k">static</span> <span class="k">implicit</span> <span class="k">operator</span> <span class="n">string</span><span class="p">(</span><span class="n">Property</span> <span class="n">prop</span><span class="p">)</span>
-<span class="err">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">string</span><span class="p">)</span> <span class="n">prop</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
-<span class="err">}</span>
+    public abstract object Value { get; set; }
 
-<span class="k">public</span> <span class="k">static</span> <span class="k">implicit</span> <span class="k">operator</span> <span class="n">bool</span><span class="p">(</span><span class="n">Property</span> <span class="n">prop</span><span class="p">)</span>
-<span class="err">{</span>
-    <span class="k">return</span> <span class="p">(</span><span class="n">bool</span><span class="p">)</span> <span class="n">prop</span><span class="p">.</span><span class="n">Value</span><span class="p">;</span>
-<span class="err">}</span>
+    public static implicit operator string(Property prop)
+    {
+        return (string) prop.Value;
+    }
 
-<span class="k">public</span> <span class="n">IList</span> <span class="n">AsList</span><span class="p">()</span>
-<span class="err">{</span>
-     <span class="k">return</span> <span class="p">(</span><span class="n">IList</span><span class="p">)</span> <span class="n">Value</span><span class="p">;</span>
-<span class="err">}</span>
-</pre></div>
+    public static implicit operator bool(Property prop)
+    {
+        return (bool) prop.Value;
+    }
 
+    public IList AsList()
+    {
+         return (IList) Value;
+    } 
+}</code></pre>
 
-<p>}</code></pre></p>
 <p>I really like the implicit operator functionality, which I'd never used before. I wish it could be used with interfaces, though. There's probably a good reason why it can't, but nothing comes to mind. Anyhow, I had to go another route for IList&mdash;the somewhat uninspiring <code>AsList</code> method. At this point, I was really missing generics.</p>
-<p>Still, it's nicer to be able to write
+<p>Still, it's nicer to be able to write</p>
 <pre><code class="csharp">string myString = p1;
 IList myList = p2.AsList();</code></pre>
-instead of 
+<p>instead of </p>
 <pre><code class="csharp">string myString = (string) p1.Value;
-IList myList = (IList) p2.Value;</code></pre></p>
-<h2>Hooking up the Properties</h2>
+IList myList = (IList) p2.Value;</code></pre>
 
-<p>This is pretty much the same as hooking up the events like the last time. All we have to do is define a field (yes, a field) of type Property in the ViewModel:
-<pre><code class="csharp">private Property titleText;</code></pre></p>
-<p>The ViewModelBase loops over all the Property fields and looks for View controls that have matching property names:
+<h2>Hooking up the Properties</h2>
+<p>This is pretty much the same as hooking up the events like the last time. All we have to do is define a field (yes, a field) of type Property in the ViewModel:</p>
+<pre><code class="csharp">private Property titleText;</code></pre>
+
+<p>The ViewModelBase loops over all the Property fields and looks for View controls that have matching property names:</p>
 <pre><code class="csharp">foreach ( FieldInfo field in PropertyFields() )
 {
     FindPropertyToBindTo(allControls, field);
-}</p>
-<p>private void FindPropertyToBindTo(ArrayList allControls, FieldInfo field)
+}
+
+private void FindPropertyToBindTo(ArrayList allControls, FieldInfo field)
 {
     foreach ( Control control in allControls )
     {
         if ( BindFieldToControl(control, field) ) { return; }
     }
-}</p>
-<p>private bool BindFieldToControl(Control control, FieldInfo field)
+}
+
+private bool BindFieldToControl(Control control, FieldInfo field)
 {
     string controlPropertyName = ControlAttributeName(control, field);
-    if ( controlPropertyName == null ) { return false; }</p>
-<div class="highlight"><pre><span></span><span class="err">PropertyInfo controlProperty = control.GetType().GetProperty(controlPropertyName, myBindingFlags);</span>
-<span class="err">if ( controlProperty != null )</span>
-<span class="err">{</span>
-<span class="err">    field.SetValue(this, new BoundProperty(control, controlProperty));</span>
-<span class="err">}</span>
-<span class="err">return true;</span>
-</pre></div>
+    if ( controlPropertyName == null ) { return false; }
 
+    PropertyInfo controlProperty = control.GetType().GetProperty(controlPropertyName, myBindingFlags);
+    if ( controlProperty != null )
+    {
+        field.SetValue(this, new BoundProperty(control, controlProperty));
+    }
+    return true;
+}</code></pre>
 
-<p>}</code></pre></p>
 <p>Technically that's it, but the rest of the ViewModel's code is a little cleaner if we <a href="http://www.refactoring.com/catalog/selfEncapsulateField.html">self encapsulate the field</a>:</p>
 <pre><code class="csharp">public string TitleText
 {
@@ -185,7 +184,6 @@ IList myList = (IList) p2.Value;</code></pre></p>
 }</code></pre>
 
 <h2>Remarks</h2>
-
 <p>Once the infrastructure was in place, I really started enjoying developing the application. It was very liberating to add a new event handler just by writing a method with the right name and signature. And even adding access to a new property wasn't so bad&mdash;writing the three lines of code to segregate the conversions and <code>.Value</code>s was worth it to keep the event handler bodies nice and clean.</p>
 <p>Next time, we'll see how the design affected the form of the application's unit tests.</p>
 <!-- /content -->

@@ -72,7 +72,7 @@ explain why the example from that post works as it does, and to
 provide an alternative solution.</p>
 <hr>
 <p>Mr. Turovskyy supposes we want to fake out the following <code>Dog</code> class:</p>
-<div class="highlight"><pre><span></span><span class="n">public</span> <span class="k">class</span> <span class="nc">Dog</span>
+<div class="highlight"><pre><span></span><code><span class="n">public</span> <span class="k">class</span> <span class="nc">Dog</span>
 <span class="p">{</span>
     <span class="n">public</span> <span class="n">virtual</span> <span class="n">string</span> <span class="n">Bark</span><span class="p">()</span>
     <span class="p">{</span>
@@ -83,8 +83,7 @@ provide an alternative solution.</p>
         <span class="k">return</span> <span class="n">Bark</span><span class="p">()</span> <span class="o">+</span> <span class="n">Bark</span><span class="p">();</span>
     <span class="p">}</span>
 <span class="p">}</span>
-</pre></div>
-
+</code></pre></div>
 
 <p>He notes that the default behaviour of a fake Dog, as made by <code>dog =
 A.Fake&lt;Dog&gt;()</code>, is for both <code>Bark</code> and <code>BarkBark</code> to return the empty
@@ -183,10 +182,10 @@ method will delegate to the version on <code>Dog</code>.</p>
 <p>Then <code>Bark</code> is overridden, and the base <code>BarkBark</code> is able to use the
 new version.</p>
 <p>Now we can realize our dream of having a
-<a href="http://seuss.wikia.com/wiki/Duck-Dog">Seussian DuckDog</a>:
+<a href="http://seuss.wikia.com/wiki/Duck-Dog">Seussian DuckDog</a>:</p>
 <figure>
   <img src="https://blairconrad.com/images/Duck-Dog.jpg">
-</figure></p>
+</figure>
 <!-- /content -->
       <footer>
         <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
