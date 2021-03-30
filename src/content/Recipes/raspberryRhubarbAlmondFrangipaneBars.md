@@ -1,0 +1,84 @@
+---
+template: recipe
+title: Raspberry Rhubarb Almond Frangipane Bars
+---
+
+<table>
+  <tr>
+    <td>1 c (96 g) blanched almond flour</td>
+    <td rowspan="5">stir</td>
+    <td rowspan="5" colspan="2">press in pan</td>
+    <td rowspan="12">spread</td>
+    <td rowspan="16">press</td>
+    <td rowspan="16">bake for 40 minutes at 350&deg;F</td>
+  </tr>
+  <tr>
+    <td>2 T tapioca flour</td>
+  </tr>
+  <tr>
+    <td>2 T coconut sugar</td>
+  </tr>
+  <tr>
+    <td>&frac18; t salt</td>
+  </tr>
+  <tr>
+    <td>2 T (28 g) coconut oil, melted</td>
+  </tr>
+  <tr>
+    <td>&frac34; c (110 g) unsalted raw almonds</td>
+    <td rowspan="4">grind</td>
+    <td rowspan="5">process</td>
+    <td rowspan="7">blend</td>
+  </tr>
+  <tr>
+    <td>1 T tapioca flour</td>
+  </tr>
+  <tr>
+    <td>&frac14; t kosher salt</td>
+  </tr>
+  <tr>
+    <td>&frac13; c coconut sugar</td>
+  </tr>
+  <tr>
+    <td>5 T (70 g) coconut oil, solid</td>
+    <td class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>1 large egg</td>
+    <td class="righthide" rowspan="2" colspan="2">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>1 t vanilla</td>
+  </tr>
+  <tr>
+    <td>1 c chopped rhubarb, cut into 1&Prime; thick slices</td>
+    <td rowspan="4" colspan="4">toss</td>
+  </tr>
+  <tr>
+    <td>1 c fresh raspberries</td>
+  </tr>
+  <tr>
+    <td>1 t lemon zest</td>
+  </tr>
+  <tr>
+    <td>1 T lemon juice</td>
+  </tr>
+</table>
+
+<ol>
+  <li>Preheat oven to 350&deg;F.</li>
+  <li>Line an 8&times;8&Prime; square pan with parchment paper.</li>
+  <li>In a mixing bowl, stir together the almond flour, tapioca flour, coconut sugar, salt, and melted coconut oil until fully combined, and there’s no dry flour remaining.</li>
+  <li>Press the crust evenly in the pan.</li>
+  <li>In a food processor or blender, grind the almonds, tapioca flour, kosher salt, and coconut sugar to a powder (or as fine as you can make it).</li>
+  <li>Add the coconut oil and process until no longer visible.</li>
+  <li>Add the egg and vanilla, blending until completely incorporated, and a smooth paste is formed.</li>
+  <li>Spread the filling evenly over the almond crust.</li>
+  <li>Toss the fruit with the lemon zest and juice.</li>
+  <li>Press fruit gently into almond paste.</li>
+  <li>Bake for 40 minutes, or until set and a skewer inserted into the center comes out clean.</li>
+  <li>Let cool completely before cutting into squares.</li>
+  <li>Keep any leftovers in the fridge in an airtight container.</li>
+</ol>
+
+<p class="confession">Shamelessly stolen from <a href="https://www.bakerita.com/raspberry-rhubarb-almond-bars-gluten-free-paleo/">Bakerita</a></p>
