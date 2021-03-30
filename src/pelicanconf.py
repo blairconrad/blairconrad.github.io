@@ -3,6 +3,8 @@
 
 import os
 
+BIND = "0.0.0.0"
+
 PATH = "content"
 OUTPUT_PATH = "../_local_build"
 

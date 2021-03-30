@@ -26,6 +26,8 @@ CONFIG = {
     "commit_message": "'Publish site on {}'".format(datetime.date.today().isoformat()),
     # Port for `serve`
     "port": 8000,
+    # The IP to which to bind the HTTP server.
+    "bind": SETTINGS["BIND"],
 }
 
 
@@ -145,4 +147,4 @@ def livereload(c):
             server.watch(static_file, lambda: build(c))
 
     # Serve output path on configured port
-    server.serve(port=CONFIG["port"], root=CONFIG["deploy_path"])
+    server.serve(host=CONFIG["bind"], port=CONFIG["port"], root=CONFIG["deploy_path"])
