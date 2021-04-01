@@ -1,12 +1,10 @@
 # -*- coding: utf-8 -*-
 
 import os
-import shutil
 import sys
 import datetime
 
 from invoke import task
-from invoke.util import cd
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
 
@@ -148,3 +146,25 @@ def livereload(c):
 
     # Serve output path on configured port
     server.serve(host=CONFIG["bind"], port=CONFIG["port"], root=CONFIG["deploy_path"])
+
+
+@task
+def recipe(c, name):
+    '''Create a new recipe, like: recipe "A Delicious Cake"'''
+    name_parts = name.split()
+    title = " ".join(name_parts)
+    basename = "".join([a.capitalize() for a in name_parts]).translate(
+        str.maketrans("", "", "' ")
+    )
+
+    basename = basename[0].lower() + basename[1:] + ".md"
+    filename = os.path.join("content", "Recipes", basename)
+
+    if os.path.exists(filename):
+        raise Exception("we already have a recipe for " + title)
+
+    template_file = os.path.join("content", "Recipes", "_template.md")
+    with open(template_file, "r") as template:
+        content = template.read() % vars()
+        with open(filename, "w") as new_recipe_file:
+            new_recipe_file.write(content)
