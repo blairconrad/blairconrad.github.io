@@ -1,4 +1,4 @@
 beautifulsoup4
 invoke
-pelican[markdown]
+pelican[markdown]==4.2.0
 pelican-series-plugin
