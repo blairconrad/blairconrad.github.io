@@ -8,7 +8,7 @@ beautifulsoup4==4.9.3
     # via -r requirements.in
 blinker==1.4
     # via pelican
-docutils==0.16
+docutils==0.17.1
     # via pelican
 feedgenerator==1.9.1
     # via pelican
@@ -20,7 +20,7 @@ markdown==3.3.4
     # via pelican
 markupsafe==1.1.1
     # via jinja2
-pelican-series-plugin==1.0.2
+pelican-series-plugin==1.1.1
     # via -r requirements.in
 pelican[markdown]==4.6.0
     # via
