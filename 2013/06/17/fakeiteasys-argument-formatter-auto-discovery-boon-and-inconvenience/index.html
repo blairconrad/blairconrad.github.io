@@ -4,6 +4,7 @@
   <meta charset="UTF-8" />
   <title>FakeItEasy's argument formatter auto-discovery - boon and inconvenience | Blair Conrad</title>
   <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/pygments-wombat.css" />
   <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
   <link rel="canonical" href="https://blairconrad.com/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/" />
   <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
@@ -16,8 +17,8 @@
   <meta property="og:title" content="FakeItEasy's argument formatter auto-discovery - boon and inconvenience" />
   <meta name="twitter:title" content="FakeItEasy's argument formatter auto-discovery - boon and inconvenience" />
   <meta property="og:url" content="https://blairconrad.com/2013/06/17/fakeiteasys-argument-formatter-auto-discovery-boon-and-inconvenience/" />
-  <meta property="og:description" content=".NET FakeItEasy Hi again. At the Day Job, we&#39;ve recently dropped Typemock Isolator and NMock2 as the mocking frameworks of choice in the products that I work on. We&#39;ve jumped on the FakeItEasy bandwagon. So far, we&#39;re enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit …" />
-  <meta name="twitter:description" content=".NET FakeItEasy Hi again. At the Day Job, we&#39;ve recently dropped Typemock Isolator and NMock2 as the mocking frameworks of choice in the products that I work on. We&#39;ve jumped on the FakeItEasy bandwagon. So far, we&#39;re enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit …" />
+  <meta property="og:description" content="Hi again. At the Day Job, we&#39;ve recently dropped Typemock Isolator and NMock2 as the mocking frameworks of choice in the products that I work on. We&#39;ve jumped on the FakeItEasy bandwagon. So far, we&#39;re enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit the mind …" />
+  <meta name="twitter:description" content="Hi again. At the Day Job, we&#39;ve recently dropped Typemock Isolator and NMock2 as the mocking frameworks of choice in the products that I work on. We&#39;ve jumped on the FakeItEasy bandwagon. So far, we&#39;re enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit the mind …" />
   <meta name="twitter:card" content="summary" />
   <meta property="og:type" content="article" />
 </head>
@@ -31,6 +32,7 @@
       <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
         <div class="m-row">
           <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Tags/">Tags</a></li>
             <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
           </ol>
         </div>
@@ -52,15 +54,15 @@
                     datetime="2013-06-17T00:00:00-04:00">2013-06-17</time></span>
                 <span><i class="fas fa-folder"></i><a
                     href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/.net.html">.NET</a>
+                  /
+                  <a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+                </span>
               </div>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
-<ul>
-<li>.NET</li>
-<li>FakeItEasy</li>
-</ul>
-<hr>
 <p>Hi again. At the Day Job, we've recently dropped <a href="http://www.typemock.com/isolator-product-page">Typemock Isolator</a> and <a href="http://sourceforge.net/apps/mediawiki/nmock2">NMock2</a> as the mocking frameworks of choice in the products that I work on. We've jumped on the <a href="http://fakeiteasy.github.io">FakeItEasy</a> bandwagon. So far, we're enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit the mind pretty well. Today I'm going to focus on one feature that I've really enjoyed but that has been an occasional thorn in the side.</p>
 <p>This is a feature that <a href="http://ondevelopment.blogspot.ca/2010/09/extending-exception-messages-in.html">Patrik Hägne has blogged about before</a>, but that I think is still not well known. I found it accidentally, and have benefited from it. You can provide custom argument renderers to <strong>improve the messages</strong> you get when FakeItEasy detects an error due to missing or mismatched calls. Check out Mr. Hägne's post for the full details, but if I may be so bold as to rip off some of his examples, here's the gist (original meaning, not fancy github one).</p>
 <!--more-->
