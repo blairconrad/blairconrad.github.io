@@ -64,32 +64,6 @@
                   <a href="https://blairconrad.com/tag/database.html">database</a>
                 </span>
               </div>
-            <aside class="m-block m-default">
-              <h3>Part 5 of the LibraryHippo 2020 series:</h3>
-              <ol>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
-                </li>
-                <li>
-                  A Small Heroku Datastore (this article)
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/'>Recap and decision</a>
-                </li>
-              </ol>
-            </aside>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
@@ -103,7 +77,7 @@ and rendered them as HTML for display to the user. It would be better to have
 the library build a data structure, which can be stored for later use or
 rendered by the web app.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="k">def</span> <span class="nf">check_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
+<pre class="m-code"><span class="k">def</span> <span class="nf">check_card</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">):</span>
     <span class="n">session</span> <span class="o">=</span> <span class="n">Session</span><span class="p">()</span>
     <span class="n">summary_page</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">login</span><span class="p">(</span><span class="n">session</span><span class="p">,</span> <span class="n">patron</span><span class="p">,</span> <span class="n">number</span><span class="p">,</span> <span class="n">pin</span><span class="p">)</span>
 
@@ -128,7 +102,7 @@ rendered by the web app.</p>
 <p>&quot;Data structure&quot; is maybe too fancy a term for &quot;dictionary with two values&quot;, but
 it's a start.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/check&quot;</span><span class="p">)</span>
+<pre class="m-code"><span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/check&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
     <span class="n">card_check_result</span> <span class="o">=</span> <span class="n">WPL</span><span class="p">()</span><span class="o">.</span><span class="n">check_card</span><span class="p">(</span>
         <span class="n">Config</span><span class="o">.</span><span class="n">PATRON_NAME</span><span class="p">,</span> <span class="n">Config</span><span class="o">.</span><span class="n">CARD_NUMBER</span><span class="p">,</span> <span class="n">Config</span><span class="o">.</span><span class="n">PIN</span>
@@ -162,7 +136,7 @@ Relational Mapper. These will let LibraryHippo interact with databases both
 locally and on Heroku. It's good practice to track changes to the database
 schema using <a href="https://github.com/miguelgrinberg/flask-migrate">Flask-Migrate</a>,
 so I'll install that as well.</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-SQLAlchemy</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-SQLAlchemy</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-Migrate</span>
 <span class="n">inv</span> <span class="n">freeze</span></pre>
 <p>Flask needs some configuration settings to access the database.
@@ -171,9 +145,9 @@ database. In this case, there's a reasonable default, a local SQLite instance.
 The <code>SQLALCHEMY_TRACK_MODIFICATIONS</code> setting will keep the database from
 signalling the application whenever the database content changes.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
+<pre class="m-code"><span class="k">class</span> <span class="nc">Config</span><span class="p">(</span><span class="nb">object</span><span class="p">):</span>
     <span class="c1"># …</span>
-    <span class="c1"># Remove PATRON_NAME, CARD_NUMBER, and PIN, as they'll move to the database</span>
+    <span class="c1"># Remove PATRON_NAME, CARD_NUMBER, and PIN, as they&#39;ll move to the database</span>
 
     <span class="n">SQLALCHEMY_DATABASE_URI</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span>
         <span class="s2">&quot;DATABASE_URL&quot;</span>
@@ -183,7 +157,7 @@ signalling the application whenever the database content changes.</p>
 </figure>
 <p>Then the application needs to be taught about the database and migration facilities:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="c1"># …</span>
+<pre class="m-code"><span class="c1"># …</span>
 <span class="kn">from</span> <span class="nn">flask_migrate</span> <span class="kn">import</span> <span class="n">Migrate</span>
 <span class="kn">from</span> <span class="nn">flask_sqlalchemy</span> <span class="kn">import</span> <span class="n">SQLAlchemy</span>
 
@@ -205,7 +179,7 @@ signalling the application whenever the database content changes.</p>
 <p>The application now has the ability to talk to the database, but there's no
 schema defined. Let's add a model and insert a record.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
+<pre class="m-code"><span class="k">class</span> <span class="nc">Card</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Model</span><span class="p">):</span>
     <span class="nb">id</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">Integer</span><span class="p">,</span> <span class="n">primary_key</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
     <span class="n">patron_name</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">))</span>
     <span class="n">number</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">32</span><span class="p">))</span>
@@ -226,16 +200,16 @@ dictionary that appears above.</p>
 <p>Now initialize a schemaless database, add the first migration script for the
 <code>Card</code> model, and actually upgrade the database schema:</p>
 <figure class="m-console-figure">
-<pre class="code powershell m-console"><span class="n">flask</span> <span class="n">db</span> <span class="n">init</span>
+<pre class="m-console m-code"><span class="n">flask</span> <span class="n">db</span> <span class="n">init</span>
 <span class="n">flask</span> <span class="n">db</span> <span class="n">migrate</span> <span class="n">-m</span> <span class="s2">&quot;Add Card model&quot;</span>
 <span class="n">flask</span> <span class="n">db</span> <span class="n">upgrade</span></pre>
-<pre class="code text m-nopad">Creating directory D:\Sandbox\LibraryHippo\migrations ...  done
+<pre class="m-nopad m-code">Creating directory D:\Sandbox\LibraryHippo\migrations ...  done
 Creating directory D:\Sandbox\LibraryHippo\migrations\versions ...  done
 Generating D:\Sandbox\LibraryHippo\migrations\alembic.ini ...  done
 Generating D:\Sandbox\LibraryHippo\migrations\env.py ...  done
 Generating D:\Sandbox\LibraryHippo\migrations\README ...  done
 Generating D:\Sandbox\LibraryHippo\migrations\script.py.mako ...  done
-Please edit configuration/connection/logging settings in 'D:\\Sandbox\\LibraryHippo\\migrations\\alembic.ini' before proceeding.
+Please edit configuration/connection/logging settings in &#39;D:\\Sandbox\\LibraryHippo\\migrations\\alembic.ini&#39; before proceeding.
 
 Generating D:\Sandbox\LibraryHippo\migrations\versions\b2fc8df2f32f_add_card_model.py ...  done</pre>
 </figure>
@@ -243,7 +217,7 @@ Generating D:\Sandbox\LibraryHippo\migrations\versions\b2fc8df2f32f_add_card_mod
 <section id="insert-a-card-into-the-database">
 <h3>Insert a card into the database</h3>
 <p>Normally cards would be added to the database by the users, via a fancy form. For now, the <code>flask shell</code> will do.</p>
-<pre class="code python m-console"><span class="err">❯</span> <span class="n">flask</span> <span class="n">shell</span>
+<pre class="m-console m-code"><span class="err">❯</span> <span class="n">flask</span> <span class="n">shell</span>
 <span class="n">Python</span> <span class="mf">3.8</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">tags</span><span class="o">/</span><span class="n">v3</span><span class="o">.</span><span class="mf">8.1</span><span class="p">:</span><span class="mi">1</span><span class="n">b293b6</span><span class="p">,</span> <span class="n">Dec</span> <span class="mi">18</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">24</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="o">.</span><span class="mi">1916</span> <span class="mi">32</span> <span class="n">bit</span> <span class="p">(</span><span class="n">Intel</span><span class="p">)]</span> <span class="n">on</span> <span class="n">win32</span>
 <span class="n">App</span><span class="p">:</span> <span class="n">app</span> <span class="p">[</span><span class="n">production</span><span class="p">]</span>
 <span class="n">Instance</span><span class="p">:</span> <span class="n">D</span><span class="p">:</span>\<span class="n">Sandbox</span>\<span class="n">LibraryHippo</span>\<span class="n">instance</span>
@@ -261,15 +235,15 @@ Generating D:\Sandbox\LibraryHippo\migrations\versions\b2fc8df2f32f_add_card_mod
 PIN values added last time, so the <code>check</code> route must load them from the
 database and save the result back onto the card:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="c1"># …</span>
+<pre class="m-code"><span class="c1"># …</span>
 <span class="kn">import</span> <span class="nn">json</span>
 <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Card</span>
 
 <span class="c1"># …</span>
 
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/check&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/check&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">check</span><span class="p">():</span>
-    <span class="n">card</span> <span class="o">=</span> <span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># a hack - we know there's only 1 card for now</span>
+    <span class="n">card</span> <span class="o">=</span> <span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># a hack - we know there&#39;s only 1 card for now</span>
     <span class="n">card_check_result</span> <span class="o">=</span> <span class="n">WPL</span><span class="p">()</span><span class="o">.</span><span class="n">check_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span>
     <span class="n">card</span><span class="o">.</span><span class="n">last_state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">dumps</span><span class="p">(</span><span class="n">card_check_result</span><span class="p">)</span>
     <span class="n">db</span><span class="o">.</span><span class="n">session</span><span class="o">.</span><span class="n">commit</span><span class="p">()</span>
@@ -278,14 +252,14 @@ database and save the result back onto the card:</p>
 </figure>
 <p>The stored result can be seen by querying the database via <code>flask shell</code>:</p>
 <figure class="m-console-figure">
-<pre class="code python m-console"><span class="err">❯</span> <span class="n">flask</span> <span class="n">shell</span>
+<pre class="m-console m-code"><span class="err">❯</span> <span class="n">flask</span> <span class="n">shell</span>
 <span class="n">Python</span> <span class="mf">3.8</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">tags</span><span class="o">/</span><span class="n">v3</span><span class="o">.</span><span class="mf">8.1</span><span class="p">:</span><span class="mi">1</span><span class="n">b293b6</span><span class="p">,</span> <span class="n">Dec</span> <span class="mi">18</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">24</span><span class="p">)</span> <span class="p">[</span><span class="n">MSC</span> <span class="n">v</span><span class="o">.</span><span class="mi">1916</span> <span class="mi">32</span> <span class="n">bit</span> <span class="p">(</span><span class="n">Intel</span><span class="p">)]</span> <span class="n">on</span> <span class="n">win32</span>
 <span class="n">App</span><span class="p">:</span> <span class="n">app</span> <span class="p">[</span><span class="n">production</span><span class="p">]</span>
 <span class="n">Instance</span><span class="p">:</span> <span class="n">D</span><span class="p">:</span>\<span class="n">Sandbox</span>\<span class="n">LibraryHippo</span>\<span class="n">instance</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="kn">from</span> <span class="nn">app.models</span> <span class="kn">import</span> <span class="n">Card</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">card</span> <span class="o">=</span> <span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
 <span class="o">&gt;&gt;&gt;</span> <span class="n">card</span><span class="o">.</span><span class="n">last_state</span></pre>
-<pre class="code python m-nopad"><span class="s1">'{&quot;holds&quot;: [{&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBlood heir / Am</span><span class="se">\\</span><span class="s1">u00e9lie Wen Zhao</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 2 of 2 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;09-17-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nEducated : a memoir / Tara Westover</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 2 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;09-28-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nCoders : the making of a new tribe and the remaking of the world / Clive Thompson</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 1 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;10-16-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBecoming Superman : my journey from poverty to Hollywood : with stops along the way at murder, mayhem, movie stars, cults, slums, sociopaths, and war crimes / J. Michael Straczynski ; introduction by Neil Gaiman</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 1 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;11-02-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBatman : Creature of the Night / illustrated by John Paul Leon.</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 4 of 6 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;11-06-2</span></pre>
+<pre class="m-nopad m-code"><span class="s1">&#39;{&quot;holds&quot;: [{&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBlood heir / Am</span><span class="se">\\</span><span class="s1">u00e9lie Wen Zhao</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 2 of 2 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;09-17-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nEducated : a memoir / Tara Westover</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 2 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;09-28-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nCoders : the making of a new tribe and the remaking of the world / Clive Thompson</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 1 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;10-16-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBecoming Superman : my journey from poverty to Hollywood : with stops along the way at murder, mayhem, movie stars, cults, slums, sociopaths, and war crimes / J. Michael Straczynski ; introduction by Neil Gaiman</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 1 of 1 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;11-02-20&quot;, &quot;Freeze&quot;: true}, {&quot;Title&quot;: &quot;</span><span class="se">\\</span><span class="s1">nBatman : Creature of the Night / illustrated by John Paul Leon.</span><span class="se">\\</span><span class="s1">n</span><span class="se">\\</span><span class="s1">n&quot;, &quot;Status&quot;: &quot; 4 of 6 holds &quot;, &quot;Pickup&quot;: &quot;WPL McCormick Branch&quot;, &quot;Cancel&quot;: &quot;11-06-2</span></pre>
 </figure>
 </section>
 <section id="use-the-stored-card-check-result-to-send-e-mail">
@@ -295,15 +269,15 @@ relatively straightforward to include that text in the notification e-mails. All
 that's required is to load the card record, deserialize the saved state using
 <code>json.loads</code>, and build the HTML:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="c1"># …</span>
+<pre class="m-code"><span class="c1"># …</span>
 <span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">mail</span><span class="p">,</span> <span class="n">models</span>
 
 <span class="c1"># …</span>
 
 <span class="k">def</span> <span class="nf">register</span><span class="p">(</span><span class="n">app</span><span class="p">):</span>
-    <span class="nd">&#64;app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;notify-all&quot;</span><span class="p">)</span>
+    <span class="nd">@app</span><span class="o">.</span><span class="n">cli</span><span class="o">.</span><span class="n">command</span><span class="p">(</span><span class="s2">&quot;notify-all&quot;</span><span class="p">)</span>
     <span class="k">def</span> <span class="nf">notify_all</span><span class="p">():</span>
-        <span class="n">card</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># a hack - we know there's only 1 card for now</span>
+        <span class="n">card</span> <span class="o">=</span> <span class="n">models</span><span class="o">.</span><span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>  <span class="c1"># a hack - we know there&#39;s only 1 card for now</span>
         <span class="n">last_card_state</span> <span class="o">=</span> <span class="n">json</span><span class="o">.</span><span class="n">loads</span><span class="p">(</span><span class="n">card</span><span class="o">.</span><span class="n">last_state</span><span class="p">)</span>
 
         <span class="n">html_body</span> <span class="o">=</span> <span class="s2">&quot;&lt;h1&gt;Holds&lt;/h1&gt;&quot;</span>
@@ -323,7 +297,7 @@ that's required is to load the card record, deserialize the saved state using
         <span class="n">now</span> <span class="o">=</span> <span class="n">datetime</span><span class="o">.</span><span class="n">now</span><span class="p">()</span><span class="o">.</span><span class="n">isoformat</span><span class="p">()</span>
 
         <span class="n">msg</span> <span class="o">=</span> <span class="n">Message</span><span class="p">(</span>
-            <span class="s2">&quot;LibraryHippo starting notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair&#64;blairconrad.com&quot;</span><span class="p">]</span>
+            <span class="s2">&quot;LibraryHippo starting notifications&quot;</span><span class="p">,</span> <span class="n">recipients</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;blair@blairconrad.com&quot;</span><span class="p">]</span>
         <span class="p">)</span>
         <span class="n">msg</span><span class="o">.</span><span class="n">body</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&quot;starting notifications at </span><span class="si">{</span><span class="n">now</span><span class="si">}</span><span class="s2">&quot;</span>
         <span class="n">msg</span><span class="o">.</span><span class="n">html</span> <span class="o">=</span> <span class="n">html_body</span>
@@ -341,8 +315,8 @@ that's required is to load the card record, deserialize the saved state using
 <h3>Add and configure a database plugin</h3>
 <p>Heroku has a free hobby-tier PostgreSQL addon that you can add on right from the command line:</p>
 <figure class="m-console-figure">
-<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">add</span> <span class="n">heroku-postgresql</span><span class="err">:</span><span class="n">hobby-dev</span></pre>
-<pre class="code text m-nopad">Creating heroku-postgresql:hobby-dev on ⬢ libraryhippo... free
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">add</span> <span class="n">heroku-postgresql</span><span class="err">:</span><span class="n">hobby-dev</span></pre>
+<pre class="m-nopad m-code">Creating heroku-postgresql:hobby-dev on ⬢ libraryhippo... free
 Database has been created and is available
 ! This database is empty. If upgrading, you can transfer
 ! data from another database with pg:copy
@@ -355,11 +329,11 @@ populated from.</p>
 <p>SQLAlchemy needs a bonus <code>psycopg2</code> package to connect to the database, and
 there's no harm in having it installed when I'm testing locally, so I'll just
 add it to <code>requirements.txt</code>:</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">psycopg2</span>
 <span class="n">inv</span> <span class="n">freeze</span></pre>
 <p>Finally, the application startup should perform the database migration, to react
 to any new model changes. This requires an extra command before starting gunicorn:</p>
-<pre class="code text">web: flask db upgrade; gunicorn libraryhippo:app</pre>
+<pre class="m-code">web: flask db upgrade; gunicorn libraryhippo:app</pre>
 <p>And the only thing left to do is deploy.</p>
 </section>
 <section id="store-a-library-card">
@@ -367,7 +341,7 @@ to any new model changes. This requires an extra command before starting gunicor
 <p>I'll store the library card to the PostgreSQL database just as with the local
 sqlite instance. The only difference is that instead of running <code>flask shell</code>
 directly, I use Heroku's facility to run a one-off command via <code>heroku run</code>:</p>
-<pre class="code python m-console"><span class="err">❯</span> <span class="n">heroku</span> <span class="n">run</span> <span class="n">flask</span> <span class="n">shell</span>
+<pre class="m-console m-code"><span class="err">❯</span> <span class="n">heroku</span> <span class="n">run</span> <span class="n">flask</span> <span class="n">shell</span>
 <span class="n">Running</span> <span class="n">flask</span> <span class="n">shell</span> <span class="n">on</span> <span class="err">⬢</span> <span class="n">libraryhippo</span><span class="o">...</span> <span class="n">up</span><span class="p">,</span> <span class="n">run</span><span class="o">.</span><span class="mi">4950</span> <span class="p">(</span><span class="n">Free</span><span class="p">)</span>
 <span class="n">Python</span> <span class="mf">3.8</span><span class="o">.</span><span class="mi">1</span> <span class="p">(</span><span class="n">default</span><span class="p">,</span> <span class="n">Dec</span> <span class="mi">23</span> <span class="mi">2019</span><span class="p">,</span> <span class="mi">04</span><span class="p">:</span><span class="mi">19</span><span class="p">:</span><span class="mi">22</span><span class="p">)</span>
 <span class="p">[</span><span class="n">GCC</span> <span class="mf">7.4</span><span class="o">.</span><span class="mi">0</span><span class="p">]</span> <span class="n">on</span> <span class="n">linux</span>
@@ -380,7 +354,7 @@ directly, I use Heroku's facility to run a one-off command via <code>heroku run<
 <span class="o">&gt;&gt;&gt;</span> <span class="n">Card</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">all</span><span class="p">()</span>
 <span class="p">[</span><span class="o">&lt;</span><span class="n">Patron</span> <span class="n">Blair</span> <span class="n">Conrad</span><span class="o">&gt;</span><span class="p">]</span></pre>
 <p>With that done, there was no need to keep the old environment variables that encoded my library credentials, so I removed them:</p>
-<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="n">unset</span> <span class="n">PATRON_NAME</span> <span class="n">CARD_NUMBER</span> <span class="n">PIN</span></pre>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="n">unset</span> <span class="n">PATRON_NAME</span> <span class="n">CARD_NUMBER</span> <span class="n">PIN</span></pre>
 </section>
 <section id="wait-for-the-e-mail">
 <h3>Wait for the e-mail</h3>

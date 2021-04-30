@@ -67,21 +67,19 @@
 <p>This is a feature that <a href="http://ondevelopment.blogspot.ca/2010/09/extending-exception-messages-in.html">Patrik Hägne has blogged about before</a>, but that I think is still not well known. I found it accidentally, and have benefited from it. You can provide custom argument renderers to <strong>improve the messages</strong> you get when FakeItEasy detects an error due to missing or mismatched calls. Check out Mr. Hägne's post for the full details, but if I may be so bold as to rip off some of his examples, here's the gist (original meaning, not fancy github one).</p>
 <!--more-->
 
-<p>Define a class that extends <code>ArgumentValueFormatter&lt;Person&gt;</code> (where Person is a class in your project), override <code>GetStringValue</code> with something that renders a Person, and FakeItEasy errors that need to talk about a Person change from this</p>
+<p>Define a class that extends <code>ArgumentValueFormatter&lt;Person&gt;</code> (where Person is a class in your project), override <code>GetStringValue</code> with something that renders a Person, and FakeItEasy errors that need to talk about a Person change from this
 <pre>Assertion failed for the following call:
     'FakeItEasy.Examples.IPersonRepository.Save()'
   Expected to find it exactly never but found it #1 times among the calls:
     1.  'FakeItEasy.Examples.IPersonRepository.Save(
-            personToSave: FakeItEasy.Examples.Person)'</pre>
-
-<p>to</p>
+            personToSave: FakeItEasy.Examples.Person)'</pre></p>
+<p>to
 <pre>Assertion failed for the following call:
     'FakeItEasy.Examples.IPersonRepository.Save()'
   Expected to find it exactly never but found it #1 times among the calls:
     1.  'FakeItEasy.Examples.IPersonRepository.Save(
             personToSave: <b>Person named Patrik Hägne,
-                          date of birth 1977-04-05 (12227,874689919 days old).)</b>'</pre>
-
+                          date of birth 1977-04-05 (12227,874689919 days old).)</b>'</pre></p>
 <p>It's very easy to use, and quite helpful. However, lately I've had a few difficulties with some test projects and have tracked it back to an aspect of this feature. Specifically, for certain very large projects</p>
 <ul>
 <li>My test fixtures are <b>taking a long time to start up</b> - several extra seconds while waiting for the first test to run. Specifically, the delay was happening in my first <code>A.Fake</code> call.</li>

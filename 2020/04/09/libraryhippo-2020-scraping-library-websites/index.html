@@ -64,32 +64,6 @@
                   <a href="https://blairconrad.com/tag/requests.html">requests</a>
                 </span>
               </div>
-            <aside class="m-block m-default">
-              <h3>Part 4 of the LibraryHippo 2020 series:</h3>
-              <ol>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                </li>
-                <li>
-                  Scraping Library Websites (this article)
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/'>Recap and decision</a>
-                </li>
-              </ol>
-            </aside>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
@@ -112,7 +86,7 @@ library is a feature-rich and popular library for sending HTTP requests. Knowing
 no more than that, I'll try it. Beautiful Soup has worked very well for me in
 the past, but has had a number of significant releases since the version I've
 used, so I'll try the latest, 4.8.2 as I write.</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">requests</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">BeautifulSoup4</span>
 <span class="n">inv</span> <span class="n">freeze</span></pre>
 </section>
@@ -125,9 +99,9 @@ source code, so they have to be stored somewhere else. Had I already integrated
 a permanent datastore and implement user management, the credentials would be
 tied to the LibraryHippo user's account, but for now I'll read them from
 environment variables that I'll save in the <code>secrets</code> file established in
-<a href="{filename}../03-05-sending-email/article.rst">Sending Email from Heroku</a>.</p>
+<a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/">Sending Email from Heroku</a>.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="c1"># …</span>
+<pre class="m-code"><span class="c1"># …</span>
 <span class="n">PATRON_NAME</span><span class="o">=</span><span class="n">Blair</span> <span class="n">Conrad</span>
 <span class="n">CARD_NUMBER</span><span class="o">=</span><span class="mi">123456789</span>
 <span class="n">PIN</span><span class="o">=</span><span class="mi">9876</span></pre>
@@ -156,7 +130,7 @@ input:</p>
 </figure>
 <p>But there are actually 6. The four we see and two hidden ones, called <code>lt</code> and <code>_eventId</code>:</p>
 <figure class="m-code-figure">
-<pre class="code html"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;15&quot;</span><span class="p">&gt;</span>
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;name&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;15&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;code&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;code&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;text&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;50&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;20&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;pin&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;pin&quot;</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;password&quot;</span> <span class="na">value</span><span class="o">=</span><span class="s">&quot;&quot;</span> <span class="na">size</span><span class="o">=</span><span class="s">&quot;25&quot;</span> <span class="na">maxlength</span><span class="o">=</span><span class="s">&quot;64&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;30&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">input</span> <span class="na">type</span><span class="o">=</span><span class="s">&quot;submit&quot;</span> <span class="na">name</span><span class="o">=</span><span class="s">&quot;Log In&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;loginSubmit&quot;</span> <span class="na">tabindex</span><span class="o">=</span><span class="s">&quot;35&quot;</span><span class="p">&gt;</span>
@@ -180,7 +154,7 @@ hidden field values</li>
 </ol>
 <p>The first 3 steps are covered by the <code>login</code> method on my new <code>WPL</code> class:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">bs4</span> <span class="kn">import</span> <span class="n">BeautifulSoup</span>
 <span class="kn">from</span> <span class="nn">requests</span> <span class="kn">import</span> <span class="n">Session</span>
 
 <span class="k">class</span> <span class="nc">WPL</span><span class="p">:</span>
@@ -254,7 +228,7 @@ bottom of the box above the &quot;Log Out&quot; button.</p>
 <p>It's those last two that we'll be going after. Unfortunately, the links aren't
 clearly marked with an ID or even a class:</p>
 <figure class="m-code-figure">
-<pre class="code html"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patNameAddress&quot;</span><span class="p">&gt;</span>
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patNameAddress&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">strong</span><span class="p">&gt;</span>CONRAD, BLAIR<span class="p">&lt;/</span><span class="nt">strong</span><span class="p">&gt;&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
   123 FAKE STREET<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
   WATERLOO ON<span class="p">&lt;</span><span class="nt">br</span><span class="p">&gt;</span>
@@ -275,7 +249,7 @@ clearly marked with an ID or even a class:</p>
 <p>The URLs vary from patron to patron, so we can't hard-code them. I'll cheat a
 little and look for links that end in &quot;/holds&quot; or &quot;/items&quot;:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">import</span> <span class="nn">re</span>
+<pre class="m-code"><span class="kn">import</span> <span class="nn">re</span>
 <span class="kn">import</span> <span class="nn">urllib.parse</span>
 
 <span class="c1"># …</span>
@@ -312,7 +286,7 @@ absolute URLs.</p>
 </figure>
 <p>And the HTML behind the table starts like this:</p>
 <figure class="m-code-figure">
-<pre class="code html"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
     <span class="p">&lt;</span><span class="nt">th</span> <span class="na">colspan</span><span class="o">=</span><span class="s">&quot;6&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
       <span class="p">&lt;</span><span class="nt">label</span> <span class="na">id</span><span class="o">=</span><span class="s">&quot;items_count&quot;</span><span class="p">&gt;</span>22 HOLDS<span class="p">&lt;/</span><span class="nt">label</span><span class="p">&gt;</span>
@@ -371,7 +345,7 @@ where the patron can choose to cancel, freeze, or change the pickup location of
 an item, some <code>td</code> elements contain input controls, slightly complicating the
 parsing. Still, it's not that difficult to extract the information:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="k">def</span> <span class="nf">get_holds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">holds_url</span><span class="p">):</span>
+<pre class="m-code"><span class="k">def</span> <span class="nf">get_holds</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">holds_url</span><span class="p">):</span>
     <span class="n">holds</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">holds_page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">holds_url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;html.parser&quot;</span><span class="p">)</span>
 
@@ -438,7 +412,7 @@ going to omit it, but that plan fell through when I found that the checkouts
 page's HTML is malformed in a way that defeated the <code>html.parser</code> library.
 Some <code>tr</code> tags aren't closed in the table:</p>
 <figure class="m-code-figure">
-<pre class="code html"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
+<pre class="m-code"><span class="p">&lt;</span><span class="nt">table</span> <span class="na">lang</span><span class="o">=</span><span class="s">&quot;en&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFunc&quot;</span><span class="p">&gt;</span>
 <span class="p">&lt;</span><span class="nt">tr</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>
   <span class="p">&lt;</span><span class="nt">th</span> <span class="na">colspan</span><span class="o">=</span><span class="s">&quot;5&quot;</span>  <span class="na">class</span><span class="o">=</span><span class="s">&quot;patFuncTitle&quot;</span><span class="p">&gt;</span>5 ITEMS CHECKED OUT<span class="p">&lt;/</span><span class="nt">th</span><span class="p">&gt;</span>
 <span class="p">&lt;/</span><span class="nt">tr</span><span class="p">&gt;</span>
@@ -462,10 +436,10 @@ Some <code>tr</code> tags aren't closed in the table:</p>
 <p>As a result, Beautiful Soupo saw only the &quot;patFuncTitle&quot; and &quot;patFuncHeaders&quot;
 rows. The workaround is to install the <a href="https://lxml.de/">lxml</a> XML and HTML
 parser and have BeautifulSoup use it:</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">lxml</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">lxml</span>
 <span class="n">inv</span> <span class="n">freeze</span></pre>
 <figure class="m-code-figure">
-<pre class="code python"><span class="k">def</span> <span class="nf">get_checkouts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">checkouts_url</span><span class="p">):</span>
+<pre class="m-code"><span class="k">def</span> <span class="nf">get_checkouts</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">checkouts_url</span><span class="p">):</span>
     <span class="n">checkouts</span> <span class="o">=</span> <span class="p">[]</span>
     <span class="n">checkouts_page</span> <span class="o">=</span> <span class="n">BeautifulSoup</span><span class="p">(</span><span class="n">session</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">checkouts_url</span><span class="p">)</span><span class="o">.</span><span class="n">text</span><span class="p">,</span> <span class="s2">&quot;lxml&quot;</span><span class="p">)</span>
     <span class="c1"># fairly boring parsing hereafter</span></pre>
@@ -476,7 +450,7 @@ parser and have BeautifulSoup use it:</p>
 <section id="deploying-to-heroku">
 <h2>Deploying to Heroku</h2>
 <p>Deploying is straightforward. I use my fancy <code>inv deploy</code> command and set the new secret environment variables:</p>
-<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="s2">&quot;PATRON_NAME=Blair Conrad&quot;</span>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="s2">&quot;PATRON_NAME=Blair Conrad&quot;</span>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">CARD_NUMBER</span><span class="p">=</span><span class="n">123456789</span>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">PIN</span><span class="p">=</span><span class="n">9876</span></pre>
 <p>And voila:</p>

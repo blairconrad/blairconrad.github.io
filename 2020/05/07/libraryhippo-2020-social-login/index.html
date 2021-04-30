@@ -64,32 +64,6 @@
                   <a href="https://blairconrad.com/tag/authomatic.html">authomatic</a>
                 </span>
               </div>
-            <aside class="m-block m-default">
-              <h3>Part 6 of the LibraryHippo 2020 series:</h3>
-              <ol>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
-                </li>
-                <li>
-                  Social Login (this article)
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/'>Recap and decision</a>
-                </li>
-              </ol>
-            </aside>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
@@ -109,7 +83,7 @@ support for storing user objects and managing their sessions, and
 <a href="https://authomatic.github.io/authomatic/">Authomatic</a> simplifies
 authentication via OAuth2 providers such as Google (and many more). Install them
 both:</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-Login</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">Flask-Login</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">Authomatic</span>
 <span class="n">inv</span> <span class="n">freeze</span></pre>
 </section>
@@ -150,14 +124,14 @@ testing, but I'll keep an eye on it.</p>
 told about the Client ID and Client secret obtained above. I'll add those to the
 <code>secrets</code> file.</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="err">…</span>
+<pre class="m-code"><span class="err">…</span>
 <span class="n">OAUTH_GOOGLE_CLIENT_ID</span><span class="o">=********.</span><span class="n">apps</span><span class="o">.</span><span class="n">googleusercontent</span><span class="o">.</span><span class="n">com</span>
 <span class="n">OAUTH_GOOGLE_CLIENT_SECRET</span><span class="o">=********</span></pre>
 <figcaption>secrets</figcaption>
 </figure>
 <p>Of course these need to be provided to the application through the <code>Config</code> class:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">oauth2</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">authomatic.providers</span> <span class="kn">import</span> <span class="n">oauth2</span>
 <span class="err">…</span>
 
 <span class="n">OAUTH</span> <span class="o">=</span> <span class="p">{</span>
@@ -169,7 +143,7 @@ told about the Client ID and Client secret obtained above. I'll add those to the
     <span class="p">}</span>
 <span class="p">}</span>
 
-<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;MeF+3?N',Nmsn39v]&quot;</span></pre>
+<span class="n">SECRET_KEY</span> <span class="o">=</span> <span class="n">os</span><span class="o">.</span><span class="n">environ</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&quot;SECRET_KEY&quot;</span><span class="p">)</span> <span class="ow">or</span> <span class="s2">&quot;MeF+3?N&#39;,Nmsn39v]&quot;</span></pre>
 <figcaption>config.py</figcaption>
 </figure>
 <p>This will tell Authomatic that there's a provider named &quot;google&quot; that is a
@@ -187,14 +161,14 @@ default value is just supplied to make local testing easier.</p>
 sense for LibraryHippo. The new <code>User</code> model will store the details of the
 users that have been registered (by logging in):</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">LoginManager</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">LoginManager</span>
 <span class="err">…</span>
 
 <span class="n">login_manager</span> <span class="o">=</span> <span class="n">LoginManager</span><span class="p">(</span><span class="n">app</span><span class="p">)</span></pre>
 <figcaption>__init__.py</figcaption>
 </figure>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">login_manager</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">login_manager</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">UserMixin</span>
 <span class="err">…</span>
 
@@ -205,7 +179,7 @@ users that have been registered (by logging in):</p>
     <span class="n">email</span> <span class="o">=</span> <span class="n">db</span><span class="o">.</span><span class="n">Column</span><span class="p">(</span><span class="n">db</span><span class="o">.</span><span class="n">String</span><span class="p">(</span><span class="mi">64</span><span class="p">),</span> <span class="n">nullable</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
 
 
-<span class="nd">&#64;login_manager</span><span class="o">.</span><span class="n">user_loader</span>
+<span class="nd">@login_manager</span><span class="o">.</span><span class="n">user_loader</span>
 <span class="k">def</span> <span class="nf">load_user</span><span class="p">(</span><span class="nb">id</span><span class="p">):</span>
     <span class="k">return</span> <span class="n">User</span><span class="o">.</span><span class="n">query</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="nb">int</span><span class="p">(</span><span class="nb">id</span><span class="p">))</span></pre>
 <figcaption>app/models.py</figcaption>
@@ -215,7 +189,7 @@ Flask-Login will ensure that there's information in the session that can
 identify the active user and will use the function to load the rest of the user
 information from the database.</p>
 <p>Of course the new model has to be added via SQLAlchemy:</p>
-<pre class="code powershell m-console"><span class="n">flask</span> <span class="n">db</span> <span class="n">migrate</span> <span class="n">-m</span> <span class="s2">&quot;Add User model&quot;</span>
+<pre class="m-console m-code"><span class="n">flask</span> <span class="n">db</span> <span class="n">migrate</span> <span class="n">-m</span> <span class="s2">&quot;Add User model&quot;</span>
 <span class="n">flask</span> <span class="n">db</span> <span class="n">upgrade</span></pre>
 </section>
 <section id="the-main-event-log-a-user-in">
@@ -225,7 +199,7 @@ via Google, log them into Flask, and save a user record to the database.</p>
 <p>First, I add an <code>Authomatic</code> instance to <cite>app</cite>, initializing it with the OAuth
 configuration and secret key I set up earlier:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">logging.config</span> <span class="kn">import</span> <span class="n">dictConfig</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">logging.config</span> <span class="kn">import</span> <span class="n">dictConfig</span>
 <span class="err">…</span>
 
 <span class="n">authomatic</span> <span class="o">=</span> <span class="n">Authomatic</span><span class="p">(</span><span class="n">config</span><span class="o">=</span><span class="n">Config</span><span class="o">.</span><span class="n">OAUTH</span><span class="p">,</span> <span class="n">secret</span><span class="o">=</span><span class="n">Config</span><span class="o">.</span><span class="n">SECRET_KEY</span><span class="p">)</span></pre>
@@ -233,7 +207,7 @@ configuration and secret key I set up earlier:</p>
 </figure>
 <p>Now add the login route, which will contain a segment for the Google provider:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">flash</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_for</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">flash</span><span class="p">,</span> <span class="n">make_response</span><span class="p">,</span> <span class="n">redirect</span><span class="p">,</span> <span class="n">request</span><span class="p">,</span> <span class="n">session</span><span class="p">,</span> <span class="n">url_for</span>
 <span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">current_user</span><span class="p">,</span> <span class="n">login_user</span>
 <span class="kn">from</span> <span class="nn">authomatic.adapters</span> <span class="kn">import</span> <span class="n">WerkzeugAdapter</span>
 
@@ -242,7 +216,7 @@ configuration and secret key I set up earlier:</p>
 
 <span class="err">…</span>
 
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login/&lt;provider&gt;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/login/&lt;provider&gt;/&quot;</span><span class="p">,</span> <span class="n">methods</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;GET&quot;</span><span class="p">,</span> <span class="s2">&quot;POST&quot;</span><span class="p">])</span>
 <span class="k">def</span> <span class="nf">login</span><span class="p">(</span><span class="n">provider</span><span class="p">):</span>
     <span class="k">if</span> <span class="ow">not</span> <span class="n">current_user</span><span class="o">.</span><span class="n">is_anonymous</span><span class="p">:</span>
         <span class="k">return</span> <span class="n">redirect</span><span class="p">(</span><span class="n">url_for</span><span class="p">(</span><span class="s2">&quot;index&quot;</span><span class="p">))</span>
@@ -298,7 +272,7 @@ the user is logged into Flask.</p>
 check their library cards. This is much easier than the login process. Again, I
 add a new route:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">logout_user</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">flask_login</span> <span class="kn">import</span> <span class="n">logout_user</span>
 
 <span class="err">…</span>
 
@@ -319,21 +293,21 @@ already logged in, and these links should be available from every page, so I'll
 replace my ad hoc page generation with templates that will centralize those
 functions.</p>
 <figure class="m-code-figure">
-<pre class="code jinja"><span class="x">&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-    &lt;head&gt;
-        &lt;title&gt;LibraryHippo&lt;/title&gt;
-    &lt;/head&gt;
-    &lt;body&gt;
-        &lt;nav&gt;
-        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_anonymous</span> <span class="cp">%}</span><span class="x">
-        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'login'</span><span class="o">,</span> <span class="nv">provider</span><span class="o">=</span><span class="s1">'google'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Login&lt;/a&gt;
-        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x">
-        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">'logout'</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Logout </span><span class="cp">{{</span> <span class="nv">current_user.nickname</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;
-        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x">
-        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x">
-    &lt;/body&gt;
-&lt;/html&gt;</span></pre>
+<pre class="m-code"><span class="x">&lt;!DOCTYPE html&gt;</span>
+<span class="x">&lt;html&gt;</span>
+<span class="x">    &lt;head&gt;</span>
+<span class="x">        &lt;title&gt;LibraryHippo&lt;/title&gt;</span>
+<span class="x">    &lt;/head&gt;</span>
+<span class="x">    &lt;body&gt;</span>
+<span class="x">        &lt;nav&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_anonymous</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;login&#39;</span><span class="o">,</span> <span class="nv">provider</span><span class="o">=</span><span class="s1">&#39;google&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Login&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;logout&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Logout </span><span class="cp">{{</span> <span class="nv">current_user.nickname</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">    &lt;/body&gt;</span>
+<span class="x">&lt;/html&gt;</span></pre>
 <figcaption>app/templates/base.jinja</figcaption>
 </figure>
 <p>The <code>base.jinja</code> template sets up common elements to all the pages of the
@@ -342,21 +316,21 @@ a link to the login route, and if so, a link to the logout route. The logout
 link includes the user's nickname, mostly to make it easier for me to test.
 The main page has not much to add, so its template is very plain for now:</p>
 <figure class="m-code-figure">
-<pre class="code jinja"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.jinja&quot;</span> <span class="cp">%}</span><span class="x">
+<pre class="m-code"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.jinja&quot;</span> <span class="cp">%}</span><span class="x"></span>
 
-</span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span><span class="x">
-&lt;h1&gt;LibraryHippo 2020&lt;/h1&gt;
-</span><span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span></pre>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">&lt;h1&gt;LibraryHippo 2020&lt;/h1&gt;</span>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span></pre>
 <figcaption>app/templates/index.jinja</figcaption>
 </figure>
 <p>Then the index route is updated to use the template:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">render_template</span>
 
 <span class="err">…</span>
 
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/index&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/index&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="n">render_template</span><span class="p">(</span><span class="s2">&quot;index.jinja&quot;</span><span class="p">)</span></pre>
 <figcaption>app/routes.py</figcaption>
@@ -396,7 +370,7 @@ including my name, which was harvested from Google.</p>
 <p>There almost nothing to this. I already added the Heroku-specific URL to the
 Google configuration, so I just have to generate a <code>SECRET_KEY</code> and set
 it and the <code>OAUTH_GOOGLE_CLIENT_*</code> values from earlier.</p>
-<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">OAUTH_GOOGLE_CLIENT_ID</span><span class="p">=</span><span class="err">…</span>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">OAUTH_GOOGLE_CLIENT_ID</span><span class="p">=</span><span class="err">…</span>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">OAUTH_GOOGLE_CLIENT_SECRET</span><span class="p">=</span><span class="err">…</span>
 <span class="n">heroku</span> <span class="n">config</span><span class="err">:</span><span class="nb">set </span><span class="n">SECRET_KEY</span><span class="p">=</span><span class="err">…</span></pre>
 </section>

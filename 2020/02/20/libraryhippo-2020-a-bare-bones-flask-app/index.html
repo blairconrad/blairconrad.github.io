@@ -62,32 +62,6 @@
                   <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
                 </span>
               </div>
-            <aside class="m-block m-default">
-              <h3>Part 2 of the LibraryHippo 2020 series:</h3>
-              <ol>
-                <li>
-                  <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
-                </li>
-                <li>
-                  A Bare-bones Flask App (this article)
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/09/libraryhippo-2020-scraping-library-websites/'>Scraping Library Websites</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/04/23/libraryhippo-2020-a-small-heroku-datastore/'>A Small Heroku Datastore</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/07/libraryhippo-2020-social-login/'>Social Login</a>
-                </li>
-                <li>
-                  <a href='https://blairconrad.com/2020/05/21/libraryhippo-2020-recap-and-decision/'>Recap and decision</a>
-                </li>
-              </ol>
-            </aside>
       </header>
       <div class="m-clearfix-l"></div>
 <!-- content -->
@@ -107,7 +81,7 @@ order of importance and risk:</p>
 </ol>
 <p>Today I'll address the first of those: web app hosting. It's not particularly
 risky, but it's very important. I'll start with an essentially empty repository:
-just a license file, readme, and a <code class="code">.gitattributes</code> file.</p>
+just a license file, readme, and a <code>.gitattributes</code> file.</p>
 <section id="requirements">
 <h2>Requirements</h2>
 <p>As I type, Heroku
@@ -123,7 +97,7 @@ remember the syntax for the various tasks I have to do and tools I need to use
 to them, and I think it's a nicer system than &quot;a dozen batch files&quot; that
 accreted in the old LibraryHippo. Those should be all the dependencies I need
 for now, so I freeze a <code>requirements.txt</code> file.</p>
-<pre class="code powershell m-console"><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">8</span> <span class="n">-m</span> <span class="n">venv</span> <span class="n">venv</span>
+<pre class="m-console m-code"><span class="n">py</span> <span class="p">-</span><span class="n">3</span><span class="p">.</span><span class="n">8</span> <span class="n">-m</span> <span class="n">venv</span> <span class="n">venv</span>
 <span class="n">venv</span><span class="p">\</span><span class="n">Scripts</span><span class="p">\</span><span class="n">activate</span>
 <span class="n">py</span> <span class="n">-m</span> <span class="n">pip</span> <span class="n">install</span> <span class="p">-</span><span class="n">-upgrade</span> <span class="n">pip</span>
 <span class="n">pip</span> <span class="n">install</span> <span class="n">flask</span>
@@ -135,7 +109,7 @@ for now, so I freeze a <code>requirements.txt</code> file.</p>
 <h2>Create a Flask application</h2>
 <p>Now I'm ready to create an application! We need three files:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">flask</span> <span class="kn">import</span> <span class="n">Flask</span>
 
 <span class="n">app</span> <span class="o">=</span> <span class="n">Flask</span><span class="p">(</span><span class="vm">__name__</span><span class="p">)</span>
 
@@ -143,39 +117,39 @@ for now, so I freeze a <code>requirements.txt</code> file.</p>
 <figcaption>app/__init__.py</figcaption>
 </figure>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span>
 
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
-<span class="nd">&#64;app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/index&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/&quot;</span><span class="p">)</span>
+<span class="nd">@app</span><span class="o">.</span><span class="n">route</span><span class="p">(</span><span class="s2">&quot;/index&quot;</span><span class="p">)</span>
 <span class="k">def</span> <span class="nf">index</span><span class="p">():</span>
     <span class="k">return</span> <span class="s2">&quot;LibraryHippo 2020&quot;</span></pre>
 <figcaption>app/routes.py</figcaption>
 </figure>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span></pre>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">app</span> <span class="kn">import</span> <span class="n">app</span></pre>
 <figcaption>libraryhippo.py</figcaption>
 </figure>
 <p>Typically, one would then set the <code>FLASK_APP</code> environment variable to
 <code>libraryhippo.py</code>, but I find that inelegant, and I don't really enjoy making
 sure it's set when I need it. Instead I'll set it in a <code>.flaskenv.py</code> file:</p>
 <figure class="m-code-figure">
-<pre class="code shell"><span class="nv">FLASK_APP</span><span class="o">=</span>libraryhippo.py</pre>
+<pre class="m-code"><span class="nv">FLASK_APP</span><span class="o">=</span>libraryhippo.py</pre>
 <figcaption>.flaskenv.py</figcaption>
 </figure>
 <p>I'll create a <code>run</code> task in <code>tasks.py</code> so I remember how to run the
 application, and then invoke it:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="kn">from</span> <span class="nn">invoke</span> <span class="kn">import</span> <span class="n">task</span>
+<pre class="m-code"><span class="kn">from</span> <span class="nn">invoke</span> <span class="kn">import</span> <span class="n">task</span>
 
-<span class="nd">&#64;task</span>
+<span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">run</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Run local version of the application&quot;&quot;&quot;</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;flask run&quot;</span><span class="p">)</span></pre>
 <figcaption>tasks.py</figcaption>
 </figure>
 <figure class="m-console-figure">
-<pre class="code powershell m-console"><span class="n">inv</span> <span class="n">run</span></pre>
-<pre class="code text m-nopad">* Serving Flask app &quot;libraryhippo.py&quot;
+<pre class="m-console m-code"><span class="n">inv</span> <span class="n">run</span></pre>
+<pre class="m-nopad m-code">* Serving Flask app &quot;libraryhippo.py&quot;
 * Environment: production
 WARNING: This is a development server. Do not use it in a production deployment.
 Use a production WSGI server instead.
@@ -205,8 +179,8 @@ so I can move right ahead with the work necessary for this application.</p>
 <p>Heroku needs an application to associate with your code. Use the CLI to add an
 application with a unique name:</p>
 <figure class="m-console-figure">
-<pre class="code powershell m-console"><span class="n">heroku</span> <span class="n">apps</span><span class="err">:</span><span class="n">create</span> <span class="n">libraryhippo</span></pre>
-<pre class="code text m-nopad">Creating ⬢ libraryhippo... done
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">apps</span><span class="err">:</span><span class="n">create</span> <span class="n">libraryhippo</span></pre>
+<pre class="m-nopad m-code">Creating ⬢ libraryhippo... done
 https://libraryhippo.herokuapp.com/ | https://git.heroku.com/libraryhippo.git</pre>
 </figure>
 <p>Success! The last line of the output indicates the URL of the deployed
@@ -218,7 +192,7 @@ and the URL of the git repository to push versions of LibraryHippo to.</p>
 <p>Heroku needs a <code>Procfile</code> to understand how to run an application. So far
 LibraryHippo's is simple:</p>
 <figure class="m-code-figure">
-<pre class="code text">web: gunicorn libraryhippo:app</pre>
+<pre class="m-code">web: gunicorn libraryhippo:app</pre>
 <figcaption>Procfile</figcaption>
 </figure>
 <p>This tells Heroku to use a web dyno to run the
@@ -227,13 +201,13 @@ application. Gunicorn is required because the native Flask web server is not
 production-ready.</p>
 <p>Of course, a Heroku web dyno doesn't come with Gunicorn installed, so it needs
 to be added to the requirements and frozen:</p>
-<pre class="code powershell m-console"><span class="n">pip</span> <span class="n">install</span> <span class="n">gunicorn</span>
+<pre class="m-console m-code"><span class="n">pip</span> <span class="n">install</span> <span class="n">gunicorn</span>
 <span class="n">pip</span> <span class="n">freeze</span> <span class="p">|</span> <span class="nb">Out-File</span> <span class="n">-encoding</span> <span class="n">ascii</span> <span class="n">requirements</span><span class="p">.</span><span class="n">txt</span></pre>
 <p>Finally, Heroku needs to know which version of Python to use. It has its own
 defaults, but I prefer to know that my local environment is in sync with
 Heroku's, so add a <code>runtime.txt</code> file to tell Heroku what I expect:</p>
 <figure class="m-code-figure">
-<pre class="code text">python-3.8.1</pre>
+<pre class="m-code">python-3.8.1</pre>
 <figcaption>runtime.txt</figcaption>
 </figure>
 </section>
@@ -242,11 +216,11 @@ Heroku's, so add a <code>runtime.txt</code> file to tell Heroku what I expect:</
 <p>I'd been committing my code to a local git repository as I went, so
 <code>heroku apps:create</code> automatcially added a new remote called &quot;heroku&quot; for me;</p>
 <figure class="m-console-figure">
-<pre class="code powershell m-console"><span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span></pre>
-<pre class="code text m-nopad">heroku  https://git.heroku.com/libraryhippo.git (fetch)
+<pre class="m-console m-code"><span class="n">git</span> <span class="n">remote</span> <span class="n">-v</span></pre>
+<pre class="m-nopad m-code">heroku  https://git.heroku.com/libraryhippo.git (fetch)
 heroku  https://git.heroku.com/libraryhippo.git (push)
-origin  git&#64;github.com:blairconrad/LibraryHippo.git (fetch)
-origin  git&#64;github.com:blairconrad/LibraryHippo.git (push)</pre>
+origin  git@github.com:blairconrad/LibraryHippo.git (fetch)
+origin  git@github.com:blairconrad/LibraryHippo.git (push)</pre>
 </figure>
 <p>If I hadn't had git set up already, I could do so now and add the remote
 manually.</p>
@@ -257,9 +231,9 @@ heroku as master&quot; actually just pushed lh2020 <em>and</em> master, but the 
 the code for the existing application, not the new Flask one. To save myself
 from making this mistake again, I added a task:</p>
 <figure class="m-code-figure">
-<pre class="code python"><span class="err">…</span>
+<pre class="m-code"><span class="err">…</span>
 
-<span class="nd">&#64;task</span>
+<span class="nd">@task</span>
 <span class="k">def</span> <span class="nf">deploy</span><span class="p">(</span><span class="n">c</span><span class="p">):</span>
     <span class="sd">&quot;&quot;&quot;Deploy the application to Heroku&quot;&quot;&quot;</span>
     <span class="n">c</span><span class="o">.</span><span class="n">run</span><span class="p">(</span><span class="s2">&quot;git push heroku lh2020:master&quot;</span><span class="p">)</span></pre>
