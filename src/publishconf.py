@@ -36,5 +36,6 @@ WITH_FUTURE_DATES = False
 
 M_CSS_FILES = [
     "/static/m-dark.compiled.css",
+    "/static/pygments-wombat.css",
     "/static/site.css",
 ]

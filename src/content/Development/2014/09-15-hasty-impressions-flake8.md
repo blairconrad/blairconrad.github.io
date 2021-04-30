@@ -2,10 +2,7 @@
 layout: post
 title: Hasty Impressions: flake8 
 comments: true
-tags:
-  - python
-  - flake8
-  - HastyImpressions
+tags: python, flake8, HastyImpressions
 ---
 
 A little while ago, I was fixing [a LibraryHippo issue][originalissue]

@@ -1,0 +1,26 @@
+{% set page_slug = 'tags' %}
+{% extends 'base.html' %}
+
+{% block title %}
+Tags · {{ super() }}
+{% endblock title %}
+
+{% block main %}
+<div class="m-container">
+    <div class="m-row">
+        <div>
+            <article>
+                <header>
+                    <h1>Tags</h1>
+                </header>
+
+                <ul>
+                    {% for tag, articles in tags | sort(case_sensitive=False) %}
+                    <li><a href="{{ SITEURL }}/{{ tag.url }}">{{ tag }}</a> ({{ articles | length }})</li>
+                    {% endfor %}
+                </ul>
+            </article>
+        </div>
+    </div>
+</div>
+{% endblock main %}

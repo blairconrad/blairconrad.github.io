@@ -2,9 +2,7 @@
 layout: post
 title: FakeItEasy's argument formatter auto-discovery - boon and inconvenience
 comments: true
-tags: 
-  - .NET
-  - FakeItEasy
+tags: .NET, FakeItEasy
 ---
 Hi again. At the Day Job, we've recently dropped [Typemock Isolator](http://www.typemock.com/isolator-product-page) and [NMock2](http://sourceforge.net/apps/mediawiki/nmock2) as the mocking frameworks of choice in the products that I work on. We've jumped on the [FakeItEasy](http://fakeiteasy.github.io) bandwagon. So far, we're enjoying the change. FakeItEasy is powerful enough and the concepts and syntax fit the mind pretty well. Today I'm going to focus on one feature that I've really enjoyed but that has been an occasional thorn in the side.
 
