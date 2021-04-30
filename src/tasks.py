@@ -163,7 +163,7 @@ def recipe(c, name):
     if os.path.exists(filename):
         raise Exception("we already have a recipe for " + title)
 
-    template_file = os.path.join("content", "Recipes", "_template.md")
+    template_file = os.path.join("templates", "recipe.md")
     with open(template_file, "r") as template:
         content = template.read() % vars()
         with open(filename, "w") as new_recipe_file:
