@@ -1,0 +1,124 @@
+---
+template: recipe
+title: Lasagne
+---
+
+<table>
+  <tr>
+    <td>12 no-boil lasagne noodles</td>
+    <td colspan="4" class="righthide">&nbsp;</td>
+    <td rowspan="13">assemble, like below</td>
+    <td rowspan="13">foil</td>
+    <td rowspan="13">bake 40 minutes at 375&deg;F</td>
+    <td rowspan="13">unfoil</td>
+    <td rowspan="13">bake 10 minutes at 375&deg;F</td>
+    <td rowspan="13">rest 10 minutes</td>
+  </tr>
+  <tr>
+    <td>1 T olive oil</td>
+    <td>heat</td>
+    <td rowspan="4">cook 4&ndash;6 minutes</td>
+    <td rowspan="6">stir</td>
+  </tr>
+  <tr>
+    <td>&frac14; t salt</td>
+    <td rowspan="3" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&frac14; t pepper</td>
+  </tr>
+  <tr>
+    <td>1 lb ground beef</td>
+  </tr>
+  <tr>
+    <td>3 c pasta sauce</td>
+    <td rowspan="2" colspan="2" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&frac12; c warm water</td>
+  </tr>
+  <tr>
+    <td>1 egg</td>
+    <td>beat lightly</td>
+    <td rowspan="4" colspan="2">mix</td>
+  </tr>
+  <tr>
+    <td>475 g ricotta cheese</td>
+    <td rowspan="3" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&frac12; t dried basil</td>
+  </tr>
+  <tr>
+    <td>&frac12; t dried oregano</td>
+  </tr>
+  <tr>
+    <td>4 c shredded mozzarella cheese</td>
+    <td rowspan="2" colspan="3" class="righthide">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&frac14; c grated Parmesan cheese</td>
+  </tr>
+</table>
+
+<h2>Assembly, from bottom</h2>
+<table>
+  <tr>
+    <td colspan="2">a little oil</td>
+  </tr>
+  <tr>
+    <td colspan="2">1 c meat sauce</td>
+  </tr>
+  <tr>
+    <td>4 noodles</td>
+    <td rowspan="4">&times;2</td>
+  </tr>
+  <tr>
+    <td>&frac12; ricotta</td>
+  </tr>
+  <tr>
+    <td>1 c meat sauce</td>
+  </tr>
+  <tr>
+    <td>1 c mozzarella</td>
+  </tr>
+  <tr>
+    <td colspan="2">4 noodles</td>
+  </tr>
+  <tr>
+    <td colspan="2">remaining meat sauce</td>
+  </tr>
+  <tr>
+    <td colspan="2">remaining mozzarella</td>
+  </tr>
+  <tr>
+    <td colspan="2">Parmesan meat sauce</td>
+  </tr>
+</table>
+
+
+<ol>
+  <li>In a skillet, heat oil over medium heat.</li>
+  <li>Cook beef with salt and pepper in oil for 4&ndash;6 minutes. Drain.</li>
+  <li>Stir water and pasta sauce into beef.</li>
+  <li>In a bowl, stir together ricotta cheese, egg, basil, and oregano.</li>
+  <li>Lightly grease a 9&Prime;&times;13&Prime; pan.</li>
+  <li>Spread 1 c meat sauce in bottom of pan.</li>
+  <li>Place 4 pieces uncooked noodles on top of sauce. Don't overlap.</li>
+  <li>Spread half of ricotta mixture over noodles.</li>
+  <li>Spread 1 c meat sauce over ricotta.</li>
+  <li>Sprinkle with 1 c mozzarella cheese.</li>
+  <li>Place 4 pieces uncooked noodles on top of cheese. Don't overlap.</li>
+  <li>Spread half of ricotta mixture over noodles.</li>
+  <li>Spread 1 c meat sauce over ricotta.</li>
+  <li>Sprinkle with 1 c mozzarella cheese.</li>
+  <li>Top with remaining noodles and meat sauce.</li>
+  <li>Sprinkle with remaining mozzarella and Parmesan cheese.</li>
+  <li>Cover with foil.</li>
+  <li>Bake 40 minutes at 375&deg;F.</li>
+  <li>Uncover.</li>
+  <li>Bake 10 minutes.</li>
+  <li>Let stand for 10 minutes.</li>
+</ol>
+
+<p class="confession">Shamelessly stolen from the back of a box of Catelli gluten-free lasagne noodles</p>
