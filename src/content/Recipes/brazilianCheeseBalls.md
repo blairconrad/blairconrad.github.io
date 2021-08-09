@@ -10,16 +10,16 @@ title: Brazilian Cheese Balls
     <td rowspan="6">bake 20 minutes at 400&deg;F</td>
   </tr>
   <tr>
-    <td>&frac14; c olive oil</td>
+    <td>40 g (&frac14; c) olive oil</td>
   </tr>
   <tr>
     <td>&frac23; c milk</td>
   </tr>
   <tr>
-    <td>1&frac12; c tapioca flour</td>
+    <td>180 g (1&frac12; c) tapioca flour</td>
   </tr>
   <tr>
-    <td>&frac12; c grated cheddar cheese</td>
+    <td>46 g (&frac12; c) grated cheddar cheese</td>
   </tr>
   <tr>
     <td>&frac12; t salt</td>
