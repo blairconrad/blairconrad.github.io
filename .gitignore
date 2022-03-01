@@ -1,7 +1,7 @@
 /_local_build/
 /drafts/
+/src/.venv/
 /src/themes/
-/src/venv/
 
 __pycache__/
 .pytest_cache/
