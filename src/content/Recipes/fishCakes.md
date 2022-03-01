@@ -9,20 +9,20 @@ title: Fish Cakes
 <table>
   <tr>
     <td>4 lb salt cod (in 2 fillets, not tiny pieces)</td>
-    <td>soak for about 2 days, changing water 5 times</td>
-    <td>boil about 40&ndash;45 minutes</td>
+    <td>soak for about 1 day, changing water 3 times</td>
+    <td>boil about 40 minutes</td>
     <td>remove skin and bones, if any</td>
     <td>flake it up good</td>
     <td rowspan="5">mix it all up</td>
-    <td rowspan="5">shape into cakes, about 136 g each</td>
+    <td rowspan="5">shape into cakes, about 136&nbsp;g each</td>
     <td rowspan="2">fry 5+ minutes per side</td>
     <td rowspan="2">eat</td>
   </tr>
   <tr>
     <td>5&frac12;&ndash;6 lb potatoes, mixed white and russet</td>
-    <td class="righthide">&nbsp;</td>
-    <td>peel and maybe quarter</td>
-    <td>boil</td>
+    <td>peel and cut up</td>
+    <td>steam</td>
+    <td>salt and pepper</td>
     <td>mash</td>
   </tr>
   <tr>
@@ -44,8 +44,8 @@ title: Fish Cakes
 
 <h2>Method</h2>
 <ol>
-  <li>About 2 days before cooking, start soaking the fish. Change the water every 6&ndash;8 hours or so. We did not change the water right before cooking, though.</li>
-  <li>Boil the fish until flaky and tender. Maybe 40 or 45 minutes. Should taste somewhat salty at this point. Of course, if it doesn't, it's too late.</li>
+  <li>About 1 day before cooking, start soaking the fish. Change the water every 12 hours or so, including before cooking.</li>
+  <li>Boil the fish until flaky and tender. Maybe 40 minutes. Should taste somewhat salty at this point. Of course, if it doesn't, it's too late.</li>
   <li>Boil or steam potatoes, so suitable for mashing.</li>
   <li>Fry the onions in butter (or better yet, first fry diced salt pork fat, then add onions).</li>
   <li>Remove any bones and skin from the cod.</li>
@@ -59,11 +59,3 @@ title: Fish Cakes
 </ol>
 
 <p>Yield: about 26 fish cakes.</p>
-
-<h2>Considerations for next time</h2>
-<ul>
-  <li>add pepper</li>
-  <li>do half as much</li>
-  <li>cut the fish up before soaking</li>
-  <li>use salt pork fat back; dice and fry before adding onions</li>
-</ul>
