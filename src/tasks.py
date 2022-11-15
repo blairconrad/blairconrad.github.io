@@ -4,6 +4,13 @@ import os
 import sys
 import datetime
 
+# -- 8< -- Work around [bug #833 in invoke](https://github.com/pyinvoke/invoke/issues/833)
+import inspect
+
+if not hasattr(inspect, 'getargspec'):
+    inspect.getargspec = inspect.getfullargspec
+# -- >8 -- Work around [bug #833 in invoke](https://github.com/pyinvoke/invoke/issues/833)
+
 from invoke import task
 from pelican.server import ComplexHTTPRequestHandler, RootedHTTPServer
 from pelican.settings import DEFAULT_CONFIG, get_settings_from_file
