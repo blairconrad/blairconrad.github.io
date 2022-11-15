@@ -5,6 +5,7 @@ on:
     branches: [ main ]
   schedule:
     - cron: '47 10 * * *'
+  workflow_dispatch:
 
 jobs:
   build:
@@ -16,7 +17,7 @@ jobs:
         submodules: 'true'
     - uses: actions/setup-python@v1
       with:
-        python-version: '3.8'
+        python-version: '3.11'
     - name: build site
       run: |
         cd src
