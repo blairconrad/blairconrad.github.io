@@ -4,8 +4,6 @@
 #
 #    pip-compile 'requirements\prod.in'
 #
-beautifulsoup4==4.11.1
-    # via -r requirements\prod.in
 blinker==1.4
     # via pelican
 docutils==0.17.1
@@ -39,8 +37,6 @@ six==1.15.0
     #   feedgenerator
     #   pelican
     #   python-dateutil
-soupsieve==2.3.2.post1
-    # via beautifulsoup4
 unidecode==1.2.0
     # via pelican
 
