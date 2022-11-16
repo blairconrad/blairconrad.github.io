@@ -7,7 +7,7 @@ import datetime
 # -- 8< -- Work around [bug #833 in invoke](https://github.com/pyinvoke/invoke/issues/833)
 import inspect
 
-if not hasattr(inspect, 'getargspec'):
+if not hasattr(inspect, "getargspec"):
     inspect.getargspec = inspect.getfullargspec
 # -- >8 -- Work around [bug #833 in invoke](https://github.com/pyinvoke/invoke/issues/833)
 
@@ -175,3 +175,15 @@ def recipe(c, name):
         content = template.read() % vars()
         with open(filename, "w") as new_recipe_file:
             new_recipe_file.write(content)
+
+
+@task
+def compile_requirements(c, upgrade=False):
+    """
+    Build new requirements/*.txt files from corresponding requirements/*.in files
+    """
+    command = "pip-compile"
+    if upgrade:
+        command += " --upgrade"
+    for in_file in ["prod", "dev"]:
+        c.run(command + " " + os.path.join("requirements", in_file + ".in"))
