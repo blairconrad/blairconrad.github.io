@@ -8,6 +8,9 @@
   {% elif M_FAVICON %}
   <link rel="icon" href="{{ M_FAVICON[0]|format_siteurl|e }}" type="{{ M_FAVICON[1]|e }}" />
   {% endif %}
+  {%- for me in BC_MY_SITES %}
+  <link rel="me" href="me" href="{{ me }}" />
+  {% endfor %}
 {% endblock %}
 
 {% block social %}

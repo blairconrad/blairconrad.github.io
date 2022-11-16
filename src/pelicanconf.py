@@ -95,3 +95,5 @@ M_SOCIAL_TWITTER_SITE = "@Hippopottoman"
 M_SOCIAL_TWITTER_SITE_ID = 14181635
 
 M_COLLAPSE_FIRST_ARTICLE = True
+
+BC_MY_SITES = ["https://fosstodon.org/@blairconrad"]
