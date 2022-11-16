@@ -22,7 +22,7 @@ jobs:
       run: |
         cd src
         python -m pip install --upgrade pip
-        pip install -r requirements.txt
+        pip install -r requirements/prod.txt
         inv preview
     - name: publish changes
       run: |
