@@ -178,7 +178,7 @@ hasn't the flexibility of other schedulers, supporting only daily, hourly, or
 day and check users' cards about that often, so it should do.</p>
 <p>Adding the scheduler is very easy:</p>
 <figure class="m-console-figure">
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">create</span> <span class="n">scheduler</span><span class="err">:</span><span class="n">standard</span></pre>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="p">:</span><span class="n">create</span> <span class="n">scheduler</span><span class="p">:</span><span class="n">standard</span></pre>
 <pre class="m-nopad m-code">Creating scheduler:standard on ⬢ libraryhippo... free
 To manage scheduled jobs run:
 heroku addons:open scheduler
@@ -189,7 +189,7 @@ Use heroku addons:docs scheduler to view documentation</pre>
 <p>A short search didn't reveal a way to affect the schedule from the console, but
 it was easy enough to open the web-based configuration.</p>
 <figure class="m-console-figure">
-<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="err">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
+<pre class="m-console m-code"><span class="n">heroku</span> <span class="n">addons</span><span class="p">:</span><span class="n">open</span> <span class="n">scheduler</span></pre>
 <img alt="Screenshot of empty Heroku Scheduler configuration page" class="m-image" src="https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/empty-scheduler-config.png" />
 </figure>
 <p>Adding a job is as simple as choosing &quot;Create job&quot;, selecting a time to run, and

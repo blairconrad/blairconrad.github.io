@@ -101,11 +101,12 @@ left. Given this convention, the above diagram would look like this:</p>
 <h2>Merging between branches</h2>
 <p>Let's add a second branch and label them, to model the system I deal with at
 work</p>
-<pre class="m-console">                       <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                       <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S</span>
 
 <span style="color: #00ffff">       </span><span style="color: #ffff00">A --- B --- C --- D</span>
-<span style="color: #ffff00">                          team</span></pre>
+<span style="color: #ffff00">                          team</span>
+</div></pre>
 <p>Here we see the master branch with commits P, Q, R, and S (the latest) and the
 team branch with A, B, C, and D. Each of the commits I mentioned exist only in
 their own branch. In particular, this means that the commits in the team branch
@@ -116,11 +117,12 @@ which sounds very fancy, but it's just another commit. A merge commit melds
 divergent histories by having two parents. Once the merge commit is added to a
 branch any commits that are reachable by following the links from that commit
 back to the left are &quot;part of&quot; the branch:</p>
-<pre class="m-console">                             <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                             <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S --- T</span>
 <span style="color: #00ffff">                           /</span>
 <span style="color: #00ffff">        </span><span style="color: #00ff00">A --- B --- C --- D</span>
-<span style="color: #00ff00">                           </span><span style="color: #ffff00">team</span></pre>
+<span style="color: #00ff00">                           </span><span style="color: #ffff00">team</span>
+</div></pre>
 <p>Here we've merged the team branch into the master branch by creating a new merge
 commit called T on the master branch. Now all of the work we've done on the
 master branch and on the team branch has been consolidated into the master
@@ -128,11 +130,12 @@ branch, so the next time we build the product, we'll get all the benefits.</p>
 <p>You don't always have to merge the last commit of a branch into another branch.
 Suppose we had some bonus commits on the team branch that we just didn't want to
 merge into the master branch yet for whatever reason. We could do this:</p>
-<pre class="m-console">                             <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                             <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S --- T</span>
 <span style="color: #00ffff">                           /</span>
 <span style="color: #00ffff">        </span><span style="color: #00ff00">A --- B --- C --- D </span><span style="color: #ffff00">--- E --- F</span>
-<span style="color: #ffff00">                                       team</span></pre>
+<span style="color: #ffff00">                                       team</span>
+</div></pre>
 <p>Then</p>
 <ul>
 <li>A, B, C, D, P, Q, R, S, and T are all part of the master branch, and</li>
@@ -156,28 +159,31 @@ commits when deciding what to merge. Suppose</p>
 </ol>
 <p>We'll represent the commits that has not yet been manually tested with a
 lowercase letter to show that it's not &quot;done&quot;:</p>
-<pre class="m-console">                       <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                       <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S</span>
 
 <span style="color: #00ffff">       </span><span style="color: #ffff00">A --- B </span><span style="color: #808000">--- c --- </span><span style="color: #ffff00">D</span>
-<span style="color: #ffff00">                          team</span></pre>
+<span style="color: #ffff00">                          team</span>
+</div></pre>
 <p>Under our rules, A, B, and D are considered complete and worthy of merging, but
 c is not. Maybe it's fine, but we don't know yet, and we promised not to merge c
 into the master branch until it's known to be good.</p>
 <p>There's no way to merge D into the master branch given our rules. We could merge
 A and B like so:</p>
-<pre class="m-console">                             <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                             <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S --- T</span>
 <span style="color: #00ffff">                           /</span>
 <span style="color: #00ffff">                    </span><span style="color: #00ff00">A --- B </span><span style="color: #808000">--- c --- </span><span style="color: #ffff00">D</span>
-<span style="color: #ffff00">                                       team</span></pre>
+<span style="color: #ffff00">                                       team</span>
+</div></pre>
 <p>(or similarly just A). But if we want to merge D in, we'd end up getting c, B,
 and A as well. It would look like this:</p>
-<pre class="m-console">                             <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                             <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S --- T</span>
 <span style="color: #00ffff">                           /</span>
 <span style="color: #00ffff">        </span><span style="color: #00ff00">A --- B </span><span style="color: #800000">--- c --- </span><span style="color: #00ff00">D</span>
-<span style="color: #00ff00">                           </span><span style="color: #ffff00">team</span></pre>
+<span style="color: #00ff00">                           </span><span style="color: #ffff00">team</span>
+</div></pre>
 <p>And that violates our rules: c has not yet met all its merging conditions, but
 it's been merged into the master branch. We can start at the latest commit in
 the master branch (T) and follow the lower parent link to the left (and down) to
@@ -204,11 +210,12 @@ This is the strategy we take most often.</p>
 is added to a branch, you can't remove it). Reverting involves adding <em>another</em>
 commit to the branch. The new commit undoes the original change. Here's what that
 looks like:</p>
-<pre class="m-console">                       <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                       <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">    P --- Q --- R --- S</span>
 
 <span style="color: #00ffff">       </span><span style="color: #ffff00">A --- B </span><span style="color: #808000">--- c --- </span><span style="color: #ffff00">D </span><span style="color: #808000">--- !c</span>
-<span style="color: #808000">                                 </span><span style="color: #ffff00">team</span></pre>
+<span style="color: #808000">                                 </span><span style="color: #ffff00">team</span>
+</div></pre>
 <p>Here &quot;!c&quot; represents a sort of anti-c that has the opposite of the changes
 contained in c.</p>
 <p>Once this is done, it's as if the team branch has only A, B, and D in it. But
@@ -230,11 +237,12 @@ running into the same problem we had this time</li>
 </ul>
 <p>If we decide that reverting and merging are still worth it given all those
 caveats, eventually we'll end up with</p>
-<pre class="m-console">                                   <span style="color: #00ffff">master</span>
+<pre class="m-console"><div class="highlight">                                   <span style="color: #00ffff">master</span>
 <span style="color: #00ffff">          P --- Q --- R --- S --- T</span>
 <span style="color: #00ffff">                                 /</span>
 <span style="color: #00ffff">       </span><span style="color: #00ff00">A --- B </span><span style="color: #008000">--- c --- </span><span style="color: #00ff00">D </span><span style="color: #008000">--- !c</span>
-<span style="color: #008000">                                 </span><span style="color: #ffff00">team</span></pre>
+<span style="color: #008000">                                 </span><span style="color: #ffff00">team</span>
+</div></pre>
 <p>While this approach is possible, it has significant downsides, and so we are
 loath to use it when &quot;focus and wait&quot; is a viable option.</p>
 </section>

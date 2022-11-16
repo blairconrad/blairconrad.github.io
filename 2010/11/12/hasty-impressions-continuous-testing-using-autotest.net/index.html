@@ -71,18 +71,19 @@
 <p>I'm taking a look at <a href="https://github.com/acken/AutoTest.Net">AutoTest.Net</a> first. Mostly because it's free. If I'm going to use something at home, it won't be for-pay, and the Day Job has been notoriously slow at shelling out for developer tools.</p>
 <p><strong>Update</strong>: there was a bug that had been fixed on trunk, but not in the installer that I used. <a href="https://blairconrad.com/2010/11/14/autotest.net-updated-now-and-then-notices-broken-builds/">AutoTest.Net is better at detecting broken builds</a> than I report below. </p>
 <h2>Setting up AutoTest.NET</h2>
-
 <p>Download and installation were straightforward. I opted to use the Windows installer package, <a href="https://github.com/downloads/acken/AutoTest.Net/AutoTest.Net-v1.0.1beta%20(Windows%20Installer).zip">AutoTest.Net-v1.0.1beta (Windows Installer).zip</a>. I just unzipped, ran the MSI, let it install both VS&nbsp;2008 and VS&nbsp;2010 Add-Ins (the other components are required, it seems), and that was that.</p>
-<p>Then I cracked open the configuration file (at <code>c:\Program Files\AutoTest.Net\AutoTest.config</code>). I just changed two entries:
+<p>Then I cracked open the configuration file (at <code>c:\Program Files\AutoTest.Net\AutoTest.config</code>). I just changed two entries:</p>
 <ul>
 <li><code>BuildExecutable</code>, and</li>
-<li><code>NUnitTestRunner</code></li> <br>
-</ul></p>
+<li><code>NUnitTestRunner</code></li>   
+</ul>
+
 <p>That's it. Well, for the basic setup.</p>
 <h2>Running the WinForms monitor</h2>
 
-<p>I opened a command prompt to the root of a small project and ran the WinForms monitor, telling it to look for changes in the current directory.
-<pre><code class="bat">&amp; 'C:\Program Files\AutoTest.Net\AutoTest.WinForms.exe' .</code></pre></p>
+<p>I opened a command prompt to the root of a small project and ran the WinForms monitor, telling it to look for changes in the current directory.</p>
+<pre><code class="bat">& 'C:\Program Files\AutoTest.Net\AutoTest.WinForms.exe' .</code></pre>
+
 <p>The application started, presenting me with a rather frightening window</p>
 <div class="images">
 <a href="https://blairconrad.com/images/autotestwinform.png"><img src="https://blairconrad.com/images/autotestwinform.png" alt="AutoTestWinForm" title="([^"]+)" width="596" height="231" class="aligncenter size-full wp-image-767" /></a>
@@ -94,10 +95,8 @@
 
 <p>Everything seemed to be in order. I <i>hadn't</i> specified MS Test or XUnit runners, nor a code editor. It says it's watching my files. So let's test it.</p>
 <h2>Mucking with the source</h2>
-
 <p>It's supposed to watch my source changes and Do The Right Thing. Let's see about that.</p>
 <h3>A benign modification to one test file</h3>
-
 <p>I changed the text in one of my test files. No functionality was changed - it was purely cosmetic. AutoTest.Net noticed, rebuilt the solution, and ran the tests! Pretty slick. Things moved quickly, but here's what I saw from the application:</p>
 <div class="images">
 <a href="https://blairconrad.com/images/innocuos-test-change-building.png"><img src="https://blairconrad.com/images/innocuos-test-change-building.png" alt="innocuous test change building" title="innocuous test change building" width="538" height="231" class="aligncenter size-full wp-image-788" /></a>
@@ -105,7 +104,6 @@
 </div>
 
 <h3>A benign modification to one "core" file</h3>
-
 <p>Next I changed the text in one of the core files - this file is part of a project that's referenced by the BookFinder GUI project, and the test project. Again, this was a cosmetic change only, just to see what AutoTest.NET would do.
 It did what it should - built the three projects and ran the tests. See?</p>
 <div class="images">
@@ -113,7 +111,6 @@ It did what it should - built the three projects and ran the tests. See?</p>
 </div>
 
 <h3>A core change that breaks a test</h3>
-
 <p>So, now I'll modify the core code in a way that breaks a test.
 It picks up the change, builds, tests, and does a really nice job of showing me the failure. I see the test that failed, and when I click it, am presented with the stack trace, including hyperlink to the source. </p>
 <div class="images">
@@ -127,18 +124,14 @@ It picks up the change, builds, tests, and does a really nice job of showing me 
 
 <p>That was a little disappointing. On the brighter side, hitting "Continue" did continue, with no seeming ill-effects.</p>
 <h3>Redemption</h3>
-
 <p>Confession time. I hadn't checked the <code>CodeEditor</code> section of the configuration file. As it turns out, it had a slightly different path to my devenv than the correct one. I fixed up the path and tried again. This time, clicking on the hyperlink opened devenv at the right spot. </p>
 <p>So the problems was <i>ultimately</i> my fault, but I can't help but wish for more graceful behaviour - how about a "I couldn't find your editor" dialogue? Ah, well. The product's young. Polish will no doubt come.</p>
 <p>I repaired the code that broke the tests, and AutoTest.Net was happy again after rebuilding and rerunning the tests.</p>
 <h3>Syntax Error</h3>
-
 <p>For my last test, I decided to actually break the compile. This was kind of disappointing. It claimed to run the 3 builds and the tests, and said that everything passed. I'm not sure why this would be - I was really hoping for an indication that the compilation failed, but nope. Everything was rainbows and puppies. <strong>Spurious rainbows and puppies.</strong></p>
 <h2>The VS Add-In</h2>
-
 <p>There's an add-in. You can activate it under the "Tools" menu. It looks and behaves like the WinForms app.</p>
 <h2>The Console Monitor</h2>
-
 <p>I am used to running py.test in the console, so I thought I'd check out AutoTest's console monitor next. I started it up, made a benign change, and then made a test-breaking change. Here's what I saw:</p>
 <pre>
 [Info] 'Default' Starting up AutoTester
@@ -159,7 +152,6 @@ It picks up the change, builds, tests, and does a really nice job of showing me 
 
 <p>Not bad, but I have no stack trace for the failed test. Just the name. I'm a little sad to lose  functionality relative the WinForms runner. I know I wouldn't be able to click on source code lines, but still.</p>
 <h2>Gravy - Hooking up Growl</h2>
-
 <p>Undeterred by the disappointing performance in the Syntax Error test, I soldiered on. I use Growl for Windows for notifications, and I was keen to see the integration. I went back to the configuration file and input the <code>growlnotify</code> path. While I was there, I set <code>notify_on_run_started</code> to <code>false</code> (after all, I know when I hit "save"), and <code>notify_on_run_completed</code> to <code>true</code>. Then I fixed my compile error and saved the file.
 In addition to the usual changes to the output window, I saw some happy toast:</p>
 <div class="images">
@@ -168,10 +160,8 @@ In addition to the usual changes to the output window, I saw some happy toast:</
 
 <p>Honestly, with a GUI or text-based component around, I'm not sure how much benefit this will be, but I guess I can minimize the main window and so long as tests keep passing, I can get some feedback. Still it's kind of fun.</p>
 <h2>Impressions</h2>
-
 <p>I really like the idea of this tool. I love the idea of watching my code and continuously running the tests. The first steps are very good - I like the clickonable line numbers to locate my errors, and I think the Growl support is cute, but probably more of a toy than an actual useful feature. </p>
 <h3>Will I Use It?</h3>
-
 <p>Not now, and probably never at the Day Job. The inability to detect broken builds is pretty disappointing.
 Also, at work, I have <a href="http://www.jetbrains.com/resharper/features/unit_testing.html">ReSharper to integrate my unit tests</a>. I've bound "rerun the previous test set" to a key sequence, so it's just as easy for me to trigger as it is to save a file.</p>
 <p>At home? Maybe. If AutoTest.Net starts noticing when builds fail, then I probably will use it when I'm away from ReSharper and working in .NET. </p>

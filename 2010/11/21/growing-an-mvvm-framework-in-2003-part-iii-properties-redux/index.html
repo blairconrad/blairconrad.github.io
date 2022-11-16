@@ -78,18 +78,16 @@
 </div>
 
 <h2>A Change of Plans</h2>
-
 <p>Last time I showed how I managed the binding of ViewModel properties to the properties on the View's controls.  I promised to talk this time about how the use of the mini-framework affected the testability of the code. I changed my mind&mdash;I want to return to the whole properties discussion.</p>
 <h2>Festering Dissatisfaction</h2>
-
-<p>The method I had for binding ViewModel properties to the View worked, but it left a bad taste in my mouth. A few things bothered me about the implementation. Recall that to add a bound property the ViewModel had to have code something like this:
+<p>The method I had for binding ViewModel properties to the View worked, but it left a bad taste in my mouth. A few things bothered me about the implementation. Recall that to add a bound property the ViewModel had to have code something like this:</p>
 <pre><code class="csharp">private Property bookListItems;
 public string BookListItems
 {
     get { return bookListItems.AsList(); }
     set { bookListItems.Value = value; }
 }</code></pre>
-I have a couple of problems with this.</p>
+<p>I have a couple of problems with this.</p>
 <ol>
 <li>it's pretty chatty</li>
 <li>the client programmer has to know when to use <code>.AsList()</code> or not, since strings and bools don't require it</li>
@@ -97,7 +95,6 @@ I have a couple of problems with this.</p>
 </ol>
 
 <h2>Poor man's generics</h2>
-
 <p>When I first wrote the code, I was bothered a little by the weaknesses in the property bindings. It wasn't until I wrote <i>about</i> the code here that the suck really started to get to me. And worse, I was unhappy with what I'd wrote. One phrase from the post kept coming back to me:</p>
 <blockquote>
 <p>At this point, I was really missing generics.</p>
@@ -138,62 +135,59 @@ public class BoolProperty: Property
 
 <p>There's not a terrible amount here, just a family of properties. Each concrete class is responsible for providing a <code>Value</code> property that will return (or accept) a typed value. The real work is done by the <code>storage</code> member&mdash;it keeps track of the untyped value that the concrete class will take or dole out. As the name <code>PropertyStorageStrategy</code> suggests, a Property can vary the source and sink for its value via the  <a href="http://en.wikipedia.org/wiki/Strategy_pattern">Strategy design pattern</a>. </p>
 <h2>I was holding it for a friend</h2>
-
-<p>Let's look at the storage strategy that defers to a property on another object.
+<p>Let's look at the storage strategy that defers to a property on another object.</p>
 <pre><code class="csharp"> public interface PropertyStorageStrategy
  {
      object Get();
      void Set(object value);
- }</p>
-<p>public class BoundPropertyStrategy: PropertyStorageStrategy 
+ }
+
+public class BoundPropertyStrategy: PropertyStorageStrategy 
 {
       private object obj;
-      private PropertyInfo propertyInfo;</p>
-<div class="highlight"><pre><span></span>  <span class="nv">public</span> <span class="nv">BoundPropertyStrategy</span><span class="ss">(</span><span class="nv">object</span> <span class="nv">obj</span>, <span class="nv">PropertyInfo</span> <span class="nv">property</span><span class="ss">)</span>
-  {
-     <span class="nv">this</span>.<span class="nv">obj</span> <span class="o">=</span> <span class="nv">obj</span><span class="c1">;</span>
-     <span class="nv">this</span>.<span class="nv">propertyInfo</span> <span class="o">=</span> <span class="nv">property</span><span class="c1">;</span>
-  }
+      private PropertyInfo propertyInfo;
 
-  <span class="nv">public</span> <span class="nv">void</span> <span class="nv">Set</span><span class="ss">(</span><span class="nv">object</span> <span class="nv">value</span><span class="ss">)</span>
-  {
-     <span class="nv">propertyInfo</span>.<span class="nv">SetValue</span><span class="ss">(</span><span class="nv">obj</span>, <span class="nv">value</span>, <span class="nv">null</span><span class="ss">)</span><span class="c1">;</span>
-  }
+      public BoundPropertyStrategy(object obj, PropertyInfo property)
+      {
+         this.obj = obj;
+         this.propertyInfo = property;
+      }
 
-  <span class="nv">public</span> <span class="nv">object</span> <span class="nv">Get</span><span class="ss">()</span>
-  {
-     <span class="k">return</span> <span class="nv">propertyInfo</span>.<span class="nv">GetValue</span><span class="ss">(</span><span class="nv">obj</span>, <span class="nv">null</span><span class="ss">)</span><span class="c1">; </span>
-  }
-</pre></div>
+      public void Set(object value)
+      {
+         propertyInfo.SetValue(obj, value, null);
+      }
 
+      public object Get()
+      {
+         return propertyInfo.GetValue(obj, null); 
+      }
+}</code></pre>
 
-<p>}</code></pre></p>
 <p>Unsurprisingly, this looks a lot like the <code>BoundProperty</code> class from last time. After all, the core functionality is pretty much the same. So, inject a BoundProperty into one of ListProperty, StringProperty, or BoolProperty, and we get a strongly-typed proxy for the underlying object.</p>
 <h2>Tying it together</h2>
-
-<p>Of course the new classes required a change to the ViewModel/Model binding code. Locating the ViewModel fields to bind is pretty much the same as it was, except only public fields that derive from Property are considered. The BindFieldToControl becomes the slightly-better named <code>BindPropertyToControl</code>:
+<p>Of course the new classes required a change to the ViewModel/Model binding code. Locating the ViewModel fields to bind is pretty much the same as it was, except only public fields that derive from Property are considered. The BindFieldToControl becomes the slightly-better named <code>BindPropertyToControl</code>:</p>
 <pre><code class="csharp linenos=table">private bool BindPropertyToControl(Control control, FieldInfo field)
 {
     string controlPropertyName = ControlAttributeName(control, field.Name);
     if ( controlPropertyName == null )
     {
         return false;
-    }</p>
-<div class="highlight"><pre><span></span><span class="n">PropertyInfo</span> <span class="n">controlProperty</span> <span class="o">=</span> <span class="n">control</span><span class="o">.</span><span class="n">GetType</span><span class="p">()</span><span class="o">.</span><span class="n">GetProperty</span><span class="p">(</span><span class="n">controlPropertyName</span><span class="p">,</span> <span class="n">myBindingFlags</span><span class="p">);</span>
-<span class="k">if</span> <span class="p">(</span> <span class="n">controlProperty</span> <span class="o">==</span> <span class="nb nb-Type">null</span> <span class="p">)</span>
-<span class="p">{</span>
-    <span class="k">return</span> <span class="bp">false</span><span class="p">;</span>
-<span class="p">}</span>
+    }
 
-<span class="n">BoundPropertyStrategy</span> <span class="n">strategy</span> <span class="o">=</span> <span class="n">new</span> <span class="n">BoundPropertyStrategy</span><span class="p">(</span><span class="n">control</span><span class="p">,</span> <span class="n">controlProperty</span><span class="p">);</span>
-<span class="n">ConstructorInfo</span> <span class="n">constructor</span> <span class="o">=</span> <span class="n">field</span><span class="o">.</span><span class="n">FieldType</span><span class="o">.</span><span class="n">GetConstructor</span><span class="p">(</span><span class="n">new</span> <span class="n">Type</span><span class="p">[]</span> <span class="p">{</span><span class="nb">typeof</span> <span class="p">(</span><span class="n">PropertyStorageStrategy</span><span class="p">)});</span>
-<span class="n">object</span> <span class="n">propertyField</span> <span class="o">=</span> <span class="n">constructor</span><span class="o">.</span><span class="n">Invoke</span><span class="p">(</span><span class="n">new</span> <span class="n">object</span><span class="p">[]</span> <span class="p">{</span><span class="n">strategy</span><span class="p">});</span>
-<span class="n">field</span><span class="o">.</span><span class="n">SetValue</span><span class="p">(</span><span class="n">this</span><span class="p">,</span> <span class="n">propertyField</span><span class="p">);</span>
-<span class="k">return</span> <span class="bp">true</span><span class="p">;</span>
-</pre></div>
+    PropertyInfo controlProperty = control.GetType().GetProperty(controlPropertyName, myBindingFlags);
+    if ( controlProperty == null )
+    {
+        return false;
+    }
 
+    BoundPropertyStrategy strategy = new BoundPropertyStrategy(control, controlProperty);
+    ConstructorInfo constructor = field.FieldType.GetConstructor(new Type[] {typeof (PropertyStorageStrategy)});
+    object propertyField = constructor.Invoke(new object[] {strategy});
+    field.SetValue(this, propertyField);
+    return true;
+}</code></pre>
 
-<p>}</code></pre></p>
 <p>The first part of the method just makes sure that the control we've found has a name that matches the first part of the property. Then we look for a property on the control that completes the name. Once those hurdles are past, the magic happens:</p>
 <ol start="15">
   <li>create a new BoundProperty to proxy the control's property value</li>
@@ -203,29 +197,29 @@ public class BoolProperty: Property
 </ol>
 
 <h2>How's it work?</h2>
-
-<p>Overall, I think okay. Here's a sample of the ViewModel code.
+<p>Overall, I think okay. Here's a sample of the ViewModel code.</p>
 <pre><code class="csharp">public StringProperty TitleText;
 public BoolProperty FindEnabled;
-public ListProperty BookListItems;</p>
-<p>public void TitleTextChanged(object sender, EventArgs e)
+public ListProperty BookListItems;
+
+public void TitleTextChanged(object sender, EventArgs e)
 {
     string newText = TitleText.Value;
     FindEnabled.Value = (newText != null &amp; newText.Length &gt; 0);
-}</p>
-<p>public void FindClick(object sender, EventArgs e)
+}
+
+public void FindClick(object sender, EventArgs e)
 {
     ICollection books = bookDepository.Find(TitleText.Value);
-    IList bookListItems = BookListItems.Value;</p>
-<div class="highlight"><pre><span></span>bookListItems.Clear();
-foreach ( string book in books )
-{
-    bookListItems.Add(book);
-}
-</pre></div>
+    IList bookListItems = BookListItems.Value;
 
+    bookListItems.Clear();
+    foreach ( string book in books )
+    {
+        bookListItems.Add(book);
+    }
+}</code></pre>
 
-<p>}</code></pre></p>
 <p>The client developer has to remember to use the funny property types,
 but this isn't that much harder than, say <code>Func</code>. At least the names
 make some sense.  The <code>.Value</code> could get a little old, but I prefer

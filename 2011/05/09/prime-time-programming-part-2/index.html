@@ -73,9 +73,8 @@
 <!--more-->
 
 <h2>Attempt 2: Sieve of Eratosthenes</h2>
-
 <p>The Sieve of Eratosthenes is another method for finding prime numbers. 
-The algorithm is basically this:
+The algorithm is basically this:</p>
 <ol>
 <li>make a big array of numbers, from 2 to the highest prime you're hoping to find</li>
 <li>look for the next number that's not crossed off</li>
@@ -83,8 +82,9 @@ The algorithm is basically this:
 <li>cross off every multiple of the number you just found</li>
 <li>so long as the prime you just found is less than the square root of your limit, go to step 2</li>
 <li>the uncrossed numbers are prime</li>
-</ol></p>
-<p>Suppose we want primes less than or equal to 20. We start with this list:
+</ol>
+
+<p>Suppose we want primes less than or equal to 20. We start with this list:</p>
 <table>
 <tr>
 <td>2</td>
@@ -108,7 +108,7 @@ The algorithm is basically this:
 <td>20</td>
 </tr>
 </table>
-The first uncrossed off number is 2. That's our first prime. Cross off all the multiples of 2 (believe it or not, the 4 is crossed off):
+<p>The first uncrossed off number is 2. That's our first prime. Cross off all the multiples of 2 (believe it or not, the 4 is crossed off):</p>
 <table>
 <tr>
 <td><b>2</b></td>
@@ -131,8 +131,9 @@ The first uncrossed off number is 2. That's our first prime. Cross off all the m
 <td>19</td>
 <td><s><span style="color:#CCC;">20</span></s></td>
 </tr>
-</table></p>
-<p>The next uncrossed off number is 3. Cross off the multiples:
+</table>
+
+<p>The next uncrossed off number is 3. Cross off the multiples:</p>
 <table>
 <tr>
 <td><b>2</b></td>
@@ -156,7 +157,7 @@ The first uncrossed off number is 2. That's our first prime. Cross off all the m
 <td><s><span style="color:#CCC;">20</span></s></td>
 </tr>
 </table>
-Next, we have 5. Cross off its multiples (actually, they're already crossed off because they're all also multiples of either 2 or 3):</p>
+<p>Next, we have 5. Cross off its multiples (actually, they're already crossed off because they're all also multiples of either 2 or 3):</p>
 <table>
 <tr>
 <td><b>2</b></td>
@@ -180,8 +181,7 @@ Next, we have 5. Cross off its multiples (actually, they're already crossed off 
 <td><s><span style="color:#CCC;">20</span></s></td>
 </tr>
 </table>
-
-<p>5 is greater than &radic;20, so stop looping. All the uncrossed off numbers are prime:
+<p>5 is greater than &radic;20, so stop looping. All the uncrossed off numbers are prime:</p>
 <table>
 <tr>
 <td><b>2</b></td>
@@ -204,9 +204,9 @@ Next, we have 5. Cross off its multiples (actually, they're already crossed off 
 <td><b>19</b></td>
 <td><s><span style="color:#CCC;">20</span></s></td>
 </tr>
-</table></p>
-<h3>A "borrowed" implementation</h3>
+</table>
 
+<h3>A "borrowed" implementation</h3>
 <p>The <a href="http://en.wikipedia.org/wiki/Sieve_of_Eratosthenes">wikipedia article</a> even provides a Python implementation, which I reproduce here in slightly altered form:</p>
 <pre><code class="python linenos=table">def eratosthenes_sieve(m):
     # Create a candidate list within which non-primes will be
@@ -223,11 +223,9 @@ Next, we have 5. Cross off its multiples (actually, they're already crossed off 
 
     # Filter out non-primes and return the list.
     return [i for i in candidates[2:] if i]</code></pre>
-
 <p>I ran this to find my standard list of primes less than 10<sup>7</sup>, and was surprised at the results. The time to completion varied wildly on successive runs. Sometimes over <b>50</b> seconds, and sometimes as low as <b>13</b>. I noticed that when the run times were high, the laptop's hard drive was thrashing, and just afterward my other applications were unresponsive. </p>
 <p>I reran the test and, with a little help from PerfMon, found out that the memory usage was off the chart. No, seriously. Right off the top. I had to rescale the graph to get everything to fit. the Private Bytes went way up over 200MB. On my 512 MB laptop with Firefox, emacs, and a few background processes, things slow to a crawl. With a smaller set of primes, or on more powerful iron, this implementation may work, but it's not going to meet my needs.</p>
 <h2>Attempt 3: The Sieve, but slowly cross out the composites</h2>
-
 <p>If allocating a big array of numbers just to cross most of them out right away doesn't work, how about we start by allocating nothing and just cross out numbers at the last moment?
 The idea is pretty simple: start counting at 2, and keep a record of upcoming composite numbers that we've discovered by looking at multiples of primes so far. Essentially we maintain a rolling wave of the next multiples of 2, 3, 5, &hellip;:</p>
 <ol>
@@ -240,7 +238,6 @@ The idea is pretty simple: start counting at 2, and keep a record of upcoming co
 </ol>
 
 <h3>Let's see how it works</h3>
-
 <table>
   <tr><th>n</th><th>composites</th></tr>
   <tr>
@@ -282,17 +279,17 @@ The idea is pretty simple: start counting at 2, and keep a record of upcoming co
 </table>
 
 <p>12 is already in the list, because it's a multiple of 3.  We can't insert it. We'll have to amend the algorithm to account for collisions. If a multiple is already accounted for, keep moving until we find one that isn't in the list.</p>
-<p>In this case, add another 2 to 12 to get 14 and insert it. Then increment n.
+<p>In this case, add another 2 to 12 to get 14 and insert it. Then increment n.</p>
 <table>
 <tr><th>n</th><th>composites</th></tr>
 <tr>
 <td>11</td><td><code>{12:3, 14:2, 25:5, 49:7}</code></td>
 <td><b>11</b> isn't in composites, so yield it, insert 11<sup>2</sup> = 121, increment n, and continue&hellip;</td>
 </tr>
-</table></p>
-<h3>Show me the code</h3>
+</table>
 
-<p>Here's an implementation of the <b>naive algorithm</b> presented above
+<h3>Show me the code</h3>
+<p>Here's an implementation of the <b>naive algorithm</b> presented above</p>
 <pre><code class="python linenos=table">def sieve():
     composites = {}
     n = 2
@@ -308,7 +305,7 @@ The idea is pretty simple: start counting at 2, and keep a record of upcoming co
             composites[n*n] = n
             yield n
         n += 1</code></pre>
-This implementation takes <b>26.8</b> seconds to generate all primes below 10<sup>7</sup>,  close to &#188; the time the best trial division algorithm took.</p>
+<p>This implementation takes <b>26.8</b> seconds to generate all primes below 10<sup>7</sup>,  close to &#188; the time the best trial division algorithm took.</p>
 <h3>Why is this method so great?</h3>
 
 <ul>
@@ -319,8 +316,7 @@ This implementation takes <b>26.8</b> seconds to generate all primes below 10<su
 </ul>
 <p>The method already incorporates some of the advantages of the souped-up trial division methods from last time. We only worry about multiples of primes, so there's no need to cut out the composite factors. And when checking to see if n is prime, we never consider prime factors larger than &radic;n. Still, there are some optimizations to make.</p>
 <h3>That's Odd</h3>
-
-<p>In the sample runthrough above, the algorithm checks 4, 6, 8, 10, &hellip; for primality, even though no even number larger than 2 are prime. Here's an implementation that avoids that:
+<p>In the sample runthrough above, the algorithm checks 4, 6, 8, 10, &hellip; for primality, even though no even number larger than 2 are prime. Here's an implementation that avoids that:</p>
 <pre><code class="python linenos=table">def odd_sieve():
    composites = {}
    yield 2
@@ -336,11 +332,12 @@ This implementation takes <b>26.8</b> seconds to generate all primes below 10<su
            # not there - prime
            composites[n*n] = n
            yield n
-       n += 2</code></pre></p>
+       n += 2</code></pre>
+
 <p>This method generates primes less than 10<sup>7</sup> in <b>13.4</b> seconds. This is about half the time it took when we didn't pre-filter the evens. In the trial division case, when we cut out the even numbers, we were saving almost no work - one division per even number, out of potentially dozens or hundreds of divisions being performed. This time, we cut out an associative array lookup and insertion, and most numbers are checked by using only a small number of these operations. Let's see what else we can do.</p>
 <h2>What about 3?</h2>
 
-<p>If skipping the numbers that are divisible by 2 paid off, will skipping those divisible by 3 as well? Probably.
+<p>If skipping the numbers that are divisible by 2 paid off, will skipping those divisible by 3 as well? Probably.</p>
 <pre><code class="python linenos=table">def sixish_sieve():
     composites = {}
     yield 2
@@ -360,10 +357,9 @@ This implementation takes <b>26.8</b> seconds to generate all primes below 10<su
             yield n
         n += step
         step = 6 - step</code></pre>
-Now the time to generate primes less than 10<sup>7</sup> is <b>11.9</b> seconds. Again, I think we've hit diminishing returns. We didn't get the 1/3 reduction I'd hoped, probably due to the more complicated "next multiple" calculation.</p>
+<p>Now the time to generate primes less than 10<sup>7</sup> is <b>11.9</b> seconds. Again, I think we've hit diminishing returns. We didn't get the 1/3 reduction I'd hoped, probably due to the more complicated "next multiple" calculation.</p>
 <h3>YAGNI</h3>
-
-<p>Things are going pretty well. There's only one thing that bothers me about the latest generator - we're storing too many composites in the associative array. Every time we find a prime number, its square is inserted in the array. Even 9999991<sup>2</sup> is put in the array, even though we'll never check to see if any number greater than 10<sup>7</sup> is prime. So, modifying the algorithm to omit storing composites that are too large, we get:
+<p>Things are going pretty well. There's only one thing that bothers me about the latest generator - we're storing too many composites in the associative array. Every time we find a prime number, its square is inserted in the array. Even 9999991<sup>2</sup> is put in the array, even though we'll never check to see if any number greater than 10<sup>7</sup> is prime. So, modifying the algorithm to omit storing composites that are too large, we get:</p>
 <pre><code class="python linenos=table">def sixish_sieve_max():
     composites = {}
     yield 2
@@ -379,14 +375,14 @@ Now the time to generate primes less than 10<sup>7</sup> is <b>11.9</b> seconds.
             composites[q] = factor
         else:
             # not there - prime
-            if n<em>n &lt;= highest:
-                composites[n</em>n] = n
+            if n*n <= highest:
+                composites[n*n] = n
             yield n
         n += step
-        step = 6 - step</code></pre></p>
+        step = 6 - step</code></pre>
+
 <p>This generator takes <b>10.8</b> seconds to generate primes below 10<sup>7</sup> - modest improvement, and one I'd keep anyhow, since the code is barely more complicated than the previous version. However, the real boost, if there is any, is in the memory usage. When <code>sixish_sieve</code>  generates primes below 10<sup>7</sup>, the private bytes climb up to 52MB, but <code>sixish_sieve_max</code> stays below 25MB. The advantage continues as the problem set grows - when the upper limit is 2*10<sup>7</sup>, <code>sixish_sieve</code> takes 100MB, but <code>sixish_sieve_max</code> remains at a cool 25MB - I guess that's the difference between storing 1270607 composites and 607.</p>
 <h2>Conclusion</h2>
-
 <p>This was a fun and interesting exercise. Being able to look bad at your old code and say "Boy, that was horrible. I'm glad I'm smarter now," makes me happy. And embarrassed. I enjoyed seeing how applying incremental changes and even rudimentary profiling yielded provably better results, right up until they showed that I probably needed to abandon my current path (trial division) and jump on a new one.</p>
 <p>I'm sticking with <code>sixish_sieve_max</code> for now. It's fast enough to meet my current needs, and will likely remain so until "CPU inflation" forces the Project Euler team to increase the size of their problem sets. Of course, maybe by then <i>I'll</i> have a faster processor and I won't care.</p>
 <!-- /content -->

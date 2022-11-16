@@ -68,13 +68,13 @@
 <p>I'm always on the lookout for convenient tools for creating diagrams that can be used for software development. <a href="http://www.balsamiq.com/">Balsamiq</a> is my tool of choice for UI mockups - it's great for whipping up stylized interfaces in very little time.</p>
 <p>Balsamiq does a great job of simplifying mockup creation, since it takes a lot of choices away from the user - you don't have the ability to change fonts or line thicknesses or colours. It really lets you focus on the aspects of the interface that matter when you're just getting started - the types and relative positions of the screen elements.</p>
 <p>Recently I discovered <a href="http://yuml.me/">yUML</a> - an online tool for creating class diagrams, activity diagrams, and use case diagrams. It's quite simple and produces attractive results. The best part is that you just specify the relationship between components - you don't have to position them yourself.</p>
-<p>Using an example from the site, you can create a diagram that shows that:
+<p>Using an example from the site, you can create a diagram that shows that:</p>
 <ul>
     <li>a single customer aggregates several orders,each of which</li>
     <li>uses 0 or 1 PaymentMethods, and</li>
     <li>is composed of some number of LineItems</li>
 </ul>
-by entering this code:</p>
+<p>by entering this code:</p>
 <pre>
 [Customer]+1-&gt;*[Order]
 [Order]++1-items &gt;*[LineItem]
@@ -86,13 +86,13 @@ by entering this code:</p>
   <img class="aligncenter size-full wp-image-414" title="yUML Order Example" src="https://blairconrad.com/images/yuml_order_example.png" alt="yUML Order Class Diagram" width="605" height="152" />
 </div>
 
-<p>Over the years, I've become accustomed to using WYSIWYG tools to create written documents and images, but I often miss text-based tools. They:
+<p>Over the years, I've become accustomed to using WYSIWYG tools to create written documents and images, but I often miss text-based tools. They:</p>
 <ul>
     <li>give consistent, repeatable results,</li>
     <li>allow easy diffing between versions, and</li>
     <li>don't encourage time-wasting as we fiddle to adjust every single pixel or line break</li>
 </ul>
-so I was really happy to find yUML - even though the syntax takes a little getting used to, it makes it easy to generate diagrams with a minimum of fuss.</p>
+<p>so I was really happy to find yUML - even though the syntax takes a little getting used to, it makes it easy to generate diagrams with a minimum of fuss.</p>
 <p>One wrinkle I've had using tools like Balsamiq and yUML is going back to modify diagrams after I've saved them off as a PNG. The last time I posted a Balsamiq PNG, I resorted to <a href="https://blairconrad.com/2010/02/07/using-subversion-to-evangelize-powershell/#getting_started">embedding the text that represented the diagram in the post comments</a>. Actually, don't bother clicking that link - I'm sure I had the source saved in the post as an HTML comment, but I don't see it there, not even in edit mode.</p>
 <p>I've unwittingly demonstrated a point I was trying to make - many of these design tools don't allow you to save the "source" of the diagram, and it could be lost. This isn't a disaster for simple diagrams like the one above, but it could be very inconvenient for larger ones. Another problem is that typing out the code, pasting it into the conversion tool (in yUML's case a web page), and converting it and saving the result can become tedious as you make many adjustments.</p>
 <p>To address some of these inconveniences, I created a tiny Python script that accepts a class diagram description, hits the yUML website to create an image from it, and saves the image to disk, embedding the diagram "source code" in the PNG's <a href="http://www.w3.org/TR/PNG/#11iTXt">iTXt chunk</a>:</p>

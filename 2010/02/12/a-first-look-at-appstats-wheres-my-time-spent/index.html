@@ -74,14 +74,15 @@
 <p>I didn't use (or need) any particularly advanced configuration, so I just <a href="http://code.google.com/p/libraryhippo/issues/detail?id=47">installed the Event Recorder</a> and let it go.</p>
 <p>Here's what I saw:</p>
 <p><img src="https://blairconrad.com/images/no_rwl.png" alt="Appstats result for checking one family with just Waterloo and Kitchener accounts" title="checking one family, Waterloo and Kitchener libraries" width="746" height="425" class="size-full wp-image-322" /></p>
-<p>I don't have an in-depth analysis, but here are some impressions: 
+<p>I don't have an in-depth analysis, but here are some impressions: </p>
 <ul>
 <li>it's pretty</li>
 <li>the information is presented very well - with only minimal reading, I can see that LibraryHippo made a handful of datastore queries, as well as a series of urlfetch.Fetch calls for each library card it checked</li>
 <li>I can get a quick view of what's taking what proportion of the time - for example, the fetches easily dominate</li>
 <li>total time (about 2.3 seconds) is easy to find, as well as the amount taken by the underlying API - 73 milliseconds</li>
 <li>there's something else that's going on - 1056 ms for cpu + api - nearly half the elapsed time. I'm not sure what that means exactly</li>
-</ul></p>
+</ul>
+
 <p>So far, no big surprises - I knew that most of the time was taken up by queries to the library web pages, but it's very cool to see it this way, and to see how much time is taken up going to the Datastore (not much). There's room for improvement, but 2.3 seconds is more than acceptable for this family - one of LibraryHippo's heaviest users.</p>
 <p>Two things did stand out, though. First, in the first group of urlfetch.Fetches, <strong>there are gaps</strong> between the fourth, fifth, and sixth calls (the ones that take 128 ms, 91ms, and 52ms) and the pattern repeats (with smaller gaps) in the second batches. This is where the retrieved records are processed and transformed into a normalized representation before rendering. The total time taken is a small, but I didn't expect to see <i>anything</i>. </p>
 <p>Second, there's a datastore_v3.Get call before each card is checked. This is <strong>not an explicit call</strong> that LibraryHippo makes, so I clicked on the line in the graph and got a detailed view of what was going on:</p>

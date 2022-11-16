@@ -97,18 +97,16 @@
       <div class="m-clearfix-l"></div>
 <!-- content -->
 <p><a href="https://github.com/sawilde/opencover">OpenCover</a> is developed by Shaun Wilde. He was a developer on (and is the only remaining maintainer of) PartCover. He's used what he learned working on PartCover to develop OpenCover, but OpenCover is a new implementation, not a port.</p>
-<p>I tried OpenCover 1.0.514. Since I downloaded a couple weeks ago there have been 3 more releases, with the 1.0.606 release promising a big performance improvement.
+<p>I tried OpenCover 1.0.514. Since I downloaded a couple weeks ago there have been 3 more releases, with the 1.0.606 release promising a big performance improvement.</p>
 <h2>The Cost</h2>
-Free! And you can get the source.
+<p>Free! And you can get the source.</p>
 <h2>VS integration</h2>
-None that I can find.
+<p>None that I can find.</p>
 <h2>Command Line Execution</h2>
-Covering an application from the command line is <strong>easy</strong>, and reminiscent of using PartCover the same way. I used this command to see what code my BookFinder unit tests exercised:</p>
+<p>Covering an application from the command line is <strong>easy</strong>, and reminiscent of using PartCover the same way. I used this command to see what code my BookFinder unit tests exercised:</p>
 <pre><code class="bat">OpenCover.Console.exe -arch:64 -register target:nunit-console.exe -targetargs:bin\debug\BookFinder.Tests.dll \
                       -output:..\..\opencover.xml -filter:+[BookFinder.Core]*</code></pre>
-
 <!--more-->
-
 <p>Let's look at that.</p>
 <ul>
 <li><code>-arch:64</code> - I'm running on a 64-bit system. I didn't get any results without this.</li>
@@ -119,10 +117,8 @@ Covering an application from the command line is <strong>easy</strong>, and remi
 <li><code>-filter:+[BookFinder.Core]*</code> - BookFinder.Core is the only assembly I was interested in - it holds the business logic.</li>
 </ul>
 <h2>GUI Runner</h2>
-
 <p>There isn't one, but I have to wonder if there won't be. Otherwise, why call the command line coverer <strong>OpenCover.Console.exe</strong>?</p>
 <h2>XML Report</h2>
-
 <p>OpenCover doesn't generate a human-readable report. Instead, you can postprocess the coverage output. <b><a href="http://www.palmmedia.de/Net/ReportGenerator">ReportGenerator</a> is the recommended tool</b>, and it works like a charm.</p>
 <pre><code class="bat">ReportGenerator.exe .\opencover.xml XmlReport Xml</code></pre>
 
@@ -161,42 +157,37 @@ Covering an application from the command line is <strong>easy</strong>, and remi
 
 <p>I appreciate the coverage count by each of the lines - not as fancy as dotCover's "which tests cover this", but it could be a helpful clue when you're trying to decide what you need to do to improve your coverage.</p>
 <h2>Joining Coverage Runs</h2>
-
 <p>Perhaps your test are scattered in space or time and you want to get an overview of all the code that's covered by them. OpenCover doesn't really do anything special for you, but <strong>ReportGenerator has your back</strong>. Specify multiple input files on the command line, and the results will be aggregated and added to a comprehensive report:</p>
 <pre><code class="bat">ReportGenerator.exe output1.xml;output2.xml;output3.xml XmlReport Xml</code></pre>
 
 <h2>DIY Auto-Deploy</h2>
-
-<p>There's no built-in auto-deploy for OpenCover. However, <b>I made my own auto-deployable package</b> like so:
+<p>There's no built-in auto-deploy for OpenCover. However, <b>I made my own auto-deployable package</b> like so:</p>
 <ol>
 <li>install OpenCover</li>
-<li>copy the <code>C:\Program Files (x86)\OpenCover</code> directory somewhere - call this your <i>package directory</i></li>
+<li>copy the `C:\Program Files (x86)\OpenCover` directory somewhere - call this your <i>package directory</i></li>
 <li>uninstall OpenCover - you won't need it any more</li>
-</ol></p>
-<p>Then I just made sure my coverage build step 
+</ol>
+
+<p>Then I just made sure my coverage build step </p>
 <ul>
 <li>knew where the OpenCover package directory was (for the build system at the Day Job, I added it to our "subscribes")</li>
-<li>used the <code>-register</code> flag mentioned above to register OpenCover before running the tests</li>
+<li>used the `-register` flag mentioned above to register OpenCover before running the tests</li>
 </ul>
-That's it. No muss, no fuss. I did a similar (but easier, since there's no registration needed) trick with ReportGenerator, and all of a sudden I have a no-deploy system.</p>
+<p>That's it. No muss, no fuss. I did a similar (but easier, since there's no registration needed) trick with ReportGenerator, and all of a sudden I have a no-deploy system.</p>
 <p>In less than an hour's work, I could upgrade a project so the build servers and all the developers could run a coverage target, with no action on their part, other than pulling the updated source tree and building. (Which is pretty much what the build server does all day long anyhow...)</p>
 <h2>DIY (for now) Coverage with Isoloator</h2>
-
 <p>Isoloator and OpenCover don't work together out of the box, but thanks to advice I got from <a href="http://www.hmemcpy.com/blog/">Igal Tabachnik</a>, Typemock employee, it was not hard to change this.</p>
-<p>Isolator's supported coverage tools are partly configurable. There is a <code>typemockconfig.xml</code> under the Isolator install directory - typically <code>%ProgramFiles (x86)%\Typemock\Isoloator\6.0</code> (or <code>%ProgramFiles%</code>, I suppose). Mr. Tabachnik had me add
+<p>Isolator's supported coverage tools are partly configurable. There is a <code>typemockconfig.xml</code> under the Isolator install directory - typically <code>%ProgramFiles (x86)%\Typemock\Isoloator\6.0</code> (or <code>%ProgramFiles%</code>, I suppose). Mr. Tabachnik had me add</p>
 <pre><code class="xml">&lt;Profiler Name="OpenCover" Clsid="{1542C21D-80C3-45E6-A56C-A9C1E4BEB7B8}" DirectLaunch="false"&gt;
   &lt;EnvironmentList /&gt;
 &lt;/Profiler&gt;</code></pre>
-to the <code>ProfilerList</code> element, and everything meshed. His <a href="http://stackoverflow.com/questions/6698290/can-opencover-be-used-with-typemock-isolator">StackOverflow answer</a> provides full details and suggests that official support for OpenCover will be added to Isolator. </p>
+<p>to the <code>ProfilerList</code> element, and everything meshed. His <a href="http://stackoverflow.com/questions/6698290/can-opencover-be-used-with-typemock-isolator">StackOverflow answer</a> provides full details and suggests that official support for OpenCover will be added to Isolator. </p>
 <h2>IIS</h2>
-
 <p>I can't find any special IIS support. I'm not saying OpenCover can't be used to cover an application running in IIS, only that I didn't find any help for it. I may investigate this later.</p>
 <h2>Sequence Point coverage</h2>
-
 <p>OpenCover counts sequence points, not statements. Yay!</p>
 <h2>Conclusion</h2>
-
-<p><strong>Pros:</strong>
+<p><strong>Pros:</strong></p>
 <ul>
     <li>free</li>
         <li>open source</li>
@@ -206,11 +197,12 @@ to the <code>ProfilerList</code> element, and everything meshed. His <a href="ht
     <li>Isolator support is easy to add (and may be included in future Isolators)</li>
         <li>auto-deploy package is easy to make</li>
 </ul>
-<strong>Cons:</strong>
+<p><strong>Cons:</strong></p>
 <ul>
     <li>no IDE integration</li>
     <li>no help with IIS profiling</li>
-</ul></p>
+</ul>
+
 <p>I really like OpenCover. It's easy to use, relatively full-featured, and free. In a work environment, where there's a tonne of developers who want the in-IDE profiling experience, it may not be the best bet, but I'd use it for my personal .NET projects in a flash. </p>
 <!-- /content -->
       <footer>

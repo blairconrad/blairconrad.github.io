@@ -70,7 +70,7 @@
 
 <p>did the trick - I got a nice list of plugin instances for the application to use.</p>
 <p>This isn't enough, though. We need to disable certain components via configuration. One option would be to remove the components from the configuration file, but I wanted to make it easy to restore the plugins (and their original configuration) should the need arise. After poring over the Autofac documentation, it seemed like adding an "Enabled" flag in the components' metadata would be the best way to handle toggling them between on and off. </p>
-<p>Setting up the config file was straightforward,
+<p>Setting up the config file was straightforward,</p>
 <pre><code class="xml">&lt;autofac defaultAssembly="DisableComponents"&gt;
   &lt;components&gt;
     &lt;component type="DisableComponents.Plugin1" service="DisableComponents.IPlugin"&gt;
@@ -84,7 +84,8 @@
       &lt;/metadata&gt;
     &lt;/component&gt;
   &lt;/components&gt;
-&lt;/autofac&gt;</code></pre></p>
+&lt;/autofac&gt;</code></pre>
+
 <p>as was filtering the components list.</p>
 <pre><code class="csharp">var enabledComponents = container.Resolve&lt;IEnumerable&lt;Meta&lt;IPlugin&gt;&gt;&gt;()
     .Where(ComponentIsEnabled)
@@ -99,12 +100,12 @@ private static bool ComponentIsEnabled&lt;T&gt;(Meta&lt;T&gt; component)
 }</code></pre>
 
 <h2>They're still created, though</h2>
-
 <p>This approach worked, but all all components are instantiated, including the disabled ones which are made just so we can throw them away. This seems a little wasteful. Worse, a particular installation may have a plugin disabled because it can't (or doesn't want to) support its creation. So I sought a way to prevent the instantiation of the unwanted plugins.</p>
-<p>I tried to find a way to remove or disallow registration based on the metadata, or to intercept component creation, but came up short. The best I could come up with was a modification to the approach above:
+<p>I tried to find a way to remove or disallow registration based on the metadata, or to intercept component creation, but came up short. The best I could come up with was a modification to the approach above:</p>
 <pre><code class="csharp">var enabledComponents = container.Resolve&lt;IEnumerable&lt;Meta&lt;Func&lt;IPlugin&gt;&gt;&gt;&gt;()
     .Where(ComponentIsEnabled)
-    .Select(c=&gt;c.Value());</code></pre></p>
+    .Select(c=&gt;c.Value());</code></pre>
+
 <p>(I would have preferred to use a <a href="http://msdn.microsoft.com/en-us/library/dd642331.aspx">Lazy</a> over a <a href="http://msdn.microsoft.com/en-us/library/bb534960.aspx">Func</a>, but I'm working with .Net&nbsp;35.)</p>
 <p>This works&mdash;the plugins are only created when they're enabled&mdash;but it feels inelegant.
 I can't help but think that my Autofac knowledge is too shallow to have discovered the "right" way to do this. Hopefully deeper understanding will come in time&hellip;</p>

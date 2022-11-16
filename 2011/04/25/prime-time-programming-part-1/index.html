@@ -74,109 +74,106 @@
 <!--more-->
 
 <h2>My Original Generator</h2>
-
-<p>This is the slow-performing generator that I replaced when working on Problem 315. The squeamish reader may want to avert his eyes.
+<p>This is the slow-performing generator that I replaced when working on Problem 315. The squeamish reader may want to avert his eyes.</p>
 <pre><code class="python">class PrimeGenerator:
     __primes_so_far = [5]
-    __increment = 2</p>
-<div class="highlight"><pre><span></span><span class="nv">def</span> <span class="nv">__init__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-    <span class="nv">self</span>.<span class="nv">__next_index</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+    __increment = 2
+
+    def __init__(self):
+        self.__next_index = -1
 
 
-<span class="nv">def</span> <span class="nv">is_prime</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">n</span><span class="ss">)</span>:
-    <span class="k">if</span> <span class="nv">n</span> <span class="o">==</span> <span class="mi">2</span> <span class="nv">or</span> <span class="nv">n</span> <span class="o">==</span> <span class="mi">3</span>:
-        <span class="k">return</span> <span class="nv">True</span>
-    <span class="nv">elif</span> <span class="nv">n</span> <span class="o">%</span> <span class="mi">2</span> <span class="o">==</span> <span class="mi">0</span> <span class="nv">or</span> <span class="nv">n</span> <span class="o">%</span><span class="mi">3</span> <span class="o">==</span> <span class="mi">0</span>:
-        <span class="k">return</span> <span class="nv">False</span>
-    <span class="nv">elif</span> <span class="nv">n</span> <span class="o">&lt;=</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span>[<span class="o">-</span><span class="mi">1</span>]:
-        # <span class="nv">bisecting</span> <span class="nv">didn</span><span class="s1">&#39;</span><span class="s">t really help</span>
-        <span class="k">return</span> <span class="nv">n</span> <span class="nv">in</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span>
-    <span class="k">else</span>:
-        <span class="k">return</span> <span class="nv">self</span>.<span class="nv">__is_prime</span><span class="ss">(</span><span class="nv">n</span><span class="ss">)</span>
+    def is_prime(self, n):
+        if n == 2 or n == 3:
+            return True
+        elif n % 2 == 0 or n %3 == 0:
+            return False
+        elif n <= PrimeGenerator.__primes_so_far[-1]:
+            # bisecting didn't really help
+            return n in PrimeGenerator.__primes_so_far
+        else:
+            return self.__is_prime(n)
 
-<span class="nv">def</span> <span class="nv">__is_prime</span><span class="ss">(</span><span class="nv">self</span>, <span class="nv">n</span><span class="ss">)</span>:
-    <span class="nv">limit</span> <span class="o">=</span> <span class="nv">math</span>.<span class="nv">sqrt</span><span class="ss">(</span><span class="nv">n</span><span class="ss">)</span>
-    <span class="nv">g</span> <span class="o">=</span> <span class="nv">PrimeGenerator</span><span class="ss">()</span>
-    <span class="nv">g</span>.<span class="k">next</span><span class="ss">()</span> # <span class="nv">skip</span> <span class="mi">2</span>
-    <span class="nv">g</span>.<span class="k">next</span><span class="ss">()</span> # <span class="nv">skip</span> <span class="mi">3</span>
-    <span class="nv">p</span> <span class="o">=</span> <span class="nv">g</span>.<span class="k">next</span><span class="ss">()</span>
-    <span class="k">while</span> <span class="nv">p</span> <span class="o">&lt;=</span> <span class="nv">limit</span>:
-        <span class="k">if</span>  <span class="nv">n</span> <span class="o">%</span> <span class="nv">p</span> <span class="o">==</span> <span class="mi">0</span>:
-            <span class="k">return</span> <span class="nv">False</span>
-        <span class="nv">p</span> <span class="o">=</span> <span class="nv">g</span>.<span class="k">next</span><span class="ss">()</span>
-    <span class="k">return</span> <span class="nv">True</span>
+    def __is_prime(self, n):
+        limit = math.sqrt(n)
+        g = PrimeGenerator()
+        g.next() # skip 2
+        g.next() # skip 3
+        p = g.next()
+        while p <= limit:
+            if  n % p == 0:
+                return False
+            p = g.next()
+        return True
 
-<span class="nv">def</span> <span class="k">next</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-    <span class="nv">self</span>.<span class="k">next</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">__next3</span>
-    <span class="k">return</span> <span class="mi">2</span>
+    def next(self):
+        self.next = self.__next3
+        return 2
 
-<span class="nv">def</span> <span class="nv">__next3</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-    <span class="nv">self</span>.<span class="k">next</span> <span class="o">=</span> <span class="nv">self</span>.<span class="nv">__next5</span>
-    <span class="k">return</span> <span class="mi">3</span>
+    def __next3(self):
+        self.next = self.__next5
+        return 3
 
-<span class="nv">def</span> <span class="nv">__next5</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-    <span class="nv">self</span>.<span class="nv">__next_index</span> <span class="o">+=</span> <span class="mi">1</span>
-    <span class="k">if</span> <span class="nv">self</span>.<span class="nv">__next_index</span> <span class="o">&lt;</span> <span class="nv">len</span><span class="ss">(</span><span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span><span class="ss">)</span>:
-        <span class="k">return</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span>[<span class="nv">self</span>.<span class="nv">__next_index</span>]
+    def __next5(self):
+        self.__next_index += 1
+        if self.__next_index < len(PrimeGenerator.__primes_so_far):
+            return PrimeGenerator.__primes_so_far[self.__next_index]
 
-    <span class="nv">candidate</span> <span class="o">=</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span>[<span class="o">-</span><span class="mi">1</span>]
+        candidate = PrimeGenerator.__primes_so_far[-1]
 
-    <span class="k">while</span> <span class="nv">True</span>:
-        <span class="nv">candidate</span> <span class="o">+=</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__increment</span>
-        <span class="nv">PrimeGenerator</span>.<span class="nv">__increment</span> <span class="o">=</span> <span class="mi">6</span> <span class="o">-</span> <span class="nv">PrimeGenerator</span>.<span class="nv">__increment</span>
+        while True:
+            candidate += PrimeGenerator.__increment
+            PrimeGenerator.__increment = 6 - PrimeGenerator.__increment
 
-        <span class="k">if</span> <span class="nv">self</span>.<span class="nv">__is_prime</span><span class="ss">(</span><span class="nv">candidate</span><span class="ss">)</span>:
-            <span class="nv">PrimeGenerator</span>.<span class="nv">__primes_so_far</span>.<span class="nv">append</span><span class="ss">(</span><span class="nv">candidate</span><span class="ss">)</span>
-            <span class="k">return</span> <span class="nv">candidate</span>
+            if self.__is_prime(candidate):
+                PrimeGenerator.__primes_so_far.append(candidate)
+                return candidate
 
-<span class="nv">def</span> <span class="nv">__iter__</span><span class="ss">(</span><span class="nv">self</span><span class="ss">)</span>:
-    <span class="k">return</span> <span class="nv">self</span><span class="o">&lt;/</span><span class="nv">code</span><span class="o">&gt;&lt;/</span><span class="nv">pre</span><span class="o">&gt;</span>
-</pre></div>
-
+    def __iter__(self):
+        return self</code></pre>
 
 <h3>My eyes!</h3>
-
-<p>When I first went back to this code, I exclaimed, "What was I thinking?". I can think of two things:
+<p>When I first went back to this code, I exclaimed, "What was I thinking?". I can think of two things:</p>
 <ol>
 <li>The <code>is_prime</code> member was intended to help out for problems where I didn't have to create too many primes, but just had to check a few number for primality. This doesn't really belong here, and clutters the class. I'd be better off focusing on prime generation.</li>
 <li>I was optimizing at least partly for the case where I'd want to get lists of primes a couple times&mdash;hence the indexing into an already-generated list of primes. If the generator were fast enough, this wouldn't be necessary.</li>
-</ol></p>
-<p>Things I can't understand, even today. I'll have to blame them on then-ignorance, foolishness, and hasty modifications to the class:
+</ol>
+
+<p>Things I can't understand, even today. I'll have to blame them on then-ignorance, foolishness, and hasty modifications to the class:</p>
 <ul>
 <li>Why the mucking about with <code>__next3</code> and <code>__next5</code>? What did I have against <a href="http://docs.python.org/reference/simple_stmts.html#yield">yield</a>?</li>
 <li>Why is <code>is_prime</code> fussing with a whole new <code>PrimeGenerator</code> and skipping 2 and 3? Why not just go straight for the saved list of primes starting with 5?</li>
-</ul></p>
-<p>In fact, just about the only defensible things (as we'll see below) in the whole class are:
+</ul>
+
+<p>In fact, just about the only defensible things (as we'll see below) in the whole class are:</p>
 <ul>
 <li>ending the modulus checks once the candidate divisor is greater than the square root of the candidate number, and</li>
 <li>the bit where the next<code>__increment</code> is formed by subtracting the current one from 6 - I was exploiting the fact that, past 3, for any prime <i>p</i>, p &equiv; 1 (mod 6) or p &equiv; 5 (mod 6).</li>
-</ul></p>
-<h3>How slow was it?</h3>
+</ul>
 
-<p>The generator took <b>551.763 seconds</b> to generate primes less than <b>10<sup>7</sup></b>, as measured by the following:
+<h3>How slow was it?</h3>
+<p>The generator took <b>551.763 seconds</b> to generate primes less than <b>10<sup>7</sup></b>, as measured by the following:</p>
 <pre><code class="python linenos=table">def run(f):
     global highest
     start = datetime.datetime.now()
     count = 1
     for p in f:
         count += 1
-        if p &gt; highest: break
+        if p > highest: break
     end = datetime.datetime.now()
     elapsed = end-start
     return highest, count, elapsed.seconds + (elapsed.microseconds/1000000.0)</code></pre>
-Where <code>f</code> is an instance of <code>PrimeGenerator</code> passed into the <code>run</code> method, and <code>highest</code> is a global that's been set to 10<sup>7</sup>. </p>
+<p>Where <code>f</code> is an instance of <code>PrimeGenerator</code> passed into the <code>run</code> method, and <code>highest</code> is a global that's been set to 10<sup>7</sup>. </p>
 <h2>Moving forward</h2>
-
-<p>Based on the extreme slowness and general horribleness of the code, I figured I'd be better off starting over. So, I chucked the generator and started afresh with the simplest generator I could write. I resolved to make incremental changes, ensuring that at each step, the code was:
+<p>Based on the extreme slowness and general horribleness of the code, I figured I'd be better off starting over. So, I chucked the generator and started afresh with the simplest generator I could write. I resolved to make incremental changes, ensuring that at each step, the code was:</p>
 <ol>
 <li>correct (otherwise, why bother)</li>
 <li>faster than the previous version</li>
 <li>simple enough for me to understand</li>
 </ol>
-Let's see what happened.</p>
+<p>Let's see what happened.</p>
 <h2>Attempt 1: Trial Division</h2>
-
-<p><a href="http://en.wikipedia.org/wiki/Trial_division">Trial division</a> is one of the simplest methods for generating primes&mdash;you start counting at 2, and if no smaller positive integers (other than 1) divide the current number, it's prime. The <b>naive implementation</b> is very simple.
+<p><a href="http://en.wikipedia.org/wiki/Trial_division">Trial division</a> is one of the simplest methods for generating primes&mdash;you start counting at 2, and if no smaller positive integers (other than 1) divide the current number, it's prime. The <b>naive implementation</b> is very simple.</p>
 <pre><code class="python linenos=table">def naive_trial():
     n = 2
     while True:
@@ -188,9 +185,8 @@ Let's see what happened.</p>
         if may_be_prime:
             yield n
         n += 1</code></pre>
-This method takes <b>113.804 seconds</b> to generate primes below <b>100000</b>&mdash;I couldn't wait for the full 10<sup>7</sup> - it would probably be over 3 hours.</p>
+<p>This method takes <b>113.804 seconds</b> to generate primes below <b>100000</b>&mdash;I couldn't wait for the full 10<sup>7</sup> - it would probably be over 3 hours.</p>
 <h3>Trial until root</h3>
-
 <p>Fortunately, there are some pretty obvious optimizations one can make to the algorithm. The first comes from the observation that if there is a number k, 1 &lt; k &lt; n, that divides n, then there is a number j that divides n with 1 &lt; j &le; &radic;n, so we can stop our trial once we've hit that point.</p>
 <pre><code class="python linenos=table">def trial_until_root():
     n = 2
@@ -203,10 +199,8 @@ This method takes <b>113.804 seconds</b> to generate primes below <b>100000</b>&
         if may_be_prime:
             yield n
         n += 1</code></pre>
-
 <p>This method takes <b>468 seconds</b> to generate primes up to 10<sup>7</sup>. A definite improvement (and already faster my original generator), but there's still room for more.</p>
 <h3>Trial by primes</h3>
-
 <p>Here's another observation about divisors of n: if there's a number k that divides n, then there's a prime number p &le; k that divides n, since either k is prime or has prime factors. So if we keep a list of the primes found so far, we only need to check prime divisors that are less than &radic;n.</p>
 <pre><code class="python linenos=table">def trial_by_primes():
     primes_so_far = []
@@ -226,7 +220,6 @@ This method takes <b>113.804 seconds</b> to generate primes below <b>100000</b>&
 
 <p>Now we're down to <b>136 seconds</b> to generate primes below 10<sup>7</sup>. That was a worthwhile change, but we have to balance it against the fact that the generator now requires additional storage - the list of primes encountered so far. In this case, we're storing over 660,000 prime numbers in a list. Even an older laptop can handle this burden, but it's something to keep in mind.</p>
 <h3>That's odd</h3>
-
 <p>And by "that", I mean "all the prime numbers except for 2". There's no point checking the even numbers to see if they're prime. Let's see what happens when we skip them. The only tricky part (and it's not that tricky) is to make sure we still return 2 as our first prime.</p>
 <pre><code class="python linenos=table">def odd_trial_by_primes():
     primes_so_far = []
@@ -244,16 +237,14 @@ This method takes <b>113.804 seconds</b> to generate primes below <b>100000</b>&
             primes_so_far.append(n)
             yield n
         n += 2</code></pre>
-
 <p>This method takes <b>127 seconds</b> to generate primes less than 10<sup>7</sup>. Not a huge improvement, but better than nothing, and it doesn't really complicate the code that much.  I'll keep it. The reason we don't get a huge improvement here is that checking the even numbers for primeness doesn't take that much effort - they were eliminated as soon as we modded them by the first prime in <code>primes_so_far</code>. Still, it's a little quicker to jump right over them than to perform the division.</p>
 <h3>What about 3?</h3>
-
-<p>If skipping the numbers that are divisible by 2 paid off, will skipping those divisible by 3? As I noted above, every prime <i>p</i> greater than 3 satisfies <code>p &equiv; 1 (mod 6) or p &equiv; 5 (mod 6)</code>. Let's use that. We'll take advantage of these facts:
+<p>If skipping the numbers that are divisible by 2 paid off, will skipping those divisible by 3? As I noted above, every prime <i>p</i> greater than 3 satisfies <code>p &equiv; 1 (mod 6) or p &equiv; 5 (mod 6)</code>. Let's use that. We'll take advantage of these facts:</p>
 <ul>
 <li>if p &equiv; 1 (mod 6) , then p+4 &equiv; 5 (mod 6)</li>
 <li>if p &equiv; 5 (mod 6) , then p+2 &equiv; 1 (mod 6)</li>
 </ul>
-So we want to alternate our <code>step</code> between 2 and 4. Fortunately 6 - 4 = 2 and 6 - 2 = 4, so we can use 6 - step as our next step.
+<p>So we want to alternate our <code>step</code> between 2 and 4. Fortunately 6 - 4 = 2 and 6 - 2 = 4, so we can use 6 - step as our next step.</p>
 <pre><code class="python linenos=table">def sixish_trial_by_primes():
     primes_so_far = []
     yield 2
@@ -266,21 +257,21 @@ So we want to alternate our <code>step</code> between 2 and 4. Fortunately 6 - 4
             if n % p == 0:
                 may_be_prime = False
                 break
-            if p * p &gt; n: # it's prime
+            if p * p > n: # it's prime
                 break
         if may_be_prime:
             primes_so_far.append(n)
             yield n
         n += step
         step = 6 - step</code></pre>
-Now the time drops to <b>123</b> seconds to generate primes less than 10<sup>7</sup>. Clearly we've hit diminishing returns - we're saving two modulus operations on numbers that are divisible by 3 (but not 2), at the cost of a more complicated "step" calculation. We could continue on in this vein, but the gains are not likely to be large, and the complexity increases rapidly. Consider the next step: we'd make sure we don't test numbers divisible by 2, 3, or 5. That means (after 5) we only consider numbers whose remainders when divided by 30 are one of 1, 7, 11, 13, 17, 19, 23, or 29. The steps between numbers are 6, 4, 2, 4, 2, 4, 6, and 2. Who has the energy?
+<p>Now the time drops to <b>123</b> seconds to generate primes less than 10<sup>7</sup>. Clearly we've hit diminishing returns - we're saving two modulus operations on numbers that are divisible by 3 (but not 2), at the cost of a more complicated "step" calculation. We could continue on in this vein, but the gains are not likely to be large, and the complexity increases rapidly. Consider the next step: we'd make sure we don't test numbers divisible by 2, 3, or 5. That means (after 5) we only consider numbers whose remainders when divided by 30 are one of 1, 7, 11, 13, 17, 19, 23, or 29. The steps between numbers are 6, 4, 2, 4, 2, 4, 6, and 2. Who has the energy?</p>
 <h2>The problem with Trial Division</h2>
-Trial division has a few things going for it:
+<p>Trial division has a few things going for it:</p>
 <ul>
 <li>it's simple to understand</li>
 <li>there are some obvious optimizations that can make its performance tolerable</li>
 </ul>
-Ultimately, though, its downfall is that it takes a lot of work to verify that a large number is prime. Consider the largest prime number below 10<sup>7</sup>: 9999991. In order to verify that this is prime, we have to consider all prime factors less than &radic;9999991. There are 446 of these. That's 446 divisions, just to verify that one number is prime. </p>
+<p>Ultimately, though, its downfall is that it takes a lot of work to verify that a large number is prime. Consider the largest prime number below 10<sup>7</sup>: 9999991. In order to verify that this is prime, we have to consider all prime factors less than &radic;9999991. There are 446 of these. That's 446 divisions, just to verify that one number is prime. </p>
 <p>We're unlikely to radically improve performance by continuing to tinker with trial division. It's time to throw the whole thing away again and try a new approach. Next time we'll do just that.</p>
 <!-- /content -->
       <footer>
