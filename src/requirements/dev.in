@@ -1,1 +1,4 @@
+-r prod.in
+-c prod.txt
+
 livereload
