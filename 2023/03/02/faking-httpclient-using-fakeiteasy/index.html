@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en" prefix="og: http://ogp.me/ns#">
+<head>
+  <meta charset="UTF-8" />
+  <title>Faking HttpClient Using FakeItEasy | Blair Conrad</title>
+  <link rel="stylesheet" href="https://blairconrad.com/static/m-dark.compiled.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/pygments-wombat.css" />
+  <link rel="stylesheet" href="https://blairconrad.com/static/site.css" />
+  <link rel="me" href="https://fosstodon.org/@blairconrad" />
+  <link rel="canonical" href="https://blairconrad.com/2023/03/02/faking-httpclient-using-fakeiteasy/" />
+  <link href="https://blairconrad.com/feeds/all.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad" />
+  <link href="https://blairconrad.com/feeds/development.atom.xml" type="application/atom+xml" rel="alternate" title="Blair Conrad | Development" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#22272e" />
+  <meta name="twitter:site" content="@Hippopottoman" />
+  <meta name="twitter:site:id" content="14181635" />
+  <meta property="og:site_name" content="Blair Conrad" />
+  <meta property="og:title" content="Faking HttpClient Using FakeItEasy" />
+  <meta name="twitter:title" content="Faking HttpClient Using FakeItEasy" />
+  <meta property="og:url" content="https://blairconrad.com/2023/03/02/faking-httpclient-using-fakeiteasy/" />
+  <meta property="og:description" content="Recently in the FakeItEasy gitter channel, someone asked how to fake System.Net.Http.HttpClient. This is a question that comes up from time to time, and each time I have to fumble for an answer and search old StackOverflow answers (usually for an older version of HttpClient) and the …" />
+  <meta name="twitter:description" content="Recently in the FakeItEasy gitter channel, someone asked how to fake System.Net.Http.HttpClient. This is a question that comes up from time to time, and each time I have to fumble for an answer and search old StackOverflow answers (usually for an older version of HttpClient) and the …" />
+  <meta name="twitter:card" content="summary" />
+  <meta property="og:type" content="article" />
+</head>
+<body>
+<header><nav id="navigation">
+  <div class="m-container">
+    <div class="m-row">
+      <a href="https://blairconrad.com/" id="m-navbar-brand" class="m-col-t-9 m-col-m-none m-left-m">Blair Conrad</a>
+      <a id="m-navbar-show" href="#navigation" title="Show navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <a id="m-navbar-hide" href="#" title="Hide navigation" class="m-col-t-3 m-hide-m m-text-right"></a>
+      <div id="m-navbar-collapse" class="m-col-t-12 m-show-m m-col-m-none m-right-m">
+        <div class="m-row">
+          <ol class="m-col-t-12 m-col-m-none">
+            <li><a href="https://blairconrad.com/Tags/">Tags</a></li>
+            <li><a href="https://blairconrad.com/Recipes/">Recipes</a></li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</nav></header>
+<main>
+<div class="m-container">
+  <div class="m-row">
+    <article class="m-col-m-12 m-nopadb">
+      
+      <header>
+          <h1><a href="https://blairconrad.com/2023/03/02/faking-httpclient-using-fakeiteasy/" rel="bookmark" title="Permalink to Faking HttpClient Using FakeItEasy">
+                  Faking HttpClient Using FakeItEasy
+              </a></h1>
+              <div class="article-metadata">
+                <span><i class="fas fa-calendar"></i><time
+                    datetime="2023-03-02T00:00:00-05:00">2023-03-02</time></span>
+                <span><i class="fas fa-folder"></i><a
+                    href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                <span><i class="fas fa-tags"></i>
+                  <a href="https://blairconrad.com/tag/fakeiteasy.html">FakeItEasy</a>
+                </span>
+              </div>
+      </header>
+      <div class="m-clearfix-l"></div>
+<!-- content -->
+<p>Recently in the <a href="https://app.gitter.im/#/room/#FakeItEasy_FakeItEasy:gitter.im">FakeItEasy gitter channel</a>,
+someone asked how to fake
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient?view=net-7.0">System.Net.Http.HttpClient</a>.</p>
+<p>This is a question that comes up from time to time, and each time I have to fumble for an answer and search
+old StackOverflow answers (usually for an older version of HttpClient) and the like. Today I'm writing
+an answer down so it's easier to find.</p>
+<aside class="m-block m-info">
+<h3>A note on versions</h3>
+<p>Everything below has been tested using FakeItEasy 7.3.1 and .NET 7.0. As always, things may be different
+in the future. (Or past!)</p>
+</aside>
+<p>Let's assume that you want to create a fake <code>HttpClient</code> so you can dictate the behaviour of the
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpclient.getasync?view=net-7.0#system-net-http-httpclient-getasync(system-string)">GetAsync(String)</a>
+method. Other methods work similarly. This seems like it would be a straightforward task,
+but it's complicated by the design of <code>HttpClient</code>, which is not faking-friendly.</p>
+<section id="a-working-fake">
+<h2>A working Fake</h2>
+<p>First off, let's look at the declaration of <code>GetAsync</code>:</p>
+<pre class="m-code"><span class="k">public</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;</span><span class="w"> </span><span class="n">GetAsync</span><span class="p">([</span><span class="n">StringSyntax</span><span class="p">(</span><span class="n">StringSyntaxAttribute</span><span class="p">.</span><span class="n">Uri</span><span class="p">)]</span><span class="w"> </span><span class="kt">string?</span><span class="w"> </span><span class="n">requestUri</span><span class="p">)</span><span class="w"></span></pre>
+<p>This method is neither virtual nor abstract, and so
+<a href="https://fakeiteasy.github.io/docs/stable/what-can-be-faked/#what-members-can-be-overridden">can't be overridden by FakeItEasy</a>.</p>
+<p>This could be the end of the story, but we can look at the
+<a href="https://github.com/dotnet/runtime/blob/ab5e28c1cab305450897749daa7393bef30d7505/src/libraries/System.Net.Http/src/System/Net/Http/HttpClient.cs#L363-L364">definition of GetAsync</a>
+and see that we eventually end up calling
+<a href="https://learn.microsoft.com/en-us/dotnet/api/system.net.http.httpmessagehandler.sendasync?view=net-7.0#system-net-http-httpmessagehandler-sendasync(system-net-http-httprequestmessage-system-threading-cancellationtoken)">HttpMessageHandler.SendAsync(HttpRequestMessage, CancellationToken)</a>
+on an <code>HttpMessageHandler</code> that can be supplied via the <code>HttpClient</code> constructor.</p>
+<p>The downside is that <code>HttpMessageHandler.SendAsync</code> is protected, which makes it less convenient to
+override than a public method. We need to specify the call by name, and to give FakeItEasy a hint about the return type,
+as described in <a href="https://fakeiteasy.github.io/docs/stable/specifying-a-call-to-configure/#specifying-a-call-to-any-method-or-property">Specifying a call to any method or property</a>.</p>
+<p>Now we can write the following passing test:</p>
+<pre class="m-code"><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Test</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpResponseMessage</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringContent</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">Fake</span><span class="p">&lt;</span><span class="n">HttpMessageHandler</span><span class="p">&gt;();</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="p">.</span><span class="n">CallTo</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">WithReturnType</span><span class="p">&lt;</span><span class="n">Task</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;&gt;()</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">Where</span><span class="p">(</span><span class="n">call</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">call</span><span class="p">.</span><span class="n">Method</span><span class="p">.</span><span class="n">Name</span><span class="w"> </span><span class="p">==</span><span class="w"> </span><span class="s">&quot;SendAsync&quot;</span><span class="p">)</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">Returns</span><span class="p">(</span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;https://fakeiteasy.github.io/docs/&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">content</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span></pre>
+<aside class="m-block m-warning">
+<h3>This is a simplified example</h3>
+<p>In the interest of brevity, I'm creating a Fake, exercising it directly, and checking its behaviour.
+A more realistic example would create the Fake as a collaborator of some production class (the &quot;system
+under test&quot;) and the Fake would not be called directly from the test code.</p>
+</aside>
+</section>
+<section id="easier-and-safer-call-configuration">
+<h2>Easier and safer call configuration</h2>
+<p>The above code works, but specifying the method name and return type is a little awkward.
+A <code>FakeableHttpMessageHandler</code> class can be used to clean things up and to also supply a
+little compile-time safety by ensuring we're configuring the expected method.
+(Note: this class is a near-verbatim copy of the one written by FakeItEasy
+co-owner <a href="https://thomaslevesque.com/">Thomas Levesque</a> while we were answering the user's question.)</p>
+<pre class="m-code"><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">FakeableHttpMessageHandler</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">HttpMessageHandler</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="c1">// sealed so when FakeItEasy creates a Fake, it won&#39;t intercept calls</span>
+<span class="w">    </span><span class="k">protected</span><span class="w"> </span><span class="k">sealed</span><span class="w"> </span><span class="k">override</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;</span><span class="w"> </span><span class="n">SendAsync</span><span class="p">(</span><span class="w"></span>
+<span class="w">            </span><span class="n">HttpRequestMessage</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">cancellationToken</span><span class="w"></span>
+<span class="w">        </span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">FakeSendAsync</span><span class="p">(</span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">cancellationToken</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">abstract</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="n">HttpResponseMessage</span><span class="p">&gt;</span><span class="w"> </span><span class="n">FakeSendAsync</span><span class="p">(</span><span class="w"></span>
+<span class="w">        </span><span class="n">HttpRequestMessage</span><span class="w"> </span><span class="n">request</span><span class="p">,</span><span class="w"> </span><span class="n">CancellationToken</span><span class="w"> </span><span class="n">cancellationToken</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Test</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">response</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpResponseMessage</span><span class="w"> </span><span class="p">{</span><span class="w"> </span><span class="n">Content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">StringContent</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">)</span><span class="w"> </span><span class="p">};</span><span class="w"></span>
+
+<span class="hll"><span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">handler</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">Fake</span><span class="p">&lt;</span><span class="n">FakeableHttpMessageHandler</span><span class="p">&gt;();</span><span class="w"></span>
+</span><span class="hll"><span class="w">    </span><span class="n">A</span><span class="p">.</span><span class="n">CallTo</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">handler</span><span class="p">.</span><span class="n">FakeSendAsync</span><span class="p">(</span><span class="n">A</span><span class="p">&lt;</span><span class="n">HttpRequestMessage</span><span class="p">&gt;.</span><span class="n">Ignored</span><span class="p">,</span><span class="w"> </span><span class="n">A</span><span class="p">&lt;</span><span class="n">CancellationToken</span><span class="p">&gt;.</span><span class="n">Ignored</span><span class="p">))</span><span class="w"></span>
+</span><span class="hll"><span class="w">        </span><span class="p">.</span><span class="n">Returns</span><span class="p">(</span><span class="n">response</span><span class="p">);</span><span class="w"></span>
+</span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">HttpClient</span><span class="p">(</span><span class="n">handler</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">result</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;https://fakeiteasy.github.io/docs/&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">content</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">result</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span><span class="w"></span>
+<span class="w">    </span><span class="n">content</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span></pre>
+</section>
+<section id="alternative-wrap-httpclient">
+<h2>Alternative: wrap HttpClient</h2>
+<p>The above approach will work, but is a little cumbersome, and relies on the internal
+implementation of <code>HttpClient</code> remaining the same. Assuming the interfaces of the
+production code can be changed, one way to reduce uncertainty and
+future-proof the code is to introduce a layer of abstraction on top of <code>HttpClient</code>.
+Since the wrapper could only be tested by faking <cite>HttpClient</cite>, which is what got us
+into this mess, or by actually making web requests, we keep the implementation as
+simple as possible and either lightly test the wrapper or leave it untested.</p>
+<pre class="m-code"><span class="k">public</span><span class="w"> </span><span class="k">interface</span><span class="w"> </span><span class="n">IWebStringGetter</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="n">Task</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"> </span><span class="n">GetAsync</span><span class="p">(</span><span class="n">String</span><span class="w"> </span><span class="n">requestUri</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">class</span><span class="w"> </span><span class="nc">WebStringGetter</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="n">IWebStringGetter</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">private</span><span class="w"> </span><span class="k">readonly</span><span class="w"> </span><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="nf">WebStringGetter</span><span class="p">(</span><span class="n">HttpClient</span><span class="w"> </span><span class="n">client</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="k">this</span><span class="p">.</span><span class="n">client</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">client</span><span class="p">;</span><span class="w"></span>
+
+<span class="w">    </span><span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="p">&lt;</span><span class="kt">string</span><span class="p">&gt;</span><span class="w"> </span><span class="n">GetAsync</span><span class="p">(</span><span class="kt">string</span><span class="w"> </span><span class="n">requestUri</span><span class="p">)</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"></span>
+<span class="w">        </span><span class="k">await</span><span class="w"> </span><span class="n">client</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="n">requestUri</span><span class="p">).</span><span class="n">Result</span><span class="p">.</span><span class="n">Content</span><span class="p">.</span><span class="n">ReadAsStringAsync</span><span class="p">();</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="k">public</span><span class="w"> </span><span class="k">async</span><span class="w"> </span><span class="n">Task</span><span class="w"> </span><span class="nf">Test</span><span class="p">()</span><span class="w"></span>
+<span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">getter</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">A</span><span class="p">.</span><span class="n">Fake</span><span class="p">&lt;</span><span class="n">IWebStringGetter</span><span class="p">&gt;();</span><span class="w"></span>
+<span class="w">    </span><span class="n">A</span><span class="p">.</span><span class="n">CallTo</span><span class="p">(()</span><span class="w"> </span><span class="p">=&gt;</span><span class="w"> </span><span class="n">getter</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;https://fakeiteasy.github.io/docs/&quot;</span><span class="p">))</span><span class="w"></span>
+<span class="w">        </span><span class="p">.</span><span class="n">Returns</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">);</span><span class="w"></span>
+
+<span class="w">    </span><span class="kt">var</span><span class="w"> </span><span class="n">text</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="k">await</span><span class="w"> </span><span class="n">getter</span><span class="p">.</span><span class="n">GetAsync</span><span class="p">(</span><span class="s">&quot;https://fakeiteasy.github.io/docs/&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="n">text</span><span class="p">.</span><span class="n">Should</span><span class="p">().</span><span class="n">Be</span><span class="p">(</span><span class="s">&quot;FakeItEasy is fun&quot;</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span></pre>
+<p>This results in a much simpler test, and so long as the <code>HttpClient</code> doesn't change its interface,
+it will continue to work. Moreover, this technique is applicable to all kinds of difficult-to-fake
+collaborators.</p>
+</section>
+<!-- /content -->
+      <footer>
+        <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+
+
+        <script src="https://utteranc.es/client.js"
+            repo="blairconrad/blairconrad.github.io"
+            issue-term="pathname"
+            theme="photon-dark"
+            crossorigin="anonymous"
+            async>
+        </script>
+      </footer>
+    </article">
+  </div>
+</div>
+</main>
+<footer><nav>
+  <div class="m-container">
+    <div class="m-row">
+      <div class="m-col-l-10 m-push-l-1">
+        <p>Blair Conrad. Powered by <a href="https://getpelican.com">Pelican</a> and <a href="https://mcss.mosra.cz">m.css</a>.</p>
+      </div>
+    </div>
+  </div>
+</nav></footer>
+</body>
+</html>

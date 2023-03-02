@@ -46,41 +46,39 @@
       <article>
         
         <header>
-            <h1><a href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" rel="bookmark" title="Permalink to LibraryHippo 2020 - A Bare-bones Flask App">
-                    LibraryHippo 2020 - A Bare-bones Flask App
+            <h1><a href="https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/" rel="bookmark" title="Permalink to LibraryHippo 2020 - Sending Email from Heroku">
+                    LibraryHippo 2020 - Sending Email from Heroku
                 </a></h1>
                 <div class="article-metadata">
                   <span><i class="fas fa-calendar"></i><time
-                      datetime="2020-02-20T00:00:00-05:00">2020-02-20</time></span>
+                      datetime="2020-03-05T00:00:00-05:00">2020-03-05</time></span>
                   <span><i class="fas fa-folder"></i><a
                       href="https://blairconrad.com/category/development.html"></i>Development</a></span>
                   <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
-                    /
                     <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
                     /
+                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                    /
                     <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                    /
+                    <a href="https://blairconrad.com/tag/email.html">email</a>
                   </span>
                 </div>
-            <p>Last time I laid out the uncertainties that have to be explore before I want to
-          try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
-          order of importance and risk:</p>
-          <ol>
-          <li>web app hosting</li>
-          <li>scheduled jobs</li>
-          <li>scraping library websites on users' behalf</li>
-          <li>a small (perhaps a few MB …</li></ol>
+            <p>After getting a do-nothing web app running on Heroku, I think the riskiest
+          requirement is having a scheduled job for LibraryHippo to check families' status
+          and notify them. However rather than trying to satisfy that requirement, this
+          time I'm going to try to set up email sending, mostly because it …</p>
               <aside class="m-block m-default">
-                <h3>Part 2 of the LibraryHippo 2020 series:</h3>
+                <h3>Part 3 of the LibraryHippo 2020 series:</h3>
                 <ol>
                   <li>
                     <a href='https://blairconrad.com/2020/02/06/libraryhippo-2020-motivation-and-plan/'>Motivation and Plan</a>
                   </li>
                   <li>
-                    A Bare-bones Flask App (this article)
+                    <a href='https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/'>A Bare-bones Flask App</a>
                   </li>
                   <li>
-                    <a href='https://blairconrad.com/2020/03/05/libraryhippo-2020-sending-email-from-heroku/'>Sending Email from Heroku</a>
+                    Sending Email from Heroku (this article)
                   </li>
                   <li>
                     <a href='https://blairconrad.com/2020/03/19/libraryhippo-2020-running-scheduled-tasks-on-heroku/'>Running Scheduled Tasks on Heroku</a>
@@ -102,6 +100,40 @@
                   </li>
                 </ol>
               </aside>
+        </header>
+        <footer>
+          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
+        </footer>
+        <div class="m-clearfix-l"></div>
+      </article>
+      <article>
+        
+        <header>
+            <h1><a href="https://blairconrad.com/2020/02/20/libraryhippo-2020-a-bare-bones-flask-app/" rel="bookmark" title="Permalink to LibraryHippo 2020 - A Bare-bones Flask App">
+                    LibraryHippo 2020 - A Bare-bones Flask App
+                </a></h1>
+                <div class="article-metadata">
+                  <span><i class="fas fa-calendar"></i><time
+                      datetime="2020-02-20T00:00:00-05:00">2020-02-20</time></span>
+                  <span><i class="fas fa-folder"></i><a
+                      href="https://blairconrad.com/category/development.html"></i>Development</a></span>
+                  <span><i class="fas fa-tags"></i>
+                    <a href="https://blairconrad.com/tag/flask.html">flask</a>
+                    /
+                    <a href="https://blairconrad.com/tag/libraryhippo.html">LibraryHippo</a>
+                    /
+                    <a href="https://blairconrad.com/tag/heroku.html">heroku</a>
+                  </span>
+                  <span><i class="fas fa-list"></i>Part 2 of LibraryHippo 2020</span>
+                </div>
+            <p>Last time I laid out the uncertainties that have to be explore before I want to
+          try hosting LibraryHippo on Heroku. Here they are again, roughly in descending
+          order of importance and risk:</p>
+          <ol>
+          <li>web app hosting</li>
+          <li>scheduled jobs</li>
+          <li>scraping library websites on users' behalf</li>
+          <li>a small (perhaps a few MB …</li></ol>
         </header>
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
@@ -336,38 +368,6 @@
           summary on the web page, it was correct.</p>
           <blockquote>
           <p>(The exact …</p></blockquote>
-        </header>
-        <footer>
-          <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
-        </footer>
-        <div class="m-clearfix-l"></div>
-      </article>
-      <article>
-        
-        <header>
-            <h1><a href="https://blairconrad.com/2014/04/16/user-sourced-calendar-feeds-for-waterloo-yard-waste-pickup/" rel="bookmark" title="Permalink to User-Sourced Calendar Feeds for Waterloo Yard Waste Pickup">
-                    User-Sourced Calendar Feeds for Waterloo Yard Waste Pickup
-                </a></h1>
-                <div class="article-metadata">
-                  <span><i class="fas fa-calendar"></i><time
-                      datetime="2014-04-16T00:00:00-04:00">2014-04-16</time></span>
-                  <span><i class="fas fa-folder"></i><a
-                      href="https://blairconrad.com/category/miscellany.html"></i>Miscellany</a></span>
-                  <span><i class="fas fa-tags"></i>
-                    <a href="https://blairconrad.com/tag/icalendar.html">icalendar</a>
-                    /
-                    <a href="https://blairconrad.com/tag/syndication.html">syndication</a>
-                    /
-                    <a href="https://blairconrad.com/tag/waterloo.html">waterloo</a>
-                    /
-                    <a href="https://blairconrad.com/tag/diversions.html">diversions</a>
-                  </span>
-                </div>
-            <p>(Thanks to <a href="http://blog.jonudell.net/">Jon Udell</a>, whose insightful posts
-          are the only reason this would ever have occurred to me.)</p>
-          <p>I live in <a href="http://www.waterloo.ca/">Waterloo, Ontario</a>, a city with weekly
-          residential waste collection. My collection day is Monday. In the warm months, there's an
-          additional biweekly (that's every 2 weeks, not twice a …</p>
         </header>
         <footer>
           <p class="m-transition">~ <i class="fas fa-hippo"></i> ~</p>
