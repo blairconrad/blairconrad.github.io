@@ -333,12 +333,12 @@ functions.</p>
 <span class="x">    &lt;/head&gt;</span>
 <span class="x">    &lt;body&gt;</span>
 <span class="x">        &lt;nav&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_anonymous</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">if</span> <span class="nv">current_user.is_anonymous</span> <span class="cp">%}</span>
 <span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;login&#39;</span><span class="o">,</span> <span class="nv">provider</span><span class="o">=</span><span class="s1">&#39;google&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Login&lt;/a&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">else</span> <span class="cp">%}</span>
 <span class="x">        &lt;a href=&quot;</span><span class="cp">{{</span> <span class="nv">url_for</span><span class="o">(</span><span class="s1">&#39;logout&#39;</span><span class="o">)</span> <span class="cp">}}</span><span class="x">&quot;&gt;Logout </span><span class="cp">{{</span> <span class="nv">current_user.nickname</span> <span class="cp">}}</span><span class="x">&lt;/a&gt;</span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span><span class="x"></span>
-<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">endif</span> <span class="cp">%}</span>
+<span class="x">        </span><span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}{%</span> <span class="k">endblock</span> <span class="cp">%}</span>
 <span class="x">    &lt;/body&gt;</span>
 <span class="x">&lt;/html&gt;</span></pre>
 <figcaption>app/templates/base.jinja</figcaption>
@@ -349,11 +349,11 @@ a link to the login route, and if so, a link to the logout route. The logout
 link includes the user's nickname, mostly to make it easier for me to test.
 The main page has not much to add, so its template is very plain for now:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.jinja&quot;</span> <span class="cp">%}</span><span class="x"></span>
+<pre class="m-code"><span class="cp">{%</span> <span class="k">extends</span> <span class="s2">&quot;base.jinja&quot;</span> <span class="cp">%}</span>
 
-<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span><span class="x"></span>
+<span class="cp">{%</span> <span class="k">block</span> <span class="nv">body</span> <span class="cp">%}</span>
 <span class="x">&lt;h1&gt;LibraryHippo 2020&lt;/h1&gt;</span>
-<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span><span class="x"></span></pre>
+<span class="cp">{%</span> <span class="k">endblock</span> <span class="cp">%}</span></pre>
 <figcaption>app/templates/index.jinja</figcaption>
 </figure>
 <p>Then the index route is updated to use the template:</p>

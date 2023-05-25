@@ -101,11 +101,11 @@ test. We (or if I'm being honest, mostly he) arrived at an API that</p>
 fulfill the requirements laid out above. The <code>Make</code> class is its single entry
 point and allows you to create your system under test:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="n">import</span><span class="w"> </span><span class="n">MakeItEasy</span><span class="p">;</span><span class="w"></span>
+<pre class="m-code"><span class="n">import</span><span class="w"> </span><span class="n">MakeItEasy</span><span class="p">;</span>
 
 <span class="c1">// ...</span>
 
-<span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">FromDefaults</span><span class="p">();</span><span class="w"></span></pre>
+<span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="o">&lt;</span><span class="n">VeryNeedySystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">FromDefaults</span><span class="p">();</span></pre>
 <figcaption>The simplest way to create your system under test</figcaption>
 </figure>
 <p>That's it. If <code>VeryNeedySystem</code> has a public constructor whose arguments can
@@ -119,8 +119,8 @@ object(s) that the SUT will be using. Then you can configure them, or maybe
 interrogate them after the system under test has been exercised. This is also
 very easy:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span><span class="w"></span>
+<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="o">&lt;</span><span class="n">VeryNeedySystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">From</span><span class="p">(</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span>
 
 <span class="c1">// A.CallTo(() =&gt; fakeCollaborator.SomeMethod()).Returns(1);</span>
 <span class="c1">// exercise systemUnderTest</span>
@@ -139,8 +139,8 @@ prefer not to use local variables for the collaborators.</p>
 parameters. MakeItEasy will usually populate these with Dummies, but if you have
 a particular value you want to supply, you can do that:</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span><span class="w"></span></pre>
+<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="o">&lt;</span><span class="n">VeryNeedySystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">From</span><span class="p">(</span>
+<span class="w">    </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">);</span></pre>
 <figcaption>Create a system under test using supplied arguments</figcaption>
 </figure>
 <p>You can supply up to 8 constructor arguments.</p>
@@ -149,9 +149,9 @@ a particular value you want to supply, you can do that:</p>
 <h2>&quot;Advanced&quot; Usage</h2>
 <p>You can request Fake collaborators and supply arguments at the same time, of course.</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span><span class="w"></span>
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span><span class="w"></span></pre>
+<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">systemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="o">&lt;</span><span class="n">VeryNeedySystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">From</span><span class="p">(</span>
+<span class="w">    </span><span class="n">DateTime</span><span class="p">.</span><span class="n">Now</span><span class="p">,</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span></pre>
 <figcaption>Create a system under test specifying an argument and accessing a Fake collaborator</figcaption>
 </figure>
 <p>As before, you can supply up to 8 arguments and request up to 8 collaborators back.</p>
@@ -161,13 +161,13 @@ create the Fake &quot;by hand&quot;, configure it, and then pass it in. Or maybe
 to share a Fake between systems under test. All this is supported, even in
 combination.</p>
 <figure class="m-code-figure">
-<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">oneSystemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="p">&lt;</span><span class="n">VeryNeedySystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span><span class="w"></span>
+<pre class="m-code"><span class="kt">var</span><span class="w"> </span><span class="n">oneSystemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">A</span><span class="o">&lt;</span><span class="n">VeryNeedySystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">From</span><span class="p">(</span>
+<span class="w">    </span><span class="k">out</span><span class="w"> </span><span class="n">ICollaborator</span><span class="w"> </span><span class="n">fakeCollaborator</span><span class="p">);</span>
 
 <span class="c1">// configure the fakeCollaborator somehow</span>
 
-<span class="kt">var</span><span class="w"> </span><span class="n">anotherSystemUnderTest</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">An</span><span class="p">&lt;</span><span class="n">OtherKindOfSystem</span><span class="p">&gt;().</span><span class="n">From</span><span class="p">(</span><span class="w"></span>
-<span class="w">    </span><span class="n">fakeCollaborator</span><span class="p">);</span><span class="w"></span></pre>
+<span class="kt">var</span><span class="w"> </span><span class="n">anotherSystemUnderTest</span><span class="w"> </span><span class="o">=</span><span class="w"> </span><span class="n">Make</span><span class="p">.</span><span class="n">An</span><span class="o">&lt;</span><span class="n">OtherKindOfSystem</span><span class="o">&gt;</span><span class="p">().</span><span class="n">From</span><span class="p">(</span>
+<span class="w">    </span><span class="n">fakeCollaborator</span><span class="p">);</span></pre>
 <figcaption>Share Fakes between classes under test</figcaption>
 </figure>
 </section>
