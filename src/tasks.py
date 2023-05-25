@@ -185,5 +185,6 @@ def compile_requirements(c, upgrade=False):
     command = "pip-compile"
     if upgrade:
         command += " --upgrade"
-    for in_file in ["prod", "dev"]:
-        c.run(command + " " + os.path.join("requirements", in_file + ".in"))
+    with c.cd('requirements'):
+        for in_file in ["prod", "dev"]:
+            c.run(f"{command} {in_file}.in")
