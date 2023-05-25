@@ -59,3 +59,24 @@ title: Fish Cakes
 </ol>
 
 <p>Yield: about 26 fish cakes.</p>
+
+
+## Session Notes
+
+### 2023-04-01
+
+* 1.5 kg of cod
+* started soaking Friday (2023-03-31) morning, probably around 7:30
+* replaced water Friday evening, probably around 19:30
+* replaced water Saturday morning, probably around 10:30
+* 20 oz of onions, including peels
+* boiled fish for about 30 minutes. Flaked, but flakes were pretty firm and tasted maybe too salty. Drained water (mostly) and refilled
+* rebrought to a boil. Cooked another 10 minutes. Some tested fish quite unsalty. Some close to original. Water was mildly salty. Drained water (mostly) and refilled
+* rebrought to a boil. Cooked another 20 minutes. Turned off heat and let it sit while getting potatoes ready.
+* .85 lb of pork fat. Removed rind. Maybe a little more than .5 left. Divided in 2, and froze half.
+* checked up fat. Rendered on low. Removed chunks. Poured liquid out so salt sediment would settle. Wiped pan. Put in onions and some fat liquid to fry
+* repeated with rest of onions
+* flaked fish. Didn't taste too salty
+* mixed it all up
+* made 25 136g cakes
+* they're pretty good!
