@@ -49,7 +49,7 @@ title: Pumpkin Chocolate Chip Bars
   <td>2 t vanilla</td>
 </tr>
 <tr>
-  <td>1 c pumpkin puree</td>
+  <td>1 c pumpkin puree (230 g)</td>
   <td colspan="2" class="righthide">&nbsp;</td>
 </tr>
 <tr>
