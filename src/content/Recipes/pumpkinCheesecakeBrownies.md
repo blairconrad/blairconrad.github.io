@@ -17,7 +17,7 @@ title: Pumpkin Cheesecake Brownies
   <td rowspan="19">cool<br>completely<br>on<br>wire<br>rack</td>
 </tr>
 <tr>
-  <td>&frac12; c pumpkin puree</td>
+  <td>&frac12; c pumpkin puree (115 g)</td>
   <td rowspan="7" class="righthide">&nbsp;</td>
 </tr>
 <tr>
