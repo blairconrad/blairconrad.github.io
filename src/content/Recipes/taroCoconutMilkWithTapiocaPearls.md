@@ -44,4 +44,4 @@ title: Taro Coconut Milk with Tapioca Pearls
 1. Add coconut milk and sugar to taro water, stirring until dissolved.
 1. Bring taro to a boil  and stir in tapioca pearls.
 
-<p class="confession">Stolen from <a href="thejanechannel">thejanechannel</a>.  </p>
+<p class="confession">Stolen from <a href="https://thejanechannel.com/2011/08/16/%E6%A4%B0%E6%B1%81%E8%8A%8B%E9%A0%AD%E8%A5%BF%E7%B1%B3%E9%9C%B2-taro-coconut-milk-with-tapioca-pearls/">thejanechannel (defunct as of 2023-11-15)</a>.  </p>

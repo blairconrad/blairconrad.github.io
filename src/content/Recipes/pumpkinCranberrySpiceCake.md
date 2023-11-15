@@ -70,7 +70,7 @@ title: Pumpkin Cranberry Spice Cake
     <td colspan="3" class="righthide">&nbsp;</td>
   </tr>
   <tr>
-    <td>powdered sugar or <a href="orangeGlaze.html">orange glaze</a></td>
+    <td>powdered sugar or <a href="../orange-glaze">orange glaze</a></td>
     <td colspan="6" class="righthide">&nbsp;</td>
   </tr>
 </table>

@@ -4,7 +4,7 @@ title: expand your scope - you can dot-source more than just files
 comments: true
 tags: Development, PowerShell
 ---
-I'm working on a  <a href="../../../02/07/using-subversion-to-evangelize-powershell/">small project</a> that will require me to dot-source some PowerShell files in order to load their functions, aliases, and variables and make them available in a session. Actually, I have to do a little more than dot-source each file, but I'll keep the example simple to illustrate the wrinkle I ran into.
+I'm working on a  <a href="/2010/02/07/using-subversion-to-evangelize-powershell/">small project</a> that will require me to dot-source some PowerShell files in order to load their functions, aliases, and variables and make them available in a session. Actually, I have to do a little more than dot-source each file, but I'll keep the example simple to illustrate the wrinkle I ran into.
 
 Suppose I have this file, <b>file-to-load.ps1</b>:
 
