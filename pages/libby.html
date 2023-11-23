@@ -1,0 +1,40 @@
+<html>
+
+<head>
+    <title>Libby</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+    <style>
+        #waiting-holds td:first-child {
+            text-align: right;
+
+            /* otherwise it fetches up against the next column */
+            padding-right: 2em;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="content"></div>
+    <script>
+        window.onload = (event) => {
+            const location_href = window.location.href;
+            const location_url = new URL(location_href);
+            const gist_slug = location_url.searchParams.get("gist");
+            const gist_url = "https://gist.githubusercontent.com/" + gist_slug;
+
+            const request = new XMLHttpRequest();
+            request.onreadystatechange = () => {
+                if (request.readyState === 4) {
+                    console.log(request.response);
+                    document.getElementById('content').innerHTML = request.response;
+
+                    // document.getElementById('content').appendChild(div)
+                }
+            };
+            request.open("GET", gist_url);
+            request.send("");
+        };
+    </script>
+</body>
+
+</html>
