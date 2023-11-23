@@ -30,6 +30,7 @@ ARTICLE_URL = "{date:%Y}/{date:%m}/{date:%d}/{slug}/"
 ARTICLE_SAVE_AS = "{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
 DRAFT_SAVE_AS = "drafts/{date:%Y}/{date:%m}/{date:%d}/{slug}/index.html"
 
+READERS = {"html": None}  # stop processing static HTML
 PAGE_URL = "pages/{slug}/"
 PAGE_SAVE_AS = "pages/{slug}/index.html"
 SLUG_REGEX_SUBSTITUTIONS = [
@@ -50,11 +51,11 @@ PAGINATION_PATTERNS = (
 
 DISPLAY_PAGES_ON_MENU = False
 
-STATIC_PATHS = ["images", "Recipes", "extra"]
+STATIC_PATHS = ["images", "pages", "Recipes", "extra"]
 
 PAGE_PATHS = ["pages", "Recipes"]
 EXTRA_PATH_METADATA = {}
-for (path, directories, files) in os.walk(os.path.join("content", "extra")):
+for path, directories, files in os.walk(os.path.join("content", "extra")):
     for f in files:
         full_path = (path + "/" + f).replace("\\", "/")
         EXTRA_PATH_METADATA[full_path[8:]] = {"path": full_path[14:]}
