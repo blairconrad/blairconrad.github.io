@@ -15,26 +15,98 @@
 </head>
 
 <body>
-    <div id="content"></div>
-    <script>
-        window.onload = (event) => {
-            const location_href = window.location.href;
-            const location_url = new URL(location_href);
-            const gist_slug = location_url.searchParams.get("gist");
-            const gist_url = "https://gist.githubusercontent.com/" + gist_slug;
+    <div id="content">loading&hellip;</div>
+    <script async>
+        window.onload = async (event) => {
 
-            const request = new XMLHttpRequest();
-            request.onreadystatechange = () => {
-                if (request.readyState === 4) {
-                    console.log(request.response);
-                    document.getElementById('content').innerHTML = request.response;
+            const proxy_base = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl='
+            const overdrive_url_base = 'https://sentry-read.svc.overdrive.com/'
+            const sync_path = 'chip/sync';
 
-                    // document.getElementById('content').appendChild(div)
-                }
-            };
-            request.open("GET", gist_url);
-            request.send("");
+            const location_url = new URL(window.location.href);
+            const bearer = location_url.searchParams.get('bearer');
+
+            const sync_url = proxy_base + encodeURI(overdrive_url_base + sync_path);
+            const response = await fetch(sync_url, { headers: { 'Authorization': 'Bearer ' + bearer } });
+            const sync_data = await response.json();
+            const cards = get_cards(sync_data);
+            const loans = get_loans(sync_data);
+
+            const lines = html(loans, cards).join('\n');
+            document.getElementById('content').innerHTML = lines;
+
         };
+
+        function get_cards(data) {
+            cards = Object();
+            for (card of data.cards) {
+                cards[card.cardId] = card;
+            }
+            return cards;
+        }
+
+        function get_loans(data) {
+            return data.loans.map(parse_loan);
+        }
+
+        function parse_loan(loan_data) {
+            loan_data.expireDate = new Date(loan_data.expireDate);
+            return loan_data;
+        }
+
+        function html(loans, cards) {
+            lines = []
+            if (loans) {
+                start_section(lines, 'Loans');
+                start_table(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1f468; Borrower');
+                for (loan of loans) {
+                    add_row(lines, loan.expireDate.toLocaleString('en-CA'), loan.title, cards[loan.cardId].cardName);
+                }
+                end_table(lines);
+
+                end_section(lines);
+            }
+            return lines;
+        }
+
+        function start_section(lines, text) {
+            lines.push(`<div id='${slug(text)}'>`);
+            lines.push(`<h2>${text}</h2>`);
+        }
+
+        function end_section(lines) {
+            lines.push('</div>');
+        }
+
+        function start_table(lines, ...column_headers) {
+            lines.push('<table>')
+            lines.push('  <thead>')
+            lines.push('    <tr>')
+            for (h of column_headers) {
+                lines.push(`      <th>${h}</th>`)
+            }
+            lines.push('  </thead>')
+            lines.push('  <tbody>')
+        }
+
+
+        function add_row(lines, ...cell_values) {
+            var text = '    <tr>';
+            for (v of cell_values) {
+                text += `<td>${v}</td>`;
+            }
+            text += '</tr>';
+            lines.push(text);
+        }
+
+        function end_table(lines) {
+            lines.push('</table>');
+        }
+
+        function slug(text) {
+            return text.toLowerCase().replace(' ', '-')
+        }
+
     </script>
 </body>
 
