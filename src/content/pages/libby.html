@@ -15,17 +15,62 @@
 </head>
 
 <body>
-    <div id="content">loading&hellip;</div>
+    <div id="content" />
     <script async>
+        const proxy_base = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl='
+        const overdrive_url_base = 'https://sentry-read.svc.overdrive.com/'
+        const bearerTokenKey = 'libby.bearer.token';
         window.onload = async (event) => {
 
-            const proxy_base = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl='
-            const overdrive_url_base = 'https://sentry-read.svc.overdrive.com/'
-            const sync_path = 'chip/sync';
-
             const location_url = new URL(window.location.href);
-            const bearer = location_url.searchParams.get('bearer');
 
+            if (location_url.searchParams.has('reset')) {
+                window.localStorage.removeItem(bearerTokenKey);
+            }
+
+            var bearer = window.localStorage.getItem(bearerTokenKey);
+            if (bearer) {
+                loadContent(bearer);
+            } else {
+                const codeInput = document.createElement('input');
+                codeInput.setAttribute('autocomplete', 'off');
+                codeInput.setAttribute('autofocus', 'autofocus');
+                codeInput.setAttribute('id', 'code');
+                codeInput.setAttribute('maxlength', 8);
+                codeInput.setAttribute('name', 'code');
+                codeInput.setAttribute('pattern', '[0-9]{8}');
+                codeInput.setAttribute('placeholder', '12345678');
+                codeInput.setAttribute('required', 'required');
+                codeInput.setAttribute('size', '8');
+                codeInput.setAttribute('title', '8-digit one-time Libby code');
+                codeInput.setAttribute('type', 'text');
+
+                const codeSubmit = document.createElement('input');
+                codeSubmit.setAttribute('type', 'submit');
+                codeSubmit.setAttribute('value', 'Submit');
+
+                const codeForm = document.createElement('form');
+                codeForm.appendChild(codeInput);
+                codeForm.appendChild(codeSubmit);
+                codeForm.addEventListener('submit', cloneCode);
+
+                const codeText = document.createElement('p');
+                codeText.innerHTML = `
+You don't appear to have registered your Libby Account. Enter an
+8-digit code <a href="https://help.libbyapp.com/en-us/6070.htm">you can get from another logged-in
+Libby account</a>.
+`;
+
+                const contentNode = document.getElementById('content');
+                contentNode.replaceChildren(codeText, codeForm);
+            }
+        };
+
+        async function loadContent(bearer) {
+            const contentNode = document.getElementById('content');
+            contentNode.innerHTML = 'loading&hellip;';
+
+            const sync_path = 'chip/sync';
             const sync_url = proxy_base + encodeURI(overdrive_url_base + sync_path);
             const response = await fetch(sync_url, { headers: { 'Authorization': 'Bearer ' + bearer } });
             const sync_data = await response.json();
@@ -33,9 +78,40 @@
             const loans = get_loans(sync_data);
 
             const lines = html(loans, cards).join('\n');
-            document.getElementById('content').innerHTML = lines;
+            contentNode.innerHTML = lines;
+        }
 
-        };
+        async function cloneCode(e) {
+            const chip_path = 'chip?client=dewey';
+            const clone_path = 'chip/clone/code';
+
+            e.preventDefault();
+
+            const chip_url = proxy_base + encodeURI(overdrive_url_base + chip_path);
+            const chip_response = await fetch(chip_url, { method: 'POST' });
+            const chip_data = await chip_response.json();
+            const bearer = chip_data.identity;
+
+            const code = new FormData(e.target).get('code');
+
+            const clone_url = encodeURI(proxy_base + overdrive_url_base + clone_path);
+            const clone_response = await fetch(
+                clone_url,
+                {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Authorization': `Bearer ${bearer}`,
+                        'Content-Type': 'application/json',
+                    },
+                    body: `{"code":"${code}"}`,
+                });
+            if (clone_response.ok) {
+                window.localStorage.setItem(bearerTokenKey, bearer);
+                loadContent(bearer);
+                return;
+            }
+        }
 
         function get_cards(data) {
             cards = Object();
