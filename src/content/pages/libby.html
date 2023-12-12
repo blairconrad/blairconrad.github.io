@@ -5,7 +5,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="icon" type="image/x-icon" href="/images/libraryhippo-icon-64.ico" />
     <style>
-        #waiting-holds td:first-child {
+        #pending-holds td:first-child {
             text-align: right;
 
             /* otherwise it fetches up against the next column */
@@ -77,9 +77,10 @@ Libby account</a>.
             const cards = getCards(syncData);
             const loans = getLoans(syncData);
             const holds = getHolds(syncData);
-            const readyHolds = holds.filter(h => h.isReady).sort((a, b) => a.expireDate < b.expireDate ? -1 : 1);
+            const readyHolds = holds.filter(h => h.isReady).sort(sortKey(h => h.expireDate));
+            const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays));
 
-            const lines = html(loans, readyHolds, cards).join('\n');
+            const lines = html(loans, readyHolds, pendingHolds, cards).join('\n');
             contentNode.innerHTML = lines;
         }
 
@@ -141,10 +142,16 @@ Libby account</a>.
                 holdData.isReady = true;
                 holdData.expireDate = new Date(holdData.expireDate);
             }
+            if (!holdData.estimatedWaitDays) {
+                holdData.estimatedWaitDays = 0;
+            }
+            if (!holdData.ownedCopies) {
+                holdData.estimatedWaitDays = Infinity;
+            }
             return holdData;
         }
 
-        function html(loans, readyHolds, cards) {
+        function html(loans, readyHolds, pendingHolds, cards) {
             lines = []
             if (loans) {
                 startSection(lines, 'Loans');
@@ -161,6 +168,16 @@ Libby account</a>.
                 startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
                 for (hold of readyHolds) {
                     addRow(lines, formatExpireDate(hold.expireDate), hold.title, cards[hold.cardId].cardName);
+                }
+                endTable(lines);
+
+                endSection(lines);
+            }
+            if (pendingHolds) {
+                startSection(lines, 'Pending Holds');
+                startTable(lines, '&#x1f4c5; Days to Wait', '&#x1f4da; Title', '&#x1f4dd; Author');
+                for (hold of pendingHolds) {
+                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), hold.title, hold.firstCreatorName);
                 }
                 endTable(lines);
 
@@ -205,6 +222,28 @@ Libby account</a>.
 
         function formatExpireDate(date) {
             return date.toLocaleString('en-CA');
+        }
+
+        function formatWaitDays(waitDays) {
+            switch (waitDays) {
+                case 0:
+                    return '&nbsp;'
+                case Infinity:
+                    return '&infin;';
+                default:
+                    return waitDays;
+            }
+        }
+
+        function sortKey(keyFunc) {
+            return function (a, b) {
+                const aKey = keyFunc(a);
+                const bKey = keyFunc(b);
+                return aKey < bKey
+                    ? -1 : aKey == bKey
+                        ? 0
+                        : 1;
+            }
         }
 
         function slug(text) {
