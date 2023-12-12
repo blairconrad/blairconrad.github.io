@@ -76,8 +76,10 @@ Libby account</a>.
             const syncData = await response.json();
             const cards = getCards(syncData);
             const loans = getLoans(syncData);
+            const holds = getHolds(syncData);
+            const readyHolds = holds.filter(h => h.isReady).sort((a, b) => a.expireDate < b.expireDate ? -1 : 1);
 
-            const lines = html(loans, cards).join('\n');
+            const lines = html(loans, readyHolds, cards).join('\n');
             contentNode.innerHTML = lines;
         }
 
@@ -130,13 +132,35 @@ Libby account</a>.
             return loanData;
         }
 
-        function html(loans, cards) {
+        function getHolds(data) {
+            return data.holds.map(parseHold);
+        }
+
+        function parseHold(holdData) {
+            if (holdData.expireDate) {
+                holdData.isReady = true;
+                holdData.expireDate = new Date(holdData.expireDate);
+            }
+            return holdData;
+        }
+
+        function html(loans, readyHolds, cards) {
             lines = []
             if (loans) {
                 startSection(lines, 'Loans');
-                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1f468; Borrower');
+                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
                 for (loan of loans) {
-                    addRow(lines, loan.expireDate.toLocaleString('en-CA'), loan.title, cards[loan.cardId].cardName);
+                    addRow(lines, formatExpireDate(loan.expireDate), loan.title, cards[loan.cardId].cardName);
+                }
+                endTable(lines);
+
+                endSection(lines);
+            }
+            if (readyHolds) {
+                startSection(lines, 'Ready Holds');
+                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
+                for (hold of readyHolds) {
+                    addRow(lines, formatExpireDate(hold.expireDate), hold.title, cards[hold.cardId].cardName);
                 }
                 endTable(lines);
 
@@ -177,6 +201,10 @@ Libby account</a>.
 
         function endTable(lines) {
             lines.push('</table>');
+        }
+
+        function formatExpireDate(date) {
+            return date.toLocaleString('en-CA');
         }
 
         function slug(text) {
