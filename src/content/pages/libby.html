@@ -5,11 +5,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="icon" type="image/x-icon" href="/images/libraryhippo-icon-64.ico" />
     <style>
-        #pending-holds td:first-child {
+        th:first-child,
+        td:first-child {
             text-align: right;
 
             /* otherwise it fetches up against the next column */
             padding-right: 2em;
+        }
+
+        table {
+            table-layout: auto;
         }
     </style>
 </head>
@@ -235,7 +240,24 @@ Libby account</a>.
         }
 
         function formatExpireDate(date) {
-            return date.toLocaleString('en-CA');
+            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+            const months = [
+                'January', 'February', 'March', 'April', 'May', 'June',
+                'July', 'August', 'September', 'October', 'November', 'December'
+            ];
+
+            const dayPart = days[date.getDay()];
+            const timePart =
+                date.getHours().toString().padStart(2, '0') + ':' +
+                date.getMinutes().toString().padStart(2, '0')
+
+            const now = new Date();
+            const daysFromNow = (date - now) / 86_400_000;
+            const middlePart = daysFromNow >= 6
+                ? ' ' + date.getDate().toString().padStart(2, '0') + ' ' + months[date.getMonth()] + ' '
+                : ' ';
+            const formattedDate = dayPart + middlePart + timePart;
+            return `<span title="${date}">${formattedDate}</span>`;
         }
 
         function formatWaitDays(waitDays) {
