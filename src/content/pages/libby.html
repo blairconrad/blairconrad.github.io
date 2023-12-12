@@ -96,9 +96,9 @@ Libby account</a>.
             e.preventDefault();
 
             const chipUrl = proxyBase + encodeURI(overdriveUrlBase + chipPath);
-            const chipResponse = await fetch(chipUrl, { method: 'POST' });
-            const chipData = await chipResponse.json();
-            const bearer = chipData.identity;
+            var chipResponse = await fetch(chipUrl, { method: 'POST' });
+            var chipData = await chipResponse.json();
+            var bearer = chipData.identity;
 
             const code = new FormData(e.target).get('code');
 
@@ -115,9 +115,15 @@ Libby account</a>.
                     body: `{"code":"${code}"}`,
                 });
             if (cloneResponse.ok) {
-                window.localStorage.setItem(bearerTokenKey, bearer);
-                loadContent(bearer);
-                return;
+
+                chipResponse = await fetch(chipUrl, { method: 'POST', headers: { 'Authorization': `Bearer ${bearer}` } });
+                if (chipResponse.ok) {
+                    chipData = await chipResponse.json();
+                    bearer = chipData.identity;
+
+                    window.localStorage.setItem(bearerTokenKey, bearer);
+                    loadContent(bearer);
+                }
             }
         }
 
