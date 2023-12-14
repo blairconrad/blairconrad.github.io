@@ -22,8 +22,6 @@
 <body>
     <div id="content" />
     <script async>
-        const proxyBase = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl='
-        const overdriveUrlBase = 'https://sentry-read.svc.overdrive.com/'
         const bearerTokenKey = 'libby.bearer.token';
         window.onload = async (event) => {
 
@@ -80,8 +78,7 @@ Libby account</a>.
             contentNode.innerHTML = 'loading&hellip;';
 
             const syncPath = 'chip/sync';
-            const syncUrl = proxyBase + encodeURI(overdriveUrlBase + syncPath);
-            const response = await fetch(syncUrl, { headers: { 'Authorization': 'Bearer ' + bearer } });
+            const response = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
             const syncData = await response.json();
             const cards = getCards(syncData);
             const loans = getLoans(syncData);
@@ -99,16 +96,15 @@ Libby account</a>.
 
             e.preventDefault();
 
-            const chipUrl = proxyBase + encodeURI(overdriveUrlBase + chipPath);
+            const chipUrl = overdriveUrl(chipPath);
             var chipResponse = await fetch(chipUrl, { method: 'POST' });
             var chipData = await chipResponse.json();
             var bearer = chipData.identity;
 
             const code = new FormData(e.target).get('code');
 
-            const cloneUrl = encodeURI(proxyBase + overdriveUrlBase + clonePath);
             const cloneResponse = await fetch(
-                cloneUrl,
+                overdriveUrl(clonePath),
                 {
                     method: 'POST',
                     headers: {
@@ -296,6 +292,15 @@ Libby account</a>.
             return text.toLowerCase().replace(' ', '-')
         }
 
+        function overdriveUrl(path) {
+            const overdriveUrlBase = 'https://sentry-read.svc.overdrive.com/'
+            return proxyUrl(overdriveUrlBase + path);
+        }
+
+        function proxyUrl(url) {
+            const proxyBase = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl=';
+            return proxyBase + encodeURI(url);
+        }
     </script>
 </body>
 
