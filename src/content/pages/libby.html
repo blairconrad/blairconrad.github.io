@@ -37,39 +37,43 @@
             if (bearer) {
                 loadContent(bearer);
             } else {
-                const codeInput = document.createElement('input');
-                codeInput.setAttribute('autocomplete', 'off');
-                codeInput.setAttribute('autofocus', 'autofocus');
-                codeInput.setAttribute('id', 'code');
-                codeInput.setAttribute('maxlength', 8);
-                codeInput.setAttribute('name', 'code');
-                codeInput.setAttribute('pattern', '[0-9]{8}');
-                codeInput.setAttribute('placeholder', '12345678');
-                codeInput.setAttribute('required', 'required');
-                codeInput.setAttribute('size', '8');
-                codeInput.setAttribute('title', '8-digit one-time Libby code');
-                codeInput.setAttribute('type', 'text');
+                showCloneChipForm();
+            }
+        };
 
-                const codeSubmit = document.createElement('input');
-                codeSubmit.setAttribute('type', 'submit');
-                codeSubmit.setAttribute('value', 'Submit');
+        function showCloneChipForm() {
+            const codeInput = document.createElement('input');
+            codeInput.setAttribute('autocomplete', 'off');
+            codeInput.setAttribute('autofocus', 'autofocus');
+            codeInput.setAttribute('id', 'code');
+            codeInput.setAttribute('maxlength', 8);
+            codeInput.setAttribute('name', 'code');
+            codeInput.setAttribute('pattern', '[0-9]{8}');
+            codeInput.setAttribute('placeholder', '12345678');
+            codeInput.setAttribute('required', 'required');
+            codeInput.setAttribute('size', '8');
+            codeInput.setAttribute('title', '8-digit one-time Libby code');
+            codeInput.setAttribute('type', 'text');
 
-                const codeForm = document.createElement('form');
-                codeForm.appendChild(codeInput);
-                codeForm.appendChild(codeSubmit);
-                codeForm.addEventListener('submit', cloneCode);
+            const codeSubmit = document.createElement('input');
+            codeSubmit.setAttribute('type', 'submit');
+            codeSubmit.setAttribute('value', 'Submit');
 
-                const codeText = document.createElement('p');
-                codeText.innerHTML = `
+            const codeForm = document.createElement('form');
+            codeForm.appendChild(codeInput);
+            codeForm.appendChild(codeSubmit);
+            codeForm.addEventListener('submit', cloneCode);
+
+            const codeText = document.createElement('p');
+            codeText.innerHTML = `
 You don't appear to have registered your Libby Account. Enter an
 8-digit code <a href="https://help.libbyapp.com/en-us/6070.htm">you can get from another logged-in
 Libby account</a>.
 `;
 
-                const contentNode = document.getElementById('content');
-                contentNode.replaceChildren(codeText, codeForm);
-            }
-        };
+            const contentNode = document.getElementById('content');
+            contentNode.replaceChildren(codeText, codeForm);
+        }
 
         async function loadContent(bearer) {
             const contentNode = document.getElementById('content');
