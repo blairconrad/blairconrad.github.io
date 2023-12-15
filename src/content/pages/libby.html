@@ -73,6 +73,13 @@ Libby account</a>.
             contentNode.replaceChildren(codeText, codeForm);
         }
 
+        const getTag = (bearer, tagName) =>
+            fetch(proxyUrl(`https://vandal.svc.overdrive.com/tag/uuid/${toBase64(tagName)}?enc=1&range=0...1000&sort=newest`),
+                { headers: { 'Authorization': `Bearer ${bearer}` } }
+            )
+                .then(onFulfilled, onRejected)
+                .catch(err => console.error('[request failed]', err.message));
+
         async function loadContent(bearer) {
             const contentNode = document.getElementById('content');
             contentNode.innerHTML = 'loading&hellip;';
@@ -83,11 +90,66 @@ Libby account</a>.
             const cards = getCards(syncData);
             const loans = getLoans(syncData);
             const holds = getHolds(syncData);
-            const readyHolds = holds.filter(h => h.isReady).sort(sortKey(h => h.expireDate));
-            const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays));
+            var readyHolds = holds.filter(h => h.isReady || h.luckyDayAvailableCopies).sort(sortKey(h => h.expireDate));
+
+            const locationUrl = new URL(window.location.href);
+            var tagNames = locationUrl.searchParams.get('tags');
+            if (tagNames) {
+                tagNames = tagNames.split(',');
+            }
+
+            var tags = [];
+            if (tagNames) {
+                const tagPromises = [];
+                for (tagName of tagNames) {
+                    tagPromises.push(getTag(bearer, tagName));
+                }
+
+                tags = (await Promise.all(tagPromises)).map(t => t.tag);
+            }
+
+            const tagTitleIds = tags.flatMap(t => t.taggings.map(t => t.titleId)).filter(t => !readyHolds.map(h => h.id).includes(t));
+
+            var availTitles = [];
+            if (tagTitleIds.length) {
+                var availResponse = await fetch("https://thunder.api.overdrive.com/v2/libraries/downloadlibrary/media/availability?x-client-id=dewey", {
+                    "headers": {
+                        "content-type": "application/json",
+                    },
+                    "body": JSON.stringify({ 'ids': tagTitleIds }),
+                    "method": "POST",
+                });
+                var availData = await availResponse.json();
+                availTitles = availData.items.filter(i => i && (i.isAvailable || i.luckyDayAvailableCopies));
+            }
+            var availTitleIds = availTitles.map(a => a.id).join(',');
+
+
+            var bulkData = [];
+            if (availTitleIds) {
+                var bulkResponse = await fetch(`https://thunder.api.overdrive.com/v2/media/bulk?titleIds=${availTitleIds}&x-client-id=dewey`);
+                bulkData = await bulkResponse.json();
+                for (b of bulkData) {
+                    b.ownedCopies = 1; // it's available, so they have at least one
+                    for (a of availTitles) {
+                        if (a && a.id == b.id) {
+                            b.isAvailable = a.isAvailable;
+                            b.luckyDayAvailableCopies = a.luckyDayAvailableCopies;
+                        }
+                    }
+                }
+            }
+
+            addTagsToNotes(holds, tags);
+            const itemsWeCanHave = bulkData.map(parseHold).sort(sortKey(h => h.title))
+            addTagsToNotes(itemsWeCanHave, tags);
+            readyHolds = readyHolds.concat(itemsWeCanHave);
+
+            const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
 
             const lines = html(loans, readyHolds, pendingHolds, cards).join('\n');
             contentNode.innerHTML = lines;
+
         }
 
         async function cloneCode(e) {
@@ -149,31 +211,49 @@ Libby account</a>.
         }
 
         function parseHold(holdData) {
-            var notes = ''
+            if (!holdData.notes) {
+                holdData.notes = []
+            }
+
             if (holdData.detailedSeries) {
                 const seriesName = holdData.detailedSeries.seriesName;
                 const readingOrder = holdData.detailedSeries.readingOrder;
                 if (seriesName && readingOrder) {
-                    notes += `${seriesName} #${readingOrder}`
+                    holdData.notes.push(`${seriesName}&nbsp;#${readingOrder}`)
                 }
             }
             if (holdData.expireDate) {
                 holdData.isReady = true;
                 holdData.expireDate = new Date(holdData.expireDate);
+            } else if (holdData.luckyDayAvailableCopies) {
+                holdData.expireDate = '&#x1F340;';
             }
+
             if (!holdData.estimatedWaitDays) {
                 holdData.estimatedWaitDays = 0;
             }
+
             if (!holdData.ownedCopies) {
                 holdData.estimatedWaitDays = Infinity;
-                if (notes) {
-                    notes += '<br>';
-                }
-                notes += 'no more copies';
+                holdData.notes.push('no&nbsp;more&nbsp;copies');
             }
-            holdData.notes = notes ? notes : '&nbsp;';
 
             return holdData;
+        }
+
+        function addTagsToNotes(holds, tags) {
+            for (hold of holds) {
+                for (tag of tags) {
+                    for (tagging of tag.taggings) {
+                        if (hold.id == tagging.titleId) {
+                            if (!hold.notes) {
+                                hold.notes = []
+                            }
+                            hold.notes.unshift(`<span title="${tag.name}">${tag.description}</span>`);
+                        }
+                    }
+                }
+            }
         }
 
         function html(loans, readyHolds, pendingHolds, cards) {
@@ -182,27 +262,32 @@ Libby account</a>.
                 startSection(lines, 'Loans');
                 startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
                 for (loan of loans) {
-                    addRow(lines, formatExpireDate(loan.expireDate), loan.title, cards[loan.cardId].cardName);
+                    addRow(lines, formatExpireDate(loan), loan.title, cards[loan.cardId].cardName);
                 }
                 endTable(lines);
 
                 endSection(lines);
             }
+
             if (readyHolds.length) {
-                startSection(lines, 'Ready Holds');
+                startSection(lines, 'Get it Now');
                 startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card', '&#x1f3b6; Notes');
                 for (hold of readyHolds) {
-                    addRow(lines, formatExpireDate(hold.expireDate), hold.title, cards[hold.cardId].cardName, hold.notes);
+                    const cardName = hold.cardId
+                        ? cards[hold.cardId].cardName
+                        : '';
+
+                    addRow(lines, formatExpireDate(hold), hold.title, cardName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
                 endSection(lines);
             }
             if (pendingHolds.length) {
-                startSection(lines, 'Pending Holds');
+                startSection(lines, 'Get it Later');
                 startTable(lines, '&#x1f4c5; Days to Wait', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
-                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), hold.title, hold.firstCreatorName, hold.notes);
+                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), hold.title, hold.firstCreatorName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
@@ -245,7 +330,16 @@ Libby account</a>.
             lines.push('</table>');
         }
 
-        function formatExpireDate(date) {
+        function formatExpireDate(item) {
+            const date = item.expireDate;
+            if (!date) {
+                return '&nbsp;';
+            }
+
+            if (typeof (date) === 'string') {
+                return date;
+            }
+
             const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
             const months = [
                 'January', 'February', 'March', 'April', 'May', 'June',
@@ -277,6 +371,10 @@ Libby account</a>.
             }
         }
 
+        function formatNotes(notes) {
+            return notes && notes.length ? notes.join(' ') : '&nbsp;';
+        }
+
         function sortKey(keyFunc) {
             return function (a, b) {
                 const aKey = keyFunc(a);
@@ -300,6 +398,23 @@ Libby account</a>.
         function proxyUrl(url) {
             const proxyBase = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl=';
             return proxyBase + encodeURI(url);
+        }
+
+        function toBase64(text) {
+            const utf8Bytes = new TextEncoder().encode(text);
+            const utf8String = String.fromCodePoint(...utf8Bytes);
+            return btoa(utf8String);
+        }
+
+        const onFulfilled = (response) => {
+            if (response.status !== 200 && !response.ok) {
+                throw new Error(`[${response.status}] Unable to fetch resource`)
+            }
+            return response.json()
+        }
+
+        const onRejected = (err) => {
+            console.error(err)
         }
     </script>
 </body>
