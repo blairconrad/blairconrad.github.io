@@ -90,7 +90,7 @@ Libby account</a>.
             const cards = getCards(syncData);
             const loans = getLoans(syncData);
             const holds = getHolds(syncData);
-            var readyHolds = holds.filter(h => h.isReady || h.luckyDayAvailableCopies).sort(sortKey(h => h.expireDate));
+            var readyHolds = holds.filter(h => h.isReady || h.luckyDayAvailableCopies);
 
             const locationUrl = new URL(window.location.href);
             var tagNames = locationUrl.searchParams.get('tags');
@@ -141,9 +141,9 @@ Libby account</a>.
             }
 
             addTagsToNotes(holds, tags);
-            const itemsWeCanHave = bulkData.map(parseHold).sort(sortKey(h => h.title))
+            const itemsWeCanHave = bulkData.map(parseHold);
             addTagsToNotes(itemsWeCanHave, tags);
-            readyHolds = readyHolds.concat(itemsWeCanHave);
+            readyHolds = readyHolds.concat(itemsWeCanHave).sort(compareHolds);
 
             const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
 
@@ -340,7 +340,7 @@ Libby account</a>.
                 return '&nbsp;';
             }
 
-            if (typeof (date) === 'string') {
+            if (typeof date === 'string') {
                 return date;
             }
 
@@ -377,6 +377,26 @@ Libby account</a>.
 
         function formatNotes(notes) {
             return notes && notes.length ? notes.join(' ') : '&nbsp;';
+        }
+
+        const compareExpireDates = sortKey(h => h.expireDate);
+        const compareTitles = sortKey(h => h.title);
+
+        function compareHolds(h1, h2) {
+            var weight = 0;
+            if (typeof h1.expireDate === typeof h2.expireDate) {
+                weight = compareExpireDates(h1, h2);
+            } else {
+                if (h1.expireDate instanceof Date) {
+                    weight = -1;
+                } else if (h2.expireDate instanceof Date) {
+                    weight = 1;
+                } else {
+                    weight = h1.expireDate ? -1 : 1;
+                }
+            }
+
+            return weight == 0 ? compareTitles(h1, h2) : weight;
         }
 
         function sortKey(keyFunc) {
