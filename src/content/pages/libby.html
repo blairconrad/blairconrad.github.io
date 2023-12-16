@@ -262,7 +262,7 @@ Libby account</a>.
                 startSection(lines, 'Loans');
                 startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
                 for (loan of loans) {
-                    addRow(lines, formatExpireDate(loan), loan.title, cards[loan.cardId].cardName);
+                    addRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
                 }
                 endTable(lines);
 
@@ -277,7 +277,7 @@ Libby account</a>.
                         ? cards[hold.cardId].cardName
                         : '';
 
-                    addRow(lines, formatExpireDate(hold), hold.title, cardName, formatNotes(hold.notes));
+                    addRow(lines, formatExpireDate(hold), formatTitle(hold), cardName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
@@ -287,7 +287,7 @@ Libby account</a>.
                 startSection(lines, 'Get it Later');
                 startTable(lines, '&#x1f4c5; Days to Wait', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
-                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), hold.title, hold.firstCreatorName, formatNotes(hold.notes));
+                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
@@ -328,6 +328,10 @@ Libby account</a>.
 
         function endTable(lines) {
             lines.push('</table>');
+        }
+
+        function formatTitle(item) {
+            return `<a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">${item.title}</a>`;
         }
 
         function formatExpireDate(item) {
