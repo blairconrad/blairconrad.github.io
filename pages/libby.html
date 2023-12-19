@@ -88,7 +88,7 @@ Libby account</a>.
             const response = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
             const syncData = await response.json();
             const cards = getCards(syncData);
-            const loans = getLoans(syncData);
+            const loans = getLoans(syncData).sort(compareExpireDates);
             const holds = getHolds(syncData);
             var readyHolds = holds.filter(h => h.isReady || h.luckyDayAvailableCopies);
 
