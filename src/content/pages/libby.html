@@ -282,7 +282,7 @@ Libby account</a>.
 
             if (readyHolds.length) {
                 startSection(lines, 'Get it Now');
-                startTable(lines, '&#x23f3; Expires', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+                startTable(lines, '&#x23f3; Expires', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of readyHolds) {
                     addRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
@@ -292,7 +292,7 @@ Libby account</a>.
             }
             if (pendingHolds.length) {
                 startSection(lines, 'Get it Later');
-                startTable(lines, '&#x1f4c5; Days to Wait', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+                startTable(lines, '&#x1f4c5; Days to Wait', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
                     addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
