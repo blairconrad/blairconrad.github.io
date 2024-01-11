@@ -90,7 +90,9 @@ Libby account</a>.
             const cards = getCards(syncData);
             const loans = getLoans(syncData).sort(compareExpireDates);
             const holds = getHolds(syncData);
-            var readyHolds = holds.filter(h => h.isReady || h.luckyDayAvailableCopies);
+            var readyHolds = holds
+                .filter(h => h.isReady || h.luckyDayAvailableCopies)
+                .map(clone);  // clone because a lucky ready hold will also show up in pending holds and we want to annotate differently
 
             const locationUrl = new URL(window.location.href);
             var tagNames = locationUrl.searchParams.get('tags');
@@ -140,16 +142,16 @@ Libby account</a>.
                 }
             }
 
-            addTagsToNotes(holds, tags);
             const itemsWeCanHave = bulkData.map(parseHold);
-            addTagsToNotes(itemsWeCanHave, tags);
             readyHolds = readyHolds.concat(itemsWeCanHave).sort(compareHolds);
+            addTagsToHolds(readyHolds, tags);
+            addCardsToNotes(readyHolds, cards);
 
             const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
+            addTagsToHolds(pendingHolds, tags);
 
             const lines = html(loans, readyHolds, pendingHolds, cards).join('\n');
             contentNode.innerHTML = lines;
-
         }
 
         async function cloneCode(e) {
@@ -241,17 +243,26 @@ Libby account</a>.
             return holdData;
         }
 
-        function addTagsToNotes(holds, tags) {
+        function addTagsToHolds(holds, tags) {
             for (hold of holds) {
                 for (tag of tags) {
                     for (tagging of tag.taggings) {
                         if (hold.id == tagging.titleId) {
-                            if (!hold.notes) {
-                                hold.notes = []
-                            }
-                            hold.notes.unshift(`<span title="${tag.name}">${tag.description}</span>`);
+                            hold.tagName = tag.name;
+                            hold.tagDescription = tag.description;
                         }
                     }
+                }
+            }
+        }
+
+        function addCardsToNotes(items, cards) {
+            for (item of items) {
+                if (item.cardId) {
+                    if (!item.notes) {
+                        item.notes = []
+                    }
+                    item.notes.unshift(`&#x1F4B3;&nbsp;${cards[item.cardId].cardName}`);
                 }
             }
         }
@@ -260,7 +271,7 @@ Libby account</a>.
             lines = []
             if (loans.length) {
                 startSection(lines, 'Loans');
-                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card');
+                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1F4B3; Card');
                 for (loan of loans) {
                     addRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
                 }
@@ -271,13 +282,9 @@ Libby account</a>.
 
             if (readyHolds.length) {
                 startSection(lines, 'Get it Now');
-                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1FAAA; Card', '&#x1f3b6; Notes');
+                startTable(lines, '&#x23f3; Expires', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of readyHolds) {
-                    const cardName = hold.cardId
-                        ? cards[hold.cardId].cardName
-                        : '';
-
-                    addRow(lines, formatExpireDate(hold), formatTitle(hold), cardName, formatNotes(hold.notes));
+                    addRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
@@ -285,9 +292,9 @@ Libby account</a>.
             }
             if (pendingHolds.length) {
                 startSection(lines, 'Get it Later');
-                startTable(lines, '&#x1f4c5; Days to Wait', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+                startTable(lines, '&#x1f4c5; Days to Wait', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
-                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
                 endTable(lines);
 
@@ -334,6 +341,10 @@ Libby account</a>.
             return `<a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">${item.title}</a>`;
         }
 
+        function formatTag(item) {
+            return `<span title="${item.tagName}">${item.tagDescription}</span>`;
+        }
+
         function formatExpireDate(item) {
             const date = item.expireDate;
             if (!date) {
@@ -376,7 +387,7 @@ Libby account</a>.
         }
 
         function formatNotes(notes) {
-            return notes && notes.length ? notes.join(' ') : '&nbsp;';
+            return notes && notes.length ? notes.join('<br>') : '&nbsp;';
         }
 
         const compareExpireDates = sortKey(h => h.expireDate);
@@ -397,6 +408,18 @@ Libby account</a>.
             }
 
             return weight == 0 ? compareTitles(h1, h2) : weight;
+        }
+
+        function clone(item) {
+            var c = { ...item };
+            if (c.notes) {
+                // Spread is shallow; make sure we don't
+                // muck with original's notes.
+                // Eventually we may need to protect other
+                // attributes.
+                c.notes = [...c.notes];
+            }
+            return c;
         }
 
         function sortKey(keyFunc) {
