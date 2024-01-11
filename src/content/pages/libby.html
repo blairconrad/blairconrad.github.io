@@ -10,11 +10,34 @@
             text-align: right;
 
             /* otherwise it fetches up against the next column */
-            padding-right: 2em;
+            padding-right: 0.5em;
         }
 
         table {
             table-layout: auto;
+        }
+
+        ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        ul li {
+            padding-left: 1.75em;
+            text-indent: -1.75em;
+        }
+
+        li.reading-order::before {
+            content: '\1F4DA\20';
+        }
+
+        li.card-name::before {
+            content: '\1F4B3\20';
+        }
+
+        li.no-more-copies::before {
+            content: '\1F6AB\20';
         }
     </style>
 </head>
@@ -213,15 +236,11 @@ Libby account</a>.
         }
 
         function parseHold(holdData) {
-            if (!holdData.notes) {
-                holdData.notes = []
-            }
-
             if (holdData.detailedSeries) {
                 const seriesName = holdData.detailedSeries.seriesName;
                 const readingOrder = holdData.detailedSeries.readingOrder;
                 if (seriesName && readingOrder) {
-                    holdData.notes.push(`${seriesName}&nbsp;#${readingOrder}`)
+                    addNote(holdData, 'reading-order', `${seriesName}&nbsp;#${readingOrder}`);
                 }
             }
             if (holdData.expireDate) {
@@ -237,10 +256,17 @@ Libby account</a>.
 
             if (!holdData.ownedCopies) {
                 holdData.estimatedWaitDays = Infinity;
-                holdData.notes.push('no&nbsp;more&nbsp;copies');
+                addNote(holdData, 'no-more-copies', 'no&nbsp;more&nbsp;copies');
             }
 
             return holdData;
+        }
+
+        function addNote(item, noteClass, note) {
+            if (!item.notes) {
+                item.notes = [];
+            }
+            item.notes.push(`<li class="${noteClass}">${note}</li>`);
         }
 
         function addTagsToHolds(holds, tags) {
@@ -259,10 +285,7 @@ Libby account</a>.
         function addCardsToNotes(items, cards) {
             for (item of items) {
                 if (item.cardId) {
-                    if (!item.notes) {
-                        item.notes = []
-                    }
-                    item.notes.unshift(`&#x1F4B3;&nbsp;${cards[item.cardId].cardName}`);
+                    addNote(item, 'card-name', `${cards[item.cardId].cardName}`);
                 }
             }
         }
@@ -282,7 +305,7 @@ Libby account</a>.
 
             if (readyHolds.length) {
                 startSection(lines, 'Get it Now');
-                startTable(lines, '&#x23f3; Expires', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+                startTable(lines, '&#x23f3; Expires', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of readyHolds) {
                     addRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
@@ -292,7 +315,7 @@ Libby account</a>.
             }
             if (pendingHolds.length) {
                 startSection(lines, 'Get it Later');
-                startTable(lines, '&#x1f4c5; Days to Wait', '&nbsp;', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+                startTable(lines, '&#x1f4c5; Days to Wait', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
                     addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
                 }
@@ -387,7 +410,7 @@ Libby account</a>.
         }
 
         function formatNotes(notes) {
-            return notes && notes.length ? notes.join('<br>') : '&nbsp;';
+            return notes && notes.length ? '<ul>\n' + notes.join('\n') + '\n</ul>' : '&nbsp;';
         }
 
         const compareExpireDates = sortKey(h => h.expireDate);
