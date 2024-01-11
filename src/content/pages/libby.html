@@ -213,15 +213,11 @@ Libby account</a>.
         }
 
         function parseHold(holdData) {
-            if (!holdData.notes) {
-                holdData.notes = []
-            }
-
             if (holdData.detailedSeries) {
                 const seriesName = holdData.detailedSeries.seriesName;
                 const readingOrder = holdData.detailedSeries.readingOrder;
                 if (seriesName && readingOrder) {
-                    holdData.notes.push(`${seriesName}&nbsp;#${readingOrder}`)
+                    addNote(holdData, `${seriesName}&nbsp;#${readingOrder}`);
                 }
             }
             if (holdData.expireDate) {
@@ -237,10 +233,17 @@ Libby account</a>.
 
             if (!holdData.ownedCopies) {
                 holdData.estimatedWaitDays = Infinity;
-                holdData.notes.push('no&nbsp;more&nbsp;copies');
+                addNote(holdData, 'no&nbsp;more&nbsp;copies');
             }
 
             return holdData;
+        }
+
+        function addNote(item, note) {
+            if (!item.notes) {
+                item.notes = [];
+            }
+            item.notes.push(note);
         }
 
         function addTagsToHolds(holds, tags) {
@@ -259,10 +262,7 @@ Libby account</a>.
         function addCardsToNotes(items, cards) {
             for (item of items) {
                 if (item.cardId) {
-                    if (!item.notes) {
-                        item.notes = []
-                    }
-                    item.notes.unshift(`&#x1F4B3;&nbsp;${cards[item.cardId].cardName}`);
+                    addNote(item, `&#x1F4B3;&nbsp;${cards[item.cardId].cardName}`);
                 }
             }
         }
