@@ -36,6 +36,14 @@
             vertical-align: top;
         }
 
+        .info-panel ul {
+            list-style: none;
+        }
+
+        .info-panel li {
+            padding-bottom: 0.5em;
+        }
+
         table {
             table-layout: auto;
         }
@@ -404,12 +412,12 @@ Libby account</a>.
                         <div><img width=150px loading="lazy" src="${coverUrl}"></div>
                         <div><ul>`);
             lines.push(
-                `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">Libby</a></li>`);
+                `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}"><img src="https://images.overdrive.com/misc/Libby_App_Icon_Circle.png" width="16px" height="16px"> Libby</a></li>`);
 
             if (isbn) {
                 lines.push(`
-                    <li><a href="https://www.goodreads.com/search?q=${isbn}">Goodreads</a></li>
-                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}">Kobo</a></li>`);
+                    <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
+                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
             }
 
             lines.push(`
