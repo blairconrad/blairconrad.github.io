@@ -383,21 +383,36 @@ Libby account</a>.
             lines.push(text);
         }
 
-        function addInfoPanelRow(line, item) {
+        function addInfoPanelRow(lines, item) {
             var coverUrl;
             try {
                 coverUrl = item.covers['cover150Wide'].href
-            }
-            catch {
+            } catch {
                 // nothing, from https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
                 coverUrl = "data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E";
+            }
+
+            var isbn;
+            try {
+                isbn = item.formats.find(f => f.isbn).isbn;
+            } catch {
+                isbn = null;
             }
 
             lines.push(`<tr class="info-panel" style="display: none" id="panel-${panelId++}"><td colspan="100%">
                     <div>
                         <div><img width=150px loading="lazy" src="${coverUrl}"></div>
-                        <div><ul>
-                            <li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">see it in Libby</blah</li>
+                        <div><ul>`);
+            lines.push(
+                `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">Libby</a></li>`);
+
+            if (isbn) {
+                lines.push(`
+                    <li><a href="https://www.goodreads.com/search?q=${isbn}">Goodreads</a></li>
+                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}">Kobo</a></li>`);
+            }
+
+            lines.push(`
                         </ul></div>
                     </div>
                 </td></tr>`);
