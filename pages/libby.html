@@ -5,6 +5,16 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
     <link rel="icon" type="image/x-icon" href="/images/libraryhippo-icon-64.ico" />
     <style>
+        #content tr:nth-child(4n+1),
+        #content tr:nth-child(4n+2) {
+            background-color: inherit;
+        }
+
+        #content tr:nth-child(4n+3),
+        #content tr:nth-child(4n) {
+            background-color: var(--background);
+        }
+
         th:first-child,
         td:first-child {
             text-align: right;
@@ -13,30 +23,51 @@
             padding-right: 0.5em;
         }
 
+        .info-panel td {
+            text-align: left;
+        }
+
+        .summary:hover {
+            cursor: pointer;
+        }
+
+        .info-panel div {
+            display: inline-block;
+            vertical-align: top;
+        }
+
+        .info-panel ul {
+            list-style: none;
+        }
+
+        .info-panel li {
+            padding-bottom: 0.5em;
+        }
+
         table {
             table-layout: auto;
         }
 
-        ul {
+        .notes {
             list-style: none;
             padding: 0;
             margin: 0;
         }
 
-        ul li {
+        .notes li {
             padding-left: 1.75em;
             text-indent: -1.75em;
         }
 
-        li.reading-order::before {
+        .notes li.reading-order::before {
             content: '\1F4DA\20';
         }
 
-        li.card-name::before {
+        notes li.card-name::before {
             content: '\1F4B3\20';
         }
 
-        li.no-more-copies::before {
+        .notes li.no-more-copies::before {
             content: '\1F6AB\20';
         }
     </style>
@@ -46,6 +77,7 @@
     <div id="content" />
     <script async>
         const bearerTokenKey = 'libby.bearer.token';
+        var panelId = 0;
         window.onload = async (event) => {
 
             const locationUrl = new URL(window.location.href);
@@ -296,7 +328,8 @@ Libby account</a>.
                 startSection(lines, 'Loans');
                 startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1F4B3; Card');
                 for (loan of loans) {
-                    addRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
+                    addSummaryRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
+                    addInfoPanelRow(lines, loan);
                 }
                 endTable(lines);
 
@@ -307,7 +340,8 @@ Libby account</a>.
                 startSection(lines, 'Get it Now');
                 startTable(lines, '&#x23f3; Expires', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of readyHolds) {
-                    addRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+                    addSummaryRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+                    addInfoPanelRow(lines, hold);
                 }
                 endTable(lines);
 
@@ -317,7 +351,8 @@ Libby account</a>.
                 startSection(lines, 'Get it Later');
                 startTable(lines, '&#x1f4c5; Days to Wait', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
                 for (hold of pendingHolds) {
-                    addRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+                    addSummaryRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+                    addInfoPanelRow(lines, hold);
                 }
                 endTable(lines);
 
@@ -347,8 +382,8 @@ Libby account</a>.
         }
 
 
-        function addRow(lines, ...cellValues) {
-            var text = '    <tr>';
+        function addSummaryRow(lines, ...cellValues) {
+            var text = `    <tr class="summary" onclick="togglePanel(${panelId})">`;
             for (v of cellValues) {
                 text += `<td>${v}</td>`;
             }
@@ -356,12 +391,48 @@ Libby account</a>.
             lines.push(text);
         }
 
+        function addInfoPanelRow(lines, item) {
+            var coverUrl;
+            try {
+                coverUrl = item.covers['cover150Wide'].href
+            } catch {
+                // nothing, from https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
+                coverUrl = "data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E";
+            }
+
+            var isbn;
+            try {
+                isbn = item.formats.find(f => f.isbn).isbn;
+            } catch {
+                isbn = null;
+            }
+
+            lines.push(`<tr class="info-panel" style="display: none" id="panel-${panelId++}"><td colspan="100%">
+                    <div>
+                        <div><img width=150px loading="lazy" src="${coverUrl}"></div>
+                        <div><ul>`);
+            lines.push(
+                `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}"><img src="https://images.overdrive.com/misc/Libby_App_Icon_Circle.png" width="16px" height="16px"> Libby</a></li>`);
+
+            if (isbn) {
+                lines.push(`
+                    <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
+                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
+            }
+
+            lines.push(`
+                        </ul></div>
+                    </div>
+                </td></tr>`);
+
+        }
+
         function endTable(lines) {
             lines.push('</table>');
         }
 
         function formatTitle(item) {
-            return `<a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}">${item.title}</a>`;
+            return item.title;
         }
 
         function formatTag(item) {
@@ -410,7 +481,7 @@ Libby account</a>.
         }
 
         function formatNotes(notes) {
-            return notes && notes.length ? '<ul>\n' + notes.join('\n') + '\n</ul>' : '&nbsp;';
+            return notes && notes.length ? '<ul class="notes">\n' + notes.join('\n') + '\n</ul>' : '&nbsp;';
         }
 
         const compareExpireDates = sortKey(h => h.expireDate);
@@ -485,6 +556,15 @@ Libby account</a>.
 
         const onRejected = (err) => {
             console.error(err)
+        }
+
+        function togglePanel(thePanelId) {
+            var x = document.getElementById(`panel-${thePanelId}`);
+            if (x.style.display === "none") {
+                x.style.display = "table-row";
+            } else {
+                x.style.display = "none";
+            }
         }
     </script>
 </body>
