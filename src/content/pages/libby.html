@@ -198,9 +198,10 @@ Libby account</a>.
             }
 
             const itemsWeCanHave = bulkData.map(parseHold);
-            readyHolds = readyHolds.concat(itemsWeCanHave).sort(compareHolds);
+            readyHolds = readyHolds.concat(itemsWeCanHave);
             addTagsToHolds(readyHolds, tags);
             addCardsToNotes(readyHolds, cards);
+            readyHOlds = readyHolds.sort(compareHolds)
 
             const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
             addTagsToHolds(pendingHolds, tags);
@@ -485,21 +486,26 @@ Libby account</a>.
         }
 
         const compareExpireDates = sortKey(h => h.expireDate);
+        const compareTagNames = sortKey(h => h.tagName);
         const compareTitles = sortKey(h => h.title);
 
         function compareHolds(h1, h2) {
-            var weight = 0;
-            if (typeof h1.expireDate === typeof h2.expireDate) {
-                weight = compareExpireDates(h1, h2);
-            } else {
+            if (typeof h1.expireDate !== typeof h2.expireDate) {
                 if (h1.expireDate instanceof Date) {
-                    weight = -1;
+                    return -1;
                 } else if (h2.expireDate instanceof Date) {
-                    weight = 1;
+                    return 1;
                 } else {
-                    weight = h1.expireDate ? -1 : 1;
+                    return h1.expireDate ? -1 : 1;
                 }
             }
+
+            var weight = compareExpireDates(h1, h2);
+            if (weight != 0) {
+                return weight;
+            }
+
+            weight = compareTagNames(h1, h2);
 
             return weight == 0 ? compareTitles(h1, h2) : weight;
         }
