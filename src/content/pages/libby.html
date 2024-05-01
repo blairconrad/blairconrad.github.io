@@ -142,6 +142,8 @@ Libby account</a>.
             const syncPath = 'chip/sync';
             const response = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
             const syncData = await response.json();
+            bearer = syncData.identity;
+            window.localStorage.setItem(bearerTokenKey, bearer);
             const cards = getCards(syncData);
             const loans = getLoans(syncData).sort(compareExpireDates);
             const holds = getHolds(syncData);
