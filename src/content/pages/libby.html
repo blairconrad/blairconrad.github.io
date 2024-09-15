@@ -129,7 +129,7 @@ Libby account</a>.
         }
 
         const getTag = (bearer, tagName) =>
-            fetch(proxyUrl(`https://vandal.svc.overdrive.com/tag/uuid/${toBase64(tagName)}?enc=1&range=0...1000&sort=newest`),
+            fetch(proxyUrl(`https://vandal.libbyapp.com/tag/uuid/${toBase64(tagName)}?enc=1&range=0...1000&sort=newest`),
                 { headers: { 'Authorization': `Bearer ${bearer}` } }
             )
                 .then(onFulfilled, onRejected)
@@ -540,7 +540,7 @@ Libby account</a>.
         }
 
         function overdriveUrl(path) {
-            const overdriveUrlBase = 'https://sentry-read.svc.overdrive.com/'
+          const overdriveUrlBase = 'https://sentry.libbyapp.com/'
             return proxyUrl(overdriveUrlBase + path);
         }
 
