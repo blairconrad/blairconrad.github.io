@@ -82,50 +82,28 @@
 
             const locationUrl = new URL(window.location.href);
 
-            if (locationUrl.searchParams.has('reset')) {
-                window.localStorage.removeItem(bearerTokenKey);
+            var bearer = locationUrl.searchParams.get('bearer');
+            if (bearer) {
+                window.localStorage.setItem(bearerTokenKey, bearer);
+                locationUrl.searchParams.delete('bearer');
+                window.location.replace(locationUrl);
+            } else {
+                bearer = window.localStorage.getItem(bearerTokenKey);
             }
 
-            var bearer = window.localStorage.getItem(bearerTokenKey);
             if (bearer) {
                 loadContent(bearer);
             } else {
-                showCloneChipForm();
+                showNoBearerError();
             }
         };
 
-        function showCloneChipForm() {
-            const codeInput = document.createElement('input');
-            codeInput.setAttribute('autocomplete', 'off');
-            codeInput.setAttribute('autofocus', 'autofocus');
-            codeInput.setAttribute('id', 'code');
-            codeInput.setAttribute('maxlength', 8);
-            codeInput.setAttribute('name', 'code');
-            codeInput.setAttribute('pattern', '[0-9]{8}');
-            codeInput.setAttribute('placeholder', '12345678');
-            codeInput.setAttribute('required', 'required');
-            codeInput.setAttribute('size', '8');
-            codeInput.setAttribute('title', '8-digit one-time Libby code');
-            codeInput.setAttribute('type', 'text');
-
-            const codeSubmit = document.createElement('input');
-            codeSubmit.setAttribute('type', 'submit');
-            codeSubmit.setAttribute('value', 'Submit');
-
-            const codeForm = document.createElement('form');
-            codeForm.appendChild(codeInput);
-            codeForm.appendChild(codeSubmit);
-            codeForm.addEventListener('submit', cloneCode);
-
-            const codeText = document.createElement('p');
-            codeText.innerHTML = `
-You don't appear to have registered your Libby Account. Enter an
-8-digit code <a href="https://help.libbyapp.com/en-us/6070.htm">you can get from another logged-in
-Libby account</a>.
-`;
+        function showNoBearerError() {
+            const errorNode = document.createElement('p');
+            errorNode.innerHTML = "You don't have a bearer token. Get one from the dewey:sentry.identity local storage entry of your Libby app and send it in as the bearer URL parameter.";
 
             const contentNode = document.getElementById('content');
-            contentNode.replaceChildren(codeText, codeForm);
+            contentNode.replaceChildren(errorNode);
         }
 
         const getTag = (bearer, tagName) =>
@@ -540,7 +518,7 @@ Libby account</a>.
         }
 
         function overdriveUrl(path) {
-          const overdriveUrlBase = 'https://sentry.libbyapp.com/'
+            const overdriveUrlBase = 'https://sentry.libbyapp.com/'
             return proxyUrl(overdriveUrlBase + path);
         }
 
