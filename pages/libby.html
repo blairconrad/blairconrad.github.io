@@ -1,558 +1,531 @@
 <html>
 
 <head>
-    <title>Libby</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
-    <link rel="icon" type="image/x-icon" href="/images/libraryhippo-icon-64.ico" />
-    <style>
-        #content tr:nth-child(4n+1),
-        #content tr:nth-child(4n+2) {
-            background-color: inherit;
-        }
+  <title>Libby</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/water.css@2/out/water.css">
+  <link rel="icon" type="image/x-icon" href="/images/libraryhippo-icon-64.ico" />
+  <style>
+    #content tr:nth-child(4n+1),
+    #content tr:nth-child(4n+2) {
+      background-color: inherit;
+    }
 
-        #content tr:nth-child(4n+3),
-        #content tr:nth-child(4n) {
-            background-color: var(--background);
-        }
+    #content tr:nth-child(4n+3),
+    #content tr:nth-child(4n) {
+      background-color: var(--background);
+    }
 
-        th:first-child,
-        td:first-child {
-            text-align: right;
+    th:first-child,
+    td:first-child {
+      text-align: right;
 
-            /* otherwise it fetches up against the next column */
-            padding-right: 0.5em;
-        }
+      /* otherwise it fetches up against the next column */
+      padding-right: 0.5em;
+    }
 
-        .info-panel td {
-            text-align: left;
-        }
+    .info-panel td {
+      text-align: left;
+    }
 
-        .summary:hover {
-            cursor: pointer;
-        }
+    .summary:hover {
+      cursor: pointer;
+    }
 
-        .info-panel div {
-            display: inline-block;
-            vertical-align: top;
-        }
+    .info-panel div {
+      display: inline-block;
+      vertical-align: top;
+    }
 
-        .info-panel ul {
-            list-style: none;
-        }
+    .info-panel ul {
+      list-style: none;
+    }
 
-        .info-panel li {
-            padding-bottom: 0.5em;
-        }
+    .info-panel li {
+      padding-bottom: 0.5em;
+    }
 
-        table {
-            table-layout: auto;
-        }
+    table {
+      table-layout: auto;
+    }
 
-        .notes {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
+    .notes {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
 
-        .notes li {
-            padding-left: 1.75em;
-            text-indent: -1.75em;
-        }
+    .notes li {
+      padding-left: 1.75em;
+      text-indent: -1.75em;
+    }
 
-        .notes li.reading-order::before {
-            content: '\1F4DA\20';
-        }
+    .notes li.reading-order::before {
+      content: '\1F4DA\20';
+    }
 
-        .notes li.card-name::before {
-            content: '\1F4B3\20';
-        }
+    .notes li.card-name::before {
+      content: '\1F4B3\20';
+    }
 
-        .notes li.no-more-copies::before {
-            content: '\1F6AB\20';
-        }
-    </style>
+    .notes li.no-more-copies::before {
+      content: '\1F6AB\20';
+    }
+  </style>
 </head>
 
 <body>
-    <div id="content" />
-    <script async>
-        const bearerTokenKey = 'libby.bearer.token';
-        var panelId = 0;
-        window.onload = async (event) => {
+  <div id="content" />
+  <script async>
+    const bearerTokenKey = 'libby.bearer.token';
+    var panelId = 0;
+    window.onload = async (event) => {
 
-            const locationUrl = new URL(window.location.href);
+      const locationUrl = new URL(window.location.href);
 
-            var bearer = locationUrl.searchParams.get('bearer');
-            if (bearer) {
-                window.localStorage.setItem(bearerTokenKey, bearer);
-                locationUrl.searchParams.delete('bearer');
-                window.location.replace(locationUrl);
-            } else {
-                bearer = window.localStorage.getItem(bearerTokenKey);
+      var bearer = locationUrl.searchParams.get('bearer');
+      if (bearer) {
+        window.localStorage.setItem(bearerTokenKey, bearer);
+        locationUrl.searchParams.delete('bearer');
+        window.location.replace(locationUrl);
+      } else {
+        bearer = window.localStorage.getItem(bearerTokenKey);
+      }
+
+      if (bearer) {
+        loadContent(bearer);
+      } else {
+        showNoBearerError();
+      }
+    };
+
+    function showNoBearerError() {
+      const errorNode = document.createElement('p');
+      errorNode.innerHTML = "You don't have a bearer token. Get one from the dewey:sentry.identity local storage entry of your Libby app and send it in as the bearer URL parameter.";
+
+      const contentNode = document.getElementById('content');
+      contentNode.replaceChildren(errorNode);
+    }
+
+    const getTag = (bearer, tagName) =>
+      fetch(proxyUrl(`https://vandal.libbyapp.com/tag/uuid/${toBase64(tagName)}?enc=1&range=0...1000&sort=newest`),
+        { headers: { 'Authorization': `Bearer ${bearer}` } }
+      )
+        .then(onFulfilled, onRejected)
+        .catch(err => console.error('[request failed]', err.message));
+
+    async function loadContent(bearer) {
+      const contentNode = document.getElementById('content');
+      contentNode.innerHTML = 'loading&hellip;';
+
+      bearer = await getNewBearer(bearer);
+      window.localStorage.setItem(bearerTokenKey, bearer);
+
+      const syncPath = 'chip/sync';
+      const syncResponse = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
+      const syncData = await syncResponse.json();
+
+      const cards = getCards(syncData);
+      const loans = getLoans(syncData).sort(compareExpireDates);
+      const holds = getHolds(syncData);
+      var readyHolds = holds
+        .filter(h => h.isReady || h.luckyDayAvailableCopies)
+        .map(clone);  // clone because a lucky ready hold will also show up in pending holds and we want to annotate differently
+
+      const locationUrl = new URL(window.location.href);
+      var tagNames = locationUrl.searchParams.get('tags');
+      if (tagNames) {
+        tagNames = tagNames.split(',');
+      }
+
+      var tags = [];
+      if (tagNames) {
+        const tagPromises = [];
+        for (tagName of tagNames) {
+          tagPromises.push(getTag(bearer, tagName));
+        }
+
+        tags = (await Promise.all(tagPromises)).map(t => t.tag);
+      }
+
+      const tagTitleIds = tags.flatMap(t => t.taggings.map(t => t.titleId)).filter(t => !readyHolds.map(h => h.id).includes(t));
+
+      var availTitles = [];
+      if (tagTitleIds.length) {
+        var availResponse = await fetch("https://thunder.api.overdrive.com/v2/libraries/downloadlibrary/media/availability?x-client-id=dewey", {
+          "headers": {
+            "content-type": "application/json",
+          },
+          "body": JSON.stringify({ 'ids': tagTitleIds }),
+          "method": "POST",
+        });
+        var availData = await availResponse.json();
+        availTitles = availData.items.filter(i => i && (i.isAvailable || i.luckyDayAvailableCopies));
+      }
+      var availTitleIds = availTitles.map(a => a.id).join(',');
+
+
+      var bulkData = [];
+      if (availTitleIds) {
+        var bulkResponse = await fetch(`https://thunder.api.overdrive.com/v2/media/bulk?titleIds=${availTitleIds}&x-client-id=dewey`);
+        bulkData = await bulkResponse.json();
+        for (b of bulkData) {
+          b.ownedCopies = 1; // it's available, so they have at least one
+          for (a of availTitles) {
+            if (a && a.id == b.id) {
+              b.isAvailable = a.isAvailable;
+              b.luckyDayAvailableCopies = a.luckyDayAvailableCopies;
             }
+          }
+        }
+      }
 
-            if (bearer) {
-                loadContent(bearer);
-            } else {
-                showNoBearerError();
+      const itemsWeCanHave = bulkData.map(parseHold);
+      readyHolds = readyHolds.concat(itemsWeCanHave);
+      addTagsToHolds(readyHolds, tags);
+      addCardsToNotes(readyHolds, cards);
+      readyHOlds = readyHolds.sort(compareHolds)
+
+      const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
+      addTagsToHolds(pendingHolds, tags);
+
+      const lines = html(loans, readyHolds, pendingHolds, cards).join('\n');
+      contentNode.innerHTML = lines;
+    }
+
+    async function getNewBearer(oldBearer) {
+      const chipPath = 'chip?client=dewey';
+      const chipUrl = overdriveUrl(chipPath);
+      var chipResponse = await fetch(chipUrl, { method: 'POST', headers: { 'Authorization': `Bearer ${oldBearer}` } });
+      var chipData = await chipResponse.json();
+      return chipData.identity;
+    }
+
+    function getCards(data) {
+      cards = Object();
+      for (card of data.cards) {
+        cards[card.cardId] = card;
+      }
+      return cards;
+    }
+
+    function getLoans(data) {
+      return data.loans.map(parseLoan);
+    }
+
+    function parseLoan(loanData) {
+      loanData.expireDate = new Date(loanData.expireDate);
+      return loanData;
+    }
+
+    function getHolds(data) {
+      return data.holds.map(parseHold);
+    }
+
+    function parseHold(holdData) {
+      if (holdData.detailedSeries) {
+        const seriesName = holdData.detailedSeries.seriesName;
+        const readingOrder = holdData.detailedSeries.readingOrder;
+        if (seriesName && readingOrder) {
+          addNote(holdData, 'reading-order', `${seriesName}&nbsp;#${readingOrder}`);
+        }
+      }
+      if (holdData.expireDate) {
+        holdData.isReady = true;
+        holdData.expireDate = new Date(holdData.expireDate);
+      } else if (holdData.luckyDayAvailableCopies) {
+        holdData.expireDate = '&#x1F340;';
+      }
+
+      if (!holdData.estimatedWaitDays) {
+        holdData.estimatedWaitDays = 0;
+      }
+
+      if (!holdData.ownedCopies) {
+        holdData.estimatedWaitDays = Infinity;
+        addNote(holdData, 'no-more-copies', 'no&nbsp;more&nbsp;copies');
+      }
+
+      return holdData;
+    }
+
+    function addNote(item, noteClass, note) {
+      if (!item.notes) {
+        item.notes = [];
+      }
+      item.notes.push(`<li class="${noteClass}">${note}</li>`);
+    }
+
+    function addTagsToHolds(holds, tags) {
+      for (hold of holds) {
+        for (tag of tags) {
+          for (tagging of tag.taggings) {
+            if (hold.id == tagging.titleId) {
+              hold.tagName = tag.name;
+              hold.tagDescription = tag.description;
             }
-        };
-
-        function showNoBearerError() {
-            const errorNode = document.createElement('p');
-            errorNode.innerHTML = "You don't have a bearer token. Get one from the dewey:sentry.identity local storage entry of your Libby app and send it in as the bearer URL parameter.";
-
-            const contentNode = document.getElementById('content');
-            contentNode.replaceChildren(errorNode);
+          }
         }
+      }
+    }
 
-        const getTag = (bearer, tagName) =>
-            fetch(proxyUrl(`https://vandal.libbyapp.com/tag/uuid/${toBase64(tagName)}?enc=1&range=0...1000&sort=newest`),
-                { headers: { 'Authorization': `Bearer ${bearer}` } }
-            )
-                .then(onFulfilled, onRejected)
-                .catch(err => console.error('[request failed]', err.message));
-
-        async function loadContent(bearer) {
-            const contentNode = document.getElementById('content');
-            contentNode.innerHTML = 'loading&hellip;';
-
-            const syncPath = 'chip/sync';
-            const response = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
-            const syncData = await response.json();
-            bearer = syncData.identity;
-            window.localStorage.setItem(bearerTokenKey, bearer);
-            const cards = getCards(syncData);
-            const loans = getLoans(syncData).sort(compareExpireDates);
-            const holds = getHolds(syncData);
-            var readyHolds = holds
-                .filter(h => h.isReady || h.luckyDayAvailableCopies)
-                .map(clone);  // clone because a lucky ready hold will also show up in pending holds and we want to annotate differently
-
-            const locationUrl = new URL(window.location.href);
-            var tagNames = locationUrl.searchParams.get('tags');
-            if (tagNames) {
-                tagNames = tagNames.split(',');
-            }
-
-            var tags = [];
-            if (tagNames) {
-                const tagPromises = [];
-                for (tagName of tagNames) {
-                    tagPromises.push(getTag(bearer, tagName));
-                }
-
-                tags = (await Promise.all(tagPromises)).map(t => t.tag);
-            }
-
-            const tagTitleIds = tags.flatMap(t => t.taggings.map(t => t.titleId)).filter(t => !readyHolds.map(h => h.id).includes(t));
-
-            var availTitles = [];
-            if (tagTitleIds.length) {
-                var availResponse = await fetch("https://thunder.api.overdrive.com/v2/libraries/downloadlibrary/media/availability?x-client-id=dewey", {
-                    "headers": {
-                        "content-type": "application/json",
-                    },
-                    "body": JSON.stringify({ 'ids': tagTitleIds }),
-                    "method": "POST",
-                });
-                var availData = await availResponse.json();
-                availTitles = availData.items.filter(i => i && (i.isAvailable || i.luckyDayAvailableCopies));
-            }
-            var availTitleIds = availTitles.map(a => a.id).join(',');
-
-
-            var bulkData = [];
-            if (availTitleIds) {
-                var bulkResponse = await fetch(`https://thunder.api.overdrive.com/v2/media/bulk?titleIds=${availTitleIds}&x-client-id=dewey`);
-                bulkData = await bulkResponse.json();
-                for (b of bulkData) {
-                    b.ownedCopies = 1; // it's available, so they have at least one
-                    for (a of availTitles) {
-                        if (a && a.id == b.id) {
-                            b.isAvailable = a.isAvailable;
-                            b.luckyDayAvailableCopies = a.luckyDayAvailableCopies;
-                        }
-                    }
-                }
-            }
-
-            const itemsWeCanHave = bulkData.map(parseHold);
-            readyHolds = readyHolds.concat(itemsWeCanHave);
-            addTagsToHolds(readyHolds, tags);
-            addCardsToNotes(readyHolds, cards);
-            readyHOlds = readyHolds.sort(compareHolds)
-
-            const pendingHolds = holds.filter(h => !h.isReady).sort(sortKey(h => h.estimatedWaitDays.toString().padStart(10, ' ') + h.title));
-            addTagsToHolds(pendingHolds, tags);
-
-            const lines = html(loans, readyHolds, pendingHolds, cards).join('\n');
-            contentNode.innerHTML = lines;
+    function addCardsToNotes(items, cards) {
+      for (item of items) {
+        if (item.cardId) {
+          addNote(item, 'card-name', `${cards[item.cardId].cardName}`);
         }
+      }
+    }
 
-        async function cloneCode(e) {
-            const chipPath = 'chip?client=dewey';
-            const clonePath = 'chip/clone/code';
-
-            e.preventDefault();
-
-            const chipUrl = overdriveUrl(chipPath);
-            var chipResponse = await fetch(chipUrl, { method: 'POST' });
-            var chipData = await chipResponse.json();
-            var bearer = chipData.identity;
-
-            const code = new FormData(e.target).get('code');
-
-            const cloneResponse = await fetch(
-                overdriveUrl(clonePath),
-                {
-                    method: 'POST',
-                    headers: {
-                        'Accept': 'application/json',
-                        'Authorization': `Bearer ${bearer}`,
-                        'Content-Type': 'application/json',
-                    },
-                    body: `{"code":"${code}"}`,
-                });
-            if (cloneResponse.ok) {
-
-                chipResponse = await fetch(chipUrl, { method: 'POST', headers: { 'Authorization': `Bearer ${bearer}` } });
-                if (chipResponse.ok) {
-                    chipData = await chipResponse.json();
-                    bearer = chipData.identity;
-
-                    window.localStorage.setItem(bearerTokenKey, bearer);
-                    loadContent(bearer);
-                }
-            }
+    function html(loans, readyHolds, pendingHolds, cards) {
+      lines = []
+      if (loans.length) {
+        startSection(lines, 'Loans');
+        startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1F4B3; Card');
+        for (loan of loans) {
+          addSummaryRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
+          addInfoPanelRow(lines, loan);
         }
+        endTable(lines);
 
-        function getCards(data) {
-            cards = Object();
-            for (card of data.cards) {
-                cards[card.cardId] = card;
-            }
-            return cards;
+        endSection(lines);
+      }
+
+      if (readyHolds.length) {
+        startSection(lines, 'Get it Now');
+        startTable(lines, '&#x23f3; Expires', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+        for (hold of readyHolds) {
+          addSummaryRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+          addInfoPanelRow(lines, hold);
         }
+        endTable(lines);
 
-        function getLoans(data) {
-            return data.loans.map(parseLoan);
+        endSection(lines);
+      }
+      if (pendingHolds.length) {
+        startSection(lines, 'Get it Later');
+        startTable(lines, '&#x1f4c5; Days to Wait', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
+        for (hold of pendingHolds) {
+          addSummaryRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
+          addInfoPanelRow(lines, hold);
         }
+        endTable(lines);
 
-        function parseLoan(loanData) {
-            loanData.expireDate = new Date(loanData.expireDate);
-            return loanData;
+        endSection(lines);
+      }
+      return lines;
+    }
+
+    function startSection(lines, text) {
+      lines.push(`<div id='${slug(text)}'>`);
+      lines.push(`<h2>${text}</h2>`);
+    }
+
+    function endSection(lines) {
+      lines.push('</div>');
+    }
+
+    function startTable(lines, ...columnHeaders) {
+      lines.push('<table>')
+      lines.push('  <thead>')
+      lines.push('    <tr>')
+      for (h of columnHeaders) {
+        lines.push(`      <th>${h}</th>`)
+      }
+      lines.push('  </thead>')
+      lines.push('  <tbody>')
+    }
+
+
+    function addSummaryRow(lines, ...cellValues) {
+      var text = `    <tr class="summary" onclick="togglePanel(${panelId})">`;
+      for (v of cellValues) {
+        text += `<td>${v}</td>`;
+      }
+      text += '</tr>';
+      lines.push(text);
+    }
+
+    function addInfoPanelRow(lines, item) {
+      var coverUrl;
+      try {
+        coverUrl = item.covers['cover150Wide'].href
+      } catch {
+        // nothing, from https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
+        coverUrl = "data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E";
+      }
+
+      var isbn;
+      try {
+        isbn = item.formats.find(f => f.isbn).isbn;
+      } catch {
+        isbn = null;
+      }
+
+      lines.push(`<tr class="info-panel" style="display: none" id="panel-${panelId++}"><td colspan="100%">
+                      <div>
+                          <div><img width=150px loading="lazy" src="${coverUrl}"></div>
+                          <div><ul>`);
+      lines.push(
+        `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}"><img src="https://images.overdrive.com/misc/Libby_App_Icon_Circle.png" width="16px" height="16px"> Libby</a></li>`);
+
+      if (isbn) {
+        lines.push(`
+                      <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
+                      <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
+      }
+
+      lines.push(`
+                          </ul></div>
+                      </div>
+                  </td></tr>`);
+
+    }
+
+    function endTable(lines) {
+      lines.push('</table>');
+    }
+
+    function formatTitle(item) {
+      return item.title;
+    }
+
+    function formatTag(item) {
+      return `<span title="${item.tagName}">${item.tagDescription}</span>`;
+    }
+
+    function formatExpireDate(item) {
+      const date = item.expireDate;
+      if (!date) {
+        return '&nbsp;';
+      }
+
+      if (typeof date === 'string') {
+        return date;
+      }
+
+      const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
+      const months = [
+        'January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'
+      ];
+
+      const dayPart = days[date.getDay()];
+      const timePart =
+        date.getHours().toString().padStart(2, '0') + ':' +
+        date.getMinutes().toString().padStart(2, '0')
+
+      const now = new Date();
+      const daysFromNow = (date - now) / 86_400_000;
+      const middlePart = daysFromNow >= 6
+        ? ' ' + date.getDate().toString().padStart(2, '0') + ' ' + months[date.getMonth()] + ' '
+        : ' ';
+      const formattedDate = dayPart + middlePart + timePart;
+      return `<span title="${date}">${formattedDate}</span>`;
+    }
+
+    function formatWaitDays(waitDays) {
+      switch (waitDays) {
+        case 0:
+          return '&nbsp;'
+        case Infinity:
+          return '&infin;';
+        default:
+          return waitDays;
+      }
+    }
+
+    function formatNotes(notes) {
+      return notes && notes.length ? '<ul class="notes">\n' + notes.join('\n') + '\n</ul>' : '&nbsp;';
+    }
+
+    const compareExpireDates = sortKey(h => h.expireDate);
+    const compareTagNames = sortKey(h => h.tagName);
+    const compareTitles = sortKey(h => h.title);
+
+    function compareHolds(h1, h2) {
+      if (typeof h1.expireDate !== typeof h2.expireDate) {
+        if (h1.expireDate instanceof Date) {
+          return -1;
+        } else if (h2.expireDate instanceof Date) {
+          return 1;
+        } else {
+          return h1.expireDate ? -1 : 1;
         }
+      }
 
-        function getHolds(data) {
-            return data.holds.map(parseHold);
-        }
+      var weight = compareExpireDates(h1, h2);
+      if (weight != 0) {
+        return weight;
+      }
 
-        function parseHold(holdData) {
-            if (holdData.detailedSeries) {
-                const seriesName = holdData.detailedSeries.seriesName;
-                const readingOrder = holdData.detailedSeries.readingOrder;
-                if (seriesName && readingOrder) {
-                    addNote(holdData, 'reading-order', `${seriesName}&nbsp;#${readingOrder}`);
-                }
-            }
-            if (holdData.expireDate) {
-                holdData.isReady = true;
-                holdData.expireDate = new Date(holdData.expireDate);
-            } else if (holdData.luckyDayAvailableCopies) {
-                holdData.expireDate = '&#x1F340;';
-            }
+      weight = compareTagNames(h1, h2);
 
-            if (!holdData.estimatedWaitDays) {
-                holdData.estimatedWaitDays = 0;
-            }
+      return weight == 0 ? compareTitles(h1, h2) : weight;
+    }
 
-            if (!holdData.ownedCopies) {
-                holdData.estimatedWaitDays = Infinity;
-                addNote(holdData, 'no-more-copies', 'no&nbsp;more&nbsp;copies');
-            }
+    function clone(item) {
+      var c = { ...item };
+      if (c.notes) {
+        // Spread is shallow; make sure we don't
+        // muck with original's notes.
+        // Eventually we may need to protect other
+        // attributes.
+        c.notes = [...c.notes];
+      }
+      return c;
+    }
 
-            return holdData;
-        }
+    function sortKey(keyFunc) {
+      return function (a, b) {
+        const aKey = keyFunc(a);
+        const bKey = keyFunc(b);
+        return aKey < bKey
+          ? -1 : aKey == bKey
+            ? 0
+            : 1;
+      }
+    }
 
-        function addNote(item, noteClass, note) {
-            if (!item.notes) {
-                item.notes = [];
-            }
-            item.notes.push(`<li class="${noteClass}">${note}</li>`);
-        }
+    function slug(text) {
+      return text.toLowerCase().replace(' ', '-')
+    }
 
-        function addTagsToHolds(holds, tags) {
-            for (hold of holds) {
-                for (tag of tags) {
-                    for (tagging of tag.taggings) {
-                        if (hold.id == tagging.titleId) {
-                            hold.tagName = tag.name;
-                            hold.tagDescription = tag.description;
-                        }
-                    }
-                }
-            }
-        }
+    function overdriveUrl(path) {
+      const overdriveUrlBase = 'https://sentry.libbyapp.com/'
+      return proxyUrl(overdriveUrlBase + path);
+    }
 
-        function addCardsToNotes(items, cards) {
-            for (item of items) {
-                if (item.cardId) {
-                    addNote(item, 'card-name', `${cards[item.cardId].cardName}`);
-                }
-            }
-        }
+    function proxyUrl(url) {
+      const proxyBase = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl=';
+      return proxyBase + encodeURI(url);
+    }
 
-        function html(loans, readyHolds, pendingHolds, cards) {
-            lines = []
-            if (loans.length) {
-                startSection(lines, 'Loans');
-                startTable(lines, '&#x23f3; Expires', '&#x1f4da; Title', '&#x1F4B3; Card');
-                for (loan of loans) {
-                    addSummaryRow(lines, formatExpireDate(loan), formatTitle(loan), cards[loan.cardId].cardName);
-                    addInfoPanelRow(lines, loan);
-                }
-                endTable(lines);
+    function toBase64(text) {
+      const utf8Bytes = new TextEncoder().encode(text);
+      const utf8String = String.fromCodePoint(...utf8Bytes);
+      return btoa(utf8String);
+    }
 
-                endSection(lines);
-            }
+    const onFulfilled = (response) => {
+      if (response.status !== 200 && !response.ok) {
+        throw new Error(`[${response.status}] Unable to fetch resource`)
+      }
+      return response.json()
+    }
 
-            if (readyHolds.length) {
-                startSection(lines, 'Get it Now');
-                startTable(lines, '&#x23f3; Expires', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
-                for (hold of readyHolds) {
-                    addSummaryRow(lines, formatExpireDate(hold), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
-                    addInfoPanelRow(lines, hold);
-                }
-                endTable(lines);
+    const onRejected = (err) => {
+      console.error(err)
+    }
 
-                endSection(lines);
-            }
-            if (pendingHolds.length) {
-                startSection(lines, 'Get it Later');
-                startTable(lines, '&#x1f4c5; Days to Wait', '&#x1F3F7', '&#x1f4da; Title', '&#x1f4dd; Author', '&#x1f3b6; Notes');
-                for (hold of pendingHolds) {
-                    addSummaryRow(lines, formatWaitDays(hold.estimatedWaitDays), formatTag(hold), formatTitle(hold), hold.firstCreatorName, formatNotes(hold.notes));
-                    addInfoPanelRow(lines, hold);
-                }
-                endTable(lines);
-
-                endSection(lines);
-            }
-            return lines;
-        }
-
-        function startSection(lines, text) {
-            lines.push(`<div id='${slug(text)}'>`);
-            lines.push(`<h2>${text}</h2>`);
-        }
-
-        function endSection(lines) {
-            lines.push('</div>');
-        }
-
-        function startTable(lines, ...columnHeaders) {
-            lines.push('<table>')
-            lines.push('  <thead>')
-            lines.push('    <tr>')
-            for (h of columnHeaders) {
-                lines.push(`      <th>${h}</th>`)
-            }
-            lines.push('  </thead>')
-            lines.push('  <tbody>')
-        }
-
-
-        function addSummaryRow(lines, ...cellValues) {
-            var text = `    <tr class="summary" onclick="togglePanel(${panelId})">`;
-            for (v of cellValues) {
-                text += `<td>${v}</td>`;
-            }
-            text += '</tr>';
-            lines.push(text);
-        }
-
-        function addInfoPanelRow(lines, item) {
-            var coverUrl;
-            try {
-                coverUrl = item.covers['cover150Wide'].href
-            } catch {
-                // nothing, from https://codepen.io/tigt/post/optimizing-svgs-in-data-uris
-                coverUrl = "data:image/svg+xml;charset=utf8,%3Csvg%20xmlns='http://www.w3.org/2000/svg'%3E%3C/svg%3E";
-            }
-
-            var isbn;
-            try {
-                isbn = item.formats.find(f => f.isbn).isbn;
-            } catch {
-                isbn = null;
-            }
-
-            lines.push(`<tr class="info-panel" style="display: none" id="panel-${panelId++}"><td colspan="100%">
-                    <div>
-                        <div><img width=150px loading="lazy" src="${coverUrl}"></div>
-                        <div><ul>`);
-            lines.push(
-                `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}"><img src="https://images.overdrive.com/misc/Libby_App_Icon_Circle.png" width="16px" height="16px"> Libby</a></li>`);
-
-            if (isbn) {
-                lines.push(`
-                    <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
-                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
-            }
-
-            lines.push(`
-                        </ul></div>
-                    </div>
-                </td></tr>`);
-
-        }
-
-        function endTable(lines) {
-            lines.push('</table>');
-        }
-
-        function formatTitle(item) {
-            return item.title;
-        }
-
-        function formatTag(item) {
-            return `<span title="${item.tagName}">${item.tagDescription}</span>`;
-        }
-
-        function formatExpireDate(item) {
-            const date = item.expireDate;
-            if (!date) {
-                return '&nbsp;';
-            }
-
-            if (typeof date === 'string') {
-                return date;
-            }
-
-            const days = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
-            const months = [
-                'January', 'February', 'March', 'April', 'May', 'June',
-                'July', 'August', 'September', 'October', 'November', 'December'
-            ];
-
-            const dayPart = days[date.getDay()];
-            const timePart =
-                date.getHours().toString().padStart(2, '0') + ':' +
-                date.getMinutes().toString().padStart(2, '0')
-
-            const now = new Date();
-            const daysFromNow = (date - now) / 86_400_000;
-            const middlePart = daysFromNow >= 6
-                ? ' ' + date.getDate().toString().padStart(2, '0') + ' ' + months[date.getMonth()] + ' '
-                : ' ';
-            const formattedDate = dayPart + middlePart + timePart;
-            return `<span title="${date}">${formattedDate}</span>`;
-        }
-
-        function formatWaitDays(waitDays) {
-            switch (waitDays) {
-                case 0:
-                    return '&nbsp;'
-                case Infinity:
-                    return '&infin;';
-                default:
-                    return waitDays;
-            }
-        }
-
-        function formatNotes(notes) {
-            return notes && notes.length ? '<ul class="notes">\n' + notes.join('\n') + '\n</ul>' : '&nbsp;';
-        }
-
-        const compareExpireDates = sortKey(h => h.expireDate);
-        const compareTagNames = sortKey(h => h.tagName);
-        const compareTitles = sortKey(h => h.title);
-
-        function compareHolds(h1, h2) {
-            if (typeof h1.expireDate !== typeof h2.expireDate) {
-                if (h1.expireDate instanceof Date) {
-                    return -1;
-                } else if (h2.expireDate instanceof Date) {
-                    return 1;
-                } else {
-                    return h1.expireDate ? -1 : 1;
-                }
-            }
-
-            var weight = compareExpireDates(h1, h2);
-            if (weight != 0) {
-                return weight;
-            }
-
-            weight = compareTagNames(h1, h2);
-
-            return weight == 0 ? compareTitles(h1, h2) : weight;
-        }
-
-        function clone(item) {
-            var c = { ...item };
-            if (c.notes) {
-                // Spread is shallow; make sure we don't
-                // muck with original's notes.
-                // Eventually we may need to protect other
-                // attributes.
-                c.notes = [...c.notes];
-            }
-            return c;
-        }
-
-        function sortKey(keyFunc) {
-            return function (a, b) {
-                const aKey = keyFunc(a);
-                const bKey = keyFunc(b);
-                return aKey < bKey
-                    ? -1 : aKey == bKey
-                        ? 0
-                        : 1;
-            }
-        }
-
-        function slug(text) {
-            return text.toLowerCase().replace(' ', '-')
-        }
-
-        function overdriveUrl(path) {
-            const overdriveUrlBase = 'https://sentry.libbyapp.com/'
-            return proxyUrl(overdriveUrlBase + path);
-        }
-
-        function proxyUrl(url) {
-            const proxyBase = 'https://libby-proxy.blairconrad.workers.dev/proxy?proxyUrl=';
-            return proxyBase + encodeURI(url);
-        }
-
-        function toBase64(text) {
-            const utf8Bytes = new TextEncoder().encode(text);
-            const utf8String = String.fromCodePoint(...utf8Bytes);
-            return btoa(utf8String);
-        }
-
-        const onFulfilled = (response) => {
-            if (response.status !== 200 && !response.ok) {
-                throw new Error(`[${response.status}] Unable to fetch resource`)
-            }
-            return response.json()
-        }
-
-        const onRejected = (err) => {
-            console.error(err)
-        }
-
-        function togglePanel(thePanelId) {
-            var x = document.getElementById(`panel-${thePanelId}`);
-            if (x.style.display === "none") {
-                x.style.display = "table-row";
-            } else {
-                x.style.display = "none";
-            }
-        }
-    </script>
+    function togglePanel(thePanelId) {
+      var x = document.getElementById(`panel-${thePanelId}`);
+      if (x.style.display === "none") {
+        x.style.display = "table-row";
+      } else {
+        x.style.display = "none";
+      }
+    }
+  </script>
 </body>
 
 </html>
