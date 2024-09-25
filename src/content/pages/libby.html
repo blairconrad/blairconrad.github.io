@@ -117,11 +117,13 @@
       const contentNode = document.getElementById('content');
       contentNode.innerHTML = 'loading&hellip;';
 
-      const syncPath = 'chip/sync';
-      const response = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
-      const syncData = await response.json();
-      bearer = syncData.identity;
+      bearer = await getNewBearer(bearer);
       window.localStorage.setItem(bearerTokenKey, bearer);
+
+      const syncPath = 'chip/sync';
+      const syncResponse = await fetch(overdriveUrl(syncPath), { headers: { 'Authorization': 'Bearer ' + bearer } });
+      const syncData = await syncResponse.json();
+
       const cards = getCards(syncData);
       const loans = getLoans(syncData).sort(compareExpireDates);
       const holds = getHolds(syncData);
@@ -190,41 +192,12 @@
       contentNode.innerHTML = lines;
     }
 
-    async function cloneCode(e) {
+    async function getNewBearer(oldBearer) {
       const chipPath = 'chip?client=dewey';
-      const clonePath = 'chip/clone/code';
-
-      e.preventDefault();
-
       const chipUrl = overdriveUrl(chipPath);
-      var chipResponse = await fetch(chipUrl, { method: 'POST' });
+      var chipResponse = await fetch(chipUrl, { method: 'POST', headers: { 'Authorization': `Bearer ${oldBearer}` } });
       var chipData = await chipResponse.json();
-      var bearer = chipData.identity;
-
-      const code = new FormData(e.target).get('code');
-
-      const cloneResponse = await fetch(
-        overdriveUrl(clonePath),
-        {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Authorization': `Bearer ${bearer}`,
-            'Content-Type': 'application/json',
-          },
-          body: `{"code":"${code}"}`,
-        });
-      if (cloneResponse.ok) {
-
-        chipResponse = await fetch(chipUrl, { method: 'POST', headers: { 'Authorization': `Bearer ${bearer}` } });
-        if (chipResponse.ok) {
-          chipData = await chipResponse.json();
-          bearer = chipData.identity;
-
-          window.localStorage.setItem(bearerTokenKey, bearer);
-          loadContent(bearer);
-        }
-      }
+      return chipData.identity;
     }
 
     function getCards(data) {
@@ -389,22 +362,22 @@
       }
 
       lines.push(`<tr class="info-panel" style="display: none" id="panel-${panelId++}"><td colspan="100%">
-                    <div>
-                        <div><img width=150px loading="lazy" src="${coverUrl}"></div>
-                        <div><ul>`);
+                      <div>
+                          <div><img width=150px loading="lazy" src="${coverUrl}"></div>
+                          <div><ul>`);
       lines.push(
         `<li><a href="https://libbyapp.com/library/downloadlibrary/similar-${item.id}/page-1/${item.id}"><img src="https://images.overdrive.com/misc/Libby_App_Icon_Circle.png" width="16px" height="16px"> Libby</a></li>`);
 
       if (isbn) {
         lines.push(`
-                    <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
-                    <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
+                      <li><a href="https://www.goodreads.com/search?q=${isbn}"><img src="https://www.goodreads.com/favicon.ico" width="16px" height="16px"> Goodreads</a></li>
+                      <li><a href="https://www.kobo.com/ca/en/search?query=${isbn}"><img src="https://static.kobo.com/1.0.1.3910/Images/favicon/favicon.ico" width="16px" height="16px"> Kobo</a></li>`);
       }
 
       lines.push(`
-                        </ul></div>
-                    </div>
-                </td></tr>`);
+                          </ul></div>
+                      </div>
+                  </td></tr>`);
 
     }
 
