@@ -19,7 +19,7 @@ title: Chocolate Coconut Macaroons
 </tr>
 <tr>
   <td>&frac14; c (25 g) unsweetened cocoa powder, sifted</td>
-  <td rowspan="4" class="righthide">&nbsp;</td>
+  <td rowspan="3">whisk</td>
 </tr>
 <tr>
   <td>&frac12; c (100 g) sugar</td>
@@ -29,6 +29,7 @@ title: Chocolate Coconut Macaroons
 </tr>
 <tr>
   <td>1 t pure vanilla extract</td>
+  <td class="righthide">&nbsp;</td>
 </tr>
 <tr>
   <td>2&frac12; c (220 g) unsweetened dried coconut (shredded or flaked)</td>
@@ -44,5 +45,7 @@ title: Chocolate Coconut Macaroons
 6. Bake heaping tablespoons of batter at 325&deg;F for 13&ndash;15 minutes or until shiny and just set
 7. Let cool on the baking sheet for about 10 minutes
 8. Let cool on a wire rack
+
+Yield: About 17
 
 <p class="confession">Stolen from the <a href="http://www.joyofbaking.com/ChocolateCoconutMacaroons.html">Joy of Baking</p>
