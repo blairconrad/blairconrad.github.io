@@ -45,7 +45,7 @@ title: Triple Coconut Cream Pie
     <td>2 oz milk</td>
   </tr>
   <tr>
-    <td>1&frac12; c unsweetened shredded coconut</td>
+    <td>1&frac12; c (120 g) unsweetened shredded coconut</td>
     <td colspan="3" class="righthide">&nbsp;</td>
   </tr>
   <tr>
